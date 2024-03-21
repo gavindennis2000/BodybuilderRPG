@@ -1,0 +1,22 @@
+The fight menu will have four actions:
+  attack - abilities to hurt enemies and buff stats
+  items - use groceries from G&C Supplements
+  run - flee from confrontations
+  max out - overdrive/limit break type attack
+
+attacks
+  Hitters
+    Dumbbell Press - Low damage physical attack
+    Barbell Press - Med damage physical attack
+    Hammer Strength Press - High damage physical attack
+  
+  Buffs
+    Wrist wrap - Increases power
+    Knee wrap - Increases toughness
+    
+  "Spells"
+    leg press - jumps high into the sky, fleeing battles and teleporting from city to city when on the overworld
+  
+
+items
+  
