@@ -81,6 +81,7 @@
   "resources":[
     {"id":{"name":"input_controller_object","path":"objects/input_controller_object/input_controller_object.yy",},},
     {"id":{"name":"objPlayer","path":"objects/objPlayer/objPlayer.yy",},},
+    {"id":{"name":"objWall","path":"objects/objWall/objWall.yy",},},
     {"id":{"name":"room1","path":"rooms/room1/room1.yy",},},
     {"id":{"name":"__input_axis_is_directional","path":"scripts/__input_axis_is_directional/__input_axis_is_directional.yy",},},
     {"id":{"name":"__input_binding_get_label","path":"scripts/__input_binding_get_label/__input_binding_get_label.yy",},},
@@ -419,6 +420,7 @@
     {"id":{"name":"input_xy","path":"scripts/input_xy/input_xy.yy",},},
     {"id":{"name":"input_y","path":"scripts/input_y/input_y.yy",},},
     {"id":{"name":"sprPlayer","path":"sprites/sprPlayer/sprPlayer.yy",},},
+    {"id":{"name":"sprWall","path":"sprites/sprWall/sprWall.yy",},},
   ],
   "resourceType":"GMProject",
   "resourceVersion":"2.0",

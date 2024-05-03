@@ -15,16 +15,8 @@ up = input_check("up");
 down = input_check("down");
 vsp = up - down;
 
-
 if (place_meeting(x+32*hsp, y, objWall)) { hsp = 0 };
 if (place_meeting(x, y+30*vsp, objWall)) { vsp = 0 };
 
-// running
-running = input_check("cancel");
-if (running and onGrid) {
-	spd = 2; 
-} else { spd = 1 };
-
-// time to move
-x += hsp * spd;
-y += vsp * spd;
+if (running and x % 32 == 0 and y % 30 == 0) { speed *= 2; }
+speed = spd;

@@ -54,6 +54,7 @@
   ],
   "ResourceOrderSettings":[
     {"name":"input_controller_object","order":30,"path":"objects/input_controller_object/input_controller_object.yy",},
+    {"name":"objWall","order":1,"path":"objects/objWall/objWall.yy",},
     {"name":"__input_axis_is_directional","order":9,"path":"scripts/__input_axis_is_directional/__input_axis_is_directional.yy",},
     {"name":"__input_binding_get_label","order":10,"path":"scripts/__input_binding_get_label/__input_binding_get_label.yy",},
     {"name":"__input_class_chord_definition","order":1,"path":"scripts/__input_class_chord_definition/__input_class_chord_definition.yy",},
@@ -354,5 +355,6 @@
     {"name":"input_x","order":3,"path":"scripts/input_x/input_x.yy",},
     {"name":"input_xy","order":4,"path":"scripts/input_xy/input_xy.yy",},
     {"name":"input_y","order":5,"path":"scripts/input_y/input_y.yy",},
+    {"name":"sprWall","order":1,"path":"sprites/sprWall/sprWall.yy",},
   ],
 }
