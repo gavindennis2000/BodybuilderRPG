@@ -20,10 +20,10 @@ function __input_config_verbs()
             left:  [input_binding_key(vk_left),  input_binding_key("A")],
             right: [input_binding_key(vk_right), input_binding_key("D")],
             
-            confirm:  input_binding_key(vk_space),
-            cancel:  input_binding_key(vk_backspace),
-            start: [ input_binding_key(vk_enter), input_binding_key("Y")],
-            select: [input_binding_key(vk_shift), input_binding_key("T")],
+            confirm:  [input_binding_key(vk_space), input_binding_key("K")],
+            cancel:  [input_binding_key(vk_lshift), input_binding_key("J")],
+            start: [input_binding_key(vk_enter), input_binding_key("Y")],
+            select: [input_binding_key(vk_rshift), input_binding_key("T")],
          
         },
         
@@ -41,4 +41,5 @@ function __input_config_verbs()
 			
         },
         
+	}
 }

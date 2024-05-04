@@ -6,7 +6,7 @@
   "name":"__input_snap_to_json",
   "parent":{
     "name":"Initialization",
-    "path":"folders/Input/(System)/Initialization.yy",
+    "path":"folders/7Input/(System)/Initialization.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -6,7 +6,7 @@
   "name":"input_binding_gamepad_button",
   "parent":{
     "name":"05  Binding Creators",
-    "path":"folders/Input/05  Binding Creators.yy",
+    "path":"folders/7Input/05  Binding Creators.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

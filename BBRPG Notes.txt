@@ -1,0 +1,1 @@
+camera size is 480x270

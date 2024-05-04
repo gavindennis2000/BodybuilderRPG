@@ -6,7 +6,7 @@
   "name":"input_window_has_focus",
   "parent":{
     "name":"23  Other",
-    "path":"folders/Input/23  Other.yy",
+    "path":"folders/7Input/23  Other.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

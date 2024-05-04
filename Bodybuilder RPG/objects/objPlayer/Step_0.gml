@@ -1,30 +1,77 @@
-// reset movement
-var onGrid = (x % 32 == 0 and y % 30 == 0);
-if (onGrid) {
-	state = stand;
-	spd = 0;
+// dev tools
+if (TEST) {
+	
 }
 
-// horizontal movement
-left = input_check("left");
-right = input_check("right");
-hsp = left - right;
-
-// vertical movement
-up = input_check("up");
-down = input_check("down");
-vsp = up - down;
+// keyboard inputs
+var keyUp = input_check("up");
+var keyLeft = input_check("left");
+var keyRight = input_check("right");
+var keyDown = input_check("down");
+var keyRun = input_check("cancel");
+var keyAction = input_check_pressed("confirm");
 
 
-if (place_meeting(x+32*hsp, y, objWall)) { hsp = 0 };
-if (place_meeting(x, y+30*vsp, objWall)) { vsp = 0 };
 
-// running
-running = input_check("cancel");
-if (running and onGrid) {
-	spd = 2; 
-} else { spd = 1 };
+// walking speed
+var spd = 2;
+if (running) spd = 4;
 
-// time to move
-x += hsp * spd;
-y += vsp * spd;
+// move to the inputted target
+if (targetX > x) { x += spd; }
+if (targetX < x) { x -= spd; }
+if (targetY > y) { y += spd; }
+if (targetY < y) { y -= spd; }
+if (targetX == x and targetY == y) { walking = false; running = false; };
+
+// input for walking
+if (global.playerCanMove) {
+	if (keyLeft and !walking) {
+	
+		running = (keyRun);
+		face = left;
+	
+		if (!place_meeting(x-1, y, objWall)) {
+			targetX -= 32;
+			walking = true;
+		}
+	
+	}
+
+	if (keyRight and !walking) {
+	
+		running = (keyRun);
+		face = right;
+	
+		if (!place_meeting(x+1, y, objWall)) {
+			targetX += 32;
+			walking = true;
+		}
+	
+	}
+
+	if (keyUp and !walking) {
+	
+
+		running = (keyRun);
+		face = up;
+	
+		if (!place_meeting(x, y-1, objWall))  {
+			targetY -= 32;
+			walking = true;
+		 }
+	
+	}
+
+	if (keyDown and !walking) {
+	
+		running = (keyRun);
+		face = down;
+	
+		if (!place_meeting(x, y+1, objWall)) {	
+			targetY += 32;
+			walking = true;
+		}
+		
+	}
+}

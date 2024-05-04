@@ -2,7 +2,7 @@
   "$GMSprite":"",
   "%Name":"sprWall",
   "bboxMode":0,
-  "bbox_bottom":29,
+  "bbox_bottom":31,
   "bbox_left":0,
   "bbox_right":31,
   "bbox_top":0,
@@ -16,7 +16,7 @@
   ],
   "gridX":0,
   "gridY":0,
-  "height":30,
+  "height":32,
   "HTile":false,
   "layers":[
     {"$GMImageLayer":"","%Name":"add997da-2ae4-448a-b938-1c8c74903cb4","blendMode":0,"displayName":"default","isLocked":false,"name":"add997da-2ae4-448a-b938-1c8c74903cb4","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},

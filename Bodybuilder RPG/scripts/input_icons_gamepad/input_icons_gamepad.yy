@@ -6,7 +6,7 @@
   "name":"input_icons_gamepad",
   "parent":{
     "name":"Icons",
-    "path":"folders/Input/(System)/Icons.yy",
+    "path":"folders/7Input/(System)/Icons.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

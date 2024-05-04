@@ -1,18 +1,19 @@
-TEST = 1;
+#macro TEST 1
+#macro CAMHEIGHT 480
+#macro CAMWIDTH 270
 
-up = -1;
-down = 1;
-left = -1;
-right = 1;
+global.playerCanMove = true;
+up = 1;
+down = 2;
+left = 3;
+right = 4;
 face = down;
 
-hsp = 0;
-vsp = 0;
-spd = 1;
-
-stand = 1;
-walk = 2;
-state = stand;
+targetX = x;
+targetY = y;
+onGrid = true;
 
 walking = false;
 running = false;
+
+if (!instance_exists(objCamera)) { instance_create_layer(x, y, layer, objCamera); }
