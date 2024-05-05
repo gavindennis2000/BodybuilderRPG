@@ -7,6 +7,14 @@ if (finished) {
 	exit;
 }
 
+if (next) {
+	glowAlpha += glowAlphaChange;
+	if (glowAlpha >= 1) { glowAlphaChange = -0.025; }
+	else 	if (glowAlpha <= 0) { glowAlphaChange = 0.025; }
+	
+	nextAlpha += .2;
+}
+
 
 	
 keyConfirmPress = input_check_pressed("confirm");	
@@ -30,6 +38,8 @@ if (keyConfirmPress) {
 				j = 1;
 				drawText = "";
 				indexCheck = 0;
+				nextAlpha = 0;
+				glowAlpha = 0;
 				alarm[0] = aTime;
 			}
 			
@@ -37,7 +47,7 @@ if (keyConfirmPress) {
 		
 	} else if (!skip) { 
 		skip = true;
-		alarm[0] = 1;
+		alarm[0] = aTime;
 	}
 	
 }

@@ -75,3 +75,7 @@ if (global.playerCanMove) {
 		
 	}
 }
+
+image_speed = (walking) ? 0.2 : 0;
+image_speed += (running * 0.1);
+if (!walking) { image_index = 0; }

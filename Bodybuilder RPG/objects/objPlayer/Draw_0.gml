@@ -15,8 +15,8 @@ if (face == down) {
 	sprite_index = sprPlayerDown;
 }
 
-image_speed = 0.2;
+
 if (running)
 	image_speed *=2;
 	
-draw_self();
+draw_sprite_ext(sprite_index, -1, x, y-6, image_alpha, image_yscale, image_angle, image_blend, image_alpha);
