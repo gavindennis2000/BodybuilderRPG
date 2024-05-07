@@ -1,12 +1,12 @@
 // draw the text box
 var camX = camera_get_view_x(view_camera[0]);
 var camY = (screen == "top") ? camera_get_view_y(view_camera[0]) : camera_get_view_y(view_camera[0]) + 270-74;
-draw_sprite_ext(sprTextBox, 0, camX, camY, 1, 1, image_angle, personColor, 0.9);
+draw_sprite_ext(sprTextBox, 0, camX, camY, 1, 1, image_angle, personColor, 0.85);
 
 if (TEST) {
 
-	draw_text(camX+60, camY + 84, camera_get_view_y(view_camera[0])+135 );
-	draw_text(camX+60, camY+ 104, objPlayer.y+16);
+	//draw_text(camX+60, camY + 84, camera_get_view_y(view_camera[0])+135 );
+	//draw_text(camX+60, camY+ 104, objPlayer.y+16);
 	//draw_text(camX, camY+ 124, "Index:" + string(indexCheck) );
 	//draw_text(camX, camY+ 144, "next: " + string(next) );
 

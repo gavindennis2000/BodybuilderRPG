@@ -23,3 +23,6 @@ running = false;
 image_speed = 0;
 
 if (!instance_exists(objCamera)) { instance_create_layer(x, y, layer, objCamera); }
+if (!instance_exists(objMusic)) { instance_create_layer(x, y, layer, objMusic); }
+if (!instance_exists(objController)) { instance_create_layer(x, y, layer, objController); }
+if (!instance_exists(objPause)) { instance_create_layer(x, y, layer, objPause); }

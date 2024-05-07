@@ -30,6 +30,7 @@ if (global.playerCanMove) {
 	
 		running = (keyRun);
 		face = left;
+		walking = true;
 	
 		if (!place_meeting(x-1, y, objWall)) {
 			targetX -= 32;

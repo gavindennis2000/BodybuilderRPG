@@ -3,7 +3,7 @@ j = 1;
 
 keyConfirmPress = false;
 
-layer = layer_create(-100, "text");
+layer = layer_create(-99, "text");
 global.playerCanMove = false;
 next = false;
 
