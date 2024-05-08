@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":120.0,
+  "duration":78.0,
   "name":"sndMom",
   "parent":{
     "name":"4Music",
@@ -20,6 +20,6 @@
   "resourceVersion":"2.0",
   "sampleRate":44100,
   "soundFile":"sndMom.wav",
-  "type":0,
+  "type":1,
   "volume":1.0,
 }

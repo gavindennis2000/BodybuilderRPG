@@ -19,8 +19,11 @@ function addGain(arg) {
 }
 
 // set song loop points
-audio_sound_loop_start(sndCentralPrairie, 21.33);
-audio_sound_loop_end(sndCentralPrairie, 106.667);
+	// central prairie
+	audio_sound_loop_start(sndCentralPrairie, 21.33);
+	audio_sound_loop_end(sndCentralPrairie, 106.667);
+	//mom's house
+	audio_sound_loop_start(sndMom, 6);
 
 function playNextSong() {
 	

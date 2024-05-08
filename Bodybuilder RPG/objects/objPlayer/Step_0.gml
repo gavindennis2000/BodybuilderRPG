@@ -34,7 +34,6 @@ if (global.playerCanMove) {
 	
 		if (!place_meeting(x-1, y, objWall)) {
 			targetX -= 32;
-			walking = true;
 		}
 	
 	}
@@ -43,10 +42,10 @@ if (global.playerCanMove) {
 	
 		running = (keyRun);
 		face = right;
+		walking = true;
 	
 		if (!place_meeting(x+1, y, objWall)) {
 			targetX += 32;
-			walking = true;
 		}
 	
 	}
@@ -56,10 +55,10 @@ if (global.playerCanMove) {
 
 		running = (keyRun);
 		face = up;
+		walking = true;
 	
 		if (!place_meeting(x, y-1, objWall))  {
 			targetY -= 32;
-			walking = true;
 		 }
 	
 	}
@@ -68,10 +67,10 @@ if (global.playerCanMove) {
 	
 		running = (keyRun);
 		face = down;
+		walking = true;
 	
 		if (!place_meeting(x, y+1, objWall)) {	
 			targetY += 32;
-			walking = true;
 		}
 		
 	}
