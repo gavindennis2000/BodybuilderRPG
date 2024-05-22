@@ -28,7 +28,7 @@ if (pause) {
 		draw_set_halign(fa_right);
 		if (!unpause) { draw_text_color(camX + 480-8, camY-yChange + 8, location, w, w, w, w, 1); }
 		
-		if (draw_get_alpha() == 1) {
+		if (image_alpha == 1) {
 			// draw the dashboard
 		
 			

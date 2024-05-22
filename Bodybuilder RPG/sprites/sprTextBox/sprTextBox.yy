@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"1Sprites",
-    "path":"folders/1Sprites.yy",
+    "name":"Textboxes",
+    "path":"folders/1Sprites/Textboxes.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

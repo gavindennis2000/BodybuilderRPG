@@ -10,11 +10,6 @@ if TEST {
 	//}
 }
 
-if (!layer_exists("NPC"))
-	layer = layer_create(-5, "NPC");
-else 
-	layer = layer_get_id("NPC");
-
 switch (npc) {
 
 	case "npc1":
@@ -51,6 +46,8 @@ var b = c_black;
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
 draw_set_font(fntTextBox);
+
+// draw the collision action
 if (drawAction) {
 	//draw_text_color(x+17, y - 15, "Talk", b, b, b, b, daAlpha);
 	//draw_text_color(x+16, y - 16, "Talk", c, c, c, c, daAlpha);

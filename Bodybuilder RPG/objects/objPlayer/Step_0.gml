@@ -24,6 +24,15 @@ if (targetY > y) { y += spd; }
 if (targetY < y) { y -= spd; }
 if (targetX == x and targetY == y) { walking = false; running = false; };
 
+var exitInst = instance_place(x, y, objExit);
+if (exitInst != noone) {
+	if (!walking and global.playerCanMove) {
+		if (exitInst.goTo == -1)
+			exit;
+		else { exitInst.nextRoom(); }; 
+	}
+}
+
 // input for walking
 if (global.playerCanMove) {
 	if (keyLeft and !walking) {

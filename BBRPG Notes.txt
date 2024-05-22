@@ -1,5 +1,19 @@
 camera size is 480x270
 
+extensions
+	input6
+	font - dubiel
+
 text = ["Hello. Hello1 Hello2 Hello3 Hello4 Hello5 Hello6 Hello7 Hello8 Hello9", "Did you get all that?"];
 
 fight song 170bpm
+
+goTo = momF1
+pX = 224;
+pY = 288-32;
+face = 1;
+
+layer ids
+	exit 10
+	controller -9
+	pause -100

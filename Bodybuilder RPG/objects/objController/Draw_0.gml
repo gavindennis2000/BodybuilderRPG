@@ -12,7 +12,16 @@ if (displayRoom != 0 and theRoom != -1) {
 	
 	draw_set_halign(fa_center);
 	draw_set_valign(fa_top);
-	draw_text_color(camX + 241, camY + 17, theRoom, b, b, b, b, roomAlpha);
-	draw_text_color(camX + 240, camY + 16, theRoom, w, w, w, w, roomAlpha);
+	draw_text_border(camX + 241, camY + 5, theRoom, w, roomAlpha);
 	
+}
+
+if (displaySub != 0 and subtitle != -1) {
+	if (subAlpha < 1 and displaySub == 1) { subAlpha += 0.05; }
+	else if (subAlpha > 0 and displaySub == 2) { subAlpha -= 0.05; }
+	
+	draw_set_halign(fa_right);
+	draw_set_valign(fa_bottom);
+	var i = 5;
+	draw_text_border(camX + 480 - i, camY + 270 - i, subtitle, w, subAlpha);
 }

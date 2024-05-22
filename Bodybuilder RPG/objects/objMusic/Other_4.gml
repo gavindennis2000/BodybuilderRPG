@@ -10,7 +10,6 @@ switch (room) {
 		break;
 		
 	default:
-		nextSong = -1;
 		break;
 }
 

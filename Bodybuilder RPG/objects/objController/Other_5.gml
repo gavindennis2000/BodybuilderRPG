@@ -1,0 +1,2 @@
+prevRoomVar = theRoom;
+prevSubtitle = subtitle;

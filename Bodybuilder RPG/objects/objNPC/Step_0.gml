@@ -12,7 +12,9 @@ if (instance_exists(objPlayer)) {
 		// check if player is touching npc
 		if (collision) {
 				if (keyAction and !instance_exists(objTextBox) ) {
-					instance_create_layer(x, y, layer, objTextBox, {text: other.text} );
+					instance_create_layer(x, y, layer, objTextBox, {text: other.text[textIndex]} );	
+					textIndex++;
+					if textIndex > textLength { textIndex = textRepeat; }
 					
 					var o = objPlayer;
 					switch(o.face) {

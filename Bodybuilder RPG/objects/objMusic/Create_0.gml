@@ -24,6 +24,9 @@ function addGain(arg) {
 	audio_sound_loop_end(sndCentralPrairie, 106.667);
 	//mom's house
 	audio_sound_loop_start(sndMom, 6);
+	//fight song
+	audio_sound_loop_start(sndBattle, 2.824);
+	
 
 function playNextSong() {
 	
@@ -39,7 +42,7 @@ function playNextSong() {
 	} else {
 
 		audio_sound_gain(currentSong, 0, 2000);
-		alarm[0] = 60 * 2.5;
+		alarm[0] = 60 * 2;
 	
 	}
 	
@@ -54,4 +57,11 @@ function playNextSongCont() {
 	nextSong = -1;
 	if (currentSong != -1) { audio_play_sound(currentSong, 1, true); }
 	
+}
+
+function initiateBattle() {
+	tempSong = currentSong;
+	audio_pause_sound(tempSong);
+	audio_play_sound(sndBattle, 1, true);
+	audio_play_sound(sndBattleInit, 1, false);
 }

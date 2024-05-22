@@ -20,11 +20,11 @@ draw_set_font(fntTextBox);
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 draw_set_color(c_white);
-draw_set_alpha(drawAlpha);
+image_alpha = drawAlpha;
 
 if (next) {
 	draw_sprite_ext(sprNextGlow, 0, camX+240, camY + 64, 1, 1, image_angle, image_blend, glowAlpha);
 	draw_sprite_ext(sprNext, 0, camX+240, camY + 64, 1, 1, image_angle, image_blend, nextAlpha);
 }
 
-draw_text(textX, textY, drawText);
+draw_text_border(textX, textY, drawText, c_white, 1);

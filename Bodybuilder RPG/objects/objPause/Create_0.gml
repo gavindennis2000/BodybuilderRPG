@@ -2,10 +2,7 @@ pause = false;
 keyPause = false;
 unpause = false;
 
-if (!layer_exists("pause"))
-	layer = layer_create(-100, "pause");	
-else 
-	layer = layer_get_id("pause");
+depth = -100;
 
 draw_set_font(fntTextBox);
 

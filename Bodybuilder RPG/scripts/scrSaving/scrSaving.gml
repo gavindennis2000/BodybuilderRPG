@@ -3,15 +3,15 @@
 function saveGame(){
 	
 	var _playerInfo = {
-		
-			pX: global.pX,
-			pY: global.pY,
-			roomVar: room
-			
+		pX: global.pX,
+		pY: global.pY,
+		roomVar: room
 	}
 	
 	var _battleInfo = {
-		
+		ben: global.benStats,
+		deadlynn: global.deadlynnStats,
+		quade: global.quadeStats
 	}
 	
 	var _pString = json_stringify(_playerInfo);
@@ -33,14 +33,26 @@ function loadGame() {
 		
 		var _file = file_text_open_read("playerInfo.txt");
 		var _json = file_text_read_string(_file);
-		var _array = json_parse(_json);
+		var _playerInfo = json_parse(_json);
 		
 		global.pX = _playerInfo.pX;
 		global.pY = _playerInfo.pY;
 		global.roomVar = _playerInfo.roomVar;
 		
+		file_text_close(_file);
+		
 	}
 	if (file_exists("battleInfo.txt")) {
+		
+		var _file = file_text_open_read("battleInfo.txt");
+		var _json = file_text_read_string(_file);
+		var _battleInfo = json_parse(_json);
+		
+		global.benStats = _battleInfo.ben;
+		global.deadlynnStats = _battleInfo.deadlynn;
+		global.quadeStats = _battleInfo.quade;	
+		
+		file_text_close(_file);
 		
 	}
 }
