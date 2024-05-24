@@ -4,10 +4,13 @@ xp = 0;
 maxhp =  1000
 hp =  maxhp
 sk = 10;
-att =  1
-def =  1
-spd =  1
-luck =  1
+att =  1;
+def =  1;
+spd =  1;
+luck =  1;
+
+// KO status
+ko = false;
 
 // skills
 skills = array_create(10, "");

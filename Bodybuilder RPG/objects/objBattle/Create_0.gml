@@ -9,6 +9,7 @@ if (!variable_instance_exists(self, "enemies")) { enemies = ["npc"]; }
 battleStart = false;
 char = array_length(global.characters);
 showText = false;
+showDesc = false;
 text = "";
 draw_set_font(fntTextBox);
 // dashboard stuff
@@ -21,13 +22,28 @@ cursor = 0;
 cursorX = -1;
 cursorY = -1;
 scroll = 0;
+maxScroll = 20;
 cantRun = false;
+// monitor the cursors previous selections
+cursorPrev = ds_stack_create()
+function stackPush(dbArg, cursorArg, scrollArg) {
+	// pushes previous cursor input onto the stack
+	ds_stack_push(cursorPrev, [dbArg, cursorArg, scrollArg]);
+}
+function stackPop() {
+	// pops previous cursor input from the stack
+	return ds_stack_pop(cursorPrev);
+}
+stackPush(-1, -1, -1);
 
 // the fighters
 fighterIDs = array_create(array_length(global.characters), -1)
 enemyIDs = array_create(array_length(enemies), -1);
 highestSpd = [-1, -1];
 turn = -1;
+
+target = -1;
+targetType = "enemy";
 
 // how far apart each fighter and enemy are
 	var xDis = 128;
@@ -80,6 +96,11 @@ turn = highestSpd[0];
 
 function drawText(text) {
 	showText = true;
+	showDesc = false;
+	
+	
+	
+	
 	self.text = text;
 	alarm[0] = 120;
 }
@@ -87,4 +108,62 @@ function drawText(text) {
 function playSound(sound) {
 	if audio_is_paused(sound) { audio_stop_sound(sound); }
 	audio_play_sound(sound, 1, false);
+}
+
+// draw skill description
+function drawSkillDescription(skill) {
+	// shows description of skill when highlighted
+	showDesc = true;
+	switch (skill) {
+		case "Brace":
+			text = "Forfeit attack and prepare for enemy assault.";
+			break;
+		case "":
+			showDesc = false;
+			break;
+		default:
+			text = "Unknown Skill";
+			break;
+	}
+}
+
+// draw gymbag description
+function drawGymbagDescription(item) {
+	// shows description of skill when highlighted
+	showDesc = true;
+	switch (item) {
+		case "Hydro20":
+			text = "Replenish 50HP.";
+			break;
+		case "":
+			showDesc = false;
+			break;
+		default:
+			text = "Unknown Item";
+			break;
+	}
+}
+
+function initiateAction(turn, act) {
+	//action = true;
+	findTarget(act);
+	showText = true;
+	text = string(target.fighter)
+}
+
+function findTarget(action) {
+	// checks action to see if it should target enemy or player	
+	switch(action) {
+		case "Attack":
+			var i = 0;
+			while (enemyIDs[i].ko) { i++; }
+			target = enemyIDs[i];
+			targetType = "enemy";
+			break;
+		case "Run":
+			target = turn;
+			targetType = "party";
+		default:
+			break;
+	}
 }

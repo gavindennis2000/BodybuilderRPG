@@ -8,6 +8,14 @@ if showText {
 	fontY(fa_middle);
 	draw_text_border(room_width/2, height/2-8, text, c_white, 1);
 }
+if showDesc {
+	draw_set_font(fntTextBox);
+	var height = 64;
+	draw_sprite_ext(sprTextBox, 0, 0, 0, 1, 1, image_angle, image_blend, 0.85);
+	fontX(fa_center);
+	fontY(fa_middle);
+	draw_text_border(room_width/2, height/2-8, text, c_white, 1);
+}
 
 // draw dashboard
 if (battleStart and !showText) {
@@ -51,6 +59,51 @@ if (battleStart and !showText) {
 			break;
 	}
 	draw_sprite(sprCursor, 0, cursorX, cursorY);
+	
+	// draw the skills descriptions
+	showDesc = false;
+	if (dashboard == "Skill") {
+		drawSkillDescription(displayOptions[cursor]);
+	} else if (dashboard == "Gymbag") {
+		/* draw the skills descriptions */
+		drawGymbagDescription(global.gymbag[cursor][0]);
+	}
+	
+	// draw whose turn it is
+	//draw_text(room_width/2, room_height/2, "maxscroll " + string(maxScroll));
+	//draw_text(room_width/2, room_height/2 + 32, "scroll " + string(scroll));
 }
 
-// draw whose turn it is
+// draw cursor on targets
+if (target != -1) {
+	image_speed = 0.1;
+	var tX = target.x - 16;
+	var tY = target.y;
+	var cursorSpr = -1;
+	switch (targetType) {
+		case "ally":
+			cursorSpr = sprCursorParty;
+			tX = target.x + 16;
+			tY = target.y;
+			break;
+		case "party":
+			cursorSpr = sprCursorParty;
+			tX = array_create(array_length(fighterIDs), 0)
+			for (i = 0; i < array_length(fighterIDs); i++) {
+				tX[i] = fighterIDs[i].x + 16;
+				tY[i] = fighterIDs[i].y;
+			}
+			break;
+		case "enemy":
+		case "enemy party":
+		default:
+			cursorSpr = sprCursorEnemy;
+			break;
+	}
+	if (is_array(tX)) {
+		for (i = 0; i < array_length(tX); i++) {
+			draw_sprite(cursorSpr, -1, tX[i], tY[i]);
+		}
+	}
+	else { draw_sprite(cursorSpr, -1, tX, tY); }
+}

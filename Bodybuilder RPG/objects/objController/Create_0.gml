@@ -17,6 +17,7 @@ prevRoomVar = -1;
 prevSubtitle = -1;
 
 global.characters = ["Ben"];
+global.gymbag = array_create(20, ["", ""]); global.gymbag[0] = ["Hydro20", 2]
 
 global.benStats = {
 	lvl: 1,
