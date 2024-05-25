@@ -1,4 +1,4 @@
-//if (TEST) { draw_text(room_width/2, room_height/2 -100, array_length(global.characters)); }
+//if (TEST) { draw_text(room_width/2, room_height/2 ,displayOptions[cursor]) }
 
 if showText {
 	draw_set_font(fntTextBox);
@@ -8,7 +8,7 @@ if showText {
 	fontY(fa_middle);
 	draw_text_border(room_width/2, height/2-8, text, c_white, 1);
 }
-if showDesc {
+else if showDesc {
 	draw_set_font(fntTextBox);
 	var height = 64;
 	draw_sprite_ext(sprTextBox, 0, 0, 0, 1, 1, image_angle, image_blend, 0.85);
@@ -22,7 +22,8 @@ if (battleStart and !showText) {
 	draw_set_font(fntHealth);
 	var dashX = 4; var dashW = 200; var dashH = 56; var dashY = 270-dashH-4; 
 	var textX = -y; var textY = -1; var xDis = -1; var yDis = -1;
-	draw_rectangle_color(dashX, dashY, dashX + dashW, dashY + dashH, c_blue, c_blue, c_black, c_black, false);
+	draw_sprite_ext(sprBattleDash, 0, dashX, dashY, 1, 1, image_angle, image_blend, 0.85);
+	////draw_rectangle_color(dashX, dashY, dashX + dashW, dashY + dashH, c_blue, c_blue, c_black, c_black, false);
 
 	// draw the fighting dashboard
 	xDis = 12; yDis = dashH/3;
@@ -81,12 +82,13 @@ if (target != -1) {
 	var tY = target.y;
 	var cursorSpr = -1;
 	switch (targetType) {
-		case "ally":
+		case "Ally":
+		case "Self":
 			cursorSpr = sprCursorParty;
 			tX = target.x + 16;
 			tY = target.y;
 			break;
-		case "party":
+		case "Party":
 			cursorSpr = sprCursorParty;
 			tX = array_create(array_length(fighterIDs), 0)
 			for (i = 0; i < array_length(fighterIDs); i++) {
@@ -94,8 +96,8 @@ if (target != -1) {
 				tY[i] = fighterIDs[i].y;
 			}
 			break;
-		case "enemy":
-		case "enemy party":
+		case "Enemy":
+		case "EnemyParty":
 		default:
 			cursorSpr = sprCursorEnemy;
 			break;
@@ -104,6 +106,5 @@ if (target != -1) {
 		for (i = 0; i < array_length(tX); i++) {
 			draw_sprite(cursorSpr, -1, tX[i], tY[i]);
 		}
-	}
-	else { draw_sprite(cursorSpr, -1, tX, tY); }
+	} else { draw_sprite(cursorSpr, -1, tX, tY); }
 }

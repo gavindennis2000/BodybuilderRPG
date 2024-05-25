@@ -43,7 +43,7 @@ highestSpd = [-1, -1];
 turn = -1;
 
 target = -1;
-targetType = "enemy";
+targetType = "Enemy";
 
 // how far apart each fighter and enemy are
 	var xDis = 128;
@@ -148,22 +148,13 @@ function initiateAction(turn, act) {
 	//action = true;
 	findTarget(act);
 	showText = true;
-	text = string(target.fighter)
-}
-
-function findTarget(action) {
-	// checks action to see if it should target enemy or player	
-	switch(action) {
-		case "Attack":
-			var i = 0;
-			while (enemyIDs[i].ko) { i++; }
-			target = enemyIDs[i];
-			targetType = "enemy";
-			break;
+	switch (act) {
 		case "Run":
-			target = turn;
-			targetType = "party";
+			text = "Flee from battle.";
+			break;
 		default:
+			text = string(target.fighter)
 			break;
 	}
 }
+

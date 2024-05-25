@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"confirmSkill",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"confirmSkill",
+  "parent":{
+    "name":"5Scripts",
+    "path":"folders/5Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
