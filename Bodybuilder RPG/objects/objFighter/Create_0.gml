@@ -4,3 +4,4 @@
 // Inherit the parent event
 event_inherited();
 statsLoaded = false;
+image_index = 0;

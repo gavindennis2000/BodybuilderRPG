@@ -18,10 +18,10 @@ var spd = 2;
 if (running) spd = 4;
 
 // move to the inputted target
-if (targetX > x) { x += spd; }
-if (targetX < x) { x -= spd; }
-if (targetY > y) { y += spd; }
-if (targetY < y) { y -= spd; }
+if (targetX > x) { x += spd; stepCheck(); } 
+if (targetX < x) { x -= spd; stepCheck(); }
+if (targetY > y) { y += spd; stepCheck(); }
+if (targetY < y) { y -= spd; stepCheck(); }
 if (targetX == x and targetY == y) { walking = false; running = false; };
 
 var exitInst = instance_place(x, y, objExit);
@@ -43,6 +43,7 @@ if (global.playerCanMove) {
 	
 		if (!place_meeting(x-1, y, objWall)) {
 			targetX -= 32;
+			steps++;
 		}
 	
 	}
@@ -55,6 +56,7 @@ if (global.playerCanMove) {
 	
 		if (!place_meeting(x+1, y, objWall)) {
 			targetX += 32;
+			steps++;
 		}
 	
 	}
@@ -68,6 +70,7 @@ if (global.playerCanMove) {
 	
 		if (!place_meeting(x, y-1, objWall))  {
 			targetY -= 32;
+			steps++;
 		 }
 	
 	}
@@ -80,6 +83,7 @@ if (global.playerCanMove) {
 	
 		if (!place_meeting(x, y+1, objWall)) {	
 			targetY += 32;
+			steps++;
 		}
 		
 	}

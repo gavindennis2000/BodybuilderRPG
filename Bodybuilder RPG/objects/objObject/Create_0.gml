@@ -6,6 +6,7 @@ text = [ ["Hello. Hello1 Hello2 Hello3 Hello4 Hello5 Hello6 Hello7 Hello8 Hello9
 textLength = array_length(text);
 textIndex = 0;
 textRepeat = 0;
+prompt = false;
 
 if (!layer_exists("NPC"))
 	layer = layer_create(-5, "NPC");

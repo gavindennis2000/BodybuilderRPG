@@ -7,11 +7,11 @@ var collision =
 var da = 0.1
 var keyAction = input_check_pressed("confirm");
 
-if (instance_exists(objPlayer)) {
+if (instance_exists(objPlayer) and instance_exists(objPause)) {
 	
 		// check if player is touching npc
 		if (collision) {
-				if (keyAction and !instance_exists(objTextBox) ) {
+				if (keyAction and !instance_exists(objTextBox) and !objPause.pause) {
 					instance_create_layer(x, y, layer, objTextBox, {text: other.text[textIndex]} );	
 					textIndex++;
 					if textIndex > textLength { textIndex = textRepeat; }

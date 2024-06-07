@@ -1,4 +1,5 @@
 depth = -9;
+if (!instance_exists(objDevTools)) { instance_create_depth(x, y, depth, objDevTools); }
 
 global.roomVar = momB;
 global.pX = x;
@@ -17,8 +18,10 @@ prevRoomVar = -1;
 prevSubtitle = -1;
 
 global.characters = ["Ben"];
-global.gymbag = array_create(20, ["", ""]); global.gymbag[0] = ["Hydro20", 2]
-
+global.gymbag = array_create(10, ["", ""]); 
+	global.gymbag[0] = ["Hydro20", 2];
+	global.gymbag[1] = ["H200", 2];
+	
 global.benStats = {
 	lvl: 1,
 	xp: 0,
@@ -27,7 +30,7 @@ global.benStats = {
 	sk: 10,
 	att: 5,
 	def: 5,
-	spd: 5,
+	spd: 10,
 	luck: 5
 }
 global.quadeStats = {
@@ -38,7 +41,7 @@ global.quadeStats = {
 	sk: 0,
 	att: 5,
 	def: 5,
-	spd: 5,
+	spd: 4,
 	luck: 5
 }
 global.deadlynnStats = {

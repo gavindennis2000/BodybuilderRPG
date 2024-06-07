@@ -5,3 +5,7 @@ if keyboard_check_pressed(ord("B")) {
 if keyboard_check_pressed(ord("R")) {
 	game_restart();
 }
+
+if keyboard_check_pressed(ord("E")) {
+	global.noEncounters = (global.noEncounters) ? false : true;
+}

@@ -1,13 +1,23 @@
 //draw_text(x, y-32, fighter);
 
 switch (fighter) {
+	case "Ben":
 	default:
 		switch(state) {
 			case "wait":
 			default:
 				sprite_index = sprPlayerLeft;
-				image_speed = 0;
 				image_index = 0;
+				image_speed = 0;
+				break;
+			case "attack":
+				sprite_index = sprPlayerLeft;
+				image_index = 0;
+				image_speed = 0;
+				break;
+			case "run":
+				sprite_index = sprPlayerLeft;
+				image_speed = 0.4;
 				break;
 		}
 		break;
@@ -15,14 +25,23 @@ switch (fighter) {
 
 x -= 16;
 y -= 16;
+if ko image_blend = c_red;
 event_inherited();
+
 
 x += 16;
 y += 16;
 
+if (fadeRoom > 0)
+	exit;
+
 if (instance_exists(objBattle)) {
 	// draw the dashboard
-	if (!objBattle.battleStart) { exit; }
+	if (
+		!objBattle.battleStart or
+		objBattle.victory or 
+		objBattle.gameOver 
+		) { exit; }
 	
 	// draw the character names
 	draw_set_font(fntTextBox);

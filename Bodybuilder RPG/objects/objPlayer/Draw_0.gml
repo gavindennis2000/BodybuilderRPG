@@ -1,4 +1,3 @@
-/// @description Insert description here
 if (face == left) {
 	sprite_index = sprPlayerLeft;
 }

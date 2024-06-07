@@ -7,7 +7,7 @@ if (variable_global_exists("chapter")) {
 if (!instance_exists(objPlayer))
 	exit;
 	
-if (keyPause and !unpause and (global.playerCanMove or (pause and !global.playerCanMove))) {
+if (keyPause and !unpause and !objPlayer.walking and (global.playerCanMove or (pause and !global.playerCanMove))) {
 	
 	if (!pause) {
 		pause = true;

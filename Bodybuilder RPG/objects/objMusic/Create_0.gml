@@ -1,7 +1,8 @@
 currentSong = -1;
 nextSong = -1;
 previousSong = -1;
-
+tempSong = -1;
+battleMusic = -1;
 
 function setGain(arg) {
 
@@ -41,8 +42,8 @@ function playNextSong() {
 		
 	} else {
 
-		audio_sound_gain(currentSong, 0, 2000);
-		alarm[0] = 60 * 2;
+		audio_sound_gain(currentSong, 0, 1500);
+		alarm[0] = 60 * 1.5;
 	
 	}
 	
@@ -59,9 +60,26 @@ function playNextSongCont() {
 	
 }
 
-function initiateBattle() {
+function initiateBattle(music = sndBattle) {
+	audio_pause_sound(currentSong);
 	tempSong = currentSong;
-	audio_pause_sound(tempSong);
-	audio_play_sound(sndBattle, 1, true);
+	currentSong = music;
+	audio_sound_gain(currentSong, 1, 0);
+	audio_play_sound(currentSong, 1, true);
 	audio_play_sound(sndBattleInit, 1, false);
 }
+
+function endBattle() {
+	battleMusic = currentSong;
+	currentSong = tempSong;
+	audio_sound_gain(battleMusic, 0, 1500);
+	alarm[1] = 60 * 1.5;
+}
+
+function battleVictory(sound = sndVictory) {
+	battleMusic = currentSong;
+	currentSong = sound;  // set new sound to victory fanfare
+	audio_sound_gain(battleMusic, 0, 1500);
+	alarm[2] = 60 * 1.5;
+	
+}	

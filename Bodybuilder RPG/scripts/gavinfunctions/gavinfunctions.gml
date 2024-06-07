@@ -24,13 +24,11 @@ function camGetY() {
 	return camera_get_view_y(view_camera[0]);	
 }
 
-function arrayTrueLength(arr, special = "null") {
+function arrayTrueLength(arr) {
 	// returns length of array not counting empty nodes
 	var length = 0;
 	for (i = 0; i < array_length(arr); i++) {
-		if (special == "gymbag") {
-			if (arr[i][0] != "") { length++; }	
-		} else if (arr[i] != "") { length++; }	
+		if (arr[i][0] != "") { length++; }		
 	}
 	return length;
 }

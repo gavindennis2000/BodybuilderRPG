@@ -10,6 +10,9 @@ else
 	layer = layer_get_id("Player");
 
 global.playerCanMove = true;
+global.noEncounters = false;
+steps = 0;
+
 up = 1;
 down = 2;
 left = 3;
@@ -29,3 +32,15 @@ if (!instance_exists(objCamera)) { instance_create_layer(x+16, y+16, layer, objC
 if (!instance_exists(objMusic)) { instance_create_layer(x, y, layer, objMusic); }
 if (!instance_exists(objController)) { instance_create_layer(x, y, layer, objController); }
 if (!instance_exists(objPause)) { instance_create_layer(x, y, layer, objPause); }
+
+function stepCheck() {
+	if (global.noEncounters) { exit; }
+	if (targetX == x and targetY == y) and (steps > 20) {
+		var ran = irandom(4);
+		if (ran == 0) {
+			global.playerCanMove = false;
+			var enemies = getEnemies();
+			objCamera.initiateBattle(enemies)
+		}
+	}
+}

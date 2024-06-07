@@ -11,8 +11,8 @@
   "name":"objTextBox",
   "overriddenProperties":[],
   "parent":{
-    "name":"2Objects",
-    "path":"folders/2Objects.yy",
+    "name":"Controllers",
+    "path":"folders/2Objects/Controllers.yy",
   },
   "parentObjectId":null,
   "persistent":false,

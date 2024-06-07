@@ -11,8 +11,8 @@
   "name":"objNPC",
   "overriddenProperties":[],
   "parent":{
-    "name":"2Objects",
-    "path":"folders/2Objects.yy",
+    "name":"Player",
+    "path":"folders/2Objects/Player.yy",
   },
   "parentObjectId":{
     "name":"objWall",

@@ -15,6 +15,7 @@ if (!variable_instance_exists(self, "screen")) {
 
 // default message and variable declarations
 if (!variable_instance_exists(self, "text")) { text = ["This is a test. Hello " + global.playerName + "!"]; }
+if (!variable_instance_exists(self, "prompt")) { prompt = false; }
 drawText = "";
 newChars= 0;
 skip = false;

@@ -1,4 +1,4 @@
-switch (fighter) {
+	switch (fighter) {
 	default:
 		switch(state) {
 			case "wait":

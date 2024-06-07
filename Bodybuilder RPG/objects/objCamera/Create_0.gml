@@ -19,15 +19,23 @@ inc = 0;
 aTime = 60;
 whiteOut = false;
 
+// battle variables
+enemies = [];
+
 layer = (layer_exists(layer_get_id("camera"))) ? layer_get_id("camera") : layer_create(-1000, "camera");
 
 function initiateBattle(enemies = ["npc"], music = sndBattle) {
 	// spin the camera, play the music, and go to the battle room
 	global.playerCanMove = false;
+	global.previousRoom = [room, objPlayer.x, objPlayer.y];
 	initBattle = true;
-	if (instance_exists(objMusic)) { objMusic.initiateBattle(); }
+	if (instance_exists(objMusic)) { objMusic.initiateBattle(music); }
 	whiteAlpha = 0;
+	
+	self.enemies = enemies;
+	
 	alarm[0] = aTime;
+	
 	inc = 0;
 	follow = noone;
 }
