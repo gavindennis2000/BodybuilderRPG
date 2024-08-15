@@ -1,0 +1,1 @@
+text = ["The Art and Science of Lifting by Greg Knuckols and Omar Isuf"];

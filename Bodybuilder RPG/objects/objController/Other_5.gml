@@ -1,2 +1,0 @@
-prevRoomVar = theRoom;
-prevSubtitle = subtitle;

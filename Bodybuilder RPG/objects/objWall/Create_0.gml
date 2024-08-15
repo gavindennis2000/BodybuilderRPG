@@ -1,2 +1,0 @@
-if (TEST)
-	visible = true;

@@ -1,1 +1,0 @@
-text = [["Welcome to the game. I am an NPC.", "Don't let me know if you need help. I won't be able to help as I am just an NPC programmed to test the dialog engine.", "Sean will beat Russ at Raw Nats."]];

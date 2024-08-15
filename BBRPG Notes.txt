@@ -1,19 +1,33 @@
 camera size is 480x270
 
+Town names 
+	Central Prairie - centertown
+	Dairygold - north
+	Highland - east
+	Great Valley - south
+	Nesleigh - west
+
 extensions
-	input6
-	font - dubiel
-
-text = ["Hello. Hello1 Hello2 Hello3 Hello4 Hello5 Hello6 Hello7 Hello8 Hello9", "Did you get all that?"];
-
-fight song 170bpm
-
-goTo = momF1
-pX = 224;
-pY = 288-32;
-face = 1;
-
-layer ids
-	exit 10
-	controller -9
-	pause -100
+	
+objDoor
+	goTo = momF1;
+	pX = 512 - 32;
+	pY = 128;
+	pFace = "left";
+	
+prompts
+	1 - bench press at home
+	2 - ask to work in for dumbbell flyes
+	3 - Hit some dumbbell bench 
+	4 - Hit some squats
+	5 - Walk on the treadmill
+	6 - Move atlas stone
+	
+	7 - Drink from the chocolate milk lake
+	8 - ride the yacht
+	9 - finish chapter 1
+	
+	
+	
+global variables
+	
