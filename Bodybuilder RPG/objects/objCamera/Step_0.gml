@@ -171,80 +171,80 @@ if (room == overworld) {
 	xDist = 480 * 1.5;
 	yDist = 270 * 1.5 + 32;
 	
-	//if (section == "nw") {
-	//	// northwest
-	//	if (x > xDist + townX) { 
-	//		if (transition and tempSection == "ne") { x -= 480/aTime0; }
-	//		else { x = xDist + townX; }
-	//	}
-	//	else if (x < 240 + townX) {
-	//		if (transition and tempSection == "ne") { x += 480/aTime0; }
-	//		else { x = 240 + townX; }	
-	//	}
-	//	if (y > yDist + townY) { 
-	//		if (transition and tempSection == "sw") { y -= 270/aTime0; }
-	//		else { y = yDist + townY;  }
-	//	}
-	//	else if (y < 135 + townY) { 
-	//		if (transition and tempSection == "sw") { y += 270/aTime0; }
-	//		else { y =  135 + townY;  }
-	//	}
-	//}
-	//else if (section == "ne") {
-	//	// northeast
-	//	if (x < 960 + 240 + townX) { 
-	//		if (transition and tempSection == "nw") { x += 480/aTime0; }
-	//		else { x = 960 + 240 + townX; }	
-	//	}
-	//	else if (x > 960*2 - 240 + townX) {
-	//		if (transition and tempSection == "nw") { x -= 480/aTime0; }
-	//		else { x = 960*2 - 240 + townX; }	
-	//	}
-	//if (y > yDist + townY) { 
-	//		if (transition and tempSection == "se") { y -= 270/aTime0; }
-	//		else { y = yDist + townY;  }
-	//	}
-	//	else if (y < 135 + townY) { 
-	//		if (transition and tempSection == "se") { y += 270/aTime0; }
-	//		else { y =  135 + townY;  }
-	//	}
-	//} 
-	//if (section == "sw") {
-	//	// northwest
-	//	if (x > xDist + townX) { 
-	//		if (transition and tempSection == "se") { x -= 480/aTime0; }
-	//		else { x = xDist + townX; }
-	//	}
-	//	else if (x < 240 + townX) {
-	//		if (transition and tempSection == "se") { x += 480/aTime0; }
-	//		else { x = 240 + townX; }	
-	//	}
-	//	if (y < 540 + 135 + 36 + townY) { 
-	//		if (transition and tempSection == "nw") { y += 270/aTime0; }
-	//		else { y = 540 + 135 + 36 + townY;  }
-	//	}
-	//	else if (y > 270 * 3.5 + 68 + townY) { 
-	//		if (transition and tempSection == "nw") { y -= 270/aTime0; }
-	//		else { y =  270 * 3.5 + 68 + townY;  }
-	//	}
-	//}
-	//else if (section == "se") {
-	//	// northwest
-	//	if (x < 960 + 240 + townX) { 
-	//		if (transition and tempSection == "sw") { x += 480/aTime0; }
-	//		else { x = 960 + 240 + townX; }	
-	//	}
-	//	else if (x > 960*2 - 240 + townX) {
-	//		if (transition and tempSection == "sw") { x -= 480/aTime0; }
-	//		else { x = 960*2 - 240 + townX; }	
-	//	}
-	//	if (y < 540 + 135 + 36 + townY) { 
-	//		if (transition and tempSection == "ne") { y += 270/aTime0; }
-	//		else { y = 540 + 135 + 36 + townY;  }
-	//	}
-	//	else if (y > 270 * 3.5 + 68 + townY) { 
-	//		if (transition and tempSection == "ne") { y -= 270/aTime0; }
-	//		else { y =  270 * 3.5 + 68 + townY;  }
-	//	}
-	//} 
+	if (section == "nw") {
+		// northwest
+		if (x > xDist + townX) { 
+			if (transition and tempSection == "ne") { x -= 480/aTime0; }
+			else { x = xDist + townX; }
+		}
+		else if (x < 240 + townX) {
+			if (transition and tempSection == "ne") { x += 480/aTime0; }
+			else { x = 240 + townX; }	
+		}
+		if (y > yDist + townY) { 
+			if (transition and tempSection == "sw") { y -= 270/aTime0; }
+			else { y = yDist + townY;  }
+		}
+		else if (y < 135 + townY) { 
+			if (transition and tempSection == "sw") { y += 270/aTime0; }
+			else { y =  135 + townY;  }
+		}
+	}
+	else if (section == "ne") {
+		// northeast
+		if (x < 960 + 240 + townX) { 
+			if (transition and tempSection == "nw") { x += 480/aTime0; }
+			else { x = 960 + 240 + townX; }	
+		}
+		else if (x > 960*2 - 240 + townX) {
+			if (transition and tempSection == "nw") { x -= 480/aTime0; }
+			else { x = 960*2 - 240 + townX; }	
+		}
+	if (y > yDist + townY) { 
+			if (transition and tempSection == "se") { y -= 270/aTime0; }
+			else { y = yDist + townY;  }
+		}
+		else if (y < 135 + townY) { 
+			if (transition and tempSection == "se") { y += 270/aTime0; }
+			else { y =  135 + townY;  }
+		}
+	} 
+	if (section == "sw") {
+		// northwest
+		if (x > xDist + townX) { 
+			if (transition and tempSection == "se") { x -= 480/aTime0; }
+			else { x = xDist + townX; }
+		}
+		else if (x < 240 + townX) {
+			if (transition and tempSection == "se") { x += 480/aTime0; }
+			else { x = 240 + townX; }	
+		}
+		if (y < 540 + 135 + 36 + townY) { 
+			if (transition and tempSection == "nw") { y += 270/aTime0; }
+			else { y = 540 + 135 + 36 + townY;  }
+		}
+		else if (y > 270 * 3.5 + 68 + townY) { 
+			if (transition and tempSection == "nw") { y -= 270/aTime0; }
+			else { y =  270 * 3.5 + 68 + townY;  }
+		}
+	}
+	else if (section == "se") {
+		// northwest
+		if (x < 960 + 240 + townX) { 
+			if (transition and tempSection == "sw") { x += 480/aTime0; }
+			else { x = 960 + 240 + townX; }	
+		}
+		else if (x > 960*2 - 240 + townX) {
+			if (transition and tempSection == "sw") { x -= 480/aTime0; }
+			else { x = 960*2 - 240 + townX; }	
+		}
+		if (y < 540 + 135 + 36 + townY) { 
+			if (transition and tempSection == "ne") { y += 270/aTime0; }
+			else { y = 540 + 135 + 36 + townY;  }
+		}
+		else if (y > 270 * 3.5 + 68 + townY) { 
+			if (transition and tempSection == "ne") { y -= 270/aTime0; }
+			else { y =  270 * 3.5 + 68 + townY;  }
+		}
+	} 
 }
