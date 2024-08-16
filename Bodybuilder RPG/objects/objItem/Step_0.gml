@@ -12,7 +12,7 @@ if (instance_exists(objPlayer)) {
 	dist = sqrt(sqr(objPlayer.x - x) + sqr(objPlayer.y - y));
 }
 
-if (touching and keyConfirm) {
+if (touching and keyConfirm and !instance_exists(objTextbox)) {
 	// if npc, face the player 
 	if (object_index == objNPC) {
 		face = objPlayer.face;

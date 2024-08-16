@@ -7,6 +7,15 @@ function draw_text_border(x, y, string, color, alpha, border = c_black) {
 function fontX(halign) {
 	draw_set_halign(halign);
 }
+
 function fontY(valign) {
 	draw_set_valign(valign);
+}
+
+function save_game(file) {
+	
+}
+
+function load_game(file) {
+	
 }

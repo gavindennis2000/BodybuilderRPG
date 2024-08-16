@@ -1,7 +1,8 @@
 health = 10;
 var delay = 120
-createNotes = true;
 
+// write the songs
+createNotes = true;
 if (createNotes) {  // create the notes
 notes1 = [  // [position, length] - Bench Novice
 	// verse 1

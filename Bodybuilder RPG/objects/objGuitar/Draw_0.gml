@@ -8,4 +8,13 @@ if (rectangleX[9] < room_width) {
 }
 
 image_speed = 0.25;
-draw_sprite(sprBench, imgIndex, playerX, room_height*3/4 + 16);
+switch(global.workout) {
+	case "novice leg":	
+		draw_sprite(sprSquat, imgIndex, playerX, room_height*3/4 + 16);
+		break;
+		
+	case "intermediate push":
+	default:
+		draw_sprite(sprBench, imgIndex, playerX, room_height*3/4 + 16);
+		break;
+}

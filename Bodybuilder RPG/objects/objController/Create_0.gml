@@ -1,5 +1,8 @@
 #macro TEST true
 
+var file = "file1.txt"
+
+// global variables
 global.roomVar = -1;
 global.subRoom = -1;
 global.prevRoom = -1;
@@ -22,6 +25,9 @@ global.maximum = max(global.push, global.pull, global.legs);
 global.total = global.push + global.pull + global.legs;
 
 global.workout = -1;
+
+if (!file_exists(file)) { save_game(file); }
+else { load_game(file); }
 
 drawRoom = false;
 drawSub = false;

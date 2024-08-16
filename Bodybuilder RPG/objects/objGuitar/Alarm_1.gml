@@ -2,9 +2,9 @@
 var bpm = 120;
 var spaceTime = 0;
 var noteY = 0;
-switch (global.chapter) {
+switch (global.workout) {
 	
-	case 1:
+	case "novice leg":
 	default:
 		bpm = 75;
 		spaceTime = 5;
@@ -21,7 +21,7 @@ switch (global.chapter) {
 		}
 		break;
 		
-	case 2:
+	case "intermediate push":
 		bpm = 150;
 		spaceTime = 75;
 		// create the notes
@@ -36,4 +36,20 @@ switch (global.chapter) {
 			noteY = inst.y;
 		}
 		break;
+		
+	case "advanced pull":
+		bpm = 150;
+		spaceTime = 75;
+		// create the notes
+		noteY = -spaceTime;
+		for (var i = 0; i < array_length(notes2); i++) {
+			var inst = instance_create_layer(
+				room_width - 32*6 + 32*notes2[i][0], 
+				noteY - notes2[i][1]*12,  // y position
+				layer, objNote, 
+				{spd: 2}  // speed
+			);
+			noteY = inst.y;
+		}
+		break; 
 }

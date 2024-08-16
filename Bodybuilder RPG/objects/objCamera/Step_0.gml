@@ -28,7 +28,6 @@ if (room == overworld) {
 		}
 		else if (objPlayer.y >= 1152 and objPlayer.y < 1152*2) {
 			town = "nesleigh";
-			pY -= 1152;
 			
 			global.prevRoom = global.roomVar;
 			global.roomVar = "Nesleigh";
@@ -36,7 +35,6 @@ if (room == overworld) {
 		}
 		else {
 			town = "end of the world sw";
-			pY -= 1152*2;
 			
 			global.prevRoom = global.roomVar;
 			global.roomVar = "The End of the World";

@@ -34,6 +34,7 @@ switch(prompt) {
 			with (objPlayer) {
 				canMove = false;
 				alarm[2] = 1;
+				global.workout = "novice leg";
 				actionRoom = roomGuitar;
 			}
 		}
@@ -50,6 +51,13 @@ switch(prompt) {
 				}
 			}
 			instance_create_layer(x, y, layer, objTextbox, { text: ["Wow! Unlimited grip strength!"] });
+		}
+		break;
+	case 7:
+		// drink from the chocolate milk lake
+		if (selection == 0) {
+			var txt = ["Yeah... That is not chocolate milk."]
+			instance_create_layer(x, y, layer, objTextbox, {text: txt});
 		}
 		break;
 }

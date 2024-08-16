@@ -4,7 +4,7 @@ Town names
 	Central Prairie - centertown
 	Dairygold - north
 	Highland - east
-	Great Valley - south
+	Great Valliou - south
 	Nesleigh - west
 
 extensions
@@ -30,4 +30,8 @@ prompts
 	
 	
 global variables
-	
+
+music
+	sad thoughs, deep squats 
+	super bench bros
+	back annihilation
