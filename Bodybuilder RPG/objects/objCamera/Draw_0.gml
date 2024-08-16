@@ -1,0 +1,1 @@
+draw_text(camX, camY, town);
