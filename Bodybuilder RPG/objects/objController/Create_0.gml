@@ -1,18 +1,22 @@
 #macro TEST true
 
-var file = "file1.txt"
-
 // global variables
 global.roomVar = -1;
 global.subRoom = -1;
 global.prevRoom = -1;
 global.prevSub = -1;
 
+global.roomID = "mom";
+
 global.chapter = 1;
 global.characterName = "GAVIN";
 global.keyItems = [
 	["serva grips", true],
 	["yacht", false]
+]
+global.keyEvents = [
+	["locked door", true],
+	["atlas stone", false]
 ]
 
 global.push = 4;
@@ -26,8 +30,10 @@ global.total = global.push + global.pull + global.legs;
 
 global.workout = -1;
 
-if (!file_exists(file)) { save_game(file); }
-else { load_game(file); }
+// save data
+var file = "save.txt"
+if (!file_exists(file)) { save_game(); }
+else { load_game(); }
 
 drawRoom = false;
 drawSub = false;

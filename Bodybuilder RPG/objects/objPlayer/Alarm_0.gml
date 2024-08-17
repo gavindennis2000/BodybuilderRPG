@@ -1,3 +1,4 @@
+///@description go to room from door
 if (fadeAlpha < 1) {
 	canMove = false;
 	depth = -999;
@@ -9,5 +10,6 @@ else {
 	x = door.pX;
 	y = door.pY;
 	face = door.pFace;
+	global.roomID = door.roomID;
 	room_goto(door.goTo);
 }

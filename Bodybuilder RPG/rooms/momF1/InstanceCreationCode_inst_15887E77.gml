@@ -1,1 +1,0 @@
-text = ["Starting Strength by Mark Rippetoe", "I'm still trying to recover from that GOMAD diet..."];

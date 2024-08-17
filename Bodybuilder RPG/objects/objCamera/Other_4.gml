@@ -6,4 +6,5 @@ if (instance_exists(objPlayer)) {
 	
 	x = xTo;
 	y = yTo;
+	
 }

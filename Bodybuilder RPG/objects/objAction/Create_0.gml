@@ -50,6 +50,7 @@ switch(prompt) {
 					gravity = 0.2;
 				}
 			}
+			global.keyEvents[1][1] = true;
 			instance_create_layer(x, y, layer, objTextbox, { text: ["Wow! Unlimited grip strength!"] });
 		}
 		break;
@@ -58,6 +59,17 @@ switch(prompt) {
 		if (selection == 0) {
 			var txt = ["Yeah... That is not chocolate milk."]
 			instance_create_layer(x, y, layer, objTextbox, {text: txt});
+		}
+		break;
+	case 9:
+		// finish chapter
+		if (selection == 0) {
+			global.chapter++;
+			save_game();
+			with (objPlayer) {
+				canMove = false;
+				alarm[3] = 1;
+			}
 		}
 		break;
 }

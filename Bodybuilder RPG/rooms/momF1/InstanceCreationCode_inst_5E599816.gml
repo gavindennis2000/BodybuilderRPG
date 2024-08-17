@@ -1,1 +1,0 @@
-text = ["Scientific Principles of Hypertrophy Training by Dr. Mike Israetel et al.", "The GOAT of bodybuilding textbooks."]

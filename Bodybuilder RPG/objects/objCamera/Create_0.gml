@@ -13,7 +13,7 @@ else { follow = noone; }
 xTo = x;
 yTo = y;
 
-section = "ne";
+section = -1;
 prevSection = -1;
 tempSection = -1;
 transition = false;

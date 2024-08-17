@@ -12,10 +12,10 @@ function fontY(valign) {
 	draw_set_valign(valign);
 }
 
-function save_game(file) {
+function save_game() {
 	
 }
 
-function load_game(file) {
+function load_game() {
 	
 }

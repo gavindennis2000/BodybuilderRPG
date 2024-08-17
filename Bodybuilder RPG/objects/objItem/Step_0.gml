@@ -35,7 +35,7 @@ if (touching and keyConfirm and !instance_exists(objTextbox)) {
 	}
 	// create the textbox
 	if (!is_array(text[0])) { text = [text]}
-	instance_create_layer(x, y, layer, objTextbox, {text: other.text[other.textIndex], prompt: other.prompt});
+	instance_create_layer(x, y, layer, objTextbox, {text: other.text[other.textIndex], prompt: other.prompt, npcID: npcID });
 	textIndex++;
 	if (textIndex > textIndexMax) { textIndex = textIndexMax; }
 	

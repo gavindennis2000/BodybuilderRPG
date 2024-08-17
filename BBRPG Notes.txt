@@ -10,10 +10,11 @@ Town names
 extensions
 	
 objDoor
-	goTo = momF1;
-	pX = 512 - 32;
-	pY = 128;
-	pFace = "left";
+	roomID = "harvey";
+	goTo = house;
+	pX = 320;
+	pY = 384 - 32;
+	pFace = "up";
 	
 prompts
 	1 - bench press at home
@@ -30,8 +31,19 @@ prompts
 	
 	
 global variables
+	keyEvents
+		0 - Save research center guy from island
+		1 - atlas stone is destroyed
 
 music
 	sad thoughs, deep squats 
 	super bench bros
 	back annihilation
+	
+text template
+	switch(global.chapter) {
+	case 1:
+	default:
+		break;
+}
+

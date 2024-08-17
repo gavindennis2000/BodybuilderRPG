@@ -1,3 +1,4 @@
+///@description Go to minigame
 // go to room after action prompt
 if (fadeAlpha < 1) {
 	depth = -999;

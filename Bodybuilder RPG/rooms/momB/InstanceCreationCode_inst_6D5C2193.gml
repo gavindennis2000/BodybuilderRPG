@@ -1,13 +1,13 @@
 switch(global.chapter) {
 	
-	case 0:
+	case 1:
 		text = [
 			["Bench press. My favorite Lift!","Maybe I'll knock out a few sets after work..."],
-			["Maybe I'll knock out a few sets after work..."]
+			["Maybe I'll knock out a few sets tomorrow..."]
 		];
 		break;
 		
-	case 1:
+	case 2:
 		text = [
 			["Bench press. My favorite Lift!","I think I have time for a couple sets...","Time to bench?"]
 		];
@@ -15,4 +15,3 @@ switch(global.chapter) {
 		break;
 
 }
-textIndexMax = array_length(text)-1;

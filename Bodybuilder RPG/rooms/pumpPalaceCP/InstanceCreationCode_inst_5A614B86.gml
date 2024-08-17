@@ -1,4 +1,4 @@
 goTo = overworld;
-pX = 448 + 32;
-pY = 416 + 32;
+pX = 2368 + 32;
+pY = 1568 + 32;
 pFace = "down";

@@ -2,6 +2,7 @@
 // You can write your code in this editor
 var camX = camera_get_view_x(view_camera[0]);
 var camY = camera_get_view_y(view_camera[0]);
+draw_text_border(camX, camY + 270 - 36, global.keyEvents, c_white, 1);
 if (drawRoom) {
 	draw_set_font(fontText);
 	fontX(fa_right); fontY(fa_top);
