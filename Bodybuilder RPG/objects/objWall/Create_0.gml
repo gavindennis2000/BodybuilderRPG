@@ -1,0 +1,1 @@
+if (room != overworld) { visible = false; }

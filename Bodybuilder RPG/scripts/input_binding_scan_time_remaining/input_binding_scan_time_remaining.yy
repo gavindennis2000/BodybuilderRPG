@@ -6,7 +6,7 @@
   "name":"input_binding_scan_time_remaining",
   "parent":{
     "name":"07  Binding Scanner",
-    "path":"folders/7Input/07  Binding Scanner.yy",
+    "path":"folders/9Extensions/Input/07  Binding Scanner.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

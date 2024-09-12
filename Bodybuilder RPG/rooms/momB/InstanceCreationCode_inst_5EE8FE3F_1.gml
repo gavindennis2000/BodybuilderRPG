@@ -1,3 +1,4 @@
+doorID = "upstairs"
 roomID = "mom";
 goTo = house;
 pX = 512 - 32;

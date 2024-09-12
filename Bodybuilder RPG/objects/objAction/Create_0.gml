@@ -6,7 +6,8 @@ switch(prompt) {
 			with (objPlayer) {
 				canMove = false;
 				alarm[2] = 1;
-				actionRoom = roomGuitar;
+				global.workout = "intermediate push";
+				actionRoom = roomWorkout;
 			}
 		}
 		break;
@@ -23,7 +24,7 @@ switch(prompt) {
 			with (objPlayer) {
 				canMove = false;
 				alarm[2] = 1;
-				/*temporary*/actionRoom = roomGuitar;
+				/*temporary*/actionRoom = roomWorkout;
 			}
 		}
 		else if (selection == 1) { instance_destroy(); }
@@ -35,7 +36,10 @@ switch(prompt) {
 				canMove = false;
 				alarm[2] = 1;
 				global.workout = "novice leg";
-				actionRoom = roomGuitar;
+				global.playerX = objPlayer.x;
+				global.playerY = objPlayer.y;
+				global.returnRoom = room;
+				actionRoom = roomWorkout;
 			}
 		}
 		break;
@@ -70,6 +74,21 @@ switch(prompt) {
 				canMove = false;
 				alarm[3] = 1;
 			}
+		}
+		break;
+	case 10:
+		// pullups with mason
+		global.keyEvents[2][1] = true;
+		if (selection == 0) {
+			with (objPlayer) {
+				canMove = false;
+				alarm[2] = 1;
+				global.workout = "novice pull";
+				actionRoom = roomWorkout;
+			}
+		}
+		else {
+			instance_create_layer(x, y, layer, objTextbox, { text: ["Maybe some other time, right?"], npcID: "MASON" });
 		}
 		break;
 }

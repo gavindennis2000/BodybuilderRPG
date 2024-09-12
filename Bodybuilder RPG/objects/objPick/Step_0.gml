@@ -8,7 +8,7 @@ var press = input_check_pressed(trigger);
 if (press) {
 	if (place_meeting(x, y, objNote)) {
 		var note = instance_place(x, y, objNote);
-		if (note.y <= y+6 and note.y >= y-12) {
+		if (note.y <= y+8 and note.y >= y-14) {
 
 			// increment score
 			var scr = 100;

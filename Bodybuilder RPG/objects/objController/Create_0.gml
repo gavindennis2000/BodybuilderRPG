@@ -16,12 +16,13 @@ global.keyItems = [
 ]
 global.keyEvents = [
 	["locked door", true],
-	["atlas stone", false]
+	["atlas stone", false],
+	["meet mason", false]
 ]
 
-global.push = 4;
-global.pull = 4;
-global.legs = 4;
+global.push = 1;
+global.pull = 1;
+global.legs = 1;
 global.cardio = 1;
 
 global.minimum = min(global.push, global.pull, global.legs);
@@ -29,6 +30,9 @@ global.maximum = max(global.push, global.pull, global.legs);
 global.total = global.push + global.pull + global.legs;
 
 global.workout = -1;
+global.playerX = -1;
+global.playerY = -1;
+global.returnRoom = -1;
 
 // save data
 var file = "save.txt"

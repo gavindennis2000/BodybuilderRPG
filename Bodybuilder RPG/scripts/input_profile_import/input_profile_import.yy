@@ -6,7 +6,7 @@
   "name":"input_profile_import",
   "parent":{
     "name":"13  Exporting and Importing",
-    "path":"folders/7Input/13  Exporting and Importing.yy",
+    "path":"folders/9Extensions/Input/13  Exporting and Importing.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

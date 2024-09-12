@@ -6,7 +6,7 @@
   "name":"__input_class_vibration_adsr",
   "parent":{
     "name":"Classes",
-    "path":"folders/7Input/(System)/Classes.yy",
+    "path":"folders/9Extensions/Input/(System)/Classes.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

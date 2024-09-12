@@ -6,7 +6,7 @@
   "name":"input_y",
   "parent":{
     "name":"02  2D Checkers",
-    "path":"folders/7Input/02  2D Checkers.yy",
+    "path":"folders/9Extensions/Input/02  2D Checkers.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -6,7 +6,7 @@
   "name":"input_mouse_in_bounds",
   "parent":{
     "name":"24  Mouse (Direct)",
-    "path":"folders/7Input/24  Mouse (Direct).yy",
+    "path":"folders/9Extensions/Input/24  Mouse (Direct).yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

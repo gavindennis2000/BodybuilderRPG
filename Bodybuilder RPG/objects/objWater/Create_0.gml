@@ -1,4 +1,7 @@
 /// @description Insert description here
+
+event_inherited();
+
 text = ["Drink from the chocolate milk lake?"];
 prompt = ["Yes", "No", 7];
 
@@ -10,12 +13,3 @@ if (variable_global_exists("keyItems")) {
 		}
 	}
 }
-
-dist = -1;
-textIndex = 0;
-textIndexMax = 0
-face = "down";
-faceStart = "down";
-itemID = "water";
-
-layer = layer_exists("Items") ? layer_get_id("Items") : layer_create(-101, "Items");

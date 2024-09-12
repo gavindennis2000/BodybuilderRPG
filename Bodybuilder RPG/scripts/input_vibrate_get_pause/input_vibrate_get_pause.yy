@@ -6,7 +6,7 @@
   "name":"input_vibrate_get_pause",
   "parent":{
     "name":"19  Vibration",
-    "path":"folders/7Input/19  Vibration.yy",
+    "path":"folders/9Extensions/Input/19  Vibration.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -1,14 +1,26 @@
 if (!instance_exists(objDevTools)) { instance_create_layer(x, y, layer, objDevTools); }
 if (!instance_exists(objCamera)) { instance_create_layer(x, y, layer, objCamera); }
 if (!instance_exists(objMusic)) { instance_create_layer(x, y, layer, objMusic); }
-instance_create_layer(x, y, layer, objKeyEvents);
+if (!instance_exists(objPause)) { instance_create_layer(x, y, layer, objPause); }
+if (!instance_exists(objKeyEvents)) { instance_create_layer(x, y, layer, objKeyEvents); }
+if (!instance_exists(objItemTiles)) { instance_create_layer(x, y, layer, objItemTiles); }
+if (!instance_exists(obj_gmlive)) { instance_create_layer(x, y, layer, obj_gmlive); }
 
 global.minimum = min(global.push, global.pull, global.legs);
 global.maximum = max(global.push, global.pull, global.legs);
 global.total = global.push + global.pull + global.legs;
 
-if (room == roomGuitar and !instance_exists(objGuitar)) { instance_create_layer(x, y, layer, objGuitar); } 
-
+if (room == roomWorkout) {
+	switch(global.workout) {
+		case "novice leg":
+		case "intermediate push":
+		case "advanced pull":
+			if (!instance_exists(objGuitar)) { instance_create_layer(x, y, layer, objGuitar); } 
+			break;
+		case "novice pull":
+			if (!instance_exists(objPullup)) { instance_create_layer(x, y, layer, objPullup); } 
+	}
+}
 global.prevRoom = global.roomVar;
 global.prevSub = global.subRoom;
 
@@ -29,7 +41,7 @@ switch (room) {
 		}
 		break;	
 	// workouts
-	case roomGuitar:
+	case roomWorkout:
 		global.subRoom = "roomGuitar";
 		break;
 		
@@ -62,9 +74,44 @@ switch (room) {
 }
 
 if (global.subRoom == "roomGuitar") {
-	if (global.workout == "leg novice") { 
+	// novice
+	if (global.workout == "novice push") { 
+		global.roomVar = -1;
+		global.subRoom = "Push Workout - Novice"; 
+	}
+	else if (global.workout == "novice pull") { 
+		global.roomVar = -1;
+		global.subRoom = "Pull Workout - Novice"; 
+	}
+	else if (global.workout == "novice leg") { 
 		global.roomVar = -1;
 		global.subRoom = "Leg Workout - Novice"; 
+	}
+	// intermediate
+	if (global.workout == "intermediate push") { 
+		global.roomVar = -1;
+		global.subRoom = "Push Workout - Intermediate"; 
+	}
+	else if (global.workout == "intermediate pull") { 
+		global.roomVar = -1;
+		global.subRoom = "Pull Workout - Intermediate"; 
+	}
+	else if (global.workout == "intermediate leg") { 
+		global.roomVar = -1;
+		global.subRoom = "Leg Workout - Intermediate"; 
+	}
+	// advanced
+	if (global.workout == "advanced push") { 
+		global.roomVar = -1;
+		global.subRoom = "Push Workout - Advanced"; 
+	}
+	else if (global.workout == "advanced pull") { 
+		global.roomVar = -1;
+		global.subRoom = "Pull Workout - Advanced"; 
+	}
+	else if (global.workout == "advanced leg") { 
+		global.roomVar = -1;
+		global.subRoom = "Leg Workout - Advanced"; 
 	}
 }
 drawRoom = false;

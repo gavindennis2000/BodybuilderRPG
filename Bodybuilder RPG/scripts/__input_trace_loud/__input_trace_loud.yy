@@ -6,7 +6,7 @@
   "name":"__input_trace_loud",
   "parent":{
     "name":"(System)",
-    "path":"folders/7Input/(System).yy",
+    "path":"folders/9Extensions/Input/(System).yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

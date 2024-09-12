@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scrMusic",
   "parent":{
-    "name":"6Scripts",
-    "path":"folders/6Scripts.yy",
+    "name":"7Scripts",
+    "path":"folders/7Scripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

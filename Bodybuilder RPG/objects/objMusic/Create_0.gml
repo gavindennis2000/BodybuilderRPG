@@ -4,17 +4,19 @@ lead = -1;
 function playGuitar(start = 0) {
 	// play the lead and backing tracks
 	
-
-	
-	switch(global.chapter) {
-		case 1:
+	switch(global.workout) {
+		case "novice leg":
 		default:
-			bt = sndBenchNoviceBT;
-			lead = sndBenchNoviceLead;
+			bt = sndRhythmLegNovice;
+			lead = sndLeadLegNovice;
 			break;
-		case 2:
-			bt = sndSquatIntermediateBT;
-			lead = sndSquatIntermediateLead;
+		case "intermediate push":
+			bt = sndRhythmPushIntermediate;
+			lead = sndLeadPushIntermediate;
+			break;
+		case "advanced pull":
+			bt = sndRhythmPullAdvanced;
+			lead = sndLeadPullAdvanced;
 			break;
 	}
 	

@@ -1,3 +1,4 @@
+itemID = "bed";
 switch (global.chapter) {
 	case 1:
 	default:

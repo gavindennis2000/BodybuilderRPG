@@ -119,8 +119,8 @@
   "maintainGms1Font":false,
   "name":"fontText",
   "parent":{
-    "name":"Fonts",
-    "path":"folders/Fonts.yy",
+    "name":"8Fonts",
+    "path":"folders/8Fonts.yy",
   },
   "pointRounding":0,
   "ranges":[

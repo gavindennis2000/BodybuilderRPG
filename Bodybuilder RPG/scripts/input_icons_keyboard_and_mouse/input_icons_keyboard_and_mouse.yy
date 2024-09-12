@@ -6,7 +6,7 @@
   "name":"input_icons_keyboard_and_mouse",
   "parent":{
     "name":"Icons",
-    "path":"folders/7Input/(System)/Icons.yy",
+    "path":"folders/9Extensions/Input/(System)/Icons.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

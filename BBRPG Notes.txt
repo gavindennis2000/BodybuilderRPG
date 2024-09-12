@@ -1,5 +1,8 @@
 camera size is 480x270
 
+layers 
+	pause 999
+
 Town names 
 	Central Prairie - centertown
 	Dairygold - north
@@ -27,6 +30,7 @@ prompts
 	7 - Drink from the chocolate milk lake
 	8 - ride the yacht
 	9 - finish chapter 1
+	10 - pullups with mason
 	
 	
 	

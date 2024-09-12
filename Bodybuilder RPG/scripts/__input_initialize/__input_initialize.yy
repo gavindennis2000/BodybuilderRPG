@@ -6,7 +6,7 @@
   "name":"__input_initialize",
   "parent":{
     "name":"Initialization",
-    "path":"folders/7Input/(System)/Initialization.yy",
+    "path":"folders/9Extensions/Input/(System)/Initialization.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

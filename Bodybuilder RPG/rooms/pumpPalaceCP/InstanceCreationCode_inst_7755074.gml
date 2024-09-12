@@ -1,15 +1,13 @@
-npcID = "Gymrat 2"
-
-npcID = "Gymrat 1"
+npcID = "gym rat 2"
 
 switch(global.legs) {
 
 	case 1:
-		text = [
+		text = [[
 			"Squats? Never. My knees can't handle them.",
 			"I mostly just do cardio. I can play a game on my phone while I burn calories!",
 			"Awesome huh?"
-		]
+		]]
 		break;
 	case 2:
 	case 3:

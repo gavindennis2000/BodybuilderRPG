@@ -6,8 +6,10 @@ var keyUp = input_check("up");
 var keyConfirm = input_check_pressed("confirm");
 var keyRun = input_check("cancel");
 var keyCancel = input_check_pressed("cancel");
+var keyStart = input_check_pressed("start");
 
 // don't move if canmove is false
+
 if (!canMove) { exit; }
 
 // check for doors/stairs
@@ -23,8 +25,8 @@ if (targetX == 0 and targetY == 0 and place_meeting(x, y, objDoor)) {
 // move the player if targets aren't 0
 var spd = 0;
 spd = (running) ? 4 : 2;
-if (bunnyHood and running) spd *= 2;
-if (landGordan and running) spd *= 2;
+if (global.bunnyHood and running) spd *= 2;
+if (global.bicycle) spd *= 2;
 
 if (targetX != 0 and targetY != 0) { spd = (running) ? 32/10 : 32/20; }
 

@@ -6,7 +6,7 @@
   "name":"input_color_get",
   "parent":{
     "name":"20  Color",
-    "path":"folders/7Input/20  Color.yy",
+    "path":"folders/9Extensions/Input/20  Color.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

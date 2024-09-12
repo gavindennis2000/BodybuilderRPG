@@ -21,10 +21,12 @@ keyConfirmPress = input_check_pressed("confirm");
 
 // change selection during prompts
 if (next and numberOfTexts == 1 and prompt != false) {
-	if (input_check_pressed("left")) { 
+	if (input_check_pressed("left") and selection == 1) { 
 		selection = 0; 
-	} else if (input_check_pressed("right")) { 
+		playSound(sndCursor);
+	} else if (input_check_pressed("right") and selection == 0) { 
 		selection = 1; 
+		playSound(sndCursor);
 	}
 }
 		

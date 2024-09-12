@@ -1,3 +1,4 @@
+itemID = "treadmill";
 switch(global.chapter) {
 	
 	case 1:

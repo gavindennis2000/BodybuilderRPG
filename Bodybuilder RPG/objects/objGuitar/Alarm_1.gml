@@ -38,16 +38,16 @@ switch (global.workout) {
 		break;
 		
 	case "advanced pull":
-		bpm = 150;
-		spaceTime = 75;
+		bpm = 180;
+		spaceTime = 245
 		// create the notes
 		noteY = -spaceTime;
-		for (var i = 0; i < array_length(notes2); i++) {
+		for (var i = 0; i < array_length(notes3); i++) {
 			var inst = instance_create_layer(
-				room_width - 32*6 + 32*notes2[i][0], 
-				noteY - notes2[i][1]*12,  // y position
+				room_width - 32*6 + 32*notes3[i][0],   // x position
+				noteY - notes3[i][1]*30,  // y position
 				layer, objNote, 
-				{spd: 2}  // speed
+				{spd: 3}  // speed
 			);
 			noteY = inst.y;
 		}

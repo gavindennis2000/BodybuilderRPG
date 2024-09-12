@@ -6,7 +6,7 @@
   "name":"input_chord_create",
   "parent":{
     "name":"04  Further Verb Functions",
-    "path":"folders/7Input/04  Further Verb Functions.yy",
+    "path":"folders/9Extensions/Input/04  Further Verb Functions.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

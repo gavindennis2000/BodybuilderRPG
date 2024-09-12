@@ -6,7 +6,7 @@
   "name":"input_keyboard_check_released",
   "parent":{
     "name":"26  Keyboard (Direct)",
-    "path":"folders/7Input/26  Keyboard (Direct).yy",
+    "path":"folders/9Extensions/Input/26  Keyboard (Direct).yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

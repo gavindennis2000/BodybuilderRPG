@@ -8,8 +8,8 @@
   "name":"objAction",
   "overriddenProperties":[],
   "parent":{
-    "name":"2Object",
-    "path":"folders/2Object.yy",
+    "name":"Controllers",
+    "path":"folders/2Object/Controllers.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -28,6 +28,7 @@
   "properties":[
     {"$GMObjectProperty":"v1","%Name":"selection","filters":[],"listItems":[],"multiselect":false,"name":"selection","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"0","varType":0,},
     {"$GMObjectProperty":"v1","%Name":"prompt","filters":[],"listItems":[],"multiselect":false,"name":"prompt","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"0","varType":0,},
+    {"$GMObjectProperty":"v1","%Name":"text","filters":[],"listItems":[],"multiselect":true,"name":"text","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"","varType":6,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

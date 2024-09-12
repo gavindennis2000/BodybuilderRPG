@@ -26,5 +26,5 @@ targetY = 0;
 fadeAlpha = 0;
 
 // item stuff
-bunnyHood = true;
-landGordan = false;
+global.bunnyHood = false;
+global.bicycle = false;

@@ -12,6 +12,10 @@ if (instance_exists(objPlayer)) {
 	dist = sqrt(sqr(objPlayer.x - x) + sqr(objPlayer.y - y));
 }
 
+glowAlpha += glowAlphaChange;
+if (glowAlpha >= 1) { glowAlphaChange = -0.025; }
+else if (glowAlpha <= 0) { glowAlphaChange = 0.025; }
+	
 if (touching and keyConfirm and !instance_exists(objTextbox)) {
 	// if npc, face the player 
 	if (object_index == objNPC) {

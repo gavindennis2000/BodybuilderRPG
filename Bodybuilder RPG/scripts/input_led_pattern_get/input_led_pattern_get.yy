@@ -6,7 +6,7 @@
   "name":"input_led_pattern_get",
   "parent":{
     "name":"25  Gamepads (Direct)",
-    "path":"folders/7Input/25  Gamepads (Direct).yy",
+    "path":"folders/9Extensions/Input/25  Gamepads (Direct).yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

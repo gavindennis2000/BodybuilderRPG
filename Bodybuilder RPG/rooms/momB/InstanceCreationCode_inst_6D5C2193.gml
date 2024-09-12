@@ -1,3 +1,4 @@
+itemID = "bench press";
 switch(global.chapter) {
 	
 	case 1:

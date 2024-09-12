@@ -12,14 +12,15 @@ switch(global.roomID) {
 				pY = 1888 + 32;
 				pFace = "down";	
 			}
-			// create mom
+			// create harveys mom
 			with (instance_create_layer(320, 224, layer, objNPC)) {
 				npcID = "harvey's mom";
+				prompt = false;
 
 				switch(global.chapter) {
 					case 1:
 						text = [
-							[string_concat("Hey ", global.characterName, "!"), "Are you looking for Harvey?", "He left for the gym about two hours ago."]
+							[string_concat("Hey ", global.characterName, "!"), "Are you looking for HARVEY?", "He left for the gym about two hours ago."]
 						];
 						break;
 					case 2:
@@ -39,6 +40,37 @@ switch(global.roomID) {
 				pX = 3136;
 				pY = 2144 + 32;
 				pFace = "down";	
+			}
+			// create mason
+			with (instance_create_layer(320, 224, layer, objNPC)) {
+				npcID = "mason";
+				prompt = ["Let's do it!", "Not right now", 10];
+
+				switch(global.chapter) {
+					case 1:
+						if (global.keyEvents[2][0] == "meet mason" and global.keyEvents[2][1] == false) {
+							text = [
+								[
+								string_concat("Hey. Are you ", global.characterName, "?"), 
+								"HARVEY told me about you. He said you were trying to get serious about bodybuilding, right?", 
+								"I'm a pretty dedicated lifter myself. I could definitely help you out if you needed.",
+								"Say, you in the mood for some pull-ups?"
+								],
+								[
+								"Change your mind about the pull-ups?"
+								]
+							];
+						}
+						else {
+							text = [
+								["Hey. Down to hit some pull-ups?"]
+							]
+						}
+						break;
+					case 2:
+						
+						break;
+				}	
 			}
 		}
 		break;
@@ -94,7 +126,7 @@ switch(global.roomID) {
 						if (global.total == 12) {
 							str = string_concat("Good morning ", global.characterName, ".");
 							text = [
-								[str,"Don't forget to pick up your check from Mr. Ohner today."]
+								[str,"Don't forget to pick up your check from Mr. OHNER \ntoday."]
 							];
 						}
 						else if (global.total < 21) {
@@ -114,7 +146,7 @@ switch(global.roomID) {
 		
 			// create stairs
 			with (instance_create_layer(512, 128, layer, objDoor)) {
-				doorID = "stairs";
+				doorID = "downstairs";
 				roomID = -1;
 				goTo = momB;
 				pX = 512 - 32;

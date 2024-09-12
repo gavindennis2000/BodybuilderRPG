@@ -6,7 +6,7 @@
   "name":"input_profile_reset_bindings",
   "parent":{
     "name":"16  Profiles",
-    "path":"folders/7Input/16  Profiles.yy",
+    "path":"folders/9Extensions/Input/16  Profiles.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
