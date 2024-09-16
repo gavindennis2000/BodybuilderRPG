@@ -1,1 +1,1 @@
-if (room != overworld) { visible = false; }
+if (room != rOverworld) { visible = false; }

@@ -28,7 +28,7 @@
   "physicsShapePoints":[],
   "physicsStartAwake":true,
   "properties":[
-    {"$GMObjectProperty":"v1","%Name":"goTo","filters":[],"listItems":[],"multiselect":false,"name":"goTo","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"momB","path":"rooms/momB/momB.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"momB","varType":5,},
+    {"$GMObjectProperty":"v1","%Name":"goTo","filters":[],"listItems":[],"multiselect":false,"name":"goTo","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"rMom","path":"rooms/rMom/rMom.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"rMom","varType":5,},
     {"$GMObjectProperty":"v1","%Name":"pX","filters":[],"listItems":[],"multiselect":false,"name":"pX","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"480","varType":0,},
     {"$GMObjectProperty":"v1","%Name":"pY","filters":[],"listItems":[],"multiselect":false,"name":"pY","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"160","varType":0,},
     {"$GMObjectProperty":"v1","%Name":"pFace","filters":[],"listItems":[],"multiselect":false,"name":"pFace","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"\"up\"","varType":2,},

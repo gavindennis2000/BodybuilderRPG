@@ -14,7 +14,7 @@ if (asset_get_index("live_init") == -1) show_error("live_init is missing!\nEithe
 // (e.g. when running on mobile platforms):
 live_init(1, "http://localhost:5100", "");
 
-live_blank_object = objGMLive;
-live_blank_room = roomGMLive;
+live_blank_object = objBlank;
+live_blank_room = rBlank;
 
 // if you need to add any overrides because of 

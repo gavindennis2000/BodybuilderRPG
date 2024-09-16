@@ -17,7 +17,7 @@ if (next) {
 
 
 	
-keyConfirmPress = input_check_pressed("confirm");
+keyConfirmPress = input_check_pressed("south");
 
 // change selection during prompts
 if (next and numberOfTexts == 1 and prompt != false) {

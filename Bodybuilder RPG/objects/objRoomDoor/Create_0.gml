@@ -1,5 +1,5 @@
 switch(room) {
-	case pumpPalaceCP:
+	case rPumpPalace:
 		
 		break;
 }

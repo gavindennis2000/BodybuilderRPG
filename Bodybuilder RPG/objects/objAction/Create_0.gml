@@ -7,7 +7,7 @@ switch(prompt) {
 				canMove = false;
 				alarm[2] = 1;
 				global.workout = "intermediate push";
-				actionRoom = roomWorkout;
+				actionRoom = rWorkout;
 			}
 		}
 		break;
@@ -24,7 +24,7 @@ switch(prompt) {
 			with (objPlayer) {
 				canMove = false;
 				alarm[2] = 1;
-				/*temporary*/actionRoom = roomWorkout;
+				/*temporary*/actionRoom = rWorkout;
 			}
 		}
 		else if (selection == 1) { instance_destroy(); }
@@ -39,7 +39,7 @@ switch(prompt) {
 				global.playerX = objPlayer.x;
 				global.playerY = objPlayer.y;
 				global.returnRoom = room;
-				actionRoom = roomWorkout;
+				actionRoom = rWorkout;
 			}
 		}
 		break;
@@ -84,7 +84,7 @@ switch(prompt) {
 				canMove = false;
 				alarm[2] = 1;
 				global.workout = "novice pull";
-				actionRoom = roomWorkout;
+				actionRoom = rWorkout;
 			}
 		}
 		else {

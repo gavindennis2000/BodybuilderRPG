@@ -10,7 +10,8 @@ global.minimum = min(global.push, global.pull, global.legs);
 global.maximum = max(global.push, global.pull, global.legs);
 global.total = global.push + global.pull + global.legs;
 
-if (room == roomWorkout) {
+global.workout = "novice pull";
+if (room == rWorkout) {
 	switch(global.workout) {
 		case "novice leg":
 		case "intermediate push":
@@ -19,19 +20,20 @@ if (room == roomWorkout) {
 			break;
 		case "novice pull":
 			if (!instance_exists(objPullup)) { instance_create_layer(x, y, layer, objPullup); } 
+			break;
 	}
 }
 global.prevRoom = global.roomVar;
 global.prevSub = global.subRoom;
 
 switch (room) {
-	case momB:
+	case rMom:
 		global.roomVar = "Mom's House";
 		global.subRoom = "Basement";
 		break;
 		
 	// pump palace
-	case pumpPalaceCP:
+	case rPumpPalace:
 		switch(global.roomID) {
 			case "pp cp":
 			default:
@@ -41,12 +43,12 @@ switch (room) {
 		}
 		break;	
 	// workouts
-	case roomWorkout:
+	case rWorkout:
 		global.subRoom = "roomGuitar";
 		break;
 		
 	// houses
-	case house:
+	case rHouse:
 		switch(global.roomID) {
 			case "mom":
 				global.roomVar = "Mom's House";

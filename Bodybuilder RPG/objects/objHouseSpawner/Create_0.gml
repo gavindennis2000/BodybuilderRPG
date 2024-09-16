@@ -7,7 +7,7 @@ switch(global.roomID) {
 		if (yes) {
 			with (objDoor) {
 				roomID = -1
-				goTo = overworld;
+				goTo = rOverworld;
 				pX = 3520;
 				pY = 1888 + 32;
 				pFace = "down";	
@@ -36,7 +36,7 @@ switch(global.roomID) {
 		if (yes) {
 			with (objDoor) {
 				roomID = -1
-				goTo = overworld;
+				goTo = rOverworld;
 				pX = 3136;
 				pY = 2144 + 32;
 				pFace = "down";	
@@ -79,7 +79,7 @@ switch(global.roomID) {
 		if (yes) {
 			with (objDoor) {
 				roomID = -1
-				goTo = overworld;
+				goTo = rOverworld;
 				pX = 3520;
 				pY = 2144 + 32;
 				pFace = "down";	
@@ -148,7 +148,7 @@ switch(global.roomID) {
 			with (instance_create_layer(512, 128, layer, objDoor)) {
 				doorID = "downstairs";
 				roomID = -1;
-				goTo = momB;
+				goTo = rMom;
 				pX = 512 - 32;
 				pY = 160;
 				pFace = "left";

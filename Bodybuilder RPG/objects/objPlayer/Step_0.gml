@@ -3,10 +3,12 @@ var keyRight = input_check("right");
 var keyDown = input_check("down");
 var keyUp = input_check("up");
 
-var keyConfirm = input_check_pressed("confirm");
-var keyRun = input_check("cancel");
-var keyCancel = input_check_pressed("cancel");
+var keyConfirm = input_check_pressed("south");
+var keyRun = input_check("west");
+var keyCancel = input_check_pressed("east");
+
 var keyStart = input_check_pressed("start");
+var keySelect = input_check_pressed("select");
 
 // don't move if canmove is false
 

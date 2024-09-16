@@ -6,13 +6,18 @@ global.subRoom = -1;
 global.prevRoom = -1;
 global.prevSub = -1;
 
+global.bicycle = false;
+global.bunnyHood = false;
+
 global.roomID = "mom";
 
 global.chapter = 1;
 global.characterName = "GAVIN";
 global.keyItems = [
-	["serva grips", true],
-	["yacht", false]
+	["serva grips", false],
+	["yacht", false],
+	["bunny hood", false],
+	["bicycle", false],
 ]
 global.keyEvents = [
 	["locked door", true],
@@ -33,6 +38,7 @@ global.workout = -1;
 global.playerX = -1;
 global.playerY = -1;
 global.returnRoom = -1;
+global.highScores = array_create(9, 0);
 
 // save data
 var file = "save.txt"

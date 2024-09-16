@@ -15,13 +15,16 @@ function __input_config_verbs()
     return {
         keyboard_and_mouse:
         {
-            up:    [input_binding_key(vk_up),    input_binding_key("W")],
-            down:  [input_binding_key(vk_down),  input_binding_key("S")],
-            left:  [input_binding_key(vk_left),  input_binding_key("A")],
-            right: [input_binding_key(vk_right), input_binding_key("D")],
+            up:    [input_binding_key("W")],
+            down:  [input_binding_key("S")],
+            left:  [input_binding_key("A")],
+            right: [input_binding_key("D")],
             
-            confirm:  [input_binding_key(vk_space), input_binding_key("K")],
-            cancel:  [input_binding_key(vk_lshift), input_binding_key("J")],
+            south:  [input_binding_key("K")],
+            west:  [input_binding_key("J")],
+			east: [input_binding_key("I")],
+			north: [input_binding_key("U")],
+			
             start: [input_binding_key(vk_enter), input_binding_key("Y")],
             select: [input_binding_key(vk_rshift), input_binding_key("T")],
 			
@@ -39,10 +42,14 @@ function __input_config_verbs()
             left:  [input_binding_gamepad_axis(gp_axislh, true),  input_binding_gamepad_button(gp_padl)],
             right: [input_binding_gamepad_axis(gp_axislh, false), input_binding_gamepad_button(gp_padr)],
             
-            accept:  input_binding_gamepad_button(gp_face1),
-            cancel:  input_binding_gamepad_button(gp_face2),
-            start:  input_binding_gamepad_button(gp_face3),
-            select: input_binding_gamepad_button(gp_face4),
+            south:  input_binding_gamepad_button(gp_face1),
+            east:  input_binding_gamepad_button(gp_face2),
+			north:  input_binding_gamepad_button(gp_face4),
+            west:  input_binding_gamepad_button(gp_face3),
+			
+			
+            start:  input_binding_gamepad_button(gp_start),
+            select: input_binding_gamepad_button(gp_select),
 			
 			l1: input_binding_gamepad_button(gp_shoulderl),
 			l2: input_binding_gamepad_button(gp_shoulderlb),

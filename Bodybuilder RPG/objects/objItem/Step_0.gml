@@ -1,5 +1,5 @@
 /// @description Insert description here
-var keyConfirm = input_check_pressed("confirm");
+var keyConfirm = input_check_pressed("south");
 var touching = false; //var dist = -1;
 if (instance_exists(objPlayer)) { 
 	// check if sign is touching player

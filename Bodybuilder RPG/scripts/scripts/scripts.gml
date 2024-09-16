@@ -19,3 +19,19 @@ function save_game() {
 function load_game() {
 	
 }
+
+function string_replace_at(str, n, insert) {
+	if (string_length(str)>=n) {
+    
+	    var tempString = "";
+	    tempString = string_insert(insert,str,n);
+	    tempString = string_delete(tempString,n+1,1);
+	    return tempString;
+    
+	}
+	else {
+    
+	    return str;
+    
+	}	
+}

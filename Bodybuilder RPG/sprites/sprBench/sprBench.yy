@@ -34,8 +34,8 @@
   "nineSlice":null,
   "origin":6,
   "parent":{
-    "name":"1Sprites",
-    "path":"folders/1Sprites.yy",
+    "name":"Workouts",
+    "path":"folders/1Sprites/Workouts.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -5,7 +5,7 @@ var check = false;
 			check = true;
 	}
 switch(room) {
-	case pumpPalaceCP:
+	case rPumpPalace:
 			
 		if (active) {
 			switch(doorID) {

@@ -6,7 +6,7 @@ if (follow != noone) {
 	y += (yTo - y) / 15;
 }
 
-if (room == overworld) {
+if (room == rOverworld) {
 	
 	var pX = objPlayer.x + 16;
 	var pY = objPlayer.y + 16;

@@ -6,7 +6,7 @@
   "name":"GMLive_noDeactivate",
   "parent":{
     "name":"GMLive",
-    "path":"folders/9Extensions/GMLive.yy",
+    "path":"folders/Extensions/GMLive.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
