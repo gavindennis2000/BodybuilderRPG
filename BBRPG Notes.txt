@@ -6,7 +6,7 @@ layers
 Town names 
 	Central Prairie - centertown
 	Dairygold - north
-	Highland - east
+	Highland - east 
 	Great Valliou - south
 	Nesleigh - west
 
@@ -51,3 +51,7 @@ text template
 		break;
 }
 
+story
+	chapter 1
+	chapter 2
+	chapter 3

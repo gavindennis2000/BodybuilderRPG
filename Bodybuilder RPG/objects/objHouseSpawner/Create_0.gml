@@ -44,33 +44,8 @@ switch(global.roomID) {
 			// create mason
 			with (instance_create_layer(320, 224, layer, objNPC)) {
 				npcID = "mason";
-				prompt = ["Let's do it!", "Not right now", 10];
-
-				switch(global.chapter) {
-					case 1:
-						if (global.keyEvents[2][0] == "meet mason" and global.keyEvents[2][1] == false) {
-							text = [
-								[
-								string_concat("Hey. Are you ", global.characterName, "?"), 
-								"HARVEY told me about you. He said you were trying to get serious about bodybuilding, right?", 
-								"I'm a pretty dedicated lifter myself. I could definitely help you out if you needed.",
-								"Say, you in the mood for some pull-ups?"
-								],
-								[
-								"Change your mind about the pull-ups?"
-								]
-							];
-						}
-						else {
-							text = [
-								["Hey. Down to hit some pull-ups?"]
-							]
-						}
-						break;
-					case 2:
-						
-						break;
-				}	
+				dialogHandler(npcID);
+				
 			}
 		}
 		break;

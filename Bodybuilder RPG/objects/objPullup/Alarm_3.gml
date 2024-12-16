@@ -4,6 +4,6 @@ if (victoryTextScale == 0) {
 	
 if (playerPullups == otherPullups) { victor = "TIE"; }
 	victor = playerPullups > otherPullups ? "YOU WIN!" : "YOU LOSE.";
-} else if (victoryTextScale >= 2) {
+} else if (victoryTextScale >= 2 and alarm_get(4) <= 0) {
 	alarm[4] = 1
 }
