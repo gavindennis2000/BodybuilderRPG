@@ -1,3 +1,5 @@
+if TEST { if (live_call()) return live_result; }
+
 // draw the text box
 var camX = camera_get_view_x(view_camera[0]);
 var camY = (screen == "top") ? camera_get_view_y(view_camera[0]) : camera_get_view_y(view_camera[0]) + 270-74;
@@ -42,7 +44,7 @@ image_alpha = drawAlpha;
 draw_text_border(textX, textY, drawText, c_white, 1);
 
 // draw the name
-if (npcID != -1) {
+if (npcID != "item") {
 	draw_set_font(fontName);
 	draw_set_halign(fa_left);
 	draw_set_valign(fa_top);

@@ -40,10 +40,10 @@ global.playerY = -1;
 global.returnRoom = -1;
 global.highScores = array_create(9, 0);
 
-// save data
-var file = "save.txt"
-if (!file_exists(file)) { save_game(); }
-else { load_game(); }
+//// save data
+//var file = "save.txt"
+//if (!file_exists(file)) { save_game(); }
+//else { load_game(); }
 
 drawRoom = false;
 drawSub = false;

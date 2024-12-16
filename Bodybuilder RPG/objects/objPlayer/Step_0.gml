@@ -18,7 +18,10 @@ if (!canMove) { exit; }
 if (targetX == 0 and targetY == 0 and place_meeting(x, y, objDoor)) {
 	var door = instance_place(x, y, objDoor);
 	if (door.goTo != -1) {
-		canMove = false;
+		if (canMove) {
+			canMove = false;
+			objMusic.roomEnd()
+		}
 		alarm[0] = 2;
 		exit;
 	}

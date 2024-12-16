@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"HandleDialog",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"HandleDialog",
+  "parent":{
+    "name":"7Scripts",
+    "path":"folders/7Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

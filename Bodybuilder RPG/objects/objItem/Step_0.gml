@@ -1,4 +1,7 @@
 /// @description Insert description here
+
+if (TEST) {if (live_call()) return live_result } // gml live stuff
+
 var keyConfirm = input_check_pressed("south");
 var touching = false; //var dist = -1;
 if (instance_exists(objPlayer)) { 
@@ -39,7 +42,14 @@ if (touching and keyConfirm and !instance_exists(objTextbox)) {
 	}
 	// create the textbox
 	if (!is_array(text[0])) { text = [text]}
+	
+	// handle dialog for npcs
+	if (object_index == objNPC) { HandleDialog(); }
+	
+	// create the textbox
 	instance_create_layer(x, y, layer, objTextbox, {text: other.text[other.textIndex], prompt: other.prompt, npcID: npcID });
+	
+	// increment the text index
 	textIndex++;
 	if (textIndex > textIndexMax) { textIndex = textIndexMax; }
 	

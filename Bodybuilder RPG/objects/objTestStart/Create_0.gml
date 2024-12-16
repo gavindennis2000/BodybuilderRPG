@@ -1,3 +1,3 @@
 //global.workout = 
-var rm = rWorkout;
+var rm = rPumpPalace;
 room_goto(rm);

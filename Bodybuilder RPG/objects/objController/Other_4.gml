@@ -11,18 +11,6 @@ global.maximum = max(global.push, global.pull, global.legs);
 global.total = global.push + global.pull + global.legs;
 
 global.workout = "novice pull";
-if (room == rWorkout) {
-	switch(global.workout) {
-		case "novice leg":
-		case "intermediate push":
-		case "advanced pull":
-			if (!instance_exists(objGuitar)) { instance_create_layer(x, y, layer, objGuitar); } 
-			break;
-		case "novice pull":
-			if (!instance_exists(objPullup)) { instance_create_layer(x, y, layer, objPullup); } 
-			break;
-	}
-}
 global.prevRoom = global.roomVar;
 global.prevSub = global.subRoom;
 
@@ -42,10 +30,6 @@ switch (room) {
 				break;
 		}
 		break;	
-	// workouts
-	case rWorkout:
-		global.subRoom = "roomGuitar";
-		break;
 		
 	// houses
 	case rHouse:

@@ -10,11 +10,18 @@ if (!skip) {  // read the text normally
 		j++;
 		indexCheck++;
 	
-		if ( (currentI == " ") and indexCheck > 50) {  // check if text is past margin
+		// reset during manual newlines
+		if (currentI == "\\") {
+			show_debug_message("worked");
+			indexCheck = 0;
+		}
+		else if ( (currentI == " ") and indexCheck > 50) {  // check if text is past margin
 			drawText = string_concat(drawText, "\n");
 			indexCheck = 0;
 			newChars++;
+			show_debug_message("auto reset line");
 		}
+		
 
 		alarm[0] = aTime;
 

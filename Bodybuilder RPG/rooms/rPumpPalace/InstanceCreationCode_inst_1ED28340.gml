@@ -1,3 +1,4 @@
+itemID = "db bench"
 switch(global.chapter) {
 	
 	case 1:

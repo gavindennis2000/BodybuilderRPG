@@ -9,7 +9,9 @@
   ],
   "managed":true,
   "name":"objNPC",
-  "overriddenProperties":[],
+  "overriddenProperties":[
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"objItem","path":"objects/objItem/objItem.yy",},"propertyId":{"name":"itemID","path":"objects/objItem/objItem.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"sign",},
+  ],
   "parent":{
     "name":"2Object",
     "path":"folders/2Object.yy",
