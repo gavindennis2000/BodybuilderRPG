@@ -29,7 +29,7 @@ function HandleDialog(){
 				[
 					string_concat("Hey, ", global.characterName, "!"),
 					"Have you been to the new Pump Palace gym yet?",
-					"What's that, wayou got a job there as a personal trainer!? Unreal!",
+					"What's that? You got a job there as a personal trainer!? Unreal!",
 					"Let me know how it goes after you meet the owner.",
 					"I'll probably still be here catching my breath haha."
 				],
