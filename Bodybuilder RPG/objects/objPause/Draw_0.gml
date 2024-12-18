@@ -1,10 +1,135 @@
+if (TEST) { if (live_call()) return live_result; }  // gmlive
+
 var camX = camera_get_view_x(view_camera[0]);
 var camY = camera_get_view_y(view_camera[0]);
 var c = c_black;
 
 if (paused) {
+    // black screen
 	var tempAlpha = draw_get_alpha();
 	draw_set_alpha(fadeBlack)
 	draw_rectangle_color(camX, camY, camX + 480, camY + 270, c, c, c, c, false);
 	draw_set_alpha(tempAlpha);
+    
+    // pause menu    
+    var menu1y = 0, menu2y = 270 - 64
+    var blue = #0066cc
+    
+    draw_rectangle_color(  // big menu
+        camX + menuX + menuMargin, camY + menu1y + menuMargin, 
+        camX + menuX + 480 - menuMargin, camY + menu2y - menuMargin,
+        #0033cc, blue, #99ccff, blue, false
+    );
+    draw_rectangle_color(  // big menu outline
+        camX + menuX + menuMargin, camY + menu1y + menuMargin, 
+        camX + menuX + 480 - menuMargin, camY + menu2y - menuMargin,
+        c_white, c_white, c_white, c_white, true
+    );
+    draw_rectangle_color(  // options menu
+        camX - menuX + menuMargin, camY + menu2y, 
+        camX - menuX + 480 - menuMargin, camY + menu2y + 64 - menuMargin,
+        blue, #99ccff, blue, #0033cc, false
+    );
+    draw_rectangle_color(  // options menu outline
+        camX - menuX + menuMargin, camY + menu2y, 
+        camX - menuX + 480 - menuMargin, camY + menu2y + 64 - menuMargin,
+        c_white, c_white, c_white, c_white, true
+    );
+    
+    // draw the menu shit
+    fontY(fa_top); 
+    draw_set_font(fontMenu);
+    
+    // options menu
+    fontX(fa_center);
+    draw_text_border(camX + 480*1/5 + menuX - 10, camY + 270-56, "Status", getColor("status"), 1);
+    draw_text_border(camX + 480*2/5 + menuX - 5, camY + 270-56, "Items", getColor("items"), 1);
+    draw_text_border(camX + 480*3/5 + menuX + 5, camY + 270-56, "Save", getColor("save"), 1);
+    draw_text_border(camX + 480*4/5 + menuX + 10, camY + 270-56, "Quit", getColor("quit"), 1);
+    
+    // chapter number
+    var chapter = "I";
+    global.chapter = 1;
+    switch (global.chapter) {
+        case 2:
+            chapter = "II: Overcoming the Lifetime \nIntermediate Prophecy"
+            break;
+        case 3:
+            chapter = "III: From DYEL to Fake \nNatty Accusations"
+            break;
+        case 4:
+            chapter = "IV: Sulik Era! Dethrone the King"
+            break;
+        case 1:
+        default:
+            chapter = "I: Humble Origins \nThe Novice Progression";
+            break;
+    }
+    fontX(fa_right);
+    draw_text_border(camX + 465 + menuX, camY + 10, chapter, c_white, 1);
+    
+    // location
+    var roomVar = global.roomVar
+    fontX(fa_left);
+    draw_text_border(camX + 15 + menuX, camY + 10, roomVar, c_white, 1);
+    
+    // the screen
+    switch (screen) {
+        case "status":
+            // draws the stats, health, and picture of player
+            var stats = global.stats, statY = camY + 154;
+            fontX(fa_center);
+        
+            // draw the players picture and fatigue state
+            /*
+                Fatigue states
+                good    0-50%   c_white
+                caution 50-75%  #ff6666
+                danger  75-99%  #ff3333
+            */
+            image_speed = 0.05;  // player animation speed
+            var pX = camX + 480/2-32 + menuX, pY = camY + 80, pColor = #ff6666;
+            
+            // get color for fatigue state
+            var fatigue = global.stats.fatigue;
+            if (fatigue < 25) { pColor = c_white; }
+            else if (fatigue < 50) { pColor = #ffcccc; }
+            else if (fatigue < 75) { pColor = #ff9999; }
+            else { pColor = #ff6666; }
+                
+            // draw the player and name
+            draw_set_font(fontText);
+            draw_sprite_ext(sprPlayerDown, -1, pX, pY, 2, 2, image_angle, pColor, 1);
+            draw_text_border(pX - 80, pY + 8, global.characterName, c_white, 1);  // name
+            draw_text_border(pX - 80, pY + 8 + 16, string_concat("Status: ","Novice"), c_orange, 1, c_black);  // status
+            
+            // draw the fatigue meter   
+            fatigue = string(fatigue);
+            if (string_length(fatigue) < 2) { fatigue = string_concat("0",fatigue); }
+            draw_text_border(pX + 80 + 64, pY + 8, string_concat("Fatigue: ", fatigue, "%"), pColor, 1);  // name
+            fatigue = global.stats.fatigue;  // return fatigue back to what it was
+            draw_set_font(fontMenu);
+            var barH = 10, barW = 100, barX = pX + 93, barY = pY + 38;
+            draw_rectangle_color(barX, barY - barH/2, barX + barW, barY + barH/2, c_black, c_black, c_black, c_black, false);  // fatigue empty bar
+            draw_rectangle_color(barX, barY - barH/2, barX + fatigue, barY + barH/2, c_red, pColor, pColor, c_red, false);  // actual fatigue bar
+            draw_rectangle_color(barX, barY - barH/2, barX + barW, barY + barH/2, c_white, c_white, c_white, c_white, true);  // fatigue bar outline
+            
+            
+            // draw the players stats
+            draw_text_border(camX + 480*1/4 + menuX - 10, statY, string_concat("Chest: ",stats.chest), c_white, 1);
+            draw_text_border(camX + 480*1/4 + menuX - 10, statY + 20, string_concat("Shoulders: ",stats.shoulders), c_white, 1);
+            draw_text_border(camX + 480*2/4 + menuX - 10, statY, string_concat("Back: ",stats.back), c_white, 1);
+            draw_text_border(camX + 480*2/4 + menuX - 10, statY + 20, string_concat("Arms: ",stats.arms), c_white, 1);
+            draw_text_border(camX + 480*3/4 + menuX + 5, statY, string_concat("Legs: ",stats.legs), c_white, 1);
+            draw_text_border(camX + 480*3/4 + menuX + 5, statY + 20, string_concat("Cardio: ",stats.cardio), c_white, 1);
+            
+            break;
+        case "save":
+            fontX(fa_center);
+            fontY(fa_middle);
+            draw_text_border(camX + 240 + menuX, camY + 135 - 32, "Save Game?", c_white, 1);
+            draw_text_border(camX + 240 - 32 + menuX, camY + 135, "Yes", getColor("yes"), 1);
+            draw_text_border(camX + 240 + 32 + menuX, camY + 135, "No", getColor("no"), 1);
+            break;
+    }
 }

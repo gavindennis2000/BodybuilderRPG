@@ -13,37 +13,48 @@ global.roomID = "mom";
 
 global.chapter = 1;
 global.characterName = "GAVIN";
-global.keyItems = [
-	["serva grips", false],
-	["yacht", false],
-	["bunny hood", false],
-	["bicycle", false],
-]
-global.keyEvents = [
-	["locked door", true],
-	["atlas stone", false],
-	["meet mason", false]
+
+// inventory array
+global.inventory = [
+    {
+        name: "Choc. Milk",
+        quantity: 1,
+        description: "Central Prairie's flagship drink - Replenishes 50hp"
+    }
 ]
 
-global.push = 1;
-global.pull = 1;
-global.legs = 1;
-global.cardio = 1;
+// key items struct
+global.keyItems = {
+	servaGrips: false,
+	yacht: false,
+	bunnyHood: false,
+	bicycle: false
+}
 
-global.minimum = min(global.push, global.pull, global.legs);
-global.maximum = max(global.push, global.pull, global.legs);
-global.total = global.push + global.pull + global.legs;
+// key events struct
+global.keyEvents = {
+    meetJim: false,
+	unlockedDoor: false,
+	atlasStone: false,
+	meetMason: false,
+}
+
+// stats struct
+global.stats = {
+    chest: 1,
+    shoulders: 1,
+    back: 1,
+    arms: 1,
+    legs: 1,
+    cardio: 1,
+    fatigue: 0
+}
 
 global.workout = -1;
 global.playerX = -1;
 global.playerY = -1;
 global.returnRoom = -1;
 global.highScores = array_create(9, 0);
-
-//// save data
-//var file = "save.txt"
-//if (!file_exists(file)) { save_game(); }
-//else { load_game(); }
 
 drawRoom = false;
 drawSub = false;

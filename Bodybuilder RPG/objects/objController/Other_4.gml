@@ -1,3 +1,5 @@
+// room start
+
 if (!instance_exists(objDevTools)) { instance_create_layer(x, y, layer, objDevTools); }
 if (!instance_exists(objCamera)) { instance_create_layer(x, y, layer, objCamera); }
 if (!instance_exists(objMusic)) { instance_create_layer(x, y, layer, objMusic); }
@@ -6,11 +8,6 @@ if (!instance_exists(objKeyEvents)) { instance_create_layer(x, y, layer, objKeyE
 if (!instance_exists(objItemTiles)) { instance_create_layer(x, y, layer, objItemTiles); }
 if (!instance_exists(obj_gmlive)) { instance_create_layer(x, y, layer, obj_gmlive); }
 
-global.minimum = min(global.push, global.pull, global.legs);
-global.maximum = max(global.push, global.pull, global.legs);
-global.total = global.push + global.pull + global.legs;
-
-global.workout = "novice pull";
 global.prevRoom = global.roomVar;
 global.prevSub = global.subRoom;
 
@@ -59,48 +56,8 @@ switch (room) {
 		break;
 }
 
-if (global.subRoom == "roomGuitar") {
-	// novice
-	if (global.workout == "novice push") { 
-		global.roomVar = -1;
-		global.subRoom = "Push Workout - Novice"; 
-	}
-	else if (global.workout == "novice pull") { 
-		global.roomVar = -1;
-		global.subRoom = "Pull Workout - Novice"; 
-	}
-	else if (global.workout == "novice leg") { 
-		global.roomVar = -1;
-		global.subRoom = "Leg Workout - Novice"; 
-	}
-	// intermediate
-	if (global.workout == "intermediate push") { 
-		global.roomVar = -1;
-		global.subRoom = "Push Workout - Intermediate"; 
-	}
-	else if (global.workout == "intermediate pull") { 
-		global.roomVar = -1;
-		global.subRoom = "Pull Workout - Intermediate"; 
-	}
-	else if (global.workout == "intermediate leg") { 
-		global.roomVar = -1;
-		global.subRoom = "Leg Workout - Intermediate"; 
-	}
-	// advanced
-	if (global.workout == "advanced push") { 
-		global.roomVar = -1;
-		global.subRoom = "Push Workout - Advanced"; 
-	}
-	else if (global.workout == "advanced pull") { 
-		global.roomVar = -1;
-		global.subRoom = "Pull Workout - Advanced"; 
-	}
-	else if (global.workout == "advanced leg") { 
-		global.roomVar = -1;
-		global.subRoom = "Leg Workout - Advanced"; 
-	}
-}
 drawRoom = false;
 drawSub = false;
+
 showRoom();
 showSubRoom();
