@@ -41,6 +41,12 @@ if (paused and !unpause) {
             case "quit":
                 selection = "status";
                 break;
+            case "yes":
+                selection = "no";
+                break;
+            case "no":
+                selection = "yes";
+                break;
         }
     }
     else if (keyLeft) {
@@ -57,6 +63,12 @@ if (paused and !unpause) {
                 break;
             case "quit":
                 selection = "save";
+                break;
+            case "yes":
+                selection = "no";
+                break;
+            case "no":
+                selection = "yes";
                 break;
         }
     }
@@ -75,11 +87,12 @@ if (paused and !unpause) {
                 break;
             case "quit":
                 screen = "quit";
+                selection = "yes";
                 break;
         }
     }
     else if (cancel) {
-        if (screen == "status" && selection == "status") {
+        if (screen == "status") {
             playSound(sndError);
             exit;
         }
@@ -98,7 +111,6 @@ if (paused and !unpause) {
                 selection = "quit";
                 break;
             case "status":
-                selection = "status";
                 break;
         }
     }

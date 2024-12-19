@@ -1,37 +1,57 @@
 itemID = "mirror";
 
-// text
-var str = -1
-var str2 = -1;
+// find out lagging muscle group
+objController.setMinAndMax();
+var statsMin = global.statsMin;
+var statsMax = global.statsMax;
+var str, str2, str3;
+show_debug_message(string_concat("statsmin: ", statsMin));
+show_debug_message(string_concat("statsmax: ", statsMax));
 
-if (global.legs < global.push and global.legs < global.pull) {
-	str = "Can anybody tell I've been skipping leg day?";
+
+
+if (statsMin[1] == statsMax[1]) {
+    str = "Everything is looking pretty proportionate!";
+    str2 = "";
 }
-else if (global.push < global.pull and global.push < global.legs) {
-	str = "Chest and shoulders could definitely use some work...";
-}
-else if (global.pull < global.push and global.pull < global.legs) {
-	str = "My posture is terrible! I better stop skipping back day.";
+else {
+    var word;
+    switch (statsMax[0]) {
+        case "chest":
+        case "back":
+            word = " has been ";
+            break;
+        case "shoulders":
+        case "arms":
+        case "legs":
+        default:
+            word = " have been ";
+            break;
+    }
+    str = string_concat("Wow! my ", statsMax[0], word, "looking huge lately!");
+    str2 = string_concat("Looks like I need to kick up the intensity for ", statsMin[0], ", though.");
 }
 
 switch(global.chapter) {
 	case 1:
-		str2 = "I definitely need some more mass before I diet.";
+		str3 = "I definitely need some more mass before I diet.";
 		break;
 	case 2:
-		str2 = "Actually, it might be time to start cutting...";
+		str3 = "Actually, it might be time to start cutting...";
 		break;
 	case 3:
 	default:
-		str2 = "This hard work has really paid off...";
+		str3 = "This hard work has really paid off...";
+        break;
 }
-if (str != -1) {
+
+if (str2 == "") {
 	text = [
-		["Wow! Lookin swole!", str2, str]
+		[str, str3]
 	];
 }
 else {
 	text = [
-		["Wow! Lookin swole!", str2]
+		[str, str2, str3]
 	];
 }

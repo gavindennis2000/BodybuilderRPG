@@ -61,3 +61,6 @@ drawSub = false;
 
 showRoom();
 showSubRoom();
+
+// set new min and max for muscle groups
+setMinAndMax()

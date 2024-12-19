@@ -101,7 +101,14 @@ if (paused) {
             draw_set_font(fontText);
             draw_sprite_ext(sprPlayerDown, -1, pX, pY, 2, 2, image_angle, pColor, 1);
             draw_text_border(pX - 80, pY + 8, global.characterName, c_white, 1);  // name
-            draw_text_border(pX - 80, pY + 8 + 16, string_concat("Status: ","Novice"), c_orange, 1, c_black);  // status
+        
+            // player's status
+            var status = "", statsMin = global.statsMin;
+            if (statsMin[1] < 40) { status = "Pencil Neck"; }
+            else if (statsMin[1] < 70) { status = "Sleeper Build"; } 
+            else if (statsMin[1] < 100) { status = "Natty Daddy"; }
+            else { status = "Pro Card"; }
+            draw_text_border(pX - 80, pY + 8 + 16, string_concat("Status: ", status), c_orange, 1, c_black);  // status
             
             // draw the fatigue meter   
             fatigue = string(fatigue);
@@ -122,12 +129,32 @@ if (paused) {
             draw_text_border(camX + 480*2/4 + menuX - 10, statY + 20, string_concat("Arms: ",stats.arms), c_white, 1);
             draw_text_border(camX + 480*3/4 + menuX + 5, statY, string_concat("Legs: ",stats.legs), c_white, 1);
             draw_text_border(camX + 480*3/4 + menuX + 5, statY + 20, string_concat("Cardio: ",stats.cardio), c_white, 1);
-            
             break;
+        
+        case "items":
+            fontX(fa_center);
+            fontY(fa_middle);
+            
+            // draw the items
+            var inventory = global.inventory;
+        
+            draw_text_border(camX + 480*1/3 + menuX, camY + 135 - 32, string_concat(inventory[0].name, " ", inventory[0].quantity), c_white, 1);
+            draw_text_border(camX + 480*2/3 + menuX, camY + 135 - 32, string_concat(inventory[0].name, " ", inventory[0].quantity), c_white, 1);
+        
+            break;
+        
         case "save":
             fontX(fa_center);
             fontY(fa_middle);
-            draw_text_border(camX + 240 + menuX, camY + 135 - 32, "Save Game?", c_white, 1);
+            draw_text_border(camX + 240 + menuX, camY + 135 - 48, "Save Game?", c_white, 1);
+            draw_text_border(camX + 240 - 32 + menuX, camY + 135, "Yes", getColor("yes"), 1);
+            draw_text_border(camX + 240 + 32 + menuX, camY + 135, "No", getColor("no"), 1);
+            break;
+        case "quit":
+            
+            fontX(fa_center);
+            fontY(fa_middle);
+            draw_text_border(camX + 240 + menuX, camY + 135 - 48, "Return to Main Menu? \nAny Unsaved Progress Will Be Lost.", c_white, 1);
             draw_text_border(camX + 240 - 32 + menuX, camY + 135, "Yes", getColor("yes"), 1);
             draw_text_border(camX + 240 + 32 + menuX, camY + 135, "No", getColor("no"), 1);
             break;

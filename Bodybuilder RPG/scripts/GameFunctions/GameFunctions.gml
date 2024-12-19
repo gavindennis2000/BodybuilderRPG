@@ -1,3 +1,9 @@
+
+function debug(str1, str2="", str3="", str4="") {
+    str = string_concat(str1, str2, str3, str4);
+    show_debug_message(str);
+}
+
 function draw_text_border(x, y, string, color, alpha = 1, border = c_black) {
 	var c = border;
 	draw_text_color(x+1, y+1, string, c, c, c, c, alpha);

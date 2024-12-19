@@ -1,4 +1,4 @@
-#macro TEST true
+if TEST { if (live_call()) return live_result; }
 
 // global variables
 global.roomVar = -1;
@@ -41,14 +41,18 @@ global.keyEvents = {
 
 // stats struct
 global.stats = {
-    chest: 1,
-    shoulders: 1,
-    back: 1,
-    arms: 1,
-    legs: 1,
-    cardio: 1,
+    chest: 100,
+    shoulders: 100,
+    back: 100,
+    arms: 100,
+    legs: 100,
+    cardio: 100,
     fatigue: 0
 }
+
+// best and worst muscle groups
+global.statsMin = ["",1];
+global.statsMax = ["",1];
 
 global.workout = -1;
 global.playerX = -1;
@@ -66,18 +70,47 @@ aTime = 3;
 layer = layer_create(-200,"Controller");
 
 function showRoom() {
-	if (global.roomVar != global.prevRoom and global.roomVar != -1) {
+    // displays the room name when you walk into a new area
+	
+    if (global.roomVar != global.prevRoom and global.roomVar != -1) {
 		drawRoom = true;
 		roomAlpha = 0;
 		alarm[0] = aTime;	
 		alarm[1] = -1;
 	}
 }	
+
 function showSubRoom() {
-	if (global.subRoom != global.prevSub and global.subRoom != -1) {
+    // displays the sub-room name when you walk into a new area
+	
+    if (global.subRoom != global.prevSub and global.subRoom != -1) {
 		drawSub = true;
 		subAlpha = 0;
 		alarm[2] = aTime;
 		alarm[3] = -1;
 	}
+}
+
+function setMinAndMax() {
+    // returns worst muscle group
+    
+    var stats = global.stats;
+    var statsArr = [
+        ["chest", stats.chest],
+        ["shoulders", stats.shoulders],
+        ["back", stats.back],
+        ["arms", stats.arms],
+        ["legs", stats.legs]
+    ]
+    
+    // sort the temporary array
+    array_sort(statsArr, function(i, j) {
+        return (i[1] > j[1])    
+    });
+    
+    // set max
+    variable_global_set("statsMax", statsArr[0]);
+    
+    // set min
+    variable_global_set("statsMin", statsArr[4]);
 }
