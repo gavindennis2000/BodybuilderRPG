@@ -50,6 +50,7 @@ if (touching and keyConfirm and !instance_exists(objTextbox)) {
 	instance_create_layer(x, y, layer, objTextbox, {text: other.text[other.textIndex], prompt: other.prompt, npcID: npcID });
 	
 	// increment the text index
+    textIndexMax = array_length(text)-1;
 	textIndex++;
 	if (textIndex > textIndexMax) { textIndex = textIndexMax; }
 	
