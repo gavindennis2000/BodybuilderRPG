@@ -20,16 +20,33 @@ global.inventory = [
         name: "Choc. Milk",
         quantity: 1,
         description: "Central Prairie's flagship drink - Replenishes 50hp"
-    }
+    },
 ]
 
 // key items struct
-global.keyItems = {
-	servaGrips: false,
-	yacht: false,
-	bunnyHood: false,
-	bicycle: false
-}
+global.keyItems = [
+    {
+        name: "Serva Grips", 
+        value: false,
+        description: "Certified 'Death Grip' technology"
+    },
+    {
+        name: "Yacht",
+        value: false,
+        description: "Do you need a description? It's a freakin yacht!"
+    },
+    {
+        name: "Bunny Hood",
+        value: false,
+        description: "Become the fastest bodybuilder ever! Equip with 'I'"
+    },
+    {
+        name: "Bicycle",
+        value: false,
+        description: "Time to hop on cycle! Use to teleport between gyms"
+    },
+	
+]
 
 // key events struct
 global.keyEvents = {
@@ -41,12 +58,12 @@ global.keyEvents = {
 
 // stats struct
 global.stats = {
-    chest: 100,
-    shoulders: 100,
-    back: 100,
-    arms: 100,
-    legs: 100,
-    cardio: 100,
+    chest: 10,
+    shoulders: 10,
+    back: 10,
+    arms: 10,
+    legs: 10,
+    cardio: 10,
     fatigue: 0
 }
 
@@ -58,7 +75,55 @@ global.workout = -1;
 global.playerX = -1;
 global.playerY = -1;
 global.returnRoom = -1;
-global.highScores = array_create(9, 0);
+
+// PRs for each exercise
+global.PRs = [
+    {  // chapter 1
+        name: "DB Bench",
+        weight: "50 x ",
+        reps: irandom_range(2,9)
+    },
+    {
+        name: "Pullups",
+        weight: "",
+        reps: irandom_range(2,9)
+    },
+    {
+        name: "Squats",
+        weight: "225 x ",
+        reps: irandom_range(2,9)
+    },
+    {  // chapter 2
+        name: "Bench Press",
+        weight: "135 x ",
+        reps: irandom_range(2,9)
+    },
+    {
+        name: "Deadlift",
+        weight: "315 x ",
+        reps: irandom_range(2,9)
+    },
+    {
+        name: "TBD",
+        weight: "0 x ",
+        reps: irandom_range(2,9)
+    },
+    {  // chapter 3
+        name: "TBD",
+        weight: "0 x ",
+        reps: irandom_range(2,9)
+    },
+    {
+        name: "TBD",
+        weight: "0 x ",
+        reps: irandom_range(2,9)
+    },
+    {
+        name: "TBD",
+        weight: "0 x ",
+        reps: irandom_range(2,9)
+    },
+];
 
 drawRoom = false;
 drawSub = false;
@@ -113,4 +178,10 @@ function setMinAndMax() {
     
     // set min
     variable_global_set("statsMin", statsArr[4]);
+}
+
+function exitGame() {
+    // goes back to the main menu
+    
+    game_end();
 }

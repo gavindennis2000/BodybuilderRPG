@@ -42,10 +42,12 @@ if (paused) {
     
     // options menu
     fontX(fa_center);
-    draw_text_border(camX + 480*1/5 + menuX - 10, camY + 270-56, "Status", getColor("status"), 1);
-    draw_text_border(camX + 480*2/5 + menuX - 5, camY + 270-56, "Items", getColor("items"), 1);
-    draw_text_border(camX + 480*3/5 + menuX + 5, camY + 270-56, "Save", getColor("save"), 1);
-    draw_text_border(camX + 480*4/5 + menuX + 10, camY + 270-56, "Quit", getColor("quit"), 1);
+    var optionY = 270 - 48;
+    draw_text_border(camX + 480*1/6 + menuX - 10, camY + optionY, "Items", getColor("items"), 1);
+    draw_text_border(camX + 480*2/6 + menuX - 10, camY + optionY, "Equip", getColor("equip"), 1);
+    draw_text_border(camX + 480*3/6 + menuX - 5, camY + optionY, "PRs", getColor("prs"), 1);
+    draw_text_border(camX + 480*4/6 + menuX + 5, camY + optionY, "Save", getColor("save"), 1);
+    draw_text_border(camX + 480*5/6 + menuX + 10, camY + optionY, "Quit", getColor("quit"), 1);
     
     // chapter number
     var chapter = "I";
@@ -136,27 +138,97 @@ if (paused) {
             fontY(fa_middle);
             
             // draw the items
-            var inventory = global.inventory;
+            // get the inventory
+            var inventory = array_create(4, -1);
+            for (var i = 0; i < 7; i++) {
+                if (i + inventoryCursor < array_length(global.inventory))
+                    inventory[i] = global.inventory[i + inventoryCursor];
+            }
+            // get the key items
+            var keyItems = global.keyItems;
+            
+            // draw the inventory
+            draw_text_border(camX + 480*1.5/5 + menuX, camY + 135 - 72, "Inventory", #e066ff, 1);
+            for (var i = 0; i < 8; i++) {
+                if (i >= array_length(inventory)) { break; }
+                if (inventory[i] == -1) { continue; }
+                
+                var itemX = (i % 2 == 0) ? camX + 480*1/5 - 10 : camX + 480*2/5 + 10
+                itemX += menuX;
+                var itemY = (i % 2 == 0) ? camY + 135 - 48 + (10*i) : camY + 135 - 48 + (10*(i-1));
+                var color = string_concat("inventory",string(i));
+                draw_text_border(itemX, itemY, string_concat(inventory[i].name, " ", inventory[i].quantity), getColor(color), 1);
+            }
+            
+            // draw the key items 
+            draw_text_border(camX + 480*4/5 + menuX, camY + 135 - 72, "Key Items", #e066ff, 1);
+            for (var i = 0; i < 4; i++) {
+                var name = (keyItems[i].value) ? keyItems[i].name : "???";
+                var description = (keyItems[i].value) ? keyItems[i].description : "";
+                var color = string_concat("key", string(i+1));
+                draw_text_border(camX + 480*4/5 + menuX, camY + 135 - 48 + (20*i), name, getColor(color), 1);
+            }
         
-            draw_text_border(camX + 480*1/3 + menuX, camY + 135 - 32, string_concat(inventory[0].name, " ", inventory[0].quantity), c_white, 1);
-            draw_text_border(camX + 480*2/3 + menuX, camY + 135 - 32, string_concat(inventory[0].name, " ", inventory[0].quantity), c_white, 1);
-        
+            // draw the item description
+            var color = c_white;
+            for (var i = 0; i < 8; i++) {
+                var str = string_concat("inventory",string(i));
+                if (str == selection) {
+                    if (i >= array_length(inventory)) { break; }
+                    draw_text_border(camX + 480*0.5 + menuX, camY + 180, inventory[i].description, color, 1);
+                    break;
+                }
+                str = string_concat("key",string(i+1));
+                if (str == selection) {
+                    if (i >= array_length(keyItems)) { break; }
+                    if (keyItems[i].value) {
+                        draw_text_border(camX + 480*0.5 + menuX, camY + 180, keyItems[i].description, color, 1);
+                        break;
+                    }
+                }
+            }
             break;
         
+        case "prs":
+            fontX(fa_center);
+            fontY(fa_middle);
+            
+            // header
+            draw_text_border(camX + 480*0.5 + menuX, camY + 135 - 72, "Training Log", #e066ff, 1);
+        
+            // pr's
+            var prs = global.PRs;
+            for (var i = 0; i < array_length(prs); i++) {
+                // get the x and y locations
+                var prX = camX + 480*0.5 + menuX, prY = camY + 135 - 92;
+                if (i % 3 == 0) { prX -= 120; }
+                if (i % 3 == 1) { prX += 120; }
+                prY += (floor(i/3) + 1) * 40;
+                
+                // draw the exercise
+                draw_text_border(prX, prY, prs[i].name, c_white);
+                // weight and reps
+                draw_text_border(prX, prY + 16, string_concat(prs[i].weight, string(prs[i].reps)), c_white);
+                
+            }
+            break;
+        case "equip":
+            fontX(fa_center);
+            fontY(fa_middle);
+            draw_text_border(camX + 240 + menuX, camY + 135 - 48, "Equip functionality WIP. Press cancel", c_white, 1);
+            break;
         case "save":
             fontX(fa_center);
             fontY(fa_middle);
-            draw_text_border(camX + 240 + menuX, camY + 135 - 48, "Save Game?", c_white, 1);
-            draw_text_border(camX + 240 - 32 + menuX, camY + 135, "Yes", getColor("yes"), 1);
-            draw_text_border(camX + 240 + 32 + menuX, camY + 135, "No", getColor("no"), 1);
+            draw_text_border(camX + 240 + menuX, camY + 135 - 48, "Game save functionality WIP. Press cancel", c_white, 1);
             break;
+        
         case "quit":
-            
             fontX(fa_center);
             fontY(fa_middle);
             draw_text_border(camX + 240 + menuX, camY + 135 - 48, "Return to Main Menu? \nAny Unsaved Progress Will Be Lost.", c_white, 1);
-            draw_text_border(camX + 240 - 32 + menuX, camY + 135, "Yes", getColor("yes"), 1);
-            draw_text_border(camX + 240 + 32 + menuX, camY + 135, "No", getColor("no"), 1);
+            draw_text_border(camX + 240 - 32 + menuX, camY + 135, "No", getColor("no"), 1);
+            draw_text_border(camX + 240 + 32 + menuX, camY + 135, "Yes", getColor("yes"), 1);
             break;
     }
 }

@@ -4,12 +4,13 @@ paused = false;
 unpause = false;
 fadeBlack = 0;
 
-selection = "status";
+selection = "items";
 screen = "status";
 
 menuX = 500;
 menuXInitial = menuX;
 menuMargin = 10;
+inventoryCursor = 0;
 
 leftCounter = 0;
 rightCounter = 0;

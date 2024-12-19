@@ -20,7 +20,7 @@ if (targetX == 0 and targetY == 0 and place_meeting(x, y, objDoor)) {
 	if (door.goTo != -1) {
 		if (canMove) {
 			canMove = false;
-			objMusic.roomEnd()
+            if (instance_exists(objMusic)) { objMusic.roomEnd(); }
 		}
 		alarm[0] = 2;
 		exit;

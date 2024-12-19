@@ -1,14 +1,12 @@
 itemID = "mirror";
 
 // find out lagging muscle group
-objController.setMinAndMax();
+if (instance_exists(objController)) {
+    if (variable_instance_exists(objController, "setMinAndMax")) objController.setMinAndMax(); 
+}
 var statsMin = global.statsMin;
 var statsMax = global.statsMax;
 var str, str2, str3;
-show_debug_message(string_concat("statsmin: ", statsMin));
-show_debug_message(string_concat("statsmax: ", statsMax));
-
-
 
 if (statsMin[1] == statsMax[1]) {
     str = "Everything is looking pretty proportionate!";

@@ -1,4 +1,4 @@
-//instance_destroy();
+instance_destroy();
 if (TEST) { if (live_call()) return live_result; }
 
 // regular music stuff
