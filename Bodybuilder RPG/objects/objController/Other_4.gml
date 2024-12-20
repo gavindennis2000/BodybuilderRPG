@@ -64,3 +64,14 @@ showSubRoom();
 
 // set new min and max for muscle groups
 setMinAndMax()
+
+// key event stuff
+// enter sulik cutscene
+if (room == rOverworld && global.keyEvents.enterSulik && !global.keyEvents.meetSulik) {
+    global.keyEvents.meetSulik = true;
+    global.cutscene = true;
+    with (objPlayer) { cutscene = true; }
+    instance_create_layer(objPlayer.x, objPlayer.y + 128, layer, objNPC, {
+        npcID: "sulik"
+    });
+}

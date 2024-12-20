@@ -20,10 +20,10 @@ function __input_config_verbs()
             left:  [input_binding_key("A")],
             right: [input_binding_key("D")],
             
-            south:  [input_binding_key("K")],
-            west:  [input_binding_key("J")],
-			east: [input_binding_key("I")],
-			north: [input_binding_key("U")],
+            south:  [input_binding_key("J")],
+            west:  [input_binding_key("U")],
+			east: [input_binding_key("K")],
+			north: [input_binding_key("I")],
 			
             start: [input_binding_key(vk_enter), input_binding_key("Y")],
             select: [input_binding_key(vk_rshift), input_binding_key("T")],

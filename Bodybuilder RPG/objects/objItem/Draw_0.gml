@@ -4,7 +4,7 @@ if (dist < 40) {
 	var alpha = 1/(dist/32)
 	// draw the action icon
 	if (instance_exists(objPlayer)) {
-		if (objPlayer.canMove) { 
+		if (objPlayer.canMove and !objPlayer.cutscene) { 
 			if (instance_exists(objPlayer)) {
 				if (dist <= 36)
 					draw_sprite_ext(sprActionGlow, 0, x+16, y+ 16 - 32, 1, 1, image_angle, image_blend, glowAlpha); 

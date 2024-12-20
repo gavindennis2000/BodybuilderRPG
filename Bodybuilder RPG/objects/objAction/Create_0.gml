@@ -1,6 +1,6 @@
 switch(prompt) {
 	
-	case 1:
+	case "bench press":
 		// bench press at home
 		if (selection == 0) {
 			with (objPlayer) {
@@ -11,25 +11,18 @@ switch(prompt) {
 			}
 		}
 		break;
-	case 2:
-		// ask to work in for dumbbell flyes
-		if (selection == 0) {
-			var txt = ["I really should focus on compound movements for now..."]
-			instance_create_layer(x, y, layer, objTextbox, {text: txt});
-		}
-		break;
-	case 3:
+	case "db bench":
 		// hit some dumbbell bench
 		if (selection == 0) {
 			with (objPlayer) {
 				canMove = false;
 				alarm[2] = 1;
-				/*temporary*/actionRoom = rWorkout;
+				/*temporary*/action = "db bench";
 			}
 		}
 		else if (selection == 1) { instance_destroy(); }
 		break;
-	case 4:
+	case "squat":
 		// hit some squats
 		if (selection == 0) {
 			with (objPlayer) {
@@ -43,7 +36,7 @@ switch(prompt) {
 			}
 		}
 		break;
-	case 6:
+	case "atlas stone":
 		// move the atlas stone
 		if (selection == 0) {
 			with (objPlayer) { canMove = false; face = "left"; }
@@ -58,14 +51,7 @@ switch(prompt) {
 			instance_create_layer(x, y, layer, objTextbox, { text: ["Wow! Unlimited grip strength!"] });
 		}
 		break;
-	case 7:
-		// drink from the chocolate milk lake
-		if (selection == 0) {
-			var txt = ["Yeah... That is not chocolate milk."]
-			instance_create_layer(x, y, layer, objTextbox, {text: txt});
-		}
-		break;
-	case 9:
+	case "finish chapter":
 		// finish chapter
 		if (selection == 0) {
 			global.chapter++;
@@ -76,10 +62,15 @@ switch(prompt) {
 			}
 		}
 		break;
-	case 10:
+    case "meet jim":
+            // meet jim ohner
+			if (global.keyEvents.meetJim) { break; }
+            global.keyEvents.meetJim = true;
+            break;
+	case "meet mason":
 		// pullups with mason
-		global.keyEvents[2][1] = true;
-		if (selection == 0) {
+		global.keyEvents.meetMason= true;
+		if (selection == 0) {  // if the player selects yes
 			with (objPlayer) {
 				canMove = false;
 				alarm[2] = 1;
@@ -89,6 +80,14 @@ switch(prompt) {
 		}
 		else {
 			instance_create_layer(x, y, layer, objTextbox, { text: ["Maybe some other time, right?"], npcID: "MASON" });
+		}
+		break;
+	case "exit sulik":
+		// after you talk to sulik, he walks away
+		with (objNPC) {
+			if (npcID == "sulik") {
+				alarm[2] = 30;
+			}
 		}
 		break;
 }

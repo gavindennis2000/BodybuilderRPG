@@ -14,6 +14,9 @@ global.roomID = "mom";
 global.chapter = 1;
 global.characterName = "GAVIN";
 
+global.cutscene = false; 
+cutsceneH = 0;  // used for cinema bars during cutscenes
+
 // inventory array
 global.inventory = [
     {
@@ -54,6 +57,9 @@ global.keyEvents = {
 	unlockedDoor: false,
 	atlasStone: false,
 	meetMason: false,
+    meetJim: false,
+    enterSulik: false, 
+    meetSulik: false,
 }
 
 // stats struct

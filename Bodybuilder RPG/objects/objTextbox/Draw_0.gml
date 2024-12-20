@@ -53,9 +53,15 @@ if (npcID != "item") {
 	image_alpha = drawAlpha;
 	
 	var name = string(npcID);
+    
+    // change the gym rat names
 	if (string_pos("gym rat", name) == 1) {
 		name = "gym rat";	
 	}
-	
+    
+    // hidden names mid change
+    if (npcID == "sulik" && action == "exit sulik" && numberOfTexts >= array_length(text)-1)
+	   name = "???";
+    
 	draw_text_border(camX + 4, camY - 2, string_upper(name), c_white, 1);
 }

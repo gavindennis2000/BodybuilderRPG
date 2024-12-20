@@ -11,12 +11,13 @@ upright = "upright";
 downleft = "downleft";
 downright = "downright";
 face = down;
-actionRoom = -1;
+action = -1;
 
 stand = "stand";
 run = "run";
 state = stand;
 canMove = true;
+cutscene = false;  // perma can't move during cutscenes
 
 // movement
 targetX = 0;

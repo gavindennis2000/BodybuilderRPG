@@ -11,11 +11,15 @@ var str = string_concat(
 	"\nBunny Hood: H - ", string(global.bunnyHood),
 	"\nBicycle: B - ", string(global.bicycle),
 	"\nLive Room: L - ", string(live),
-	"\nHide DevTools: F"
+	"\nHide DevTools: F",
+    "\nShow KeyEvents: Q"
 )
 if (showDevTools) {
 	draw_text_border(camX, camY + 270, str, c_white, 0.5);
 }
 else {
 	draw_text_border(camX, camY + 270, "Show DevTools: F", c_white, 0.5);
+}
+if (showKeyEvents) {
+    draw_text_border(camX, camY + 32, global.keyEvents, c_white, 0.5);
 }

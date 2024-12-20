@@ -36,6 +36,7 @@
     {"$GMObjectProperty":"v1","%Name":"itemID","filters":[],"listItems":[],"multiselect":false,"name":"itemID","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"sign","varType":2,},
     {"$GMObjectProperty":"v1","%Name":"prompt","filters":[],"listItems":[],"multiselect":false,"name":"prompt","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"False","varType":3,},
     {"$GMObjectProperty":"v1","%Name":"npcID","filters":[],"listItems":[],"multiselect":false,"name":"npcID","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"npc","varType":2,},
+    {"$GMObjectProperty":"v1","%Name":"action","filters":[],"listItems":[],"multiselect":false,"name":"action","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"-1","varType":0,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

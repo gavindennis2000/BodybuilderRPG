@@ -6,7 +6,7 @@ var keyConfirm = input_check_pressed("south");
 var touching = false; //var dist = -1;
 if (instance_exists(objPlayer)) { 
 	// check if sign is touching player
-	touching = objPlayer.canMove and ( 
+	touching = objPlayer.canMove and !objPlayer.cutscene and ( 
 		(place_meeting(x+1, y, objPlayer) and objPlayer.face == "left") or 
 		(place_meeting(x-1, y, objPlayer) and objPlayer.face == "right") or 
 		(place_meeting(x, y-1, objPlayer) and objPlayer.face == "down") or 
@@ -47,7 +47,11 @@ if (touching and keyConfirm and !instance_exists(objTextbox)) {
 	if (object_index == objNPC) { HandleDialog(); }
 	
 	// create the textbox
-	instance_create_layer(x, y, layer, objTextbox, {text: other.text[other.textIndex], prompt: other.prompt, npcID: npcID });
+	instance_create_layer(x, y, layer, objTextbox, {
+		text: other.text[other.textIndex], 
+		prompt: other.prompt, 
+		action: other.action,
+		npcID: npcID });
 	
 	// increment the text index
     textIndexMax = array_length(text)-1;

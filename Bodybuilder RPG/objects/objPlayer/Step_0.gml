@@ -1,18 +1,24 @@
+/*gmlive*/if (TEST) { if (live_call()) return live_result; }
+
+
 var keyLeft = input_check("left");
 var keyRight = input_check("right");
 var keyDown = input_check("down");
 var keyUp = input_check("up");
 
 var keyConfirm = input_check_pressed("south");
-var keyRun = input_check("west");
-var keyCancel = input_check_pressed("east");
-
+var keyRun = input_check("east");
 var keyStart = input_check_pressed("start");
 var keySelect = input_check_pressed("select");
 
 // don't move if canmove is false
-
 if (!canMove) { exit; }
+
+// check for cutscenes
+if (cutscene) {
+	image_index = 0;
+	exit;
+}
 
 // check for doors/stairs
 if (targetX == 0 and targetY == 0 and place_meeting(x, y, objDoor)) {

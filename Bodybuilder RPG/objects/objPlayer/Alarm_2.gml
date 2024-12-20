@@ -1,13 +1,19 @@
 ///@description Go to minigame
 // go to room after action prompt
-if (fadeAlpha < 1) {
+
+if (fadeAlpha < 0.5) {
 	depth = -999;
 	canMove = false;
-	fadeAlpha += 0.2;
+	fadeAlpha += 0.1;
 	alarm[2] = 2;
 }
 else {
-	var door = instance_place(x, y, objDoor);
-	room_goto(actionRoom);
-	instance_destroy();
+    switch (action) {
+        case "db bench":
+            break;
+        case "squat":
+            instance_create_layer(x, y, layer, objGuitar);
+            break;
+    }
+    instance_destroy();
 }
