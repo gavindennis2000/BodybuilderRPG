@@ -1,8 +1,4 @@
-
 image_index = input_check(trigger) ? 1: 0;
-
-if (move) x += 8;
-
 var press = input_check_pressed(trigger);
 
 if (press) {

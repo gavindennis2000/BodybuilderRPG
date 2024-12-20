@@ -4,6 +4,32 @@ function debug(str1, str2="", str3="", str4="") {
     show_debug_message(str);
 }
 
+function drawScore(x, y, str) {
+    var d = 3;
+    draw_text_color(x + 1, y + d, str, c_black, c_black, c_black, c_black, 1);
+    draw_text_color(x, y, str, c_white, c_white, c_white, c_white, 1);	
+}
+
+function drawScoreAlpha(x, y, str, alpha) {
+    var d = 3;
+    draw_text_color(x + 1, y + d, str, c_black, c_black, c_black, c_black, alpha);
+    draw_text_color(x, y, str, c_white, c_white, c_white, c_white, alpha);	
+}
+
+function drawScoreExt(x, y, str, xscale, yscale) {
+    var d = 3;
+    draw_text_transformed_color(x + 1, y + d, str, xscale, yscale, 0, c_black, c_black, c_black, c_black, 1);
+    draw_text_transformed_color(x, y, str, xscale, yscale, 0, c_white, c_white, c_white, c_white, 1);
+}
+
+function levelUp(stat1 = 1, stat2 = 1) {
+    stat1++;
+    stat2++;
+    playSound(sndLevelUp);
+    levelUpY = room_height;
+    levelUpAlpha = 1;
+}
+
 function draw_text_border(x, y, string, color, alpha = 1, border = c_black) {
 	var c = border;
 	draw_text_color(x+1, y+1, string, c, c, c, c, alpha);

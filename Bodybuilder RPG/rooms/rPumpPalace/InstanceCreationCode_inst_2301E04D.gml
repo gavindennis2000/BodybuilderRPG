@@ -8,7 +8,7 @@ switch(global.chapter) {
 				"It's an empty power rack.", "Hit some squats?"
 			]
 		]
-		prompt = ["Yes", "No", 4]
+		prompt = ["Yes", "No", "squat"]
 		break;
 
 }

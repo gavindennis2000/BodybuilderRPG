@@ -1,10 +1,19 @@
-health = 10;
-var delay = 120
-var aTime = 60;
+/*gmlive*/if (TEST) { if (live_call()) return live_result; }
 
-// write the songs
-createNotes = true;
-if (createNotes) {  // create the notes
+// stop whatever music is currently playing
+if (instance_exists(objMusic)) {objMusic.workout(); }
+
+// get camera position
+var camX = camera_get_view_x(view_camera[0]);
+var camY = camera_get_view_y(view_camera[0]);
+
+health = 10;
+var delay = 80;
+var aTime = 50;
+
+layer = layer_create(-1000, "guitar");
+
+// write the songs bro
 notes1 = [  // [position, length] - Leg Novice
 	// verse 1
 	[0,4], [0,4], [0,4], [0,4],
@@ -204,35 +213,34 @@ notes3 = [
 	
 	
 ]
-}
 
 if (!variable_global_exists("chapter")) { global.chapter = 1; }
 if (!variable_global_exists("workout")) { global.workout = "advanced pull"; }
 
+var extra;
+switch(global.workout) {
+	case "novice leg":
+		extra = -20;
+		break;
+}
 if global.workout == "intermediate push" { aTime -= 5; }
-var extra = 0;
 if global.workout == "advanced pull" { extra = 240; }
 //if (global.workout == "advanced pull") { extra = 1.5 * 60; }
+
 alarm[0] = aTime + delay  // play the wav file
 alarm[1] = delay + extra;  // make the notes
 alarm[2] = delay/2;  // create the picks
 
-pFinalX = 64;
-playerX = room_width + pFinalX;
+playerX = camX + 480 + 64
+pFinalX = playerX - 480;
 playerMove = false;
 imgIndex = 0;
 
-counter = 0;
-
 image_index = 0;
-rectangleX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-rectangleY = 0;
 
-song = -1;
-
+debug(global.workout);
 switch(global.workout) {
 	case "novice leg":
-	default:
 		song = sndRhythmLegNovice;
 		break;
 		
@@ -241,6 +249,7 @@ switch(global.workout) {
 		break;
 		
 	case "advanced pull":
+	default: 
 		song = sndRhythmPullAdvanced;
 		break;
 }

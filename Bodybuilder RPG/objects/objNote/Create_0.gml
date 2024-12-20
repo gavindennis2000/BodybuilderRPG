@@ -14,4 +14,3 @@ switch(x) {
 }
 image_speed = 0;
 depth = layer_get_depth(layer) - 1;
-image_alpha = 0.75;

@@ -26,28 +26,3 @@ levelUpAlpha = 0;
 timerY = room_height/2 + 20;
 
 fadeAlpha = 0;
-
-function drawScore(x, y, str) {
-	var d = 3;
-	draw_text_color(x + 1, y + d, str, c_black, c_black, c_black, c_black, 1);
-	draw_text_color(x, y, str, c_white, c_white, c_white, c_white, 1);	
-}
-
-function drawScoreAlpha(x, y, str, alpha) {
-	var d = 3;
-	draw_text_color(x + 1, y + d, str, c_black, c_black, c_black, c_black, alpha);
-	draw_text_color(x, y, str, c_white, c_white, c_white, c_white, alpha);	
-}
-
-function drawScoreExt(x, y, str, xscale, yscale) {
-	var d = 3;
-	draw_text_transformed_color(x + 1, y + d, str, xscale, yscale, 0, c_black, c_black, c_black, c_black, 1);
-	draw_text_transformed_color(x, y, str, xscale, yscale, 0, c_white, c_white, c_white, c_white, 1);
-}
-
-function levelUp() {
-	global.pull++;
-	playSound(sndLevelUp);
-	levelUpY = room_height;
-	levelUpAlpha = 1;
-}

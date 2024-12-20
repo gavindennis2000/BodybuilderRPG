@@ -1,6 +1,10 @@
-counter++;
-if (rectangleY < 10) { rectangleX[rectangleY] += 40; }
-if (rectangleX[rectangleY] >= room_width/2 and rectangleY < 8) { rectangleX[rectangleY+1] += 40;}
-if (rectangleX[rectangleY] >= room_width and rectangleY < 9) { rectangleY++; }
+var camX = camera_get_view_x(view_camera[0]);
+var camY = camera_get_view_y(view_camera[0]);
 
-if (playerMove and playerX > pFinalX) { playerX -= 8; }
+if (playerMove and playerX > pFinalX) {
+    var dist = abs(playerX - pFinalX)/10;
+    playerX -= dist;
+    if (instance_exists(objPick)) { 
+        with (objPick) { x += dist; }
+    }
+}

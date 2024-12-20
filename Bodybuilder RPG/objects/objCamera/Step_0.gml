@@ -1,3 +1,5 @@
+if (!instance_exists(objPlayer)) { follow = noone; }
+
 if (follow != noone) {
 	xTo = follow.x + 16;
 	yTo = follow.y + 16;
@@ -6,7 +8,7 @@ if (follow != noone) {
 	y += (yTo - y) / 15;
 }
 
-if (room == rOverworld) {
+if (room == rOverworld && instance_exists(objPlayer)) {
 	
 	var pX = objPlayer.x + 16;
 	var pY = objPlayer.y + 16;

@@ -1,20 +1,20 @@
-draw_text(0, 32, string_concat("health: ", health));
-draw_text(0, 64, string_concat("score: ", score));
+/*gmlive*/if (TEST) { if (live_call()) return live_result; }
 
-if (rectangleX[9] < room_width) {
-	for (var i = 0; i < 10; i ++) {
-		draw_rectangle_color(rectangleX[i], i*27, room_width, i*27+26,c_black, c_black, c_black, c_black, false);
-	}
-}
+var camX = camera_get_view_x(view_camera[0]);
+var camY = camera_get_view_y(view_camera[0]);
+
+draw_text(camX, camY + 32, string_concat("health: ", health));
+draw_text(camX, camY + 64, string_concat("score: ", score));
 
 image_speed = 0.25;
+var spr;
 switch(global.workout) {
 	case "novice leg":	
-		draw_sprite(sprSquat, imgIndex, playerX, room_height*3/4 + 16);
+		spr = sprSquat;
 		break;
-		
 	case "intermediate push":
-	default:
-		draw_sprite(sprBench, imgIndex, playerX, room_height*3/4 + 16);
+		spr = sprBench;
 		break;
 }
+
+draw_sprite(spr, imgIndex, camX + playerX, camY + 270*3/4 + 16);

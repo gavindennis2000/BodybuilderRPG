@@ -60,6 +60,12 @@ function roomEnd() {
 	audio_sound_gain(soundID, 0.5, 250)	
 }
 
+function workout() {
+	// stops the music when working out
+	
+	audio_sound_gain(soundID, 0, 1000);	
+}
+
 // workout stuff
 bt = -1;
 lead = -1;
