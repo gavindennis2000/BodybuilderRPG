@@ -133,7 +133,91 @@ global.PRs = [
 
 // battle stuff
 global.battle = false;
-
+global.attacks = [
+    // an array of attack objects
+    // you start with all of these
+    {
+        name: "Overhead Press",
+        description: "Upper body assault - Some would call it an uppercut of sorts",
+        limit: 10,
+        power: 1
+    },
+    {
+        name: "Pulldown",
+        description: "Back attack - A menacing takedown",
+        limit: 10,
+        power: 1
+    },
+    {
+        name: "Leg Press",
+        description: "An aerial doublekick - Good thing you didn't skip leg day!",
+        limit: 10,
+        power: 1
+    },
+]
+global.skills = [
+    // an array of skill objects
+    // starting skills - scan
+    {
+        name: "Scan",
+        description: "Act like a science-based lifter and overanalyze the enemy",
+        unlocked: true,
+        limit: -1,
+        limitMax: -1,
+    },
+    // chapter 1 skills
+    {
+        name: "Brace",
+        description: "Ancient powerlifting technique - Cut the enemy's next attack by 75%",
+        unlocked: false,
+        limit: -1,
+        limitMax: -1,
+    },
+    {
+        name: "Flex",
+        description: "Scare away shrimps with your freak physique!",
+        unlocked: false,
+        limit: -1, 
+        limitMax: -1,
+    },
+    {
+        name: "Hype",
+        description: "Amp up for the next attack - Increase damage by up to 200%",
+        unlocked: false,
+        limit: 5, 
+        limitMax: 5
+    },
+    // chapter 2 skills
+    {
+        name: "Rest",
+        description: "Extended rest between sets - Reduces fatigue by 30%",
+        unlocked: false,
+        limit: 3, 
+        limitMax: 3
+    },
+    {
+        name: "Superset",
+        description: "Time saving gym hack - Combine two attacks",
+        unlocked: false,
+        limit: 2,
+        limitMax: 2
+    },
+    // chapter 3 skills
+    {
+        name: "Berserker Bulk",
+        description: "All the food, all the gains - Increase damage by 300% but take double damage",
+        unlocked: false,
+        limit: 1,
+        limitMax: 1
+    },
+    {
+        name: "Deficit Romanian Deadlift",
+        description: "Bulletproof your back - Cut enemy's future attacks by 50%",
+        unlocked: false,
+        limit: 1,
+        limitMax: 1
+    },
+]
 drawRoom = false;
 drawSub = false;
 

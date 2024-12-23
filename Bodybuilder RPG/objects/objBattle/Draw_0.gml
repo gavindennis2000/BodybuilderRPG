@@ -77,8 +77,8 @@ if (room == rBattle) {
                 fontX(fa_center); fontY(fa_top);
                 switch (screen) {
                     case "menu":
-                        draw_text_border(camX + 340/4 + xmargin, camY + 190 + ymargin, "Movement", getColor("movement"));
-                        draw_text_border(camX + 340*3/4 - xmargin, camY + 190 + ymargin, "Flex Muscles", getColor("flex"));
+                        draw_text_border(camX + 340/4 + xmargin, camY + 190 + ymargin, "Attack", getColor("attack"));
+                        draw_text_border(camX + 340*3/4 - xmargin, camY + 190 + ymargin, "Skill", getColor("skill"));
                         draw_text_border(camX + 340/4 + xmargin, camY + 190 + 70*3/4 - ymargin, "Item", getColor("item"));
                         draw_text_border(camX + 340*3/4 - xmargin, camY + 190 + 70*3/4 - ymargin, "Escape", getColor("escape"));
                         break;
@@ -87,6 +87,19 @@ if (room == rBattle) {
                         draw_text_border(camX + 340/2 + xmargin/2, camY + 190 + ymargin, "Run away? (+1 cardio)", c_white);
                         draw_text_border(camX + 340/2 + xmargin/2 - 50, camY + 190+ 70*3/4 - ymargin, "Yes", getColor("yes"));
                         draw_text_border(camX + 340/2 + xmargin/2 + 50, camY + 190+ 70*3/4 - ymargin, "No", getColor("no"));
+                        break;
+                    case "attack":
+                        draw_text_border(camX + 340/4 + xmargin, camY + 190 + ymargin, attacks[0].name, getColor(attacks[0]));
+                        draw_text_border(camX + 340*3/4 - xmargin, camY + 190 + ymargin, attacks[1].name, getColor(attacks[1]));
+                        draw_text_border(camX + 340/4 + xmargin, camY + 190 + 70*3/4 - ymargin, attacks[2].name, getColor(attacks[2]));
+                        // draw the description
+                        var tempAlpha = draw_get_alpha();
+                        draw_set_alpha(0.8);
+                        draw_rectangle_color(camX, camY, camX + 480, camY + 15, c_black, c_black, c_black, c_black, false);
+                        draw_set_alpha(tempAlpha);
+                        fontX(fa_center); fontY(fa_top);
+                        draw_set_font(fontName);
+                        draw_text_border(camX + 240, camY + 0, selection.description, c_white);
                         break;
                 }
             }

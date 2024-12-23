@@ -1,4 +1,4 @@
 //global.workout = 
 #macro TEST true
-var rm = rPumpPalace;
+var rm = rMom;
 room_goto(rm);

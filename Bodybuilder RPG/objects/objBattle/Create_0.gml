@@ -25,12 +25,23 @@ pStart = player.x;
 ready = false;
 menuX = 0;
 
-selection = "movement";
+selection = "attack";
 screen = "menu";
+
+inventory = global.inventory;
+attacks = global.attacks;  // attacks are static
+skills = [array_length(global.skills)];
+array_copy(skills, 0, global.skills, 0, array_length(global.skills));
+
+
 
 function getColor(select) {
     // finds the correct color for menu options
-    
+    // attacks, skills, and items
+    if (is_struct(select)) {
+        if (select.name == selection.name)
+            return #cccc00;
+    }
     var str = string(select)
     var color = c_white;
     if (str == selection)

@@ -5,18 +5,31 @@ if (ready && !instance_exists(objTextbox)) {
     if input_check_pressed("up") {
         switch (screen) {
             case "menu":
+                playSound(sndCursor);
                 switch (selection) {
-                    case "movement":
+                    case "attack":
                         selection = "item";
                         break;
                     case "item":
-                        selection = "movement";
+                        selection = "attack";
                         break;
-                    case "flex":
+                    case "skill":
                         selection = "escape";
                         break;
                     case "escape":
-                        selection = "flex";
+                        selection = "skill";
+                        break;
+                }
+                break;
+            case "attack":
+                switch (selection) {
+                    case attacks[0]:
+                        selection = attacks[2];
+                        break;
+                    case attacks[2]:
+                        selection = attacks[0];
+                        break;
+                    case attacks[1]:
                         break;
                 }
                 break;
@@ -25,18 +38,31 @@ if (ready && !instance_exists(objTextbox)) {
     else if input_check_pressed("down") {
         switch (screen) {
             case "menu":
+                playSound(sndCursor);
                 switch (selection) {
-                    case "movement":
+                    case "attack":
                         selection = "item";
                         break;
                     case "item":
-                        selection = "movement";
+                        selection = "attack";
                         break;
-                    case "flex":
+                    case "skill":
                         selection = "escape";
                         break;
                     case "escape":
-                        selection = "flex";
+                        selection = "skill";
+                        break;
+                }
+                break;
+            case "attack":
+                switch (selection) {
+                    case attacks[0]:
+                        selection = attacks[2];
+                        break;
+                    case attacks[2]:
+                        selection = attacks[0];
+                        break;
+                    case attacks[1]:
                         break;
                 }
                 break;
@@ -45,15 +71,16 @@ if (ready && !instance_exists(objTextbox)) {
     else if input_check_pressed("left") {
         switch (screen) {
             case "menu":
+                playSound(sndCursor);
                 switch (selection) {
-                    case "movement":
-                        selection = "flex";
+                    case "attack":
+                        selection = "skill";
                         break;
                     case "item":
                         selection = "escape";
                         break;
-                    case "flex":
-                        selection = "movement";
+                    case "skill":
+                        selection = "attack";
                         break;
                     case "escape":
                         selection = "item";
@@ -61,12 +88,25 @@ if (ready && !instance_exists(objTextbox)) {
                 }
                 break;
             case "escape":
+                playSound(sndCursor);
                 switch (selection) {
                     case "yes":
                         selection = "no";
                         break;
                     case "no":
                         selection = "yes";
+                        break;
+                }
+                break;
+            case "attack":
+                switch (selection) {
+                    case attacks[0]:
+                        selection = attacks[1];
+                        break;
+                    case attacks[1]:
+                        selection = attacks[0];
+                        break;
+                    case attacks[2]:
                         break;
                 }
                 break;
@@ -75,15 +115,16 @@ if (ready && !instance_exists(objTextbox)) {
     else if input_check_pressed("right") {
         switch (screen) {
             case "menu":
+                playSound(sndCursor);
                 switch (selection) {
-                    case "movement":
-                        selection = "flex";
+                    case "attack":
+                        selection = "skill";
                         break;
                     case "item":
                         selection = "escape";
                         break;
-                    case "flex":
-                        selection = "movement";
+                    case "skill":
+                        selection = "attack";
                         break;
                     case "escape":
                         selection = "item";
@@ -91,12 +132,25 @@ if (ready && !instance_exists(objTextbox)) {
                 }
                 break;
             case "escape":
+                playSound(sndCursor);
                 switch (selection) {
                     case "yes":
                         selection = "no";
                         break;
                     case "no":
                         selection = "yes";
+                        break;
+                }
+                break;
+            case "attack":
+                switch (selection) {
+                    case attacks[0]:
+                        selection = attacks[1];
+                        break;
+                    case attacks[1]:
+                        selection = attacks[0];
+                        break;
+                    case attacks[2]:
                         break;
                 }
                 break;
@@ -108,11 +162,13 @@ if (ready && !instance_exists(objTextbox)) {
     if (input_check_pressed("south")) {
         switch (screen) {
             case "menu":
+                playSound(sndCursor);
                 switch (selection) {
-                    case "movement":
+                    case "attack":
                         screen = selection;
+                        selection = attacks[0];
                         break;
-                    case "flex":
+                    case "skill":
                         screen = selection;
                         break;
                     case "item":
@@ -126,10 +182,12 @@ if (ready && !instance_exists(objTextbox)) {
                 break;
             case "escape":
                 if (selection == "no") {
+                    playSound(sndDecline);
                     screen = "menu";
                     selection = "escape";
                 }
                 else {
+                    playSound(sndCursor);
                     var str = string_concat(global.characterName, " ran away!");
                     instance_create_layer(x, y, "Instances", objTextbox, {
                         npcID: "",
@@ -142,12 +200,16 @@ if (ready && !instance_exists(objTextbox)) {
     // cancel
     if (input_check_pressed("east")) {
         switch (screen) {
-            case "movement":
-            case "flex":
+            case "attack":
+            case "skill":
             case "item":
             case "escape":
+                playSound(sndDecline);
                 selection = screen;
                 screen = "menu";
+                break;
+            case "menu":
+                playSound(sndError);
                 break;
         }
     }
