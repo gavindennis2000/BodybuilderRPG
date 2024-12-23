@@ -1,3 +1,5 @@
+
+
 switch(x) {
 	case 480 - 32*6:
 		image_index = 0;
@@ -12,5 +14,6 @@ switch(x) {
 		image_index = 3;
 		break;
 }
+x += 16;
 image_speed = 0;
 depth = layer_get_depth(layer) - 1;

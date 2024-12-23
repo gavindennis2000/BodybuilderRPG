@@ -13,6 +13,7 @@ switch(global.workout) {
 		spr = sprSquat;
 		break;
 	case "intermediate push":
+    default:
 		spr = sprBench;
 		break;
 }

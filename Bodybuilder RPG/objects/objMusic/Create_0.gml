@@ -12,6 +12,9 @@ soundID = -1;
 
 function playMusic() {
 	// plays the current song
+    
+    // don't interupt the battle music
+    if (audio_is_playing(sndBattle)) { exit; }
 	
 	if (current == previous) { 
 		audio_sound_gain(soundID, 1, 200);  // reset the volume

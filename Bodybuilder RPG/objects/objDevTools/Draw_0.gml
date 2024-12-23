@@ -18,8 +18,8 @@ if (showDevTools) {
 	draw_text_border(camX, camY + 270, str, c_white, 0.5);
 }
 else {
-	draw_text_border(camX, camY + 270, "Show DevTools: F", c_white, 0.5);
+	draw_text_border(camX, camY + 270, "Show DevTools: F", c_white, 0.3);
 }
 if (showKeyEvents) {
-    draw_text_border(camX, camY + 32, global.keyEvents, c_white, 0.5);
+    draw_text_border(camX, camY + 32, global.keyEvents, c_white, 0.3);
 }

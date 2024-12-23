@@ -218,6 +218,7 @@ if (!variable_global_exists("chapter")) { global.chapter = 1; }
 if (!variable_global_exists("workout")) { global.workout = "advanced pull"; }
 
 var extra;
+global.workout = "advanced pull";
 switch(global.workout) {
 	case "novice leg":
 		extra = -20;

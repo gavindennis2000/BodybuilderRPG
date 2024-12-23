@@ -29,3 +29,22 @@ fadeAlpha = 0;
 // item stuff
 global.bunnyHood = false;
 global.bicycle = false;
+
+// battle stuff
+battleCounter = 0;
+function checkBattle() {
+    // increments battle encounter and randomly throws battle encounter
+    
+    if (!variable_global_exists("noEncounters")) { global.noEncounters = false; }
+    if (global.noEncounters) { exit; }
+        
+    battleCounter++;
+    debug(battleCounter);
+    
+    if (battleCounter > 20) {
+        var rand = irandom(10);
+        if (rand == 5) {
+            initiateBattle();
+        }
+    }
+}

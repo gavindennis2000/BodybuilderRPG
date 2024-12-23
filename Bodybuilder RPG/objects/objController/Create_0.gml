@@ -131,6 +131,9 @@ global.PRs = [
     },
 ];
 
+// battle stuff
+global.battle = false;
+
 drawRoom = false;
 drawSub = false;
 

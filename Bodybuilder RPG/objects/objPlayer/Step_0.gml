@@ -14,10 +14,15 @@ var keySelect = input_check_pressed("select");
 // don't move if canmove is false
 if (!canMove) { exit; }
 
-// check for cutscenes
-if (cutscene) {
+// check for cutscenes or battle
+if (cutscene || global.battle ) {
 	image_index = 0;
 	exit;
+}
+
+// dev tool
+if input_check_pressed("l1") {
+    initiateBattle(true);
 }
 
 // check for doors/stairs
@@ -41,22 +46,20 @@ if (global.bicycle) spd *= 2;
 
 if (targetX != 0 and targetY != 0) { spd = (running) ? 32/10 : 32/20; }
 
-if (targetX > 0) {
-	targetX -= spd;
-	x += spd;
+if (targetX != 0) {
+    x += (spd * sign(targetX));
+	targetX -= (spd * sign(targetX));
+    if (targetX == 0) {
+       checkBattle();
+    }
 }
-else if (targetX < 0) {
-	targetX += spd;
-	x -= spd;
-}
-
-if (targetY > 0) {
-	targetY -= spd;
-	y += spd;
-}
-else if (targetY < 0) {
-	targetY += spd;
-	y -= spd;
+if (targetY != 0) {
+    y += (spd * sign(targetY));
+    targetY -= (spd * sign(targetY));
+    if (targetY == 0) {
+       battleCounter++;
+       debug(battleCounter);
+    }
 }
 
 // look for input if targets are 0

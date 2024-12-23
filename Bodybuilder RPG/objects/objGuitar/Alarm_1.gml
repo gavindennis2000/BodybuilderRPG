@@ -5,24 +5,26 @@
 var camX = camera_get_view_x(view_camera[0]);
 var camY = camera_get_view_y(view_camera[0]);
 
-var spaceTime, spd, noteY = camY;
+var spaceTime, spd, dist, noteY = camY;
 var song;
 
 switch (global.workout) {
 	case "novice leg":
 		song = notes1;
-		spd = 10;
+		spd = 1;
 		noteY += 5;
+        dist = 10;
 		break;
 	case "intermediate push":
 		song = notes2;
-		spd = 10;
-		noteY = 75;
+		spd = 15;
+		noteY += 5;
 		break;
 	case "advanced pull":
 		song = notes3;
-		spd = 10;
-		noteY = 245
+		spd = 4.8;
+		noteY -= 445
+        dist = 48;
 		break; 
 }
 
@@ -30,9 +32,9 @@ switch (global.workout) {
 for (var i = 0; i < array_length(song); i++) {
 	var inst = instance_create_layer(
 		camX + 480 - 32*6 + 32*song[i][0], 
-		noteY - song[i][1]*spd,  // y position
+		noteY - song[i][1]*dist,  // y position
 		layer, objNote, 
-		{spd: 1}  // speed
+		{spd: spd}  // speed
 	);
 	noteY = inst.y;
 }
