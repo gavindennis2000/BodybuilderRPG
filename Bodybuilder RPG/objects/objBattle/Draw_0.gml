@@ -131,8 +131,8 @@ if (fadeWhite != -1) {
     if (room != rBattle) {
         fadeWhite += 0.02;
         
-        i += 0.25;
-        camAngle += i;
+        whiteIncrease += 0.28;
+        camAngle += whiteIncrease;
         camera_set_view_size(cam, camera_get_view_width(cam)-2, camera_get_view_height(cam)-2);
         camera_set_view_angle(cam, camAngle);
         

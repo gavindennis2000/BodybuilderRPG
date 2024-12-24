@@ -189,16 +189,20 @@ if (ready && !instance_exists(objTextbox)) {
             case "skill":
                 switch (selection) {
                     case skills[0 + sCursor]:
-                        selection = skills[1 + sCursor];
+                        if (array_length(skills) > 1 + sCursor)
+                            selection = skills[1 + sCursor];
                         break;
                     case skills[1 + sCursor]:
-                        selection = skills[0 + sCursor];
+                        if (array_length(skills) > 0 + sCursor)
+                            selection = skills[0 + sCursor];
                         break;
                     case skills[2 + sCursor]:
-                        selection = skills[3 + sCursor];
+                        if (array_length(skills) > 3 + sCursor)
+                            selection = skills[3 + sCursor];
                         break;
                     case skills[3 + sCursor]:
-                        selection = skills[2 + sCursor];
+                        if (array_length(skills) > 2 + sCursor)
+                            selection = skills[2 + sCursor];
                         break;
                 }
                 break;
@@ -249,16 +253,20 @@ if (ready && !instance_exists(objTextbox)) {
             case "skill":
                 switch (selection) {
                     case skills[0 + sCursor]:
-                        selection = skills[1 + sCursor];
+                        if (array_length(skills) > 1 + sCursor)
+                            selection = skills[1 + sCursor];
                         break;
                     case skills[1 + sCursor]:
-                        selection = skills[0 + sCursor];
+                        if (array_length(skills) > 0 + sCursor)
+                            selection = skills[0 + sCursor];
                         break;
                     case skills[2 + sCursor]:
-                        selection = skills[3 + sCursor];
+                        if (array_length(skills) > 3 + sCursor)
+                            selection = skills[3 + sCursor];
                         break;
                     case skills[3 + sCursor]:
-                        selection = skills[2 + sCursor];
+                        if (array_length(skills) > 2 + sCursor)
+                            selection = skills[2 + sCursor];
                         break;
                 }
                 break;

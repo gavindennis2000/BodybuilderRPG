@@ -2,7 +2,7 @@
     
 layer = layer_create(-1000, "battle");
 camAngle = real(camera_get_view_angle(view_camera[0]));
-i = 0;
+whiteIncrease = 0;
 fadeWhite = 0;
 initialX = camera_get_view_x(view_camera[0]);
 initialY = camera_get_view_y(view_camera[0]);
@@ -30,8 +30,16 @@ screen = "menu";
 
 inventory = global.inventory;
 attacks = global.attacks;  // attacks are static
-skills = [array_length(global.skills)];
-array_copy(skills, 0, global.skills, 0, array_length(global.skills));
+skills = [];
+
+// delete skills that the player doesn't have yet
+for (var i = 0; i < array_length(global.skills); i++) {
+    if (global.skills[i].unlocked) {
+        debug("added to array");
+        array_push(skills, global.skills[i]);
+    }
+}
+debug(skills);
 sCursor = 0;  // skill cursor
 
 
