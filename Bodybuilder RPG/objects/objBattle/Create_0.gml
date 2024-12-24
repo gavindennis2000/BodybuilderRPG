@@ -32,6 +32,7 @@ inventory = global.inventory;
 attacks = global.attacks;  // attacks are static
 skills = [array_length(global.skills)];
 array_copy(skills, 0, global.skills, 0, array_length(global.skills));
+sCursor = 0;  // skill cursor
 
 
 

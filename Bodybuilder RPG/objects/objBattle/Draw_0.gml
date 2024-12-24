@@ -101,6 +101,24 @@ if (room == rBattle) {
                         draw_set_font(fontName);
                         draw_text_border(camX + 240, camY + 0, selection.description, c_white);
                         break;
+                    case "skill":
+                        if (array_length(skills) > 0 + sCursor)
+                            draw_text_border(camX + 340/4 + xmargin, camY + 190 + ymargin, skills[0 + sCursor].name, getColor(skills[0 + sCursor]));
+                        if (array_length(skills) > 1 + sCursor)
+                        draw_text_border(camX + 340*3/4 - xmargin, camY + 190 + ymargin, skills[1 + sCursor].name, getColor(skills[1 + sCursor]));
+                        if (array_length(skills) > 2 + sCursor)
+                            draw_text_border(camX + 340/4 + xmargin, camY + 190 + 70*3/4 - ymargin, skills[2 + sCursor].name, getColor(skills[2 + sCursor]));
+                        if (array_length(skills) > 3 + sCursor)
+                            draw_text_border(camX + 340*3/4 - xmargin, camY + 190 + 70*3/4 - ymargin, skills[3 + sCursor].name, getColor(skills[3 + sCursor]));
+                        // draw the description
+                        var tempAlpha = draw_get_alpha();
+                        draw_set_alpha(0.8);
+                        draw_rectangle_color(camX, camY, camX + 480, camY + 15, c_black, c_black, c_black, c_black, false);
+                        draw_set_alpha(tempAlpha);
+                        fontX(fa_center); fontY(fa_top);
+                        draw_set_font(fontName);
+                        draw_text_border(camX + 240, camY + 0, selection.description, c_white);
+                        break;
                 }
             }
         }

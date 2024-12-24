@@ -33,6 +33,48 @@ if (ready && !instance_exists(objTextbox)) {
                         break;
                 }
                 break;
+            case "skill":
+                switch (selection) {
+                    case skills[0 + sCursor]:
+                        if (sCursor == 0) { 
+                            var length = array_length(skills) - 1, index = 0;
+                            index = (length % 2 == 0) ? length : length-1;
+                            while (index > 3) {
+                                index -= 2;
+                                sCursor += 2;
+                            }
+                            selection = skills[index + sCursor];
+                            break;
+                        }
+                        playSound(sndCursor);
+                        sCursor -= 2;
+                        selection = skills[0 + sCursor];
+                        break;
+                    case skills[1 + sCursor]:
+                        if (sCursor == 0) { 
+                            var length = array_length(skills) - 1, index = 0;
+                            index = length;
+                            while (index > 3) {
+                                index -= 2;
+                                sCursor += 2;
+                            }
+                            selection = skills[index + sCursor];
+                            break;
+                        }
+                        playSound(sndCursor);
+                        sCursor -= 2;
+                        selection = skills[1 + sCursor];
+                        break;
+                    case skills[2 + sCursor]:
+                        playSound(sndCursor);
+                        selection = skills[0 + sCursor];
+                        break;
+                    case skills[3 + sCursor]:
+                        playSound(sndCursor);
+                        selection = skills[1 + sCursor];
+                        break;
+                }
+                break;
         }
     }
     else if input_check_pressed("down") {
@@ -63,6 +105,40 @@ if (ready && !instance_exists(objTextbox)) {
                         selection = attacks[0];
                         break;
                     case attacks[1]:
+                        break;
+                }
+                break;
+            case "skill":
+                switch (selection) {
+                    case skills[0 + sCursor]:
+                        if (array_length(skills) <= 2 + sCursor) { break; }
+                        playSound(sndCursor);
+                        selection = skills[2 + sCursor];
+                        break;
+                    case skills[1 + sCursor]:
+                        if (array_length(skills) <= 3 + sCursor) { break; }
+                        playSound(sndCursor);
+                        selection = skills[3 + sCursor];
+                        break;
+                    case skills[2 + sCursor]:
+                        if (array_length(skills) <= 2 + sCursor + 2) { 
+                            sCursor = 0;
+                            selection = skills[0];
+                            break;
+                        }
+                        playSound(sndCursor);
+                        sCursor += 2;
+                        selection = skills[2 + sCursor];
+                        break;
+                    case skills[3 + sCursor]:
+                        if (array_length(skills) <= 3 + sCursor + 2) { 
+                            sCursor = 0;
+                            selection = skills[1];
+                            break;
+                        }
+                        playSound(sndCursor);
+                        sCursor += 2;
+                        selection = skills[3 + sCursor];
                         break;
                 }
                 break;
@@ -110,6 +186,22 @@ if (ready && !instance_exists(objTextbox)) {
                         break;
                 }
                 break;
+            case "skill":
+                switch (selection) {
+                    case skills[0 + sCursor]:
+                        selection = skills[1 + sCursor];
+                        break;
+                    case skills[1 + sCursor]:
+                        selection = skills[0 + sCursor];
+                        break;
+                    case skills[2 + sCursor]:
+                        selection = skills[3 + sCursor];
+                        break;
+                    case skills[3 + sCursor]:
+                        selection = skills[2 + sCursor];
+                        break;
+                }
+                break;
         }
     } 
     else if input_check_pressed("right") {
@@ -154,6 +246,22 @@ if (ready && !instance_exists(objTextbox)) {
                         break;
                 }
                 break;
+            case "skill":
+                switch (selection) {
+                    case skills[0 + sCursor]:
+                        selection = skills[1 + sCursor];
+                        break;
+                    case skills[1 + sCursor]:
+                        selection = skills[0 + sCursor];
+                        break;
+                    case skills[2 + sCursor]:
+                        selection = skills[3 + sCursor];
+                        break;
+                    case skills[3 + sCursor]:
+                        selection = skills[2 + sCursor];
+                        break;
+                }
+                break;
         }
     } 
 
@@ -170,6 +278,7 @@ if (ready && !instance_exists(objTextbox)) {
                         break;
                     case "skill":
                         screen = selection;
+                        selection = skills[0];
                         break;
                     case "item":
                         screen = selection;

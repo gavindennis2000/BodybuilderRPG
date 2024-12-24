@@ -59,8 +59,10 @@ switch (room) {
 drawRoom = false;
 drawSub = false;
 
-showRoom();
-showSubRoom();
+if (room != rBattle) {
+	showRoom();
+	showSubRoom();
+}
 
 // set new min and max for muscle groups
 setMinAndMax()

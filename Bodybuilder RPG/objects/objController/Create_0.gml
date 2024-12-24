@@ -168,7 +168,7 @@ global.skills = [
     // chapter 1 skills
     {
         name: "Brace",
-        description: "Ancient powerlifting technique - Cut the enemy's next attack by 75%",
+        description: "Ancient powerlifting technique - Cut the enemy's next attack damage by 75%",
         unlocked: false,
         limit: -1,
         limitMax: -1,
@@ -189,8 +189,8 @@ global.skills = [
     },
     // chapter 2 skills
     {
-        name: "Rest",
-        description: "Extended rest between sets - Reduces fatigue by 30%",
+        name: "Deload",
+        description: "Recovery tactic - Reduces fatigue by 30%",
         unlocked: false,
         limit: 3, 
         limitMax: 3
@@ -205,13 +205,13 @@ global.skills = [
     // chapter 3 skills
     {
         name: "Berserker Bulk",
-        description: "All the food, all the gains - Increase damage by 300% but take double damage",
+        description: "All the food, all the gains - Increase damage by 300%, but take double damage",
         unlocked: false,
         limit: 1,
         limitMax: 1
     },
     {
-        name: "Deficit Romanian Deadlift",
+        name: "Deficit RDL",
         description: "Bulletproof your back - Cut enemy's future attacks by 50%",
         unlocked: false,
         limit: 1,
