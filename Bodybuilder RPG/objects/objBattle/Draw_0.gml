@@ -28,97 +28,118 @@ if (room == rBattle) {
         menuX = 480;
     }
     else {
-        // draw the attack options if a textbox isn't there
-        if (!instance_exists(objTextbox)) {
-            // draw the attack menu
-            if (menuX > 0) menuX -= 480/4;
-            var blue = #0066cc, white = c_white, margin = 5;
-            var tempAlpha = draw_get_alpha();
-            draw_set_alpha(0.8);
-            draw_rectangle_color( 
-                camX + margin + menuX, camY + 190 + margin, 
-                camX + 360 - 20 + menuX, camY + 269 - margin,
-                blue, #99ccff, blue, #0033cc, false
-            );
-            draw_rectangle_color(  // outline
-                camX + margin + menuX, camY + 190 + margin, 
-                camX + 360 - 20 + menuX, camY + 269 - margin,
-                white, white, white, white, true
-            );
-            draw_set_alpha(tempAlpha);
+        // player's turn
+        if (turn == "player") {
+            // draw the attack options if a textbox isn't there
+            if (!instance_exists(objTextbox)) {
+                // draw the attack menu
+                if (menuX > 0) menuX -= 480/4;
+                var blue = #0066cc, white = c_white, margin = 5;
+                var tempAlpha = draw_get_alpha();
+                draw_set_alpha(0.8);
+                draw_rectangle_color( 
+                    camX + margin + menuX, camY + 190 + margin, 
+                    camX + 360 - 20 + menuX, camY + 269 - margin,
+                    blue, #99ccff, blue, #0033cc, false
+                );
+                draw_rectangle_color(  // outline
+                    camX + margin + menuX, camY + 190 + margin, 
+                    camX + 360 - 20 + menuX, camY + 269 - margin,
+                    white, white, white, white, true
+                );
+                draw_set_alpha(tempAlpha);
 
-            // draw the options and fatigue meter
-            if (menuX == 0) {
+                // draw the options and fatigue meter
+                if (menuX == 0) {
 
-                // draw the fatigue meter   
-                var fX = 50, fY = 50, fColor = c_red;
+                    // draw the fatigue meter   
+                    var fX = 50, fY = 50, fColor = c_red;
 
-                // get fatigue from global variable
-                var fatigue = global.stats.fatigue;
+                    // get fatigue from global variable
+                    var fatigue = global.stats.fatigue;
 
-                // configure fColor
-                if (fatigue < 25) { fColor = c_white; }
-                else if (fatigue < 50) { fColor = #ffcccc; }
-                else if (fatigue < 75) { fColor = #ff9999; }
-                else { fColor = #ff6666; }
-                 
-                if (string_length(string(fatigue)) < 2) { fatigue = string_concat("0", string(fatigue)); }
-                fontX(fa_center); fontY(fa_bottom);
-                draw_text_border(camX + 410, camY + 240, string_concat("Fatigue: ", string(fatigue), "%"), fColor, 1);  // name
+                    // configure fColor
+                    if (fatigue < 25) { fColor = c_white; }
+                    else if (fatigue < 50) { fColor = #ffcccc; }
+                    else if (fatigue < 75) { fColor = #ff9999; }
+                    else { fColor = #ff6666; }
+                    
+                    if (string_length(string(fatigue)) < 2) { fatigue = string_concat("0", string(fatigue)); }
+                    fontX(fa_center); fontY(fa_bottom);
+                    draw_text_border(camX + 410, camY + 240, string_concat("Fatigue: ", string(fatigue), "%"), fColor, 1);  // name
 
-                // draw the damn bar
-                var barH = 10, barW = 100, barX = camX + 360, barY = camY + 270 - 20;
-                draw_rectangle_color(barX, barY - barH/2, barX + barW, barY + barH/2, c_black, c_black, c_black, c_black, false);  // fatigue empty bar
-                draw_rectangle_color(barX, barY - barH/2, barX + fatigue, barY + barH/2, c_red, fColor, fColor, c_red, false);  // actual fatigue bar
-                draw_rectangle_color(barX, barY - barH/2, barX + barW, barY + barH/2, c_white, c_white, c_white, c_white, true);  // fatigue bar outline
+                    // draw the damn bar
+                    var barH = 10, barW = 100, barX = camX + 360, barY = camY + 270 - 20;
+                    draw_rectangle_color(barX, barY - barH/2, barX + barW, barY + barH/2, c_black, c_black, c_black, c_black, false);  // fatigue empty bar
+                    draw_rectangle_color(barX, barY - barH/2, barX + fatigue, barY + barH/2, c_red, fColor, fColor, c_red, false);  // actual fatigue bar
+                    draw_rectangle_color(barX, barY - barH/2, barX + barW, barY + barH/2, c_white, c_white, c_white, c_white, true);  // fatigue bar outline
 
-                // draw the options
-                var xmargin = 10, ymargin = 13;
-                fontX(fa_center); fontY(fa_top);
-                switch (screen) {
-                    case "menu":
-                        draw_text_border(camX + 340/4 + xmargin, camY + 190 + ymargin, "Attack", getColor("attack"));
-                        draw_text_border(camX + 340*3/4 - xmargin, camY + 190 + ymargin, "Skill", getColor("skill"));
-                        draw_text_border(camX + 340/4 + xmargin, camY + 190 + 70*3/4 - ymargin, "Item", getColor("item"));
-                        draw_text_border(camX + 340*3/4 - xmargin, camY + 190 + 70*3/4 - ymargin, "Escape", getColor("escape"));
-                        break;
-                    case "escape":
-                        fontX(fa_center);
-                        draw_text_border(camX + 340/2 + xmargin/2, camY + 190 + ymargin, "Run away? (+1 cardio)", c_white);
-                        draw_text_border(camX + 340/2 + xmargin/2 - 50, camY + 190+ 70*3/4 - ymargin, "Yes", getColor("yes"));
-                        draw_text_border(camX + 340/2 + xmargin/2 + 50, camY + 190+ 70*3/4 - ymargin, "No", getColor("no"));
-                        break;
-                    case "attack":
-                        draw_text_border(camX + 340/4 + xmargin, camY + 190 + ymargin, attacks[0].name, getColor(attacks[0]));
-                        draw_text_border(camX + 340*3/4 - xmargin, camY + 190 + ymargin, attacks[1].name, getColor(attacks[1]));
-                        draw_text_border(camX + 340/4 + xmargin, camY + 190 + 70*3/4 - ymargin, attacks[2].name, getColor(attacks[2]));
-                        // draw the description
-                        var tempAlpha = draw_get_alpha();
-                        draw_set_alpha(0.8);
-                        draw_rectangle_color(camX, camY, camX + 480, camY + 15, c_black, c_black, c_black, c_black, false);
-                        draw_set_alpha(tempAlpha);
-                        fontX(fa_center); fontY(fa_top);
-                        draw_set_font(fontName);
-                        draw_text_border(camX + 240, camY + 0, selection.description, c_white);
-                        break;
-                    case "skill":
-                        if (array_length(skills) > 0 + sCursor)
-                            draw_text_border(camX + 340/4 + xmargin, camY + 190 + ymargin, skills[0 + sCursor].name, getColor(skills[0 + sCursor]));
-                        if (array_length(skills) > 1 + sCursor)
-                        draw_text_border(camX + 340*3/4 - xmargin, camY + 190 + ymargin, skills[1 + sCursor].name, getColor(skills[1 + sCursor]));
-                        if (array_length(skills) > 2 + sCursor)
-                            draw_text_border(camX + 340/4 + xmargin, camY + 190 + 70*3/4 - ymargin, skills[2 + sCursor].name, getColor(skills[2 + sCursor]));
-                        if (array_length(skills) > 3 + sCursor)
-                            draw_text_border(camX + 340*3/4 - xmargin, camY + 190 + 70*3/4 - ymargin, skills[3 + sCursor].name, getColor(skills[3 + sCursor]));
-                        // draw the description
-                        var tempAlpha = draw_get_alpha();
-                        draw_set_alpha(0.8);
-                        draw_rectangle_color(camX, camY, camX + 480, camY + 15, c_black, c_black, c_black, c_black, false);
-                        draw_set_alpha(tempAlpha);
-                        fontX(fa_center); fontY(fa_top);
-                        draw_set_font(fontName);
-                        draw_text_border(camX + 240, camY + 0, selection.description, c_white);
-                        break;
+                    // draw the options
+                    var xmargin = 10, ymargin = 13;
+                    fontX(fa_center); fontY(fa_top);
+                    switch (screen) {
+                        case "menu":
+                            draw_text_border(camX + 340/4 + xmargin, camY + 190 + ymargin, "Attack", getColor("attack"));
+                            draw_text_border(camX + 340*3/4 - xmargin, camY + 190 + ymargin, "Skill", getColor("skill"));
+                            draw_text_border(camX + 340/4 + xmargin, camY + 190 + 70*3/4 - ymargin, "Item", getColor("item"));
+                            draw_text_border(camX + 340*3/4 - xmargin, camY + 190 + 70*3/4 - ymargin, "Escape", getColor("escape"));
+                            break;
+                        case "escape":
+                            fontX(fa_center);
+                            draw_text_border(camX + 340/2 + xmargin/2, camY + 190 + ymargin, "Run away? (+1 cardio)", c_white);
+                            draw_text_border(camX + 340/2 + xmargin/2 - 50, camY + 190+ 70*3/4 - ymargin, "Yes", getColor("yes"));
+                            draw_text_border(camX + 340/2 + xmargin/2 + 50, camY + 190+ 70*3/4 - ymargin, "No", getColor("no"));
+                            break;
+                        case "attack":
+                            draw_text_border(camX + 340/4 + xmargin, camY + 190 + ymargin, attacks[0].name, getColor(attacks[0]));
+                            draw_text_border(camX + 340*3/4 - xmargin, camY + 190 + ymargin, attacks[1].name, getColor(attacks[1]));
+                            draw_text_border(camX + 340/4 + xmargin, camY + 190 + 70*3/4 - ymargin, attacks[2].name, getColor(attacks[2]));
+                            // draw the description
+                            var tempAlpha = draw_get_alpha();
+                            draw_set_alpha(0.8);
+                            draw_rectangle_color(camX, camY, camX + 480, camY + 15, c_black, c_black, c_black, c_black, false);
+                            draw_set_alpha(tempAlpha);
+                            fontX(fa_center); fontY(fa_top);
+                            draw_set_font(fontName);
+                            draw_text_border(camX + 240, camY + 0, selection.description, c_white);
+                            break;
+                        case "skill":
+                            if (array_length(skills) > 0 + sCursor)
+                                draw_text_border(camX + 340/4 + xmargin, camY + 190 + ymargin, skills[0 + sCursor].name, getColor(skills[0 + sCursor]));
+                            if (array_length(skills) > 1 + sCursor)
+                            draw_text_border(camX + 340*3/4 - xmargin, camY + 190 + ymargin, skills[1 + sCursor].name, getColor(skills[1 + sCursor]));
+                            if (array_length(skills) > 2 + sCursor)
+                                draw_text_border(camX + 340/4 + xmargin, camY + 190 + 70*3/4 - ymargin, skills[2 + sCursor].name, getColor(skills[2 + sCursor]));
+                            if (array_length(skills) > 3 + sCursor)
+                                draw_text_border(camX + 340*3/4 - xmargin, camY + 190 + 70*3/4 - ymargin, skills[3 + sCursor].name, getColor(skills[3 + sCursor]));
+                            // draw the description
+                            var tempAlpha = draw_get_alpha();
+                            draw_set_alpha(0.8);
+                            draw_rectangle_color(camX, camY, camX + 480, camY + 15, c_black, c_black, c_black, c_black, false);
+                            draw_set_alpha(tempAlpha);
+                            fontX(fa_center); fontY(fa_top);
+                            draw_set_font(fontName);
+                            draw_text_border(camX + 240, camY + 0, selection.description, c_white);
+                            break;
+                        case "item":
+                            if (array_length(inventory) > 0 + sCursor)
+                                draw_text_border(camX + 340/4 + xmargin, camY + 190 + ymargin, inventory[0 + sCursor].name, getColor(inventory[0 + sCursor]));
+                            if (array_length(inventory) > 1 + sCursor)
+                            draw_text_border(camX + 340*3/4 - xmargin, camY + 190 + ymargin, inventory[1 + sCursor].name, getColor(inventory[1 + sCursor]));
+                            if (array_length(inventory) > 2 + sCursor)
+                                draw_text_border(camX + 340/4 + xmargin, camY + 190 + 70*3/4 - ymargin, inventory[2 + sCursor].name, getColor(inventory[2 + sCursor]));
+                            if (array_length(inventory) > 3 + sCursor)
+                                draw_text_border(camX + 340*3/4 - xmargin, camY + 190 + 70*3/4 - ymargin, inventory[3 + sCursor].name, getColor(inventory[3 + sCursor]));
+                            // draw the description
+                            var tempAlpha = draw_get_alpha();
+                            draw_set_alpha(0.8);
+                            draw_rectangle_color(camX, camY, camX + 480, camY + 15, c_black, c_black, c_black, c_black, false);
+                            draw_set_alpha(tempAlpha);
+                            fontX(fa_center); fontY(fa_top);
+                            draw_set_font(fontName);
+                            draw_text_border(camX + 240, camY + 0, selection.description, c_white);
+                            break;
+                    }
                 }
             }
         }
@@ -159,4 +180,13 @@ if (fadeWhite != -1) {
     var margin = 150;
     draw_rectangle_color(camX - margin, camY - margin, camX + camW + margin, camY + camH + margin, w, w, w, w, false);
     draw_set_alpha(tempAlpha); 
+}
+else if (fadeBlack != -1) {
+    var camX = camera_get_view_x(cam);
+    var camY = camera_get_view_y(cam);
+    var tempAlpha = draw_get_alpha();
+
+    draw_set_alpha(fadeBlack);
+    draw_rectangle_color(camX, camY, camX + 480, camY + 270, c_black, c_black, c_black, c_black, false);
+    draw_set_alpha(tempAlpha);
 }

@@ -83,12 +83,17 @@ switch(prompt) {
 		}
 		break;
 	case "exit sulik":
-		// after you talk to sulik, he walks away
+		// after you talk to sulik, he walks away and no encounters is turned off
 		with (objNPC) {
 			if (npcID == "sulik") {
 				alarm[2] = 30;
 			}
 		}
+		global.noEncounters = false;
+		break;
+	case "escape battle":
+		debug("escaped battle");
+		with (objBattle) { move("escape"); }
 		break;
 }
 

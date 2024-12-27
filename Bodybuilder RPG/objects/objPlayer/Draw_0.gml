@@ -1,5 +1,8 @@
+// don't draw in the battle room
+if (room == rBattle) { exit; }
+
+// player's direction
 switch (face) {
-	
 	case "left":
 		sprite_index = sprPlayerLeft;
 		break;
@@ -13,9 +16,12 @@ switch (face) {
 		sprite_index = sprPlayerDown;
 		break;
 }
+
+// running animation speed
 image_speed = running ? 0.4 : 0.2;
 if (state == "stand") {image_index = 0; }
 
+// draw the player a little higher than the ground
 var yDis = 4;
 y -= yDis;
 draw_self();
@@ -30,7 +36,4 @@ if (fadeAlpha > 0) {
 	var b = c_black;
 	draw_rectangle_color(camX, camY, camX+480, camY + 270, b, b, b, b, false);
 	draw_set_alpha(alpha);
-}
-if (test) {
-
 }

@@ -75,6 +75,48 @@ if (ready && !instance_exists(objTextbox)) {
                         break;
                 }
                 break;
+            case "item":
+                switch (selection) {
+                    case inventory[0 + sCursor]:
+                        if (sCursor == 0) { 
+                            var length = array_length(inventory) - 1, index = 0;
+                            index = (length % 2 == 0) ? length : length-1;
+                            while (index > 3) {
+                                index -= 2;
+                                sCursor += 2;
+                            }
+                            selection = inventory[index + sCursor];
+                            break;
+                        }
+                        playSound(sndCursor);
+                        sCursor -= 2;
+                        selection = inventory[0 + sCursor];
+                        break;
+                    case inventory[1 + sCursor]:
+                        if (sCursor == 0) { 
+                            var length = array_length(skills) - 1, index = 0;
+                            index = length;
+                            while (index > 3) {
+                                index -= 2;
+                                sCursor += 2;
+                            }
+                            selection = inventory[index + sCursor];
+                            break;
+                        }
+                        playSound(sndCursor);
+                        sCursor -= 2;
+                        selection = inventory[1 + sCursor];
+                        break;
+                    case inventory[2 + sCursor]:
+                        playSound(sndCursor);
+                        selection = inventory[0 + sCursor];
+                        break;
+                    case inventory[3 + sCursor]:
+                        playSound(sndCursor);
+                        selection = inventory[1 + sCursor];
+                        break;
+                }
+                break;
         }
     }
     else if input_check_pressed("down") {
@@ -142,6 +184,40 @@ if (ready && !instance_exists(objTextbox)) {
                         break;
                 }
                 break;
+            case "item":
+                switch (selection) {
+                    case inventory[0 + sCursor]:
+                        if (array_length(inventory) <= 2 + sCursor) { break; }
+                        playSound(sndCursor);
+                        selection = inventory[2 + sCursor];
+                        break;
+                    case inventory[1 + sCursor]:
+                        if (array_length(inventory) <= 3 + sCursor) { break; }
+                        playSound(sndCursor);
+                        selection = inventory[3 + sCursor];
+                        break;
+                    case inventory[2 + sCursor]:
+                        if (array_length(inventory) <= 2 + sCursor + 2) { 
+                            sCursor = 0;
+                            selection = inventory[0];
+                            break;
+                        }
+                        playSound(sndCursor);
+                        sCursor += 2;
+                        selection = inventory[2 + sCursor];
+                        break;
+                    case inventory[3 + sCursor]:
+                        if (array_length(inventory) <= 3 + sCursor + 2) { 
+                            sCursor = 0;
+                            selection = inventory[1];
+                            break;
+                        }
+                        playSound(sndCursor);
+                        sCursor += 2;
+                        selection = inventory[3 + sCursor];
+                        break;
+                }
+                break;
         }
     } 
     else if input_check_pressed("left") {
@@ -203,6 +279,26 @@ if (ready && !instance_exists(objTextbox)) {
                     case skills[3 + sCursor]:
                         if (array_length(skills) > 2 + sCursor)
                             selection = skills[2 + sCursor];
+                        break;
+                }
+                break;
+            case "item":
+                switch (selection) {
+                    case inventory[0 + sCursor]:
+                        if (array_length(inventory) > 1 + sCursor)
+                            selection = inventory[1 + sCursor];
+                        break;
+                    case inventory[1 + sCursor]:
+                        if (array_length(inventory) > 0 + sCursor)
+                            selection = inventory[0 + sCursor];
+                        break;
+                    case inventory[2 + sCursor]:
+                        if (array_length(inventory) > 3 + sCursor)
+                            selection = inventory[3 + sCursor];
+                        break;
+                    case inventory[3 + sCursor]:
+                        if (array_length(inventory) > 2 + sCursor)
+                            selection = inventory[2 + sCursor];
                         break;
                 }
                 break;
@@ -290,6 +386,7 @@ if (ready && !instance_exists(objTextbox)) {
                         break;
                     case "item":
                         screen = selection;
+                        selection = inventory[0];
                         break;
                     case "escape":
                         screen = selection;
@@ -303,13 +400,14 @@ if (ready && !instance_exists(objTextbox)) {
                     screen = "menu";
                     selection = "escape";
                 }
-                else {
+                else {  // yes
                     playSound(sndCursor);
                     var str = string_concat(global.characterName, " ran away!");
                     instance_create_layer(x, y, "Instances", objTextbox, {
                         npcID: "",
-                        text: [str, ""]
-                    })
+                        text: [str],
+                        action: "escape battle"
+                    });
                 }
                 break;
         }

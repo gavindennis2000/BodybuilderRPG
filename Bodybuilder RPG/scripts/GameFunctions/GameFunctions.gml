@@ -4,22 +4,25 @@ function initiateBattle(special = false, song = sndBattle) {
     // random encounters only happen in the overworld
     if (room != rOverworld && !special ) { exit; }
         
-    // update the global status
+    // update the global statuses
     global.battle = true;
+    global.playerX = objPlayer.x; 
+    global.playerY = objPlayer.y;
+    global.returnRoom = room;
     
     // play the battle music
     if (instance_exists(objMusic)) {
         with (objMusic) {
             audio_pause_sound(soundID);
             audio_play_sound(sndStartBattle, 1, false, 1);
-            audio_play_sound(song, 1, true, 1);
+            global.battleSong = audio_play_sound(song, 1, true, 1);
         }
     }
     
     debug("initiate battle");
-    with (objPlayer) { 
-        battleCounter = 0;
-    }
+    //with (objPlayer) { 
+        //battleCounter = 0;
+    //}
     var camX = camera_get_view_x(view_camera[0]);
     var camY = camera_get_view_y(view_camera[0]);
     instance_create_layer(camX + 240, camY + 135, "Instances", objBattle);

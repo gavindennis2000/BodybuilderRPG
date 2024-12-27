@@ -11,7 +11,8 @@ next = false;
 // defaults
 if (variable_global_exists("playerName")) { global.playerName = "Ben"; }
 if (!variable_instance_exists(self, "screen")) { 
-	screen = (objPlayer.y+16 > camera_get_view_y(view_camera[0])+135 ) ? "top" : "bottom"; 
+	if (room == rBattle) { screen = "top"; }
+	else { screen = (objPlayer.y+16 > camera_get_view_y(view_camera[0])+135 ) ? "top" : "bottom"; }
 }
 
 // default message and variable declarations

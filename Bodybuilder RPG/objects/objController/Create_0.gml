@@ -78,9 +78,8 @@ global.statsMin = ["",1];
 global.statsMax = ["",1];
 
 global.workout = -1;
-global.playerX = -1;
-global.playerY = -1;
 global.returnRoom = -1;
+global.battleSong = -1;
 
 // PRs for each exercise
 global.PRs = [
@@ -133,6 +132,8 @@ global.PRs = [
 
 // battle stuff
 global.battle = false;
+global.noEncounters = true;
+
 global.attacks = [
     // an array of attack objects
     // you start with all of these

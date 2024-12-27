@@ -35,11 +35,11 @@ battleCounter = 0;
 function checkBattle() {
     // increments battle encounter and randomly throws battle encounter
     
-    if (!variable_global_exists("noEncounters")) { global.noEncounters = false; }
+    if (variable_global_exists("noEncounters")) { global.noEncounters = false; }
     if (global.noEncounters) { exit; }
         
     battleCounter++;
-    debug(battleCounter);
+    debug(string_concat("battle counter: ", battleCounter));
     
     if (battleCounter > 20) {
         var rand = irandom(10);

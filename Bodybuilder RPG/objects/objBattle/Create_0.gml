@@ -4,6 +4,7 @@ layer = layer_create(-1000, "battle");
 camAngle = real(camera_get_view_angle(view_camera[0]));
 whiteIncrease = 0;
 fadeWhite = 0;
+fadeBlack = 0;
 initialX = camera_get_view_x(view_camera[0]);
 initialY = camera_get_view_y(view_camera[0]);
 
@@ -19,6 +20,11 @@ if (!variable_instance_exists(self, "enemy")) {
         spr: sprPlayerDown,
         x: 240 - 32,
         y: 135 - 32 - 30,
+        skills: [
+            {
+
+            }
+        ],
     }
 }
 pStart = player.x;
@@ -39,10 +45,11 @@ for (var i = 0; i < array_length(global.skills); i++) {
         array_push(skills, global.skills[i]);
     }
 }
-debug(skills);
-sCursor = 0;  // skill cursor
 
-
+// battle variables
+sCursor = 0;  // selection cursor
+turn = "player";  // whose turn is it?
+escape = false;  // boolean that flags when the player runs away
 
 function getColor(select) {
     // finds the correct color for menu options
@@ -56,4 +63,24 @@ function getColor(select) {
     if (str == selection)
         color = #cccc00;  // darkish yellow
     return color;
+}
+
+function move(m) {
+    // the player's move
+
+    switch (m) {
+        case "escape":
+            //objMusic.endbattle();
+            escape = true;
+            turn = "escape";
+            goBack();
+            break;
+    }
+}
+
+function goBack() {
+    // goes back to previous room
+
+    alarm[0] = 1;
+    audio_sound_gain(global.battleSong, 0, 1000);
 }
