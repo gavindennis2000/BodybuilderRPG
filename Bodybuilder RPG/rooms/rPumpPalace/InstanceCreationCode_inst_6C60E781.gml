@@ -1,2 +1,1 @@
 npcID = "jim";
-HandleDialog()

@@ -44,7 +44,7 @@ image_alpha = drawAlpha;
 draw_text_border(textX, textY, drawText, c_white, 1);
 
 // draw the name
-if (npcID != "item") {
+if (npcID != "item" && npcID != -1) {
 	draw_set_font(fontName);
 	draw_set_halign(fa_left);
 	draw_set_valign(fa_top);

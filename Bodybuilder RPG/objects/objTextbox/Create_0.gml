@@ -1,6 +1,13 @@
+// variables for text drawing later on
 i = 0;
 j = 1;
-with (objPlayer) { image_index = 0; image_speed = 0; state = "stand" };
+
+// make sure the player is standing patiently
+with (objPlayer) { 
+	image_index = 0; 
+	image_speed = 0; 
+	state = "stand"; 
+}
 
 keyConfirmPress = false;
 
@@ -9,14 +16,14 @@ if (instance_exists(objPlayer)) { objPlayer.canMove = false; }
 next = false;
 
 // defaults
-if (variable_global_exists("playerName")) { global.playerName = "Ben"; }
+if (variable_global_exists("playerName")) { global.playerName = "GAVIN"; }
 if (!variable_instance_exists(self, "screen")) { 
 	if (room == rBattle) { screen = "top"; }
 	else { screen = (objPlayer.y+16 > camera_get_view_y(view_camera[0])+135 ) ? "top" : "bottom"; }
 }
 
 // default message and variable declarations
-if (!variable_instance_exists(self, "text")) { text = [string_concat("This is a test. Hello ", global.playerName, "!")]; }
+if (!variable_instance_exists(self, "text")) { text = ["This object doesn't have text yet.", string_concat("Hello ", global.playerName, "!")]; }
 if (!variable_instance_exists(self, "prompt")) { prompt = false; }
 selection = 0;
 canPress = true;

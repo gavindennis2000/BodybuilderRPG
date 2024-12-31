@@ -69,7 +69,7 @@ with (objItem) {
 				draw_sprite_part(sprItems, 0, 32*8, 32*0, 32, 32, other.x, other.y);	
 			}		
 			break;
-		case "door":
+		case "locked door":
 			drawSelf = false;
 			with (other) {
 				draw_sprite(sprDoor, 0, other.x, other.y);

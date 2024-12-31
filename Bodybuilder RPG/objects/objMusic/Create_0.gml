@@ -17,7 +17,7 @@ function playMusic() {
     if (audio_is_playing(sndBattle)) { exit; }
 	
 	if (current == previous) { 
-		audio_sound_gain(soundID, 1, 200);  // reset the volume
+		audio_sound_gain(soundID, 1, 150);  // reset the volume
 		exit; 
 	}
 	
@@ -33,7 +33,7 @@ function playMusic() {
 		var gain = (room == rOverworld && !global.cutscene) ? 0.5 : 1;
 		soundID = audio_play_sound(current, 1, true, gain);
         audio_sound_gain(soundID, 0.5, 0);
-		audio_sound_gain(soundID, 1, 200);
+		audio_sound_gain(soundID, 1, 150);
 	}
 	
 }

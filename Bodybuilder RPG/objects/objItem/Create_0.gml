@@ -1,6 +1,6 @@
 /// @description Insert description here
 
-text = [[""]];
+// if (!variable_instance_exists(self, text)) { text =  [[""]]; }
 dist = -1;
 textIndex = 0;
 textIndexMax = 0

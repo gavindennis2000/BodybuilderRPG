@@ -6,6 +6,7 @@ if (fadeBlack < 1) {
     alarm[0] = 2;
 }
 else {
+    global.stats.cardio++;
     fadeBlack = 0;
     audio_stop_sound(global.battleSong);
     room_goto(global.returnRoom);

@@ -1,3 +1,5 @@
+// stairs in the basement
+
 doorID = "upstairs"
 roomID = "mom";
 goTo = rHouse;

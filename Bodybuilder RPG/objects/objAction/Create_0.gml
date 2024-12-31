@@ -1,5 +1,19 @@
+/*gmlive*/if (TEST) { if (live_call()) return live_result; }
+
 switch(prompt) {
-	
+	case "first paycheck":
+		instance_create_layer(x, y, layer, objTextbox, {
+			npcID: "jim",
+			text: [
+				"I'm paying you in advance so you can buy supplements and equipment.",
+				"Go find the Bodybuilding Nutrition Company (BBNC)  down south in Great Valliou.",
+				"Good luck, kid."
+			]
+		});
+		with (objItem) {
+			if (itemID = "locked door") { instance_destroy(); }
+		}
+		break;
 	case "bench press":
 		// bench press at home
 		if (selection == 0) {
@@ -63,23 +77,32 @@ switch(prompt) {
 		}
 		break;
     case "meet jim":
-            // meet jim ohner
+            // meet jim ohner and get first pay check
 			if (global.keyEvents.meetJim) { break; }
             global.keyEvents.meetJim = true;
+			var txt = string_concat(global.characterName, " received $1000."); 
+			playSound(sndLevelUp);
+			instance_create_layer(x, y, "Instances", objTextbox, {
+				text: [txt],
+				action: "first paycheck"
+			})
             break;
-	case "meet mason":
+	case "pullups":
 		// pullups with mason
 		global.keyEvents.meetMason= true;
 		if (selection == 0) {  // if the player selects yes
 			with (objPlayer) {
-				canMove = false;
-				alarm[2] = 1;
-				global.workout = "novice pull";
-				actionRoom = rWorkout;
+				// canMove = false;
+				// alarm[2] = 1;
+				// global.workout = "novice pull";
+				// actionRoom = rWorkout;
 			}
 		}
 		else {
-			instance_create_layer(x, y, layer, objTextbox, { text: ["Maybe some other time, right?"], npcID: "MASON" });
+			instance_create_layer(x, y, layer, objTextbox, { 
+				text: ["Maybe some other time, right?"], 
+				npcID: "mason" 
+			});
 		}
 		break;
 	case "exit sulik":
@@ -94,6 +117,37 @@ switch(prompt) {
 	case "escape battle":
 		debug("escaped battle");
 		with (objBattle) { move("escape"); }
+		break;
+	case "mason philosophy":
+		if (selection == 0) {  // if the player selects work ethic
+			instance_create_layer(x, y, layer, objTextbox, { 
+				text: [
+					"Work ethic is very important! But...", 
+					"Don't think for a second that you're going to get huge without the love of lifting.",
+					"I've achieved my size and strength because training is my passion!",
+					"As far as serious lifters go I'm really quite lazy!",
+					"Shoot, I could really go for a lift right now...",
+					"How about we have a little pullup contest?"
+				], 
+				npcID: "mason",
+				prompt: ["Let's do it!", "Maybe later", "pullups"]
+			});
+		}
+		else {  // if the player selects passion
+			instance_create_layer(x, y, layer, objTextbox, { 
+				text: [
+					"I agree whole-heartedly!", 
+					"I've achieved my size and strength because training is my passion!",
+					"As far as serious lifters go I'm really quite lazy!",
+					"It's still important to push past our comfort zones, however. Hard work is essential.",
+					"Competition with others is a great way to push yourself to the limit!",
+					"How about we have a little pullup contest?"
+				], 
+				npcID: "mason",
+				prompt: ["Let's do it!", "Maybe later", "pullups"]
+			});
+		}
+		break;
 		break;
 }
 

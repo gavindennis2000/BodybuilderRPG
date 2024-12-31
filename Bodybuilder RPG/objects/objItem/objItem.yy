@@ -37,6 +37,9 @@
     {"$GMObjectProperty":"v1","%Name":"prompt","filters":[],"listItems":[],"multiselect":false,"name":"prompt","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"False","varType":3,},
     {"$GMObjectProperty":"v1","%Name":"npcID","filters":[],"listItems":[],"multiselect":false,"name":"npcID","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"npc","varType":2,},
     {"$GMObjectProperty":"v1","%Name":"action","filters":[],"listItems":[],"multiselect":false,"name":"action","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"-1","varType":0,},
+    {"$GMObjectProperty":"v1","%Name":"text","filters":[],"listItems":[
+        "[\"This object doesn't have text yet.\"]",
+      ],"multiselect":false,"name":"text","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"[\"This object doesn't have text yet.\"]","varType":6,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

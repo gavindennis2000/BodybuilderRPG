@@ -43,8 +43,8 @@ if (touching and keyConfirm and !instance_exists(objTextbox)) {
 	// create the textbox
 	if (!is_array(text[0])) { text = [text]}
 	
-	// handle dialog for npcs
-	if (object_index == objNPC) { HandleDialog(); }
+	// find the right dialog
+	HandleDialog();
 	
 	// create the textbox
 	instance_create_layer(x, y, layer, objTextbox, {
