@@ -11,7 +11,7 @@ var str = string_concat(
 	"\nBunny Hood: H - ", string(global.bunnyHood),
 	"\nBicycle: B - ", string(global.bicycle),
 	"\nLive Room: L - ", string(live),
-	"\nNo Encounters: E - ", string(global.noEncounters),
+	"\nNo Encounters: E - ", (global.noEncounters) ? "No Encounters" : "Encounters",
 	"\nHide DevTools: F",
     "\nShow KeyEvents: Q"
 )

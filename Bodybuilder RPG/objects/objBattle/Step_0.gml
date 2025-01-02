@@ -1,22 +1,29 @@
 /*gmlive*/if (TEST) { if (live_call()) return live_result }; 
 
 // move the selections
-if (ready && !instance_exists(objTextbox)) {
+if (ready && !instance_exists(objTextbox) && turn == "player" && menuX == 0) {
     if input_check_pressed("up") {
         switch (screen) {
             case "menu":
-                playSound(sndCursor);
                 switch (selection) {
                     case "attack":
-                        selection = "item";
+                        if (array_length(global.inventory) > 0) { 
+                            playSound(sndCursor);
+                            selection = "item"; 
+                        }
+                        else 
+                            { playSound(sndError); }
                         break;
                     case "item":
+                        playSound(sndCursor);
                         selection = "attack";
                         break;
                     case "skill":
+                        playSound(sndCursor);
                         selection = "escape";
                         break;
                     case "escape":
+                        playSound(sndCursor);
                         selection = "skill";
                         break;
                 }
@@ -122,18 +129,25 @@ if (ready && !instance_exists(objTextbox)) {
     else if input_check_pressed("down") {
         switch (screen) {
             case "menu":
-                playSound(sndCursor);
                 switch (selection) {
                     case "attack":
-                        selection = "item";
+                        if (array_length(global.inventory) > 0) { 
+                            playSound(sndCursor);
+                            selection = "item";
+                        }
+                        else 
+                            { playSound(sndError); }
                         break;
                     case "item":
+                        playSound(sndCursor);
                         selection = "attack";
                         break;
                     case "skill":
+                        playSound(sndCursor);
                         selection = "escape";
                         break;
                     case "escape":
+                        playSound(sndCursor);
                         selection = "skill";
                         break;
                 }
@@ -223,19 +237,26 @@ if (ready && !instance_exists(objTextbox)) {
     else if input_check_pressed("left") {
         switch (screen) {
             case "menu":
-                playSound(sndCursor);
                 switch (selection) {
                     case "attack":
+                        playSound(sndCursor);
                         selection = "skill";
                         break;
                     case "item":
+                        playSound(sndCursor);
                         selection = "escape";
                         break;
                     case "skill":
+                        playSound(sndCursor);
                         selection = "attack";
                         break;
                     case "escape":
-                        selection = "item";
+                         if (array_length(global.inventory) > 0) { 
+                            playSound(sndCursor);
+                            selection = "item"; 
+                        }
+                        else 
+                            { playSound(sndError); }
                         break;
                 }
                 break;
@@ -307,19 +328,26 @@ if (ready && !instance_exists(objTextbox)) {
     else if input_check_pressed("right") {
         switch (screen) {
             case "menu":
-                playSound(sndCursor);
                 switch (selection) {
                     case "attack":
+                        playSound(sndCursor);
                         selection = "skill";
                         break;
                     case "item":
+                        playSound(sndCursor);
                         selection = "escape";
                         break;
                     case "skill":
+                        playSound(sndCursor);
                         selection = "attack";
                         break;
                     case "escape":
-                        selection = "item";
+                         if (array_length(global.inventory) > 0) { 
+                            playSound(sndCursor);
+                            selection = "item"; 
+                        }
+                        else 
+                            { playSound(sndError); }
                         break;
                 }
                 break;
@@ -394,6 +422,45 @@ if (ready && !instance_exists(objTextbox)) {
                         break;
                 }
                 break;
+            case "attack":
+                // the sound effect
+                playSound(sndCursor);
+
+                // get the right string for the text box
+                if (selection == attacks[0]) {
+                    var str = string_concat(global.characterName, " attacks with a Boulder Shoulder Uppercut!");
+                }
+                else if (selection == attacks[1]) {
+                    var str = string_concat(global.characterName, " attacks with a Big Back Smack!");
+                }
+                else {
+                    var str = string_concat(global.characterName, " attacks with a Thunder Thigh Surprise!");
+                }
+                // perform the move
+                move(selection);
+
+                // create the textbox
+                instance_create_layer(x, y, "Instances", objTextbox, {
+                    npcID: "",
+                    text: [str],
+                });
+                break;
+            case "skill":
+                // the sound effect
+                playSound(sndCursor);
+
+                // perform the move
+                move(selection.name);
+
+                break;
+            case "item":
+                 // the sound effect
+                 playSound(sndCursor);
+
+                 // use the item and go to the next turn
+                 move("item");
+                 
+                break;
             case "escape":
                 if (selection == "no") {
                     playSound(sndDecline);
@@ -402,6 +469,14 @@ if (ready && !instance_exists(objTextbox)) {
                 }
                 else {  // yes
                     playSound(sndCursor);
+                    
+                    // change the player's sprite and animation speed
+                    turn = "escape";
+                    player.spr = sprPlayerLeft;
+                    player.imgSpd = -1;
+                    image_speed = 0.5;
+
+                    // the textbox
                     var str = string_concat(global.characterName, " ran away!");
                     instance_create_layer(x, y, "Instances", objTextbox, {
                         npcID: "",

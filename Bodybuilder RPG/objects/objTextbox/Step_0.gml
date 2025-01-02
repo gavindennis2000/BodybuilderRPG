@@ -1,3 +1,4 @@
+/*gmlive*/if (TEST) { if (live_call()) return live_result; }
 if (finished) {
 	drawAlpha -= 0.25;
 	

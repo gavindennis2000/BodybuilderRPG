@@ -1,6 +1,6 @@
 {
   "$GMSound":"",
-  "%Name":"sndDecline",
+  "%Name":"sndBattleReady",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -9,8 +9,8 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":0.247007,
-  "name":"sndDecline",
+  "duration":0.388844,
+  "name":"sndBattleReady",
   "parent":{
     "name":"SFX",
     "path":"folders/4 Music/SFX.yy",
@@ -19,7 +19,7 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"sndDecline.wav",
+  "soundFile":"sndBattleReady.wav",
   "type":0,
   "volume":1.0,
 }

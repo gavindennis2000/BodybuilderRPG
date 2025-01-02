@@ -22,7 +22,7 @@ global.inventory = [
     {
         name: "Choc. Milk",
         quantity: 1,
-        description: "Central Prairie's flagship drink - Replenishes 50hp"
+        description: "Central Prairie's flagship drink - Reduces fatigue by 20%"
     },
 ]
 
@@ -272,6 +272,34 @@ function setMinAndMax() {
     
     // set min
     variable_global_set("statsMin", statsArr[4]);
+}
+
+function useItem(item) {
+    // uses item from inventory during battle or pause menu
+
+    // text that will be returned
+    var txt = "";
+
+    debug(item);
+
+    switch (item) {
+        case "Choc. Milk":
+            for (var i = 0; i < array_length(global.inventory); i++) {
+                // reduce the quantity of the item in the inventory
+                if (global.inventory[i].name == item) {
+                    global.inventory[i].quantity--;
+                    // delete the item if quantity is 0
+                    if (global.inventory[i].quantity <= 0) {
+                        array_delete(global.inventory, i, 1);
+                    }
+                }
+            }
+            // subtract 20 fatigue
+            txt = $"The delicious chocolate milk reduced {global.characterName}'s `fatigue!"
+            global.stats.fatigue = (global.stats.fatigue >= 20) ? global.stats.fatigue - 20 : 0;
+            break;
+    }
+    return txt;
 }
 
 function exitGame() {

@@ -77,19 +77,32 @@ function HandleDialog(){
 							
 					// mom
 					case "mom":
-						text = [
-							[
-								string_concat("Good morning, ", global.characterName, "."),
-								"Are you ready to start your new job as a personal trainer?",
-								"The gym is in the northwest part of town past the \nuniversity.",
-								"Don't forget to introduce yourself to your boss, Mr. Ohner.",
-								"Don't be late!"
-							],
-							[
-								"The gym is in the northwest part of town past the \nuniversity.",
-								"Don't be late!"
+						if (!global.keyEvents.meetJim) {
+							text = [
+								[
+									string_concat("Good morning, ", global.characterName, "."),
+									"Are you ready to start your new job as a personal trainer?",
+									"The gym is in the northwest part of town past the \nuniversity.",
+									"Don't forget to introduce yourself to your boss, Mr. Ohner.",
+									"Don't be late!"
+								],
+								[
+									"The gym is in the northwest part of town past the \nuniversity.",
+									"Don't be late!"
+								]
 							]
-						]
+						}
+						else if (global.statsMin[1] < 40) {
+							text = [
+								[
+									"How's your first day of work going, honey?",
+									"They're paying you to work out!? Interesting...",
+								],
+								[
+									"There's a chocolate milk in the fridge if you need it."
+								]
+							]
+						}
 						break;
 								
 					// harvey
