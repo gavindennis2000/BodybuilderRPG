@@ -58,7 +58,6 @@ if (targetY != 0) {
     targetY -= (spd * sign(targetY));
     if (targetY == 0) {
        battleCounter++;
-       debug(battleCounter);
     }
 }
 

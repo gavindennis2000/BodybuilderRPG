@@ -28,7 +28,7 @@
   "origin":9,
   "parent":{
     "name":"Player",
-    "path":"folders/1Sprites/Player.yy",
+    "path":"folders/1 Sprites/Player.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

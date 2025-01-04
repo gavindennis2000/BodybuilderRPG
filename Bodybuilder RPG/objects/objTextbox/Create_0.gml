@@ -1,3 +1,5 @@
+/*gmlive*/if (TEST) { if (live_call()) return live_result; }
+
 // variables for text drawing later on
 i = 0;
 j = 1;
@@ -18,7 +20,7 @@ next = false;
 // defaults
 if (variable_global_exists("playerName")) { global.playerName = "GAVIN"; }
 if (!variable_instance_exists(self, "screen")) { 
-	if (room == rBattle) { screen = "top"; }
+	if (room == rBattle) { screen = "bottom"; }
 	else { screen = (objPlayer.y+16 > camera_get_view_y(view_camera[0])+135 ) ? "top" : "bottom"; }
 }
 

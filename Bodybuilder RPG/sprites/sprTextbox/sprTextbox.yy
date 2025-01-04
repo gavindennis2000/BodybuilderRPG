@@ -26,7 +26,7 @@
   "origin":0,
   "parent":{
     "name":"Textbox",
-    "path":"folders/1Sprites/Textbox.yy",
+    "path":"folders/1 Sprites/Textbox.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

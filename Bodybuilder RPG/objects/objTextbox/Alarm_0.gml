@@ -25,7 +25,6 @@ if (!skip) {  // read the text normally
 			drawText = string_concat(drawText, "\n");
 			indexCheck = 0;
 			newChars++;
-			show_debug_message("auto reset line");
 		}
 		
 

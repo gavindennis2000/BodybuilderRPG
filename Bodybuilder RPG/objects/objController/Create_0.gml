@@ -22,7 +22,7 @@ global.inventory = [
     {
         name: "Choc. Milk",
         quantity: 1,
-        description: "Central Prairie's flagship drink - Reduces fatigue by 20%"
+        description: "Central Prairie's flagship drink - Reduces fatigue by 50%"
     },
 ]
 
@@ -31,7 +31,7 @@ global.keyItems = [
     {
         name: "Serva Grips", 
         value: false,
-        description: "Certified 'Death Grip' technology"
+        description: "Certified death grip technology"
     },
     {
         name: "Yacht",
@@ -41,7 +41,7 @@ global.keyItems = [
     {
         name: "Bunny Hood",
         value: false,
-        description: "Become the fastest bodybuilder ever! Equip with 'I'"
+        description: "Become the fastest bodybuilder ever! Equip with 'B'"
     },
     {
         name: "Bicycle",
@@ -70,7 +70,8 @@ global.stats = {
     arms: 10,
     legs: 10,
     cardio: 10,
-    fatigue: 0
+    fatigue: 0,
+    ultimate: 0
 }
 
 // best and worst muscle groups
@@ -133,6 +134,87 @@ global.PRs = [
 // battle stuff
 global.battle = false;
 global.noEncounters = true;
+global.enemies = {
+    dyel: {
+        // drawing info
+        name: "DYEL",
+        spr: sprPlayerDown,
+        imgSpd: 0,
+        x: 240 - 32,
+        y: 135 - 32 - 30,
+
+        // attacks
+        attacks: [
+            {
+                name: "Unsolicited Advice",  // the name of the attack
+                description: $"The terrible bench press tips cause psychological harm to {global.characterName}.",
+                coefficient: 1,  // multiplies by strength for attack damage (e.g. str:5 * coeff:1.5 = 7.5 fatigue)
+                effect: "none"  // special ailment inflicted by the attack, if any
+            },
+            {
+                name: "Sumo Deadlift Smash",  // the name of the attack
+                description: "It's only strong because he's doing sumo! If he did conventional, it wouldn't have hurt so bad (allegedly).",
+                coefficient: 1.5,  // multiplies by strength for attack damage (e.g. str:5 * coeff:1.5 = 7.5 fatigue)
+                effect: "none"  // special ailment inflicted by the attack, if any
+            }
+        ],
+        attackIndex: 0,
+
+        // health
+        hp: 50,
+
+        // attack power
+        strength: 5,
+
+        // defense/vulnerabilities
+        pushDef: 0.75,
+        pullDef: 1,
+        legDef: 1,
+    },
+
+    strongman: {
+        // drawing info
+        name: "STRONGMAN",
+        spr: sprPlayerDown,
+        imgSpd: 0,
+        x: 240 - 32,
+        y: 135 - 32 - 30,
+
+        // attacks
+        attacks: [
+            {
+                name: "Charge",  // the name of the attack
+                description: $"STRONGMAN begins charging his power.",
+                coefficient: 0,  // multiplies by strength for attack damage (e.g. str:5 * coeff:1.5 = 7.5 fatigue)
+                effect: "none"  // special ailment inflicted by the attack, if any
+            },
+            {
+                name: "Charge",  // the name of the attack
+                description: $"STRONGMAN continues charging his power.",
+                coefficient: 0,  // multiplies by strength for attack damage (e.g. str:5 * coeff:1.5 = 7.5 fatigue)
+                effect: "none"  // special ailment inflicted by the attack, if any
+            },
+            {
+                name: "Release",  // the name of the attack
+                description: $"STRONGMAN hurls an at atlas stone at {global.characterName}.",
+                coefficient: 1,  // multiplies by strength for attack damage (e.g. str:5 * coeff:1.5 = 7.5 fatigue)
+                effect: "none"  // special ailment inflicted by the attack, if any
+            }
+        ],
+        attackIndex: 0,
+
+        // health
+        hp: 200,
+
+        // attack power
+        strength: 50,
+
+        // defense/vulnerabilities
+        pushDef: 1,
+        pullDef: 1,
+        legDef: 1,
+    }
+}
 
 global.attacks = [
     // an array of attack objects
@@ -295,8 +377,8 @@ function useItem(item) {
                 }
             }
             // subtract 20 fatigue
-            txt = $"The delicious chocolate milk reduced {global.characterName}'s `fatigue!"
-            global.stats.fatigue = (global.stats.fatigue >= 20) ? global.stats.fatigue - 20 : 0;
+            txt = $"The delicious chocolate milk reduces {global.characterName}'s `fatigue!"
+            global.stats.fatigue = (global.stats.fatigue >= 50) ? global.stats.fatigue - 50 : 0;
             break;
     }
     return txt;

@@ -8,12 +8,53 @@ if (room == rBattle) {
 
      // draw the enemy
      var scale = 2, dist = 75;
-     draw_sprite_ext(enemy.spr, enemy.imgSpd, enemy.x, enemy.y, scale, scale, 0, c_white, 1);
+     
+    if (enemy.hp <= 0 && deadY != -1) {
+        // draw the enemy fading
+        draw_sprite_part_ext(enemy.spr, enemy.imgSpd, 0, 0, 32, 32 - deadY, enemy.x, enemy.y, scale, scale, c_black, 0.7);
+        if (deadY < 32) {
+            deadY++;
+        }
+    }
+    else {
+        // the enemy flashes white when using a skill
+        if (eSkillAlpha < 1) {
+            var oldFog = gpu_get_fog();
+            gpu_set_fog(true, c_white, 0, 0);   
+            draw_sprite_ext(enemy.spr, enemy.imgSpd, enemy.x, enemy.y, scale, scale, 0, c_white, 1);
+            gpu_set_fog(oldFog[0], oldFog[1], oldFog[2], oldFog[3]);
+        }
+        // draw the enemy
+        draw_sprite_ext(enemy.spr, enemy.imgSpd, enemy.x, enemy.y, scale, scale, 0, c_white, eSkillAlpha);
+    }
+
+    // draw enemy projectiles
+    if (projectile.draw) {
+        draw_sprite_part_ext(projectile.spr, -1, 0 + projectile.sprNum*32, 0, 32, 32, projectile.x, projectile.y, scale, scale, c_white, 0.75);
+        projectile.x -= 1.75*projectile.spd;
+        projectile.y += projectile.spd;
+    }
 
     // draw the player
-    draw_sprite_ext(player.spr, player.imgSpd, player.x, player.y, scale, scale, 0, c_white, 1);
-    // draw_text(player.x, player.y - 32, string_concat("playerX: ", player.x, " playerY: ", player.y));
-    
+    if (global.stats.fatigue >= 100 && deadY != -1) {
+        // draw the player fading
+        draw_sprite_part_ext(player.spr, player.imgSpd, 0, 0, 32, 32 - deadY, player.x, player.y, scale, scale, c_black, 0.7);
+        if (deadY < 32) {
+            deadY++;
+        }
+    }
+    else {
+        // the player flashes white when using a skill
+        if (pSkillAlpha < 1) {
+            var oldFog = gpu_get_fog();
+            gpu_set_fog(true, c_white, 0, 0);   
+            draw_sprite_ext(player.spr, player.imgSpd, player.x, player.y, scale, scale, 0, c_white, 1);
+            gpu_set_fog(oldFog[0], oldFog[1], oldFog[2], oldFog[3]);
+        }
+        // draw the player
+        draw_sprite_ext(player.spr, player.imgSpd, player.x, player.y, scale, scale, 0, c_white, pSkillAlpha);
+    }
+
     // move the players
     if (turn == "escape") {
         player.x -= 10;
@@ -37,8 +78,13 @@ if (room == rBattle) {
         menuX = 480;
     }
     else {
+        // draw the fatigue, ultimate, and enemy health bars
+
+        // configure the animation of the bars
+        var inc = 3;  // increment the length of the bar
+
         // draw the fatigue meter   
-        var fX = 50, fY = 50, fColor = c_red;
+        var fColor;
 
         // get fatigue from global variable
         var fatigue = global.stats.fatigue;
@@ -48,17 +94,130 @@ if (room == rBattle) {
         else if (fatigue < 50) { fColor = #ffcccc; }
         else if (fatigue < 75) { fColor = #ff9999; }
         else { fColor = #ff6666; }
+
+        // give the bar some animation when it goes up and down
+        if (drawFatigue != fatigue) {
+            if (fatigue > drawFatigue) { 
+                if (fatigue >= drawFatigue + inc)
+                    drawFatigue += inc; 
+                else 
+                    drawFatigue = fatigue;
+            }
+            if (fatigue < drawFatigue) { 
+                if (fatigue <= drawFatigue - inc)
+                    drawFatigue -= inc; 
+                else 
+                    drawFatigue = fatigue;
+            }
+        }
+        if (drawFatigue < 0) { drawFatigue = 0; }
         
+        // draw the fatigue %
         if (string_length(string(fatigue)) < 2) { fatigue = string_concat("0", string(fatigue)); }
         fontX(fa_center); fontY(fa_bottom);
         draw_set_font(fontMenu);
-        draw_text_border(camX + 410, camY + 240, string_concat("Fatigue: ", string(fatigue), "%"), fColor, 1);  // name
-
+        draw_text_border(camX + 410, camY + 210, string_concat("Fatigue: ", string(fatigue), "%"), fColor, 1);
+        
         // draw the damn bar
-        var barH = 10, barW = 100, barX = camX + 360, barY = camY + 270 - 20;
+        var barH = 10, barW = 100, barX = camX + 360, barY = camY + 218;
         draw_rectangle_color(barX, barY - barH/2, barX + barW, barY + barH/2, c_black, c_black, c_black, c_black, false);  // fatigue empty bar
-        draw_rectangle_color(barX, barY - barH/2, barX + fatigue, barY + barH/2, c_red, fColor, fColor, c_red, false);  // actual fatigue bar
+        draw_rectangle_color(barX, barY - barH/2, barX + drawFatigue, barY + barH/2, c_red, fColor, fColor, c_red, false);  // actual fatigue bar
         draw_rectangle_color(barX, barY - barH/2, barX + barW, barY + barH/2, c_white, c_white, c_white, c_white, true);  // fatigue bar outline
+        
+        // ultimate
+
+        // draw the ultimate meter   
+        var uColor = c_red;
+
+        // get ultimate from global variable
+        var ultimate = global.stats.ultimate;
+
+        // configure uColor
+        if (ultimate < 25) { uColor = c_white; }
+        else if (ultimate < 50) { uColor = #a677ba; }
+        else if (ultimate < 75) { uColor = #8b6a99; }
+        else { uColor = #6a5175; }
+
+        // give the bar some animation when it goes up and down
+        if (drawUltimate != ultimate) {
+            if (ultimate > drawUltimate) { 
+                if (ultimate >= drawUltimate + inc)
+                    drawUltimate += inc; 
+                else 
+                    drawUltimate = ultimate;
+            }
+            else if (ultimate < drawUltimate) {
+                if (ultimate <= drawUltimate - inc)
+                    drawUltimate -= inc; 
+                else 
+                    drawUltimate = ultimate;
+            }
+        }
+        if (drawUltimate < 0) { drawUltimate = 0; }
+        
+        // draw the ultimate %
+        if (string_length(string(ultimate)) < 2) { ultimate = string_concat("0", string(ultimate)); }
+        draw_text_border(camX + 410, camY + 247, string_concat("Ultimate: ", string(ultimate), "%"), uColor, 1);
+        
+        // draw the ultimate bar
+        var barH = 10, barW = 100, barX = camX + 360, barY = camY + 255;
+        draw_rectangle_color(barX, barY - barH/2, barX + barW, barY + barH/2, c_black, c_black, c_black, c_black, false);  // fatigue empty bar
+        draw_rectangle_color(barX, barY - barH/2, barX + drawUltimate, barY + barH/2, c_yellow, #381747, uColor, c_yellow, false);  // actual fatigue bar
+        draw_rectangle_color(barX, barY - barH/2, barX + barW, barY + barH/2, c_white, c_white, c_white, c_white, true);  // fatigue bar outline
+
+        // enemy's health 
+        var eColor;
+
+
+        // configure eColor
+        var eHealth = (enemy.hp / enemy.maxHp) * 100;
+        if (eHealth < 25) { eColor = c_white; }
+        else if (eHealth < 50) { eColor = #33ff33; }
+        else if (eHealth < 75) { eColor = #00cc00; }
+        else { eColor = #009900; }
+            
+        // draw the enemy's name
+        draw_text_border(camX + 410, camY + 100, $"{enemy.name}", c_white, 1);
+        
+        // give the bar some animation when it goes up and down
+        if (drawEHealth != eHealth) {
+            if (eHealth > drawEHealth) { 
+                if (eHealth >= drawEHealth + inc)
+                    drawEHealth += inc; 
+                else 
+                    drawEHealth = eHealth;
+            }
+            else if (eHealth < drawEHealth) { 
+                if (eHealth <= drawEHealth - inc)
+                    drawEHealth -= inc; 
+                else 
+                    drawEHealth = eHealth;
+            }
+        }
+        if (drawEHealth < 0) { drawEHealth = 0; }
+
+
+        // draw the enemy healthbar
+        var barH = 10, barW = 100, barX = camX + 360, barY = camY + 108;
+        draw_rectangle_color(barX, barY - barH/2, barX + barW, barY + barH/2, c_black, c_black, c_black, c_black, false);  // fatigue empty bar
+        draw_rectangle_color(barX, barY - barH/2, barX + drawEHealth, barY + barH/2, #66ff66, eColor, eColor, #006600, false);  // actual fatigue bar
+        draw_rectangle_color(barX, barY - barH/2, barX + barW, barY + barH/2, c_white, c_white, c_white, c_white, true);  // fatigue bar outline
+        
+        // draw damage accrued for enemy and player
+        if (enemyDamageY != -1) {  // enemy
+            fontX(fa_center);
+            fontY(fa_middle);
+            draw_set_font(fontMenu);
+            if (enemyDamageY < 10) enemyDamageY += 1;
+            draw_text_border(enemy.x + 32, enemy.y - 16 - enemyDamageY, enemyDamage, c_white);
+        }
+        if (playerDamageY != -1) {  // player
+            fontX(fa_center);
+            fontY(fa_middle);
+            draw_set_font(fontMenu);
+            if (playerDamageY < 10) playerDamageY += 1;
+            draw_text_border(player.x + 32, player.y - 16 - playerDamageY, playerDamage, c_white);
+        }
 
         // player's turn
         if (turn == "player") {

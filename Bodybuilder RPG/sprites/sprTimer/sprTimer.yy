@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"Workouts",
-    "path":"folders/1Sprites/Workouts.yy",
+    "path":"folders/1 Sprites/Workouts.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

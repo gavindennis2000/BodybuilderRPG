@@ -245,8 +245,8 @@
   ],
   "name":"rPumpPalace",
   "parent":{
-    "name":"3Room",
-    "path":"folders/3Room.yy",
+    "name":"3 Rooms",
+    "path":"folders/3 Rooms.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

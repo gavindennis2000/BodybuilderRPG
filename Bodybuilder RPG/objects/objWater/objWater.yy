@@ -11,8 +11,8 @@
   "name":"objWater",
   "overriddenProperties":[],
   "parent":{
-    "name":"2Object",
-    "path":"folders/2Object.yy",
+    "name":"2 Objects",
+    "path":"folders/2 Objects.yy",
   },
   "parentObjectId":{
     "name":"objItem",

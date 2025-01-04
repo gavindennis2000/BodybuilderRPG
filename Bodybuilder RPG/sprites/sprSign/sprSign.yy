@@ -26,7 +26,7 @@
   "origin":0,
   "parent":{
     "name":"Squares",
-    "path":"folders/1Sprites/Squares.yy",
+    "path":"folders/1 Sprites/Squares.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

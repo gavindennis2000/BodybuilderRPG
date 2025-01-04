@@ -31,9 +31,11 @@ if (ready && !instance_exists(objTextbox) && turn == "player" && menuX == 0) {
             case "attack":
                 switch (selection) {
                     case attacks[0]:
+                        playSound(sndCursor);
                         selection = attacks[2];
                         break;
                     case attacks[2]:
+                        playSound(sndCursor);
                         selection = attacks[0];
                         break;
                     case attacks[1]:
@@ -156,9 +158,11 @@ if (ready && !instance_exists(objTextbox) && turn == "player" && menuX == 0) {
                 switch (selection) {
                     case attacks[0]:
                         selection = attacks[2];
+                        playSound(sndCursor);
                         break;
                     case attacks[2]:
                         selection = attacks[0];
+                        playSound(sndCursor);
                         break;
                     case attacks[1]:
                         break;
@@ -275,9 +279,11 @@ if (ready && !instance_exists(objTextbox) && turn == "player" && menuX == 0) {
                 switch (selection) {
                     case attacks[0]:
                         selection = attacks[1];
+                        playSound(sndCursor);
                         break;
                     case attacks[1]:
                         selection = attacks[0];
+                        playSound(sndCursor);
                         break;
                     case attacks[2]:
                         break;
@@ -366,9 +372,11 @@ if (ready && !instance_exists(objTextbox) && turn == "player" && menuX == 0) {
                 switch (selection) {
                     case attacks[0]:
                         selection = attacks[1];
+                        playSound(sndCursor);
                         break;
                     case attacks[1]:
                         selection = attacks[0];
+                        playSound(sndCursor);
                         break;
                     case attacks[2]:
                         break;
