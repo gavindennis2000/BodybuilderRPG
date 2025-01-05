@@ -20,6 +20,10 @@ else if (turn == "win") {
         case "dyel":
             improve = 4;
             break;
+        // get the best reward
+        case "strongman":
+            improve = 3;
+            break;
     }
     var txt = [
         $"{enemy.name} has been defeated!",

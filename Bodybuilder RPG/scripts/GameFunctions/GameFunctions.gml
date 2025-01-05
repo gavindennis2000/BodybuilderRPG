@@ -19,13 +19,32 @@ function initiateBattle(special = false, song = sndBattle) {
         }
     }
     
-    debug("initiate battle");
-    //with (objPlayer) { 
-        //battleCounter = 0;
-    //}
     var camX = camera_get_view_x(view_camera[0]);
     var camY = camera_get_view_y(view_camera[0]);
-    instance_create_layer(camX + 240, camY + 135, "Instances", objBattle);
+
+    // decide on an enemy
+    var enemy;
+    switch (global.chapter) {
+        case 1:
+            var rand = irandom(5);
+            switch (rand) {
+                case 0:
+                    enemy = global.enemies.strongman;
+                    break;
+                case 1:
+                case 2:
+                    enemy = global.enemies.dyel;
+                    break;
+                case 3:
+                default:
+                    enemy = global.enemies.dyel;
+                    break;
+            }
+            break;
+    }
+    instance_create_layer(camX + 240, camY + 135, "Instances", objBattle, {
+        enemyToCopy: enemy
+    });
 }
 
 function debug(str1, str2="", str3="", str4="") {

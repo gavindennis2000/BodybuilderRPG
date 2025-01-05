@@ -221,21 +221,19 @@ global.attacks = [
     // you start with all of these
     {
         name: "Overhead Press",
-        description: "Upper body assault - Some would call it an uppercut of sorts",
-        limit: 10,
-        power: 1
+        description: "Upper body assault - Some would call it an uppercut of sorts.",
     },
     {
         name: "Pulldown",
-        description: "Back attack - A menacing takedown",
-        limit: 10,
-        power: 1
+        description: "Back attack - A menacing takedown.",
     },
     {
         name: "Leg Press",
         description: "An aerial doublekick - Good thing you didn't skip leg day!",
-        limit: 10,
-        power: 1
+    },
+    {
+        name: "Max Out",
+        description: "Full body obliteration - Combines the power of every muscle group.",
     },
 ]
 global.skills = [

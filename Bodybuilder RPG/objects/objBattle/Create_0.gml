@@ -18,9 +18,33 @@ player = {
 }
 
 // the enemy
-if (!variable_instance_exists(self, "enemy")) {
-    enemy = global.enemies.strongman;
+if (!variable_instance_exists(self, "enemyToCopy")) {
+    enemyToCopy = global.enemies.strongman;
 }
+enemy = {
+     // drawing info
+     name: enemyToCopy.name,
+     spr: enemyToCopy.spr,
+     imgSpd: enemyToCopy.imgSpd,
+     x: enemyToCopy.x,
+     y: enemyToCopy.y,
+
+     // attacks
+     attacks: enemyToCopy.attacks,
+     attackIndex: enemyToCopy.attackIndex,
+
+     // health
+     hp: enemyToCopy.hp,
+
+     // attack power
+     strength: enemyToCopy.strength,
+
+     // defense/vulnerabilities
+     pushDef: enemyToCopy.pushDef,
+     pullDef: enemyToCopy.pullDef,
+     legDef: enemyToCopy.legDef,
+};
+
 enemy.maxHp = enemy.hp;
 pStart = player.x;
 pFinalX = player.x;
@@ -65,7 +89,11 @@ sfxBuffer = -1;  // holds sound effect for later stuff
 // effects and stuff
 // flash white when using skills
 pSkillAlpha = 1;
+pSkillColor = c_white;
 eSkillAlpha = 1;
+eSkillColor = c_white;
+ultimateAlpha = 0
+
 // projectile
 projectile = {
     draw: false,
@@ -270,8 +298,9 @@ function enemyMove(m) {
              var txt = "";
              txt = objController.useItem(selection.name);
 
-            // sound effect
+            // effects
             playSound(sndUseItem);
+            skillFlash("enemy", "item");
 
             // create the textbox
             instance_create_layer(x, y, "Instances", objTextbox, {
@@ -314,7 +343,7 @@ function enemyTurn() {
 function getColor(select) {
     // finds the correct color for menu options
     
-    // /*gmlive*/if (TEST) { if (live_call(select)) return live_result; }
+    /*gmlive*/if (TEST) { if (live_call(select)) return live_result; }
     
     // attacks, skills, and items
     if (is_struct(select)) {
@@ -325,6 +354,9 @@ function getColor(select) {
     var color = c_white;
     if (str == selection)
         color = #cccc00;  // darkish yellow
+    if (str == string(attacks[3])) {
+        color = #c61aff;
+    }
 
     if (select == "item" && array_length(global.inventory) == 0) { color = c_gray; }
     return color;
@@ -346,18 +378,22 @@ function move(m) {
     switch (m) {
         case attacks[0]:
             // overhead press
-            alarm[1] = 1;
-            turn = "attack";
-            break;
         case attacks[1]:
             // pulldown
-            alarm[1] = 1;
-            turn = "attack";
-            break;
         case attacks[2]:
             // leg press
             alarm[1] = 1;
             turn = "attack";
+            break;
+        case attacks[3]:
+            // max out
+            alarm[1] = 1;
+            turn = "attack";
+
+            // effects
+            playSound(sndMaxOut);
+            skillFlash("player", "max out");
+
             break;
         case "Scan":
             // scan the enemy for data
@@ -419,6 +455,7 @@ function move(m) {
 
             // sound effect
             playSound(sndUseItem);
+            skillFlash("player", "item");
 
             // create the textbox
             instance_create_layer(x, y, "Instances", objTextbox, {
@@ -456,17 +493,28 @@ function screenShake() {
     if (sfxBuffer != -1) playSound(sfxBuffer);
 }
 
-function skillFlash(type) {
+function skillFlash(type, move = "skill") {
     // flash the enemy or player when using a skill
-    
-    debug($"worked: {type}");
-
+    var color = c_white;
+    switch (move) {
+        case "max out":
+            color = #992600
+            break;
+        case "item":
+            color = #1ac6ff
+            break;
+        case "skill":
+        default:
+            break;
+    }
     if (type == "player") {
         pSkillAlpha -= 0.1;
+        pSkillColor = color;
         alarm[5] = 1;
     }
     else if (type == "enemy") {
         eSkillAlpha -= 0.1;
+        eSkillColor = color;
         alarm[5] = 1;
     }
 }

@@ -39,6 +39,14 @@ if (ready && !instance_exists(objTextbox) && turn == "player" && menuX == 0) {
                         selection = attacks[0];
                         break;
                     case attacks[1]:
+                        if (global.stats.ultimate >= 100) {
+                            playSound(sndCursor);
+                            selection = attacks[3];
+                        }
+                        break;
+                    case attacks[3]:
+                        selection = attacks[1];
+                        playSound(sndCursor);
                         break;
                 }
                 break;
@@ -165,6 +173,14 @@ if (ready && !instance_exists(objTextbox) && turn == "player" && menuX == 0) {
                         playSound(sndCursor);
                         break;
                     case attacks[1]:
+                        if (global.stats.ultimate >= 100) {
+                            playSound(sndCursor);
+                            selection = attacks[3];
+                        }
+                        break;
+                    case attacks[3]:
+                        selection = attacks[1];
+                        playSound(sndCursor);
                         break;
                 }
                 break;
@@ -286,6 +302,14 @@ if (ready && !instance_exists(objTextbox) && turn == "player" && menuX == 0) {
                         playSound(sndCursor);
                         break;
                     case attacks[2]:
+                        if (global.stats.ultimate >= 100) {
+                            selection = attacks[3];
+                            playSound(sndCursor);
+                        }
+                        break;
+                    case attacks[3]:
+                        selection = attacks[2];
+                        playSound(sndCursor);
                         break;
                 }
                 break;
@@ -379,6 +403,14 @@ if (ready && !instance_exists(objTextbox) && turn == "player" && menuX == 0) {
                         playSound(sndCursor);
                         break;
                     case attacks[2]:
+                        if (global.stats.ultimate >= 100) {
+                            selection = attacks[3];
+                            playSound(sndCursor);
+                        }
+                        break;
+                    case attacks[3]:
+                        selection = attacks[2];
+                        playSound(sndCursor);
                         break;
                 }
                 break;
@@ -441,8 +473,11 @@ if (ready && !instance_exists(objTextbox) && turn == "player" && menuX == 0) {
                 else if (selection == attacks[1]) {
                     var str = string_concat(global.characterName, " attacks with a Big Back Smack!");
                 }
-                else {
+                else if (selection == attacks[2]) {
                     var str = string_concat(global.characterName, " attacks with a Thunder Thigh Surprise!");
+                }
+                else {  // ultimate
+                    var str = string_concat("Ultimate Move: Max Out!");
                 }
                 // perform the move
                 move(selection);

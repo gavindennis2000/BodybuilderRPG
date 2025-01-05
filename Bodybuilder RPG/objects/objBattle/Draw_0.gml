@@ -6,6 +6,15 @@ if (room == rBattle) {
     var camX = camera_get_view_x(cam);
     var camY = camera_get_view_y(cam);
 
+    // draw fog during ultimate attacks
+    if (ultimateAlpha != 0) {
+        var oldFog = gpu_get_fog(), tempAlpha = draw_get_alpha();
+        draw_set_alpha(ultimateAlpha);
+        draw_rectangle_color(camX, camY, camX + 480, camY + 270, c_white, c_white, c_white, c_white, false);
+        draw_set_alpha(tempAlpha);
+        if (ultimateAlpha < 0.75) ultimateAlpha += 0.01;
+    }
+
      // draw the enemy
      var scale = 2, dist = 75;
      
@@ -20,7 +29,7 @@ if (room == rBattle) {
         // the enemy flashes white when using a skill
         if (eSkillAlpha < 1) {
             var oldFog = gpu_get_fog();
-            gpu_set_fog(true, c_white, 0, 0);   
+            gpu_set_fog(true, eSkillColor, 0, 0);   
             draw_sprite_ext(enemy.spr, enemy.imgSpd, enemy.x, enemy.y, scale, scale, 0, c_white, 1);
             gpu_set_fog(oldFog[0], oldFog[1], oldFog[2], oldFog[3]);
         }
@@ -47,7 +56,7 @@ if (room == rBattle) {
         // the player flashes white when using a skill
         if (pSkillAlpha < 1) {
             var oldFog = gpu_get_fog();
-            gpu_set_fog(true, c_white, 0, 0);   
+            gpu_set_fog(true, pSkillColor, 0, 0);   
             draw_sprite_ext(player.spr, player.imgSpd, player.x, player.y, scale, scale, 0, c_white, 1);
             gpu_set_fog(oldFog[0], oldFog[1], oldFog[2], oldFog[3]);
         }
@@ -222,22 +231,38 @@ if (room == rBattle) {
         // player's turn
         if (turn == "player") {
             // draw the attack options if a textbox isn't there
+            var menuColors = (global.stats.ultimate >= 100) ? [
+                #00ffcc,
+                #e6e6ff,
+                #00ffcc,
+                #000066
+            ]
+            : [
+                #0066cc,
+                #99ccff,
+                #0066cc,
+                #0033cc
+            ];
+            // don't draw the menu if there's a textbox on screen
             if (!instance_exists(objTextbox)) {
                 // draw the attack menu
                 if (menuX > 0) menuX -= 480/4;
-                var blue = #0066cc, white = c_white, margin = 5;
+                var white = c_white, margin = 5;
                 var tempAlpha = draw_get_alpha();
                 draw_set_alpha(0.8);
+                // the blue menu rectangle
                 draw_rectangle_color( 
                     camX + margin + menuX, camY + 190 + margin, 
                     camX + 360 - 20 + menuX, camY + 269 - margin,
-                    blue, #99ccff, blue, #0033cc, false
+                    menuColors[0], menuColors[1], menuColors[2], menuColors[3], false
                 );
-                draw_rectangle_color(  // outline
+                // white outline
+                draw_rectangle_color(
                     camX + margin + menuX, camY + 190 + margin, 
                     camX + 360 - 20 + menuX, camY + 269 - margin,
                     white, white, white, white, true
                 );
+                // go back to original screen drawing opacity
                 draw_set_alpha(tempAlpha);
 
                 // play the menu ready sound effect
@@ -265,6 +290,10 @@ if (room == rBattle) {
                             draw_text_border(camX + 340/4 + xmargin, camY + 190 + ymargin, attacks[0].name, getColor(attacks[0]));
                             draw_text_border(camX + 340*3/4 - xmargin, camY + 190 + ymargin, attacks[1].name, getColor(attacks[1]));
                             draw_text_border(camX + 340/4 + xmargin, camY + 190 + 70*3/4 - ymargin, attacks[2].name, getColor(attacks[2]));
+                            // max out when you have ultimate
+                            if (global.stats.ultimate >= 100) {
+                                draw_text_border(camX + 340*3/4 - xmargin, camY + 190 + 70*3/4 - ymargin, attacks[3].name, getColor(attacks[3]));
+                            }
                             // draw the description
                             var tempAlpha = draw_get_alpha();
                             draw_set_alpha(0.8);

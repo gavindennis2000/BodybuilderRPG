@@ -18,7 +18,7 @@ switch (selection) {
         }
         else if (aCounter < 11) {
             // handle damage
-            playSound(sndAttack);
+            playSound(sndPushAttack);
             var dmg = calculateDamage("push");
             enemyDamage = dmg;
             enemy.hp -= dmg;
@@ -75,7 +75,7 @@ switch (selection) {
         }
         else if (aCounter < 11) {
             // handle damage
-            playSound(sndAttack);
+            playSound(sndPullAttack);
             var dmg = calculateDamage("pull");
             enemyDamage = dmg;
             alarm[2] = 1;
@@ -125,7 +125,7 @@ switch (selection) {
         }
         else if (aCounter < 11) {
             // handle damage
-            playSound(sndAttack);
+            playSound(sndLegAttack);
             var dmg = calculateDamage("legs");
             enemyDamage = dmg;
             alarm[2] = 1;
@@ -156,6 +156,157 @@ switch (selection) {
             player.y = pFinalY;
             if (!instance_exists(objTextbox)) { enemyTurn(); }
             else { alarm[1] = 1; }
+        }
+        break;
+    case attacks[3]:  // max out
+        if (aCounter == 0) {
+            global.stats.ultimate = 0;
+            aCounter++;
+            alarm[1] = 1;
+        }
+        else if (aCounter == 1) {
+            aCounter++;
+            ultimateAlpha += 0.01;
+            alarm[1] = 90;
+        }
+        else if (aCounter == 2) {
+            aCounter++;
+            alarm[1] = 1;
+            playSound(sndCriticalAttack);
+
+            // handle damage
+            var dmg = global.stats.chest;
+            debug($"dmg: {dmg}");
+            enemyDamage = dmg;
+            enemyDamageY = -1;
+            alarm[2] = 1;
+            enemy.hp -= dmg;
+        }
+        else if (aCounter < 25) {
+            // diagonal right
+            aCounter++;
+            alarm[1] = 1;
+            player.x += 25;
+            player.y -= 10;
+        }
+        else if (aCounter == 25) {
+            // reset
+            player.x = pFinalX + 300;
+            player.y = pFinalY;
+            alarm[1] = 1;
+            aCounter++;
+            playSound(sndCriticalAttack);
+        
+            // handle damage
+            var dmg = global.stats.shoulders;
+            debug($"dmg: {dmg}");
+            enemyDamage = dmg;
+            enemyDamageY = -1;
+            alarm[2] = 1;
+            enemy.hp -= dmg;
+        }
+        else if (aCounter < 50) {
+            // diagonal left
+            aCounter++;
+            alarm[1] = 1;
+            player.x -= 25;
+            player.y -= 10;
+        }
+        else if (aCounter == 50) {
+            // reset
+            player.x = - 40;
+            player.y = enemy.y;
+            alarm[1] = 1;
+            aCounter++;
+            playSound(sndCriticalAttack);
+
+            // handle damage
+            var dmg = global.stats.back;
+            debug($"dmg: {dmg}");
+            enemyDamage = dmg;
+            enemyDamageY = -1;
+            alarm[2] = 1;
+            enemy.hp -= dmg;
+        }
+        else if (aCounter < 75) {
+            // right
+            aCounter++;
+            alarm[1] = 1;
+            player.x += 40;
+        }
+        else if (aCounter == 75) {
+            // reset
+            player.x = 270 + 32
+            player.y = enemy.y;
+            alarm[1] = 1;
+            aCounter++;
+            playSound(sndCriticalAttack);
+
+            // handle damage
+            var dmg = global.stats.arms;
+            debug($"dmg: {dmg}");
+            enemyDamage = dmg;
+            enemyDamageY = -1;
+            alarm[2] = 1;
+            enemy.hp -= dmg;
+        }
+        else if (aCounter < 100) {
+            // left
+            aCounter++;
+            alarm[1] = 1;
+            player.x -= 40;
+        }
+        else if (aCounter == 100) {
+            // reset
+            player.x = enemy.x;
+            player.y = 270 + 32;
+            alarm[1] = 1;
+            aCounter++;
+            playSound(sndCriticalAttack);
+
+            // handle damage
+            var dmg = global.stats.legs;
+            debug($"dmg: {dmg}");
+            enemyDamage = dmg;
+            enemyDamageY = -1;
+            alarm[2] = 1;
+            enemy.hp -= dmg;
+        }
+        else if (aCounter < 125) {
+            // up
+            aCounter++;
+            alarm[1] = 1;
+            player.y -= 40;
+        }
+        else if (aCounter == 125) {
+            // final reset
+            player.x = pFinalX;
+            player.y = -32;
+            alarm[1] = 1;
+            aCounter++;
+        }
+        else if (aCounter < 150) {
+            // down
+            aCounter++;
+            alarm[1] = 1;
+            if (player.y <= pFinalY-30) player.y += 30;
+            else player.y = pFinalY;
+        }
+        else if (aCounter == 150) {
+            // last reset
+            player.x = pFinalX;
+            player.y = pFinalY;
+            alarm[1] = 1;
+            aCounter++;
+        }
+        else {
+            ultimateAlpha = 0;
+            if (instance_exists(objTextbox)) {
+                alarm[1] = 1;
+            }
+            else {
+                enemyTurn();
+            }
         }
         break;
     case "Scan":
@@ -197,7 +348,6 @@ switch (selection) {
             // projectiles
             if (projectile.sprNum != -1) {
                 projectile.draw = true;
-                debug("draw");
             }
 
             alarm[1] = 1;

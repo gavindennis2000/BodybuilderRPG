@@ -13,7 +13,7 @@ var str = string_concat(
 	"\nLive Room: L - ", string(live),
 	"\nNo Encounters: E - ", (global.noEncounters) ? "No Encounters" : "Encounters",
 	"\nHide DevTools: F",
-    "\nShow KeyEvents: Q"
+    "\nInfinite Ultimate: U", string(global.ultimate)
 )
 if (showDevTools) {
 	draw_text_border(camX, camY + 270, str, c_white, 0.5);
