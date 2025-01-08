@@ -175,7 +175,7 @@ switch (selection) {
             playSound(sndCriticalAttack);
 
             // handle damage
-            var dmg = global.stats.chest;
+            var dmg = round(global.stats.chest / enemy.pushDef);
             debug($"dmg: {dmg}");
             enemyDamage = dmg;
             enemyDamageY = -1;
@@ -198,7 +198,7 @@ switch (selection) {
             playSound(sndCriticalAttack);
         
             // handle damage
-            var dmg = global.stats.shoulders;
+            var dmg = round(global.stats.shoulders / enemy.pushDef);
             debug($"dmg: {dmg}");
             enemyDamage = dmg;
             enemyDamageY = -1;
@@ -221,7 +221,7 @@ switch (selection) {
             playSound(sndCriticalAttack);
 
             // handle damage
-            var dmg = global.stats.back;
+            var dmg = round(global.stats.back / enemy.pullDef);
             debug($"dmg: {dmg}");
             enemyDamage = dmg;
             enemyDamageY = -1;
@@ -243,7 +243,7 @@ switch (selection) {
             playSound(sndCriticalAttack);
 
             // handle damage
-            var dmg = global.stats.arms;
+            var dmg = round(global.stats.arms / enemy.pullDef);
             debug($"dmg: {dmg}");
             enemyDamage = dmg;
             enemyDamageY = -1;
@@ -265,7 +265,7 @@ switch (selection) {
             playSound(sndCriticalAttack);
 
             // handle damage
-            var dmg = global.stats.legs;
+            var dmg = round(global.stats.legs / enemy.legDef);
             debug($"dmg: {dmg}");
             enemyDamage = dmg;
             enemyDamageY = -1;
@@ -357,6 +357,54 @@ switch (selection) {
             // wait for the textbox to go away
             if (instance_exists(objTextbox)) { alarm[1] = 1; }
             else { endEnemyTurn(); }
+        }
+        break;
+    case "enemy item":
+        if (aCounter == 0) {
+            // wait for the textbox to go away
+            if (instance_exists(objTextbox)) {
+                alarm[1] = 1;
+                exit;
+            }
+            switch (enemyItem) {
+                case "bcaa":
+                    enemy.hp += round(enemy.maxHp/3);
+                    if (enemy.hp > enemy.maxHp) { 
+                        enemy.hp = enemy.maxHp; }
+                    enemy.strength += 5;
+                    break;
+                case "earbuds":
+                    enemy.legDef *= 4;
+                    enemy.pullDef *= 4;
+                    enemy.pushDef *= 4;
+                    debug("improved defense");
+                    break;
+                case "remove earbuds":
+                    enemy.legDef /= 4;
+                    enemy.pullDef /= 4;
+                    enemy.pushDef /= 4;
+                    debug("reduced defense");
+                    break;
+                default:
+                    break;
+            }
+            aCounter++;
+            alarm[1] = 1;
+        }
+        else if (aCounter == 1) {
+            // create the textbox
+            instance_create_layer(x, y, "Instances", objTextbox, {
+                text: [
+                    textBuffer
+                ]
+            });
+            aCounter++;
+            alarm[1] = 1;
+        }
+        else {
+            // wait for the textbox to finish before ending turn
+            if (instance_exists(objTextbox)) { alarm[1] = 1; }
+                else { endEnemyTurn(); }
         }
         break;
     case "charge":

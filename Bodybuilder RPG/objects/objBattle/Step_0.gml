@@ -1,6 +1,9 @@
 /*gmlive*/if (TEST) { if (live_call()) return live_result }; 
 
 // move the selections
+if (ready && !instance_exists(objTextbox) && turn == "enemy first") {
+    enemyTurn();
+}
 if (ready && !instance_exists(objTextbox) && turn == "player" && menuX == 0) {
     if input_check_pressed("up") {
         switch (screen) {

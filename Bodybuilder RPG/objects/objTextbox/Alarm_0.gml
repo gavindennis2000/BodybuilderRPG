@@ -11,7 +11,6 @@ if (!skip) {  // read the text normally
 		// reset during manual newlines
 		if (currentI == "`") {
 			currentI = "\n";
-			show_debug_message("worked");
 			indexCheck = 0;
 		}
 		
@@ -42,7 +41,6 @@ if (!skip) {  // read the text normally
 		// reset during manual newlines
 		if (currentI == "`") {
 			currentI = "\n";
-			show_debug_message("worked");
 			indexCheck = 0;
 		}
 		

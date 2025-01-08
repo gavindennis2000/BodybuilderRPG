@@ -40,11 +40,12 @@ if (touching and keyConfirm and !instance_exists(objTextbox)) {
 		}
 		if (alarm_get(0) > -1) { alarm[0] = -1; }
 	}
-	// create the textbox
-	if (!is_array(text[0])) { text = [text]}
 	
 	// find the right dialog
 	HandleDialog();
+
+	// create the textbox
+	if (!is_array(text[0])) { text = [text]}
 	
 	// create the textbox
 	instance_create_layer(x, y, layer, objTextbox, {

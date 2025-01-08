@@ -6,6 +6,26 @@ if (room == rBattle) {
     var camX = camera_get_view_x(cam);
     var camY = camera_get_view_y(cam);
 
+    // get the player's hair color
+    var hairColor = c_white;
+    switch (global.outfit.hairColor) {
+        case 0:
+            hairColor = #663500;
+            break;
+        case 1:
+            hairColor = #ffff99;
+            break;
+        case 2:
+            hairColor = #1a0d00;
+            break;
+        case 3:
+            hairColor = #cc2900;
+            break;
+        case 4:
+            hairColor = #66ccff;
+            break;
+    }
+
     // draw fog during ultimate attacks
     if (ultimateAlpha != 0) {
         var oldFog = gpu_get_fog(), tempAlpha = draw_get_alpha();
@@ -20,8 +40,8 @@ if (room == rBattle) {
      
     if (enemy.hp <= 0 && deadY != -1) {
         // draw the enemy fading
-        draw_sprite_part_ext(enemy.spr, enemy.imgSpd, 0, 0, 32, 32 - deadY, enemy.x, enemy.y, scale, scale, c_black, 0.7);
-        if (deadY < 32) {
+        draw_sprite_part_ext(enemy.spr, enemy.imgSpd, 32 * enemy.npcImg, 0, 32, 40 - deadY, enemy.x, enemy.y - 8, scale, scale, c_black, 0.7);
+        if (deadY < 40) {
             deadY++;
         }
     }
@@ -30,16 +50,16 @@ if (room == rBattle) {
         if (eSkillAlpha < 1) {
             var oldFog = gpu_get_fog();
             gpu_set_fog(true, eSkillColor, 0, 0);   
-            draw_sprite_ext(enemy.spr, enemy.imgSpd, enemy.x, enemy.y, scale, scale, 0, c_white, 1);
+            draw_sprite_part_ext(enemy.spr, enemy.imgSpd, 32*enemy.npcImg, 0, 32, 40,  enemy.x, enemy.y - 8, scale, scale, c_white, 1);
             gpu_set_fog(oldFog[0], oldFog[1], oldFog[2], oldFog[3]);
         }
         // draw the enemy
-        draw_sprite_ext(enemy.spr, enemy.imgSpd, enemy.x, enemy.y, scale, scale, 0, c_white, eSkillAlpha);
+        draw_sprite_part_ext(enemy.spr, enemy.imgSpd, 32*enemy.npcImg, 0, 32, 40, enemy.x, enemy.y - 8, scale, scale, c_white, eSkillAlpha);
     }
 
     // draw enemy projectiles
     if (projectile.draw) {
-        draw_sprite_part_ext(projectile.spr, -1, 0 + projectile.sprNum*32, 0, 32, 32, projectile.x, projectile.y, scale, scale, c_white, 0.75);
+        draw_sprite_part_ext(projectile.spr, projectile.imgIndex, projectile.sprNum*32, 0, 32, 32, projectile.x, projectile.y, scale, scale, c_white, 0.75);
         projectile.x -= 1.75*projectile.spd;
         projectile.y += projectile.spd;
     }
@@ -47,8 +67,10 @@ if (room == rBattle) {
     // draw the player
     if (global.stats.fatigue >= 100 && deadY != -1) {
         // draw the player fading
-        draw_sprite_part_ext(player.spr, player.imgSpd, 0, 0, 32, 32 - deadY, player.x, player.y, scale, scale, c_black, 0.7);
-        if (deadY < 32) {
+        draw_sprite_part_ext(player.spr, player.imgSpd, 32*global.outfit.color, 0, 32, 32 - deadY, player.x, player.y, scale, scale, c_black, 0.7);
+        // player's hair
+        draw_sprite_part_ext(player.hair, player.imgSpd, 32*global.outfit.hair, 0, 32, 40 - deadY, player.x, player.y - 8, scale, scale, c_black, 0.7);
+        if (deadY < 40) {
             deadY++;
         }
     }
@@ -56,12 +78,17 @@ if (room == rBattle) {
         // the player flashes white when using a skill
         if (pSkillAlpha < 1) {
             var oldFog = gpu_get_fog();
-            gpu_set_fog(true, pSkillColor, 0, 0);   
-            draw_sprite_ext(player.spr, player.imgSpd, player.x, player.y, scale, scale, 0, c_white, 1);
+            gpu_set_fog(true, pSkillColor, 0, 0);
+            draw_sprite_part_ext(player.spr, player.imgSpd, 32*global.outfit.color, 0, 32, 32, player.x, player.y, scale, scale, c_white, 1);
+            // draw the player's hair
+            draw_sprite_part_ext(player.hair, player.imgSpd, 32*global.outfit.hair, 0, 32, 40, player.x, player.y - 8, scale, scale, hairColor, 1);
+            // reset the fog
             gpu_set_fog(oldFog[0], oldFog[1], oldFog[2], oldFog[3]);
         }
         // draw the player
-        draw_sprite_ext(player.spr, player.imgSpd, player.x, player.y, scale, scale, 0, c_white, pSkillAlpha);
+        draw_sprite_part_ext(player.spr, player.imgSpd, 32*global.outfit.color, 0, 32, 32, player.x, player.y, scale, scale, c_white, pSkillAlpha);
+        // draw the player's hair
+        draw_sprite_part_ext(player.hair, player.imgSpd, 32*global.outfit.hair, 0, 32, 40, player.x, player.y - 8, scale, scale, hairColor, pSkillAlpha + 0.5);
     }
 
     // move the players
@@ -306,19 +333,19 @@ if (room == rBattle) {
                         case "skill":
                             var skillLimit
                             if (array_length(skills) > 0 + sCursor) {
-                                skillLimit = (skills[0 + sCursor].limitMax == -1) ? "" : string(skillLimit = skills[0 + sCursor].limitMax);
+                                skillLimit = (skills[0 + sCursor].limit == -1) ? "" : string(skillLimit = skills[0 + sCursor].limit);
                                 draw_text_border(camX + 340/4 + xmargin, camY + 190 + ymargin, string_concat(skills[0 + sCursor].name, skillLimit), getColor(skills[0 + sCursor]));
                             }
                             if (array_length(skills) > 1 + sCursor) {
-                                skillLimit = (skills[1 + sCursor].limitMax == -1) ? "" : string(skillLimit = skills[1 + sCursor].limitMax);
+                                skillLimit = (skills[1 + sCursor].limit == -1) ? "" : string(skillLimit = skills[1 + sCursor].limit);
                                 draw_text_border(camX + 340/4 + xmargin, camY + 190 + ymargin, string_concat(skills[1 + sCursor].name, skillLimit), getColor(skills[1 + sCursor]));
                             }
                             if (array_length(skills) > 2 + sCursor) {
-                                skillLimit = (skills[2 + sCursor].limitMax == -1) ? "" : string(skillLimit = skills[2 + sCursor].limitMax);
+                                skillLimit = (skills[2 + sCursor].limit == -1) ? "" : string(skillLimit = skills[2 + sCursor].limit);
                                 draw_text_border(camX + 340/4 + xmargin, camY + 190 + ymargin, string_concat(skills[2 + sCursor].name, skillLimit), getColor(skills[2 + sCursor]));
                             }
                             if (array_length(skills) > 3 + sCursor) {
-                                skillLimit = (skills[3 + sCursor].limitMax == -1) ? "" : string(skillLimit = skills[3 + sCursor].limitMax);
+                                skillLimit = (skills[3 + sCursor].limit == -1) ? "" : string(skillLimit = skills[3 + sCursor].limit);
                                 draw_text_border(camX + 340/4 + xmargin, camY + 190 + ymargin, string_concat(skills[3 + sCursor].name, skillLimit), getColor(skills[3 + sCursor]));
                             }
                             // draw the description

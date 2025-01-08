@@ -1,4 +1,3 @@
-//instance_destroy();
 if (TEST) { if (live_call()) return live_result; }
 
 // regular music stuff
@@ -9,6 +8,11 @@ loopStart = -1;
 loopEnd = -1;
 songTime = -1;
 soundID = -1;
+
+// set the loop points of each song
+// pump palace
+audio_sound_loop_start(sndPumpPalace, 42);
+audio_sound_loop_end(sndPumpPalace, 2*60 + 50);
 
 function playMusic() {
 	// plays the current song

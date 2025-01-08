@@ -2,6 +2,7 @@
 
 switch(prompt) {
 	case "first paycheck":
+		global.stats.money += 1000;
 		instance_create_layer(x, y, layer, objTextbox, {
 			npcID: "jim",
 			text: [
@@ -21,9 +22,18 @@ switch(prompt) {
 				canMove = false;
 				alarm[2] = 1;
 				global.workout = "intermediate push";
-				actionRoom = rWorkout;
 			}
 		}
+		break;
+	case "bunny hood coupon":
+		global.keyEvents.bunnyHoodCoupon = true;
+		instance_create_layer(x, y, "Instances", objTextbox, {
+			text: [
+				$"{global.characterName} received a Bunny Hood Coupon.",
+				"Go buy one at the college shop in Central Prairie Northeast."
+			],
+			npcID: -1
+		})
 		break;
 	case "db bench":
 		// hit some dumbbell bench
@@ -115,7 +125,6 @@ switch(prompt) {
 		global.noEncounters = false;
 		break;
 	case "escape battle":
-		debug("escaped battle");
 		with (objBattle) { move("escape"); }
 		break;
 	case "mason philosophy":

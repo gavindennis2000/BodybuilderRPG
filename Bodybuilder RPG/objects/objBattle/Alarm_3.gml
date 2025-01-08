@@ -77,25 +77,28 @@ else if (turn == "win") {
 
             break;
         case 4:  // bro split
-            var rand = irandom(4);
-            switch (rand) {
-                case 0:
+            // only improve the weakest muscle
+            var muscle = global.statsMin[0];
+            debug($"improving weakest muscle: {muscle}");
+            switch (muscle) {
+                case "chest":
                     global.stats.chest++;
                     array_push(txt, $"Chest: {global.stats.chest-1} -> {global.stats.chest}");
                     break;
-                case 1:
+                case "shoulders":
                     global.stats.shoulders++;
                     array_push(txt, $"Shoulders: {global.stats.shoulders-1} -> {global.stats.shoulders}");
                     break;
-                case 2:
+                case "back":
                     global.stats.back++;
                     array_push(txt, $"Back: {global.stats.back-1} -> {global.stats.back}");
                     break;
-                case 3:
+                case "arms":
                     global.stats.arms++;
                     array_push(txt, $"Arms: {global.stats.arms-1} -> {global.stats.arms}");
                     break;
-                case 4:
+                case "legs":
+                default:
                     global.stats.legs++;
                     array_push(txt, $"Legs: {global.stats.legs-1} -> {global.stats.legs}");
                     break;

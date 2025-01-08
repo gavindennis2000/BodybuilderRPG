@@ -27,8 +27,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"Player",
-    "path":"folders/1 Sprites/Player.yy",
+    "name":"Bunny Hood",
+    "path":"folders/1 Sprites/Player/Bunny Hood.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

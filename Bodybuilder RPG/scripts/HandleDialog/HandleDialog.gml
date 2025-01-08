@@ -82,12 +82,12 @@ function HandleDialog(){
 								[
 									string_concat("Good morning, ", global.characterName, "."),
 									"Are you ready to start your new job as a personal trainer?",
-									"The gym is in the northwest part of town past the \nuniversity.",
+									"The gym you're working at is in the northwest part of town.",
 									"Don't forget to introduce yourself to your boss, Mr. Ohner.",
 									"Don't be late!"
 								],
 								[
-									"The gym is in the northwest part of town past the \nuniversity.",
+									"The gym you're working at is in the northwest part of town.",
 									"Don't be late!"
 								]
 							]
@@ -99,7 +99,7 @@ function HandleDialog(){
 									"They're paying you to work out!? Interesting...",
 								],
 								[
-									"There's a chocolate milk in the fridge if you need it."
+									"There's a chocolate milk in the fridge if you need some protein."
 								]
 							]
 						}
@@ -143,36 +143,55 @@ function HandleDialog(){
 					// jim ohner
 					case "jim":
 						if (global.statsMin[1] < 20) {
-							text = [
-								[
+							if (!global.keyEvents.meetJim) {
+								text = [
 									"Hey, are you the new trainer I hired?",
 									string_concat(global.characterName, "!? What kind of name is that!"),
 									"The name's JIM OHNER, but you can call me JIM.",
 									"You're all skin and bones! How are you supposed to train my lifters?",
 									"If you want me to keep you around, you better put on some serious mass quickly.",
-									"Start with compound movements: squats, dumbbell    bench, and pullups.",
-									"Come talk to me when all your muscle groups are    intermediate status.",
-									"Also... One more thing.",
-								],
-								[
-									"Start with compound movements: squats, dumbbell    bench, and pullups.",
-									"I'm too busy to help you out, so bug the other lifters if you need lifting advice.",
-									"Come talk to me when all your muscle groups are    intermediate status.",
+									"Start with compound movements: squats, dumbbell `bench, and pullups.",
+									"Come talk to me when all your muscle groups are `intermediate status.",
+									"That means your weakest muscle group should be at least Level 30.",
+									"Also... One more thing."
 								]
-							]
-							action = "meet jim";
+								action = "meet jim";
+							}
+							else {
+								text = [
+									"Start with compound movements: squats, dumbbell `bench, and pullups.",
+									"I'm too busy to help you out, so bug the other lifters if you need lifting advice.",
+									"Come talk to me when all your muscle groups are `intermediate status.",
+									"That means your weakest muscle group should be at least level 30."
+								]
+								action = -1;
+							}
 						}
-						else if (global.statsMin[1] < 40) {
+						else if (global.statsMin[1] < 30) {
 							text = [
-								"You're really starting to put on some muscle! Great work!",
+								"You're really starting to put on some muscle! Great work kid!",
 								string_concat("Don't let your ", statsMin[0], " fall behind!")
 							];
 						}
 						else {
-							text = [
-								"Great work today! I didn't expect you to become an intermediate lifter so soon...",
-								"Go home and get some rest."
-							]
+							if (!global.keyEvents.bunnyHoodCoupon) {
+								text = [
+									"Great work today! I didn't expect you to become an intermediate lifter so soon...",
+									"I need you to do one more thing before you head home for the night.",
+									"Go to Central Prairie Community College and grab yourself a bunny hood at the shop.",
+									"The hood increases your running speed when wearing it.",
+									"Here's a coupon for a free one."
+								];
+								action = "bunny hood coupon";
+							}
+							else {
+								text = [
+									"Go to Central Prairie Community College and grab yourself a bunny hood at the shop.",
+									"The hood increases your running speed when wearing it.",
+
+								];
+								action = -1
+							}
 						}
 						break;
 								
@@ -183,14 +202,13 @@ function HandleDialog(){
 								"*pant* *pant* What's that? You're waiting to use this bench?",
 								"It's all yours. I'm wiped out.",
 								"This is what happens when you skip your cardio!",
-								"Bench pressing is kind of like a rhythm game when you think about it.", 
-								"I'm a boxer so I mostly build my upper body through combat.", 
-								"If benching is too hard, you should give fighting a try. There's a dojo south of here."
+								"I'm a boxer so I mostly build my upper body through combat, not lifting.", 
+								"If bench pressing is too hard, you should give fighting a try.",
+								"There's a martial arts gym south of here in Great Valliou."
 							],
 							[
-								"Bench pressing is kind of like a rhythm game when you think about it.", 
-								"I'm a boxer so I mostly build my upper body through combat.", 
-								"If benching is too hard you should give it a try. There's a dojo south of here."
+								"If bench pressing is too hard, you should give fighting a try.",
+								"There's a martial arts gym south of here in Great Valliou."
 							]
 						];
 						break;
@@ -398,6 +416,11 @@ function HandleDialog(){
 								]
 							];
 						}
+						break;
+					case "locked door":
+						// text = [
+						// 	"The door is locked."
+						// ];
 						break;
 					// signs
 					case "sign":

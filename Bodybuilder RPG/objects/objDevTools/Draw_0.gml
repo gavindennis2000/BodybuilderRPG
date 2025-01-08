@@ -1,3 +1,5 @@
+/*gmlive*/if (TEST) { if (live_call()) return live_result; }
+
 var camX = camera_get_view_x(view_camera[0]);
 var camY = camera_get_view_y(view_camera[0]);
 
@@ -8,12 +10,13 @@ draw_set_font(fontText);
 var str = string_concat(
 	"Restart Room: R",
 	"\nRestart Game: G",
+	"\nInitiate Random Encounter with Enemy: C",
 	"\nBunny Hood: H - ", string(global.bunnyHood),
 	"\nBicycle: B - ", string(global.bicycle),
 	"\nLive Room: L - ", string(live),
 	"\nNo Encounters: E - ", (global.noEncounters) ? "No Encounters" : "Encounters",
 	"\nHide DevTools: F",
-    "\nInfinite Ultimate: U", string(global.ultimate)
+    "\nInfinite Ultimate: U - ", string(global.ultimate)
 )
 if (showDevTools) {
 	draw_text_border(camX, camY + 270, str, c_white, 0.5);

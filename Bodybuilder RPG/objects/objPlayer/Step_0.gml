@@ -20,11 +20,6 @@ if (cutscene || global.battle ) {
 	exit;
 }
 
-// dev tool
-if input_check_pressed("l1") {
-    initiateBattle(true);
-}
-
 // check for doors/stairs
 if (targetX == 0 and targetY == 0 and place_meeting(x, y, objDoor)) {
 	var door = instance_place(x, y, objDoor);

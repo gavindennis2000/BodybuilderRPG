@@ -70,10 +70,13 @@ if (paused) {
     fontX(fa_right);
     draw_text_border(camX + 465 + menuX, camY + 10, chapter, c_white, 1);
     
-    // location
-    var roomVar = global.roomVar
+    // location and money
+    var roomVar = global.roomVar;
+    var money = string(global.stats.money);
+    money = string_concat("Money: $", money);
     fontX(fa_left);
     draw_text_border(camX + 15 + menuX, camY + 10, roomVar, c_white, 1);
+    draw_text_border(camX + 15 + menuX, camY + 10, $"\n{money}", c_white, 1);
     
     // the screen
     switch (screen) {
@@ -93,7 +96,7 @@ if (paused) {
             var pX = camX + 480/2-32 + menuX, pY = camY + 80, pColor = #ff6666;
             
             // get color for fatigue state
-            var fatigue = global.stats.fatigue;
+            var fatigue = global.stats.fatigue, pColor = c_white, barDistance = 20;
             if (fatigue < 25) { pColor = c_white; }
             else if (fatigue < 50) { pColor = #ffcccc; }
             else if (fatigue < 75) { pColor = #ff9999; }
@@ -101,7 +104,29 @@ if (paused) {
                 
             // draw the player and name
             draw_set_font(fontText);
-            draw_sprite_ext(sprPlayerDown, -1, pX, pY, 2, 2, image_angle, pColor, 1);
+            // the player's sprite
+            draw_sprite_part_ext(sprPlayerDown, -1, 32*global.outfit.color, 0, 32, 32, pX, pY, 2, 2, pColor, 1);
+            // the player's hair
+            var hairColor = c_white;
+            switch (global.outfit.hairColor) {
+                case 0:
+                    hairColor = #663500;
+                    break;
+                case 1:
+                    hairColor = #ffff99;
+                    break;
+                case 2:
+                    hairColor = #1a0d00;
+                    break;
+                case 3:
+                    hairColor = #cc2900;
+                    break;
+                case 4:
+                    hairColor = #66ccff;
+                    break;
+            }
+            draw_sprite_part_ext(sprHairDown, -1, 32*global.outfit.hair, 0, 32, 40, pX, pY - 8, 2, 2, hairColor, 1);
+            // the player's mame
             draw_text_border(pX - 80, pY + 8, global.characterName, c_white, 1);  // name
         
             // player's status
@@ -115,14 +140,32 @@ if (paused) {
             // draw the fatigue meter   
             fatigue = string(fatigue);
             if (string_length(fatigue) < 2) { fatigue = string_concat("0",fatigue); }
-            draw_text_border(pX + 80 + 64, pY + 8, string_concat("Fatigue: ", fatigue, "%"), pColor, 1);  // name
+            draw_text_border(pX + 80 + 64, pY + 8 - barDistance, string_concat("Fatigue: ", fatigue, "%"), pColor, 1);  // name
             fatigue = global.stats.fatigue;  // return fatigue back to what it was
             draw_set_font(fontMenu);
             var barH = 10, barW = 100, barX = pX + 93, barY = pY + 38;
-            draw_rectangle_color(barX, barY - barH/2, barX + barW, barY + barH/2, c_black, c_black, c_black, c_black, false);  // fatigue empty bar
-            draw_rectangle_color(barX, barY - barH/2, barX + fatigue, barY + barH/2, c_red, pColor, pColor, c_red, false);  // actual fatigue bar
-            draw_rectangle_color(barX, barY - barH/2, barX + barW, barY + barH/2, c_white, c_white, c_white, c_white, true);  // fatigue bar outline
+            draw_rectangle_color(barX, barY - barH/2 - barDistance, barX + barW, barY + barH/2 - barDistance, c_black, c_black, c_black, c_black, false);  // fatigue empty bar
+            draw_rectangle_color(barX, barY - barH/2 - barDistance, barX + fatigue, barY + barH/2 - barDistance, c_red, pColor, pColor, c_red, false);  // actual fatigue bar
+            draw_rectangle_color(barX, barY - barH/2 - barDistance, barX + barW, barY + barH/2 - barDistance, c_white, c_white, c_white, c_white, true);  // fatigue bar outline
             
+             // draw the ultimate meter   
+             // get color for ultimate state
+            var ultimate = global.stats.ultimate;
+            if (ultimate < 25) { uColor = c_white; }
+            else if (ultimate < 50) { uColor = #a677ba; }
+            else if (ultimate < 75) { uColor = #8b6a99; }
+            else { uColor = #6a5175; }
+
+            // draw the actual bar
+             ultimate = string(ultimate);
+             if (string_length(fatigue) < 2) { fatigue = string_concat("0", ultimate); }
+             draw_text_border(pX + 80 + 64, pY + 8 + barDistance, string_concat("Ultimate: ", ultimate, "%"), uColor, 1);  // name
+             ultimate = global.stats.ultimate;  // return fatigue back to what it was
+             draw_set_font(fontMenu);
+             var barH = 10, barW = 100, barX = pX + 93, barY = pY + 38;
+             draw_rectangle_color(barX, barY - barH/2 + barDistance, barX + barW, barY + barH/2 + barDistance, c_black, c_black, c_black, c_black, false);  // empty bar
+             draw_rectangle_color(barX, barY - barH/2 + barDistance, barX + ultimate, barY + barH/2 + barDistance, c_yellow, #381747, uColor, c_yellow, false);  // actual ultimate bar
+             draw_rectangle_color(barX, barY - barH/2 + barDistance, barX + barW, barY + barH/2 + barDistance, c_white, c_white, c_white, c_white, true);  // ultimate bar outline
             
             // draw the players stats
             draw_text_border(camX + 480*1/4 + menuX - 10, statY, string_concat("Chest: ",stats.chest), c_white, 1);

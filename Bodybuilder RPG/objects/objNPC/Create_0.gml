@@ -3,6 +3,7 @@ itemID = "npc"
 if (!variable_instance_exists(self, "npcID")) { npcID = "npc"; }
 event_inherited();
 image_speed = 0;
+npcImg = 0;
 
 // take care of cutscenes
 switch(npcID) {

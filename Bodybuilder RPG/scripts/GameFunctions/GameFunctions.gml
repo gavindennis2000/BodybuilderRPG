@@ -2,6 +2,7 @@ function initiateBattle(special = false, song = sndBattle) {
     // initiates battle during overworld
     
     // random encounters only happen in the overworld
+    // unless there is a special condition
     if (room != rOverworld && !special ) { exit; }
         
     // update the global statuses
@@ -23,32 +24,30 @@ function initiateBattle(special = false, song = sndBattle) {
     var camY = camera_get_view_y(view_camera[0]);
 
     // decide on an enemy
-    var enemy;
-    switch (global.chapter) {
-        case 1:
-            var rand = irandom(5);
-            switch (rand) {
-                case 0:
-                    enemy = global.enemies.strongman;
-                    break;
-                case 1:
-                case 2:
-                    enemy = global.enemies.dyel;
-                    break;
-                case 3:
-                default:
-                    enemy = global.enemies.dyel;
-                    break;
-            }
-            break;
+    var enemy = [ global.enemies.gymbro ];
+    if (global.chapter == 1) {
+        enemy = [
+            global.enemies.dyel,
+            global.enemies.dyel,
+            global.enemies.gymbro,
+            global.enemies.gymbro,
+            global.enemies.strongman,
+        ];
+        if (global.statsMin[1] >= 20) {
+            array_push(enemy, global.enemies.stoiclifter);
+            array_push(enemy, global.enemies.stoiclifter);
+        }
+        else debug("not strong enough for stoic")
     }
-    instance_create_layer(camX + 240, camY + 135, "Instances", objBattle, {
-        enemyToCopy: enemy
-    });
+    // randomly pick enemy from the array
+        var rand = irandom(array_length(enemy)-1);
+        instance_create_layer(camX + 240, camY + 135, "Instances", objBattle, {
+            enemyToCopy: enemy[rand]
+        });
 }
 
 function debug(str1, str2="", str3="", str4="") {
-    str = string_concat(str1, str2, str3, str4);
+    var str = string_concat(str1, str2, str3, str4);
     show_debug_message(str);
 }
 

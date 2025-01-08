@@ -12,6 +12,7 @@ aCounter = 0;  // counter for alarm attacks
 // the player
 player = {
     spr: sprPlayerUp,
+    hair: sprHairUp,
     imgSpd: 0,
     x: 240 - 32,
     y: 135 - 32 + 30,
@@ -19,15 +20,19 @@ player = {
 
 // the enemy
 if (!variable_instance_exists(self, "enemyToCopy")) {
-    enemyToCopy = global.enemies.strongman;
+    enemyToCopy = global.enemies.dyel;
 }
 enemy = {
      // drawing info
      name: enemyToCopy.name,
      spr: enemyToCopy.spr,
+     npcImg: 0,
      imgSpd: enemyToCopy.imgSpd,
      x: enemyToCopy.x,
      y: enemyToCopy.y,
+
+     // scan description
+     description: enemyToCopy.description,
 
      // attacks
      attacks: enemyToCopy.attacks,
@@ -73,9 +78,14 @@ for (var i = 0; i < array_length(global.skills); i++) {
     }
 }
 
+// decide who goes first (it's usually the player)
+turn = "player";
+if (enemy.name == "STOIC LIFTER") { 
+    turn = "enemy first";
+}
+
 // battle variables
 sCursor = 0;  // selection cursor
-turn = "player";  // whose turn is it?
 escape = false;  // boolean that flags when the player runs away
 enemyDamage = 0;  // damage drawn when the player attacks
 enemyDamageY = -1;  // where to draw enemy damage on screen
@@ -85,6 +95,7 @@ deadY = -1;  // height of the drawn sprite for dead people
 canScan = true;  // player can scan once without losing a turn
 textBuffer = "";  // holds text for later stuff
 sfxBuffer = -1;  // holds sound effect for later stuff
+enemyItem = -1;  // holds item that enemy uses
 
 // effects and stuff
 // flash white when using skills
@@ -99,6 +110,7 @@ projectile = {
     draw: false,
     spr: sprItems,
     sprNum: -1,
+    imgIndex: 0,
     x: enemy.x,
     y: enemy.y,
     spd: 8
@@ -161,6 +173,10 @@ function endEnemyTurn() {
     if (playerDamage != -1) {
         global.stats.fatigue += playerDamage;
         var ultimateIncrease = round(playerDamage * 0.1);
+        if (enemy.attacks[enemy.attackIndex].effect == "ultimate") {
+            debug("ultimate increased");
+            ultimateIncrease *= 3;
+        }
         global.stats.ultimate += ultimateIncrease;
         alarm[4] = 1;
     }
@@ -198,57 +214,37 @@ function enemyMove(m) {
         attack = m.name;
     }
     switch (attack) {
-        case "Sumo Deadlift Smash":
-            // sound effect
-            playSound(sndUseSkill);
+        case "BCAA":
+            // special effects
+            playSound(sndUseItem);
+            skillFlash("enemy", "item");
 
-            // drawing effect
-            skillFlash("enemy");
-            
             // the textbox with attack name and description
             instance_create_layer(x, y, "Instances", objTextbox, {
                 npcID: "",
                 text: [
-                    $"{enemy.name} attacks with {m.name}."
+                    m.announcement
                 ]
             });
-            textBuffer = m.description;
-            sfxBuffer = sndScreenShake;
-
-            // set the damage
-            var rand = random_range(0.8, 1.2);
-            playerDamage = calculateDamage("enemy", m.coefficient);
 
             // set the alarm and stuff
             turn = "attack";
-            selection = "enemy skill";
+            selection = "enemy item";
+            textBuffer = m.description;
+            enemyItem = "bcaa";
             alarm[1] = 15;
+
             break;
-        case "Unsolicited Advice":
+        case "Bench Press Blast":
             // sound effect
             playSound(sndUseSkill);
 
             // drawing effect
             skillFlash("enemy");
             
-            // the textbox with attack name and description
-            instance_create_layer(x, y, "Instances", objTextbox, {
-                npcID: "",
-                text: [
-                    $"{enemy.name} gives {m.name}."
-                ]
-            });
-            textBuffer = m.description;
-            sfxBuffer = sndScreenShake;
-
-            // set the damage
-            var rand = random_range(0.8, 1.2);
-            playerDamage = calculateDamage("enemy", m.coefficient);
-
-            // set the alarm and stuff
-            turn = "attack";
-            selection = "enemy skill";
-            alarm[1] = 15;
+            // do all the enemy attack stuff
+            enemySkill(m);
+            
             break;
         case "Charge":
             // the textbox with attack name and description
@@ -264,64 +260,168 @@ function enemyMove(m) {
             selection = "charge";
             alarm[1] = 15;
             break;
-        case "Release":
+        case "Earbuds":
             // special effects
-            playSound(sndUseSkill);
-            skillFlash("enemy");
-            projectile.x = enemy.x;
-            projectile.y = enemy.y;
-            projectile.sprNum = 10;
-            
+            playSound(sndUseItem);
+            skillFlash("enemy", "item");
+
             // the textbox with attack name and description
             instance_create_layer(x, y, "Instances", objTextbox, {
                 npcID: "",
                 text: [
-                    $"STRONGMAN's energy is fully charged!"
+                    m.announcement
                 ]
             });
-            textBuffer = m.description;
-            sfxBuffer = sndScreenShake;
-
-            // set the damage
-            var rand = random_range(0.8, 1.2);
-            playerDamage = calculateDamage("enemy", m.coefficient);
 
             // set the alarm and stuff
             turn = "attack";
-            selection = "enemy skill";
+            selection = "enemy item";
+            textBuffer = m.description;
+            enemyItem = "earbuds";
             alarm[1] = 15;
+
             break;
+        case "Efficient Overhead Press":
+            // sound effect
+            playSound(sndUseSkill);
 
-        // items and escape
-        case "item":
-             // enemy uses the item
-             var txt = "";
-             txt = objController.useItem(selection.name);
+            // drawing effect
+            skillFlash("enemy");
+            
+            // do all the enemy attack stuff
+            enemySkill(m);
+            
+            break;
+        case "Release":
+            // special effects
+            playSound(sndUseSkill);
+            skillFlash("enemy");
 
-            // effects
+            // projectile
+            projectile.x = enemy.x;
+            projectile.y = enemy.y;
+            projectile.sprNum = 10;
+            
+            // do all the enemy attack stuff
+            enemySkill(m);
+            
+            break;
+        case "Remove Earbuds":
+            // special effects
             playSound(sndUseItem);
             skillFlash("enemy", "item");
 
-            // create the textbox
+            // the textbox with attack name and description
             instance_create_layer(x, y, "Instances", objTextbox, {
                 npcID: "",
                 text: [
-                    string_concat(global.characterName, " uses ", selection.name, "."),
-                    txt
-                ],
+                    m.announcement
+                ]
             });
 
             // set the alarm and stuff
             turn = "attack";
-            selection = "Item";
-            alarm[1] = 30;
-            break;
+            selection = "enemy item";
+            textBuffer = m.description;
+            enemyItem = "remove earbuds";
+            alarm[1] = 15;
 
-        case "escape":
-            turn = "escape";
-            goBack();
+            break;
+        case "Rerack":
+            // special effects
+            playSound(sndUseSkill);
+            skillFlash("enemy");
+
+            // projectile
+            projectile.x = enemy.x;
+            projectile.y = enemy.y;
+            projectile.spr = sprNote;
+            projectile.imgIndex = irandom(3);
+            projectile.sprNum = 0;
+            
+            // do all the enemy attack stuff
+            enemySkill(m);
+            
+            break;
+        case "Skip":
+            if (m.effect == "forever") { enemy.attackIndex -= 1; }
+            playerDamage = -1;
+            endEnemyTurn();
+            break;
+        case "Sumo Deadlift Smash":
+            // sound effect
+            playSound(sndUseSkill);
+
+            // drawing effect
+            skillFlash("enemy");
+            
+            // do all the enemy attack stuff
+            enemySkill(m);
+
+            break;
+        case "Unsolicited Advice":
+            // sound effect
+            playSound(sndUseSkill);
+
+            // drawing effect
+            skillFlash("enemy");
+            
+            // do all the enemy attack stuff
+            enemySkill(m);
+
+            break;
+        
+        case "Weighted Dip Destruction":
+            // sound effect
+            playSound(sndUseSkill);
+
+            // drawing effect
+            skillFlash("enemy");
+
+            // do all the enemy attack stuff
+            enemySkill(m);
+
+            break;
+        case "Weighted Pullup Pounce":
+            // sound effect
+            playSound(sndUseSkill);
+
+            // drawing effect
+            skillFlash("enemy");
+            
+            // do all the enemy attack stuff
+            enemySkill(m);
+            
+            break;
+        default:
             break;
     }
+}
+
+function enemySkill(m, sfx = sndScreenShake) {
+    // used for the bulk of enemy attacks
+    // takes attack and sound effect as argument
+
+    // the textbox with attack name and description
+    instance_create_layer(x, y, "Instances", objTextbox, {
+        npcID: "",
+        text: [
+            $"{m.announcement}"
+        ]
+    });
+
+    // future text and sound effects
+    textBuffer = m.description;
+    sfxBuffer = sfx;
+
+    // set the damage
+    var rand = random_range(0.8, 1.2);
+    playerDamage = calculateDamage("enemy", m.coefficient);
+
+    // set the alarm and stuff
+    turn = "attack";
+    selection = "enemy skill";
+    alarm[1] = 15;
 }
 
 function enemyTurn() {
@@ -401,28 +501,7 @@ function move(m) {
             var stats = $"Health: {enemy.hp}/{enemy.maxHp}, `Strength: {enemy.strength} ";
             
             // get the enemy's description
-            var desc = "" 
-            switch (eName) {
-                case "dyel":
-                    desc = [
-                        "DYEL: A powerlifter with ~5 years experience that `doesn't even look like he lifts.",
-                        "His lackluster bench make him vulnerable to push `attacks.",
-                        "Don't sleep on his deadlift, however. He claims to have a junior record in the 75kg weight class."
-                    ]
-                    break;
-                case "strongman":
-                    desc = [
-                        "STRONGMAN: A local strongman with absurd strength `and endurance.",
-                        "Despite his power, his size slows him down `considerably.",
-                        "Your best bet is to take him out quickly or run away before he attacks."
-                    ]
-                    break;
-                default:
-                    desc = [
-                        "Unable to analyze enemy's strengths and weaknesses.",
-                    ]
-                    break;
-            }
+            var desc = enemy.description;
 
             // create the textbox - get the description text
             txt = [ $"{global.characterName} scans the enemy!" ];

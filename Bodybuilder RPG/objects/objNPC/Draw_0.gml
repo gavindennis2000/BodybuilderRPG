@@ -1,5 +1,7 @@
+/*gmlive*/if (TEST) { if (live_call()) return live_result; }
+
 event_inherited();
-y -=4;
+
 switch(npcID) {
 	case "NPC":
 	default:
@@ -8,7 +10,7 @@ switch(npcID) {
 				sprite_index = sprNPCLeft;
 				break;
 			case "right":
-				sprite_index = SprNPCRight;
+				sprite_index = sprNPCRight;
 				break;
 			case "up":
 				sprite_index = sprNPCUp;
@@ -19,6 +21,4 @@ switch(npcID) {
 		}
 		break;
 }
-draw_self();
-
-y += 4;
+draw_sprite_part(sprite_index, image_index, npcImg*32, 0, 32, 40, x, y-8);
