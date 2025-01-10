@@ -11,8 +11,7 @@ switch(global.roomID) {
         }
         // create harveys mom
         instance_create_layer(320, 224, layer, objNPC, {
-            npcID: "harvey's mom",
-            prompt: false
+            npcID: "harvey's mom"
         });
         break;
 	case "mason":
@@ -24,9 +23,9 @@ switch(global.roomID) {
             pFace = "down";	
         }
         // create mason
-        with (instance_create_layer(320, 224, layer, objNPC)) {
-            npcID = "mason";
-        }
+        instance_create_layer(320, 224, layer, objNPC, {
+            npcID: "mason"
+        });
         break;
 		
 	case "mom":

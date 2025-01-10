@@ -27,7 +27,7 @@
   "origin":9,
   "parent":{
     "name":"Bunny Hood",
-    "path":"folders/1 Sprites/Player/Bunny Hood.yy",
+    "path":"folders/1 Sprites/Characters/Bunny Hood.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -4,5 +4,5 @@ event_inherited();
 
 text = [
 	"The beautiful Schokomilch Sea!",
-	"Named after the color attributed to its immense pollution."
+	"It is named after its color, which is caused by immense pollution."
 ];

@@ -42,10 +42,11 @@ function playMusic() {
 	
 }
 
-function cutscene(song) {
-    var songID = song;
+function cutscene(song = sndError) {
     if (audio_sound_get_gain(soundID) > 0) {
-        next = songID;
+		debug("1");
+        next = song;
+		debug("2");
         audio_sound_gain(soundID, 0, 500);
         alarm[1] = 30;
     }
@@ -53,7 +54,7 @@ function cutscene(song) {
         audio_stop_all();
         audio_sound_gain(soundID, 1, 0);
         previous = current;
-        current = songID;
+        current = next;
         playMusic();
     }
 }

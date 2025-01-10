@@ -28,7 +28,7 @@
   "origin":9,
   "parent":{
     "name":"Hair",
-    "path":"folders/1 Sprites/Player/Hair.yy",
+    "path":"folders/1 Sprites/Characters/Player/Hair.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

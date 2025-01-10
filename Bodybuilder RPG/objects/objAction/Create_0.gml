@@ -1,7 +1,40 @@
 /*gmlive*/if (TEST) { if (live_call()) return live_result; }
 
+var txt = "";
 switch(prompt) {
-	case "first paycheck":
+	case "ask about strongman":
+		// get the right text based on the selection
+		txt = [""];
+		if (selection == 0) {
+			txt = [
+				"Strongmen are these huge people that make even `bodybuilders look tiny.",
+				"You would need crazy grip strength to even lift that stone, let alone move it around.",
+				"If you got into a fight with one, I would run away before you get hurt."
+			];
+		}
+		else {
+			txt = [
+				"Highland is a rural community to the east of Central Prairie.",
+				"Their religious beliefs prohibit technology, so they spend most of their days lifting and praying."
+			];
+		}
+		// create the textbox
+		instance_create_layer(x, y, layer, objTextbox, {
+			npcID: "young woman",
+			text: txt
+		});
+		break;
+	case "bench press":
+		// bench press at home
+		if (selection == 0) {
+			with (objPlayer) {
+				canMove = false;
+				alarm[2] = 1;
+				global.workout = "intermediate push";
+			}
+		}
+		break;
+		case "first paycheck":
 		global.stats.money += 1000;
 		instance_create_layer(x, y, layer, objTextbox, {
 			npcID: "jim",
@@ -15,16 +48,7 @@ switch(prompt) {
 			if (itemID = "locked door") { instance_destroy(); }
 		}
 		break;
-	case "bench press":
-		// bench press at home
-		if (selection == 0) {
-			with (objPlayer) {
-				canMove = false;
-				alarm[2] = 1;
-				global.workout = "intermediate push";
-			}
-		}
-		break;
+	
 	case "bunny hood coupon":
 		global.keyEvents.bunnyHoodCoupon = true;
 		instance_create_layer(x, y, "Instances", objTextbox, {
@@ -46,34 +70,17 @@ switch(prompt) {
 		}
 		else if (selection == 1) { instance_destroy(); }
 		break;
-	case "squat":
-		// hit some squats
-		if (selection == 0) {
-			with (objPlayer) {
-				canMove = false;
-				action = "squat";
-				alarm[2] = 1;
-				global.workout = "novice leg";
-				global.playerX = objPlayer.x;
-				global.playerY = objPlayer.y;
-				global.returnRoom = room;
-			}
-		}
+	case "escape battle":
+		with (objBattle) { move("escape"); }
 		break;
-	case "atlas stone":
-		// move the atlas stone
-		if (selection == 0) {
-			with (objPlayer) { canMove = false; face = "left"; }
-			with (objItem) { 
-				if (itemID == "atlas stone") {
-					y = objPlayer. y - 32;
-					hspeed = -10;
-					gravity = 0.2;
-				}
+	case "exit sulik":
+		// after you talk to sulik, he walks away and no encounters is turned off
+		with (objNPC) {
+			if (npcID == "sulik") {
+				alarm[2] = 30;
 			}
-			global.keyEvents[1][1] = true;
-			instance_create_layer(x, y, layer, objTextbox, { text: ["Wow! Unlimited grip strength!"] });
 		}
+		global.noEncounters = false;
 		break;
 	case "finish chapter":
 		// finish chapter
@@ -85,47 +92,6 @@ switch(prompt) {
 				alarm[3] = 1;
 			}
 		}
-		break;
-    case "meet jim":
-            // meet jim ohner and get first pay check
-			if (global.keyEvents.meetJim) { break; }
-            global.keyEvents.meetJim = true;
-			var txt = string_concat(global.characterName, " received $1000."); 
-			playSound(sndLevelUp);
-			instance_create_layer(x, y, "Instances", objTextbox, {
-				text: [txt],
-				action: "first paycheck"
-			})
-            break;
-	case "pullups":
-		// pullups with mason
-		global.keyEvents.meetMason= true;
-		if (selection == 0) {  // if the player selects yes
-			with (objPlayer) {
-				// canMove = false;
-				// alarm[2] = 1;
-				// global.workout = "novice pull";
-				// actionRoom = rWorkout;
-			}
-		}
-		else {
-			instance_create_layer(x, y, layer, objTextbox, { 
-				text: ["Maybe some other time, right?"], 
-				npcID: "mason" 
-			});
-		}
-		break;
-	case "exit sulik":
-		// after you talk to sulik, he walks away and no encounters is turned off
-		with (objNPC) {
-			if (npcID == "sulik") {
-				alarm[2] = 30;
-			}
-		}
-		global.noEncounters = false;
-		break;
-	case "escape battle":
-		with (objBattle) { move("escape"); }
 		break;
 	case "mason philosophy":
 		if (selection == 0) {  // if the player selects work ethic
@@ -145,7 +111,7 @@ switch(prompt) {
 		else {  // if the player selects passion
 			instance_create_layer(x, y, layer, objTextbox, { 
 				text: [
-					"I agree whole-heartedly!", 
+					"I agree wholeheartedly!", 
 					"I've achieved my size and strength because training is my passion!",
 					"As far as serious lifters go I'm really quite lazy!",
 					"It's still important to push past our comfort zones, however. Hard work is essential.",
@@ -157,7 +123,86 @@ switch(prompt) {
 			});
 		}
 		break;
+	case "meet jim":
+		// meet jim ohner and get first pay check
+		if (global.keyEvents.meetJim) { break; }
+		global.keyEvents.meetJim = true;
+		txt = string_concat(global.characterName, " received $1000."); 
+		playSound(sndLevelUp);
+		instance_create_layer(x, y, "Instances", objTextbox, {
+			text: [txt],
+			action: "first paycheck"
+		})
 		break;
-}
+	case "move the atlas stone":
+		// move the atlas stone
+		if (selection == 0) {
+			with (objPlayer) { canMove = false; face = "left"; }
+			with (objItem) { 
+				if (itemID == "atlas stone") {
+					y = objPlayer. y - 32;
+					hspeed = -10;
+					gravity = 0.2;
+				}
+			}
+			global.keyEvents.atlasStone = true;
+			instance_create_layer(x, y, layer, objTextbox, { text: ["Wow! Unlimited grip strength!"] });
+		}
+		break;
+	case "pullups":
+		// pullups with mason
+		global.keyEvents.meetMason= true;
+		if (selection == 0) {  // if the player selects yes
+			with (objPlayer) {
+				// canMove = false;
+				// alarm[2] = 1;
+				// global.workout = "novice pull";
+				// actionRoom = rWorkout;
+			}
+		}
+		else {
+			instance_create_layer(x, y, layer, objTextbox, { 
+				text: ["Maybe some other time, right?"], 
+				npcID: "mason" 
+			});
+		}
+		break;
+	case "squat":
+		// hit some squats
+		if (selection == 0) {
+			with (objPlayer) {
+				canMove = false;
+				action = "squat";
+				alarm[2] = 1;
+				global.workout = "novice leg";
+				global.playerX = objPlayer.x;
+				global.playerY = objPlayer.y;
+				global.returnRoom = room;
+			}
+		}
+		break;
+	case "squat help":
+		if (selection == 0) {
+			txt = [
+				"Squatting is sort of like a rhythm game.",
+				"You need to carefully time when you bounce out of the hole and take advantage of the stretch reflex.",
+				"If you can't figure it out, try to find another way to build up your legs.",
+				"The sensei at the Great Valliou Dojo is pretty stacked, so maybe combat would be a good option.",
+				"The BBNC shop in that area should sell some knee sleeves too.",
+				"They're a bit pricey, but should buff up your leg power!"
+			];
+		}
+		else {
+			txt = [
+				"Right on! I admire your confidence.",
+				"Squats are harder than they look. If you decide you need some help, I'll be right here."
+			];
+		}
+		instance_create_layer(x, y, "Instances", objTextbox, {
+			text: txt,
+			npcID: "gym rat"
+		})
+		break;
+	}
 
 instance_destroy();

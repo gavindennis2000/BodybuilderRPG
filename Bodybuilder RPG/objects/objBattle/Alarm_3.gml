@@ -79,7 +79,6 @@ else if (turn == "win") {
         case 4:  // bro split
             // only improve the weakest muscle
             var muscle = global.statsMin[0];
-            debug($"improving weakest muscle: {muscle}");
             switch (muscle) {
                 case "chest":
                     global.stats.chest++;

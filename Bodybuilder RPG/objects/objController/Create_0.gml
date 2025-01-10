@@ -227,7 +227,7 @@ global.enemies = {
         attackIndex: 0,
 
         // health
-        hp: 200,
+        hp: 150,
 
         // attack power
         strength: 50,

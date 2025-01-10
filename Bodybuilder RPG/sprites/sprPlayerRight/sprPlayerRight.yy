@@ -27,7 +27,7 @@
   "origin":0,
   "parent":{
     "name":"Player",
-    "path":"folders/1 Sprites/Player.yy",
+    "path":"folders/1 Sprites/Characters/Player.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

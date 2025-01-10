@@ -8,7 +8,7 @@ function HandleDialog(){
 
 		// find out lagging muscle group
 		if (instance_exists(objController)) {
-			if (variable_instance_exists(objController, "setMinAndMax")) objController.setMinAndMax(); 
+			if (variable_instance_exists(objController.id, "setMinAndMax")) objController.setMinAndMax(); 
 		}
 		var statsMin = global.statsMin;
 		var statsMax = global.statsMax;
@@ -25,18 +25,18 @@ function HandleDialog(){
 			switch (statsMax[0]) {
 				case "chest":
 				case "back":
-					word = " has been ";
+					word = "has been";
 					break;
 				case "shoulders":
 				case "arms":
 				case "legs":
 				default:
-					word = " have been ";
+					word = "have been";
 					break;
 			}
 			// modify the messages to be grammatically correct
-			str = string_concat("Wow! my ", statsMax[0], word, "looking huge lately!");
-			str2 = string_concat("Looks like I need to kick up the intensity for ", statsMin[0], ", though.");
+			str = $"Wow! my {statsMax[0]} {word} looking huge lately!";
+			str2 = $"Looks like I need to kick up the intensity for {statsMin[0]}, though.";
 		}
 
 		// set the last paragraph depending on the chapter
@@ -125,6 +125,8 @@ function HandleDialog(){
 						else if (!global.keyEvents.meetMason) {
 							text = [
 								[
+									"Whoa? Who was that huge guy!?",
+									"He was definitely giving me a bad vibe...",
 									"Hey, what'd you think of Pump Palace? Pretty sick, isn't it!",
 									"I heard Mr. Ohner wants you to build some brawn before you start training clients.",
 									"Go visit my friend Mason in Central Prairie South.", 
@@ -136,6 +138,12 @@ function HandleDialog(){
 									"His back is so wide he can't fit through doors anymore.",
 									"He'll definitely whip your lats into shape!"
 								]
+							]
+						}
+						else {
+							text = [
+								$"Hey, {global.characterName}!	",
+								"You end up hitting pullups with Mason? How'd it go?"
 							]
 						}
 						break;
@@ -170,7 +178,7 @@ function HandleDialog(){
 						else if (global.statsMin[1] < 30) {
 							text = [
 								"You're really starting to put on some muscle! Great work kid!",
-								string_concat("Don't let your ", statsMin[0], " fall behind!")
+								$"Don't let your {global.statsMin[0]} fall behind!"
 							];
 						}
 						else {
@@ -222,13 +230,31 @@ function HandleDialog(){
 							]
 						];
 						break;
+					// gym rat 3
+					case "gym rat 3":
+						text = [
+							[
+							"Yo!",
+							"I'm a powerlifting competitor at this gym. Jim told me we'd have a new guy today.",
+							"Need some help with your squats?"
+							],
+							[
+							"Hey, need some help with your technique?"
+							],
+						];
+						prompt = [
+							"Sure!",
+							"Nope",
+							"squat help"
+						]
+						break;
 					// mason 
 					case "mason":
 						if (!global.keyEvents.meetMason) {
 							text = [
 								[
 									string_concat("You must be ", global.characterName, "."),
-									"Harvey told me about you... I'm a natural bodybuilding competitor as well!",
+									"Harvey told me about you... I'm a natural bodybuilder as well!",
 									"Say, which do you think is more important?"
 								]
 							];
@@ -243,6 +269,14 @@ function HandleDialog(){
 							];
 							prompt = ["Let's do it!", "Maybe later", "pullups"];
 						}
+						break;
+					case "person 1":
+						// young woman by the atlas stone
+						text = [
+							"I was going to visit my grandma in Highland but a local strongman sealed the path with an atlas stone.",
+							"What a jerk!"
+						]
+						prompt = ["Strongman?", "Highland?", "ask about strongman"];
 						break;
 					default:
 						text = (variable_instance_exists(id, "npcID")) ? [[ string_upper(string(npcID)) ]] : [[ "There is no text for this object yet.", string_concat("Hello, ", global.characterName, "!") ]];
@@ -351,6 +385,22 @@ function HandleDialog(){
 				break;
 			case 1:
 				switch (itemID) {
+					// atlas stone
+					case "atlas stone":
+						global.keyItems[0].value = true;
+						text = [
+							"An atlas stone blocks your path."
+						]
+						
+						if (variable_global_exists("keyItems")) {
+							if (global.keyItems[0].value) {  // if you have the serva grips
+								text = [
+									["An atlas stone blocks your path.","Move the atlas stone?"]
+								];
+								prompt = ["Yes", "No", "move the atlas stone"];
+							}
+						}
+						break;
 					// bed of the player
 					case "bed":
 						if (!global.keyEvents.meetJim) {

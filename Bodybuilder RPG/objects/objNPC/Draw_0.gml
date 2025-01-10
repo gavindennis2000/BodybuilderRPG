@@ -2,23 +2,96 @@
 
 event_inherited();
 
-switch(npcID) {
-	case "NPC":
+var hair;
+// face the right direction
+switch(face) {
+	case "left":
+		sprite_index = sprNPCLeft;
+		hair = sprHairLeft;
+		break;
+	case "right":
+		sprite_index = sprNPCRight;
+		hair = sprHairRight;
+		break;
+	case "up":
+		sprite_index = sprNPCUp;
+		hair = sprHairUp;
+		break;
+	case "down":
 	default:
-		switch(face) {
-			case "left":
-				sprite_index = sprNPCLeft;
-				break;
-			case "right":
-				sprite_index = sprNPCRight;
-				break;
-			case "up":
-				sprite_index = sprNPCUp;
-				break;
-			case "down":
-				sprite_index = sprNPCDown;
-				break;
-		}
+		sprite_index = sprNPCDown;
+		hair = sprHairDown; 
 		break;
 }
-draw_sprite_part(sprite_index, image_index, npcImg*32, 0, 32, 40, x, y-8);
+// get the right person sprite
+switch (npcID) {
+	// main characters
+    case "mom":
+        npcImg = 1;
+        npcHair = 2;
+		npcHairColor = #7a6a2b
+        break;
+	case "sulik":
+		npcImg = 2;
+		npcHair = -1;
+		break;
+	case "harvey":
+		npcImg = 4;
+		npcHair = 3;
+		npcHairColor = #c91800;
+		break;
+	case "jim":
+		npcImg = 5;
+		npcHair = 3;
+		npcHairColor = #e0e0e0
+		break;
+
+	// side characters
+	case "harvey's mom":
+        npcImg = 3;
+		image_blend = c_white;
+        npcHair = 4;
+		npcHairColor = #c91800;
+        break;
+	case "mason":
+		npcImg = 6;
+		npcHair = 4;
+		npcHairColor = #0f0d05
+		break;
+
+	// fighting enemies
+	
+    // npc girls
+    case "person 1":
+        npcImg = 3;
+        npcHair = 2;
+        npcHairColor = #0f0d05
+        break;
+
+	// npc boys
+
+	// gym rats
+	case "gym rat 1":
+		npcImg = 3;
+		npcHair = 3;
+		npcHairColor = #0f0d05;
+		break;
+	case "gym rat 2":
+		npcImg = 3;
+        npcHair = 2;
+        npcHairColor = #0f0d05
+		break;
+	case "gym rat 3":
+		npcImg = 8;
+		npcHair = 3;
+		npcHairColor = #0f0d05;
+		break;
+		
+	// default
+    default:
+        break;
+}
+// draw the npc
+draw_sprite_part_ext(sprite_index, image_index, npcImg*32, 0, 32, 40, x, y-8, image_xscale, image_yscale, image_blend, image_alpha);
+// draw the npc's hair
+if (npcHair != -1) { draw_sprite_part_ext(hair, image_index, npcHair*32, 0, 32, 40, x, y-8, image_xscale, image_yscale, npcHairColor, image_alpha); }

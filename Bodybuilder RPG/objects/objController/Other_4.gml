@@ -7,6 +7,7 @@ if (!instance_exists(objPause)) { instance_create_layer(x, y, layer, objPause); 
 if (!instance_exists(objKeyEvents)) { instance_create_layer(x, y, layer, objKeyEvents); }
 if (!instance_exists(objItemTiles)) { instance_create_layer(x, y, layer, objItemTiles); }
 if (!instance_exists(obj_gmlive)) { instance_create_layer(x, y, layer, obj_gmlive); }
+if (!instance_exists(objNPCSpawner)) { instance_create_layer(x, y, layer, objNPCSpawner); }
 
 global.prevRoom = global.roomVar;
 global.prevSub = global.subRoom;

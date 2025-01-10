@@ -9,8 +9,8 @@
   "name":"objItemTiles",
   "overriddenProperties":[],
   "parent":{
-    "name":"Controllers",
-    "path":"folders/2 Objects/Controllers.yy",
+    "name":"Spawners",
+    "path":"folders/2 Objects/Controllers/Spawners.yy",
   },
   "parentObjectId":null,
   "persistent":false,

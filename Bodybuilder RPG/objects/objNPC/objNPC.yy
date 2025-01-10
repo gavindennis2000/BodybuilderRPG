@@ -43,8 +43,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sprPlayerDown",
-    "path":"sprites/sprPlayerDown/sprPlayerDown.yy",
+    "name":"sprDummy",
+    "path":"sprites/sprDummy/sprDummy.yy",
   },
   "spriteMaskId":{
     "name":"sprWall",

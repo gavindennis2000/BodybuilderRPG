@@ -1,14 +1,20 @@
 {
   "$GMTileSet":"v1",
   "%Name":"tsOverworld",
-  "autoTileSets":[],
+  "autoTileSets":[
+    {"$GMAutoTileSet":"","%Name":"autoGrass","closed_edge":false,"name":"autoGrass","resourceType":"GMAutoTileSet","resourceVersion":"2.0","tiles":[1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,],},
+  ],
   "macroPageTiles":{
-    "SerialiseHeight":3,
-    "SerialiseWidth":5,
-    "TileSerialiseData":[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,],
+    "SerialiseHeight":16,
+    "SerialiseWidth":12,
+    "TileCompressedData":[
+      -148,0,8,8,9,10,11,12,13,14,15,-4,0,8,16,17,18,19,20,21,22,23,-4,0,8,24,25,26,27,28,29,30,31,-4,0,8,
+      32,33,34,35,36,37,38,39,
+    ],
+    "TileDataFormat":1,
   },
   "name":"tsOverworld",
-  "out_columns":9,
+  "out_columns":4,
   "out_tilehborder":2,
   "out_tilevborder":2,
   "parent":{
@@ -28,11 +34,11 @@
   },
   "tileAnimationFrames":[],
   "tileAnimationSpeed":15.0,
-  "tileHeight":16,
+  "tileHeight":32,
   "tilehsep":0,
   "tilevsep":0,
-  "tileWidth":16,
+  "tileWidth":32,
   "tilexoff":0,
   "tileyoff":0,
-  "tile_count":80,
+  "tile_count":18,
 }

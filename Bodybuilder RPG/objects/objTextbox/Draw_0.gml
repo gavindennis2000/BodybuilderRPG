@@ -58,6 +58,12 @@ if (npcID != "item" && npcID != -1) {
 	if (string_pos("gym rat", name) == 1) {
 		name = "gym rat";	
 	}
+	// change the names of various people
+	switch (name) {
+		case "person 1":
+			name = "young woman";
+			break;
+	}
     
     // hidden names mid change
     if (npcID == "sulik" && action == "exit sulik" && numberOfTexts >= array_length(text)-1)

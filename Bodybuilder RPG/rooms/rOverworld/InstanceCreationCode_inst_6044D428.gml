@@ -1,2 +1,2 @@
 npcID = "harvey";
-HandleDialog()
+HandleDialog();

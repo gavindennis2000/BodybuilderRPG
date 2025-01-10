@@ -2,6 +2,9 @@
 
 // don't draw in the battle room
 if (room == rBattle) { exit; }
+global.outfit.color = 1;
+global.outfit.hair = 4;
+global.outfit.hairColor = 0;
 
 var hair = sprHairDown;
 

@@ -176,7 +176,6 @@ switch (selection) {
 
             // handle damage
             var dmg = round(global.stats.chest / enemy.pushDef);
-            debug($"dmg: {dmg}");
             enemyDamage = dmg;
             enemyDamageY = -1;
             alarm[2] = 1;
@@ -199,7 +198,6 @@ switch (selection) {
         
             // handle damage
             var dmg = round(global.stats.shoulders / enemy.pushDef);
-            debug($"dmg: {dmg}");
             enemyDamage = dmg;
             enemyDamageY = -1;
             alarm[2] = 1;
@@ -222,7 +220,6 @@ switch (selection) {
 
             // handle damage
             var dmg = round(global.stats.back / enemy.pullDef);
-            debug($"dmg: {dmg}");
             enemyDamage = dmg;
             enemyDamageY = -1;
             alarm[2] = 1;
@@ -244,7 +241,6 @@ switch (selection) {
 
             // handle damage
             var dmg = round(global.stats.arms / enemy.pullDef);
-            debug($"dmg: {dmg}");
             enemyDamage = dmg;
             enemyDamageY = -1;
             alarm[2] = 1;
@@ -266,7 +262,6 @@ switch (selection) {
 
             // handle damage
             var dmg = round(global.stats.legs / enemy.legDef);
-            debug($"dmg: {dmg}");
             enemyDamage = dmg;
             enemyDamageY = -1;
             alarm[2] = 1;
@@ -377,13 +372,11 @@ switch (selection) {
                     enemy.legDef *= 4;
                     enemy.pullDef *= 4;
                     enemy.pushDef *= 4;
-                    debug("improved defense");
                     break;
                 case "remove earbuds":
                     enemy.legDef /= 4;
                     enemy.pullDef /= 4;
                     enemy.pushDef /= 4;
-                    debug("reduced defense");
                     break;
                 default:
                     break;

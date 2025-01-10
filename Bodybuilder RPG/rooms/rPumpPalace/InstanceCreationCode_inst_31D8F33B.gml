@@ -1,1 +1,0 @@
-npcID = "gym rat 1"
