@@ -1,3 +1,5 @@
+// handles the 'rhythm game' style workout mini games
+
 /*gmlive*/if (TEST) { if (live_call()) return live_result; }
 
 // stop whatever music is currently playing
@@ -8,6 +10,7 @@ var camX = camera_get_view_x(view_camera[0]);
 var camY = camera_get_view_y(view_camera[0]);
 
 health = 10;
+reps = 0;
 var delay = 80;
 var aTime = 50;
 
@@ -46,8 +49,8 @@ notes1 = [  // [position, length] - Leg Novice
 	[0,4],[0,12],[1,2],[3,2],[2,4],[1,2],[2,4],[1,4],
 	[3, 8],[2,4],[1,4],[0,2],[1,4],[0,2],[0,4],
 	[0,6],[1,4],[0,2],[0,4], [0,6],[1,4],[2,2],[1,4],
-	[3,4],[3,4],[3,2],[3,2],[3,2],[3,2],[3,2],[3,2],
-	[3,2],[3,2],[3,2],[3,2],[3,2],[3,2],[3,2],[3,2],
+	[3,4],[3,6],[3,4],[3,4],
+	[3,4],[3,4],[3,4],[3,4],[3,4]
 ]
 notes2 = [  // [position, length] - push intermediate
 	// verse 1
@@ -215,10 +218,10 @@ notes3 = [
 ]
 
 if (!variable_global_exists("chapter")) { global.chapter = 1; }
-if (!variable_global_exists("workout")) { global.workout = "advanced pull"; }
+if (!variable_global_exists("workout")) { global.workout = "novice leg"; }
 
 var extra;
-global.workout = "advanced pull";
+// global.workout = "advanced pull";
 switch(global.workout) {
 	case "novice leg":
 		extra = -20;
@@ -232,8 +235,8 @@ alarm[0] = aTime + delay  // play the wav file
 alarm[1] = delay + extra;  // make the notes
 alarm[2] = delay/2;  // create the picks
 
-playerX = camX + 480 + 64
-pFinalX = playerX - 480;
+pFinalX = camX;
+playerX = camX + 480;
 playerMove = false;
 imgIndex = 0;
 

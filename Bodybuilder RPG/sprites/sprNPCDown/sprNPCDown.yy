@@ -2,7 +2,7 @@
   "$GMSprite":"",
   "%Name":"sprNPCDown",
   "bboxMode":0,
-  "bbox_bottom":34,
+  "bbox_bottom":74,
   "bbox_left":4,
   "bbox_right":385,
   "bbox_top":3,

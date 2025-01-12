@@ -53,7 +53,7 @@ image_speed = running ? 0.4 : 0.2;
 if (state == "stand") {image_index = 0; }
 
 // draw the player a little higher than the ground
-draw_sprite_part(sprite_index, image_index, global.outfit.color*32, 0, 32, 32, x, y - 4);
+draw_sprite_part_ext(sprite_index, image_index, global.outfit.color*32, 0, 32, 32, x, y - 4, image_xscale, image_yscale, image_blend, image_alpha);
 // draw the player's hair
 draw_sprite_part_ext(hair, image_index, global.outfit.hair*32, 0, 32, 32, x, y - 8, image_xscale, image_yscale, hairColor, image_alpha);
 

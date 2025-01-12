@@ -56,4 +56,6 @@ switch(global.roomID) {
         }
         // we're done
         break;
+    case "":
+        break;
 }

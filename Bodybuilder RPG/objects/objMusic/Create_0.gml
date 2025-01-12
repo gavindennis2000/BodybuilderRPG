@@ -72,6 +72,7 @@ function workout() {
 	// stops the music when working out
 	
 	audio_sound_gain(soundID, 0, 1000);	
+	alarm[2] = 60;
 }
 
 // workout stuff

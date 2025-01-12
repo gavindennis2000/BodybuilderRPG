@@ -28,7 +28,7 @@ if (room == rBattle) {
 
     // draw fog during ultimate attacks
     if (ultimateAlpha != 0) {
-        var oldFog = gpu_get_fog(), tempAlpha = draw_get_alpha();
+        var tempAlpha = draw_get_alpha();
         draw_set_alpha(ultimateAlpha);
         draw_rectangle_color(camX, camY, camX + 480, camY + 270, c_white, c_white, c_white, c_white, false);
         draw_set_alpha(tempAlpha);
@@ -37,10 +37,15 @@ if (room == rBattle) {
 
      // draw the enemy
      var scale = 2, dist = 75;
+     var npcImg = enemy.npcImg, npcY = 0;
+     while (npcImg >= 10) {
+        npcImg -= 10;
+        npcY += 40;
+     }
      
     if (enemy.hp <= 0 && deadY != -1) {
         // draw the enemy fading
-        draw_sprite_part_ext(enemy.spr, enemy.imgSpd, 32 * enemy.npcImg, 0, 32, 40 - deadY, enemy.x, enemy.y - 8, scale, scale, c_black, 0.7);
+        draw_sprite_part_ext(enemy.spr, enemy.imgSpd, 32 * npcImg, npcY, 32, 40 - deadY, enemy.x, enemy.y - 8, scale, scale, c_black, 0.7);
         if (deadY < 40) {
             deadY++;
         }
@@ -50,11 +55,11 @@ if (room == rBattle) {
         if (eSkillAlpha < 1) {
             var oldFog = gpu_get_fog();
             gpu_set_fog(true, eSkillColor, 0, 0);   
-            draw_sprite_part_ext(enemy.spr, enemy.imgSpd, 32*enemy.npcImg, 0, 32, 40,  enemy.x, enemy.y - 8, scale, scale, c_white, 1);
+            draw_sprite_part_ext(enemy.spr, enemy.imgSpd, 32*npcImg, npcY, 32, 40,  enemy.x, enemy.y - 8, scale, scale, c_white, 1);
             gpu_set_fog(oldFog[0], oldFog[1], oldFog[2], oldFog[3]);
         }
         // draw the enemy
-        draw_sprite_part_ext(enemy.spr, enemy.imgSpd, 32*enemy.npcImg, 0, 32, 40, enemy.x, enemy.y - 8, scale, scale, c_white, eSkillAlpha);
+        draw_sprite_part_ext(enemy.spr, enemy.imgSpd, 32*npcImg, npcY, 32, 40, enemy.x, enemy.y - 8, scale, scale, c_white, eSkillAlpha);
     }
 
     // draw enemy projectiles

@@ -144,7 +144,7 @@ global.enemies = {
     dyel: {
         // drawing info
         name: "DYEL",
-        spr: sprPlayerDown,
+        npcImg: 10,
         imgSpd: 0,
         x: 240 - 32,
         y: 135 - 32 - 30,
@@ -190,7 +190,7 @@ global.enemies = {
     strongman: {
         // drawing info
         name: "STRONGMAN",
-        spr: sprPlayerDown,
+        npcImg: 11,
         imgSpd: 0,
         x: 240 - 32,
         y: 135 - 32 - 30,
@@ -241,7 +241,7 @@ global.enemies = {
     gymbro: {
         // drawing info
         name: "GYM BRO",
-        spr: sprPlayerDown,
+        npcImg: 12,
         imgSpd: 0,
         x: 240 - 32,
         y: 135 - 32 - 30,
@@ -308,7 +308,7 @@ global.enemies = {
     stoiclifter: {
         // drawing info
         name: "STOIC LIFTER",
-        spr: sprPlayerDown,
+        npcImg: 13,
         imgSpd: 0,
         x: 240 - 32,
         y: 135 - 32 - 30,

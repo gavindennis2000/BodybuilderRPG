@@ -8,5 +8,5 @@ live = false;
 
 // gavin's stuff
 // global.keyEvents.meetSulik = true;
-// global.keyEvents.meetJim = true;
+global.keyEvents.meetJim = true;
 //global.keyEvents.enterSulik = true;

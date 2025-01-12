@@ -519,6 +519,7 @@ if (ready && !instance_exists(objTextbox) && turn == "player" && menuX == 0) {
                     // change the player's sprite and animation speed
                     turn = "escape";
                     player.spr = sprPlayerLeft;
+                    player.hair = sprHairLeft;
                     player.imgSpd = -1;
                     image_speed = 0.5;
 

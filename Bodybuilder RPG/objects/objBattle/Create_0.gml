@@ -25,8 +25,8 @@ if (!variable_instance_exists(self, "enemyToCopy")) {
 enemy = {
      // drawing info
      name: enemyToCopy.name,
-     spr: enemyToCopy.spr,
-     npcImg: 0,
+     spr: sprNPCDown,
+     npcImg: enemyToCopy.npcImg,
      imgSpd: enemyToCopy.imgSpd,
      x: enemyToCopy.x,
      y: enemyToCopy.y,

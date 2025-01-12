@@ -1,10 +1,14 @@
+// handle 'guitar note strumming' during minigame
+
+/*gmlive*/if (TEST) { if (live_call()) return live_result; }
+
 image_index = input_check(trigger) ? 1: 0;
 var press = input_check_pressed(trigger);
 
 if (press) {
 	if (place_meeting(x, y, objNote)) {
 		var note = instance_place(x, y, objNote);
-		if (note.y <= y+8 and note.y >= y-14) {
+		if (note.y <= y+16 && note.y >= y-20 && !note.isDestroyed) {
 
 			// increment score
 			var scr = 100;
@@ -12,7 +16,7 @@ if (press) {
 			score += scr;
 			
 			// destroy the note
-			instance_destroy(note);
+			note.isDestroyed = true;
 			
 			// play the music if it's stopped
 			objMusic.hitNote();

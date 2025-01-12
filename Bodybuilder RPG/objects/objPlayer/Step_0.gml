@@ -52,7 +52,7 @@ if (targetY != 0) {
     y += (spd * sign(targetY));
     targetY -= (spd * sign(targetY));
     if (targetY == 0) {
-       battleCounter++;
+       checkBattle();
     }
 }
 

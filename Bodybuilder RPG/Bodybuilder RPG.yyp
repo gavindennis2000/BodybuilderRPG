@@ -136,6 +136,7 @@
     {"id":{"name":"rMom","path":"rooms/rMom/rMom.yy",},},
     {"id":{"name":"rOverworld","path":"rooms/rOverworld/rOverworld.yy",},},
     {"id":{"name":"rPumpPalace","path":"rooms/rPumpPalace/rPumpPalace.yy",},},
+    {"id":{"name":"rShop","path":"rooms/rShop/rShop.yy",},},
     {"id":{"name":"rTestStart","path":"rooms/rTestStart/rTestStart.yy",},},
     {"id":{"name":"rUniversity","path":"rooms/rUniversity/rUniversity.yy",},},
     {"id":{"name":"__input_axis_is_directional","path":"scripts/__input_axis_is_directional/__input_axis_is_directional.yy",},},
@@ -548,6 +549,7 @@
     {"id":{"name":"sprPullupPlayer","path":"sprites/sprPullupPlayer/sprPullupPlayer.yy",},},
     {"id":{"name":"sprSign","path":"sprites/sprSign/sprSign.yy",},},
     {"id":{"name":"sprSquat","path":"sprites/sprSquat/sprSquat.yy",},},
+    {"id":{"name":"sprSquatOld","path":"sprites/sprSquatOld/sprSquatOld.yy",},},
     {"id":{"name":"sprTemp","path":"sprites/sprTemp/sprTemp.yy",},},
     {"id":{"name":"sprTextbox","path":"sprites/sprTextbox/sprTextbox.yy",},},
     {"id":{"name":"sprTimer","path":"sprites/sprTimer/sprTimer.yy",},},
@@ -567,6 +569,7 @@
     {"roomId":{"name":"rBlank","path":"rooms/rBlank/rBlank.yy",},},
     {"roomId":{"name":"rBattle","path":"rooms/rBattle/rBattle.yy",},},
     {"roomId":{"name":"rMenu","path":"rooms/rMenu/rMenu.yy",},},
+    {"roomId":{"name":"rShop","path":"rooms/rShop/rShop.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[

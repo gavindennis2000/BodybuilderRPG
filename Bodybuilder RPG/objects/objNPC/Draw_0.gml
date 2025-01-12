@@ -1,4 +1,11 @@
+// handles npc sprite rendering including body, hair, and hair color
+
 /*gmlive*/if (TEST) { if (live_call()) return live_result; }
+
+// don't draw npc sprites during workout minigames
+if (
+	instance_exists(objGuitar)
+) { exit; }
 
 event_inherited();
 

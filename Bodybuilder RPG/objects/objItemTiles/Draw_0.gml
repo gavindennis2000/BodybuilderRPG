@@ -1,3 +1,5 @@
+/*gmlive*/if (TEST) { if (live_call()) return live_result; }
+
 with (objNPC) {
 	itemID = "npc";	
 }
@@ -39,20 +41,25 @@ with (objItem) {
 					switch (face) {
 						case "up":
 							spr = sprPlayerDown;
+							hair = sprHairDown;
 							break;
 						case "down":
 							spr = sprPlayerUp;
+							hair = sprHairUp;
 							break;
 						case "left":
 							spr = sprPlayerLeft;
+							hair = sprHairLeft;
 							break;
 						case "right":
 							spr = sprPlayerRight;
+							hair = sprHairRight;
 							break;
 					}
 					if (distX < 32) and (distY < 64) {
 						var sprY = 5-(distY -32) > 0 ? 5-(distY -32) : 0;
-						draw_sprite_part_ext(spr, index, 4, sprY, 24 - distX, 17 - (distY-32)*1, other.x+4 + distX, other.y+5 + distY-32, 1, 1, c_white,0.8);
+						draw_sprite_part_ext(spr, index, 4 + 32*global.outfit.color, sprY, 24 - distX, 17 - (distY-32)*1, other.x+4 + distX, other.y+5 + distY-32, 1, 1, c_white, 0.8);
+						draw_sprite_part_ext(hair, index, 4 + 32*global.outfit.hair, sprY + 4, 24 - distX, 17 - (distY-32)*1, other.x+4 + distX, other.y+5 + distY-32, 1, 1, global.outfit.hairColor, 0.8);
 					}
 				}
 			}		

@@ -174,10 +174,6 @@ switch(prompt) {
 				canMove = false;
 				action = "squat";
 				alarm[2] = 1;
-				global.workout = "novice leg";
-				global.playerX = objPlayer.x;
-				global.playerY = objPlayer.y;
-				global.returnRoom = room;
 			}
 		}
 		break;

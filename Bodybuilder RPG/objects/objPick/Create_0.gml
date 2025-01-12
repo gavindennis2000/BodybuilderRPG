@@ -17,3 +17,5 @@ switch (findTrigger) {
 }
 
 move = true;
+barY = 270;
+x += 16;
