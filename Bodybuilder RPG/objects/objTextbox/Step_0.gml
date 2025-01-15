@@ -42,7 +42,8 @@ if (keyConfirmPress and canPress) {
 			numberOfTexts--;
 			
 			if (numberOfTexts == 0) { 
-				objPlayer.canMove = true;
+				if (instance_exists(objPlayer))
+					objPlayer.canMove = true;
 				finished = true;
 				indexCheck = 0;
 			} else {

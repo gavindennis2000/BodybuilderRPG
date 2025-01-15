@@ -7,24 +7,7 @@ if (room == rBattle) {
     var camY = camera_get_view_y(cam);
 
     // get the player's hair color
-    var hairColor = c_white;
-    switch (global.outfit.hairColor) {
-        case 0:
-            hairColor = #663500;
-            break;
-        case 1:
-            hairColor = #ffff99;
-            break;
-        case 2:
-            hairColor = #1a0d00;
-            break;
-        case 3:
-            hairColor = #cc2900;
-            break;
-        case 4:
-            hairColor = #66ccff;
-            break;
-    }
+    var hairColor = getHairColor();
 
     // draw fog during ultimate attacks
     if (ultimateAlpha != 0) {
@@ -343,15 +326,15 @@ if (room == rBattle) {
                             }
                             if (array_length(skills) > 1 + sCursor) {
                                 skillLimit = (skills[1 + sCursor].limit == -1) ? "" : string(skillLimit = skills[1 + sCursor].limit);
-                                draw_text_border(camX + 340/4 + xmargin, camY + 190 + ymargin, string_concat(skills[1 + sCursor].name, skillLimit), getColor(skills[1 + sCursor]));
+                                draw_text_border(camX + 340*3/4 + xmargin, camY + 190 + ymargin, string_concat(skills[1 + sCursor].name, skillLimit), getColor(skills[1 + sCursor]));
                             }
                             if (array_length(skills) > 2 + sCursor) {
                                 skillLimit = (skills[2 + sCursor].limit == -1) ? "" : string(skillLimit = skills[2 + sCursor].limit);
-                                draw_text_border(camX + 340/4 + xmargin, camY + 190 + ymargin, string_concat(skills[2 + sCursor].name, skillLimit), getColor(skills[2 + sCursor]));
+                                draw_text_border(camX + 340/4 + xmargin, camY + 190 + 70*3/4 - ymargin, string_concat(skills[2 + sCursor].name, skillLimit), getColor(skills[2 + sCursor]));
                             }
                             if (array_length(skills) > 3 + sCursor) {
                                 skillLimit = (skills[3 + sCursor].limit == -1) ? "" : string(skillLimit = skills[3 + sCursor].limit);
-                                draw_text_border(camX + 340/4 + xmargin, camY + 190 + ymargin, string_concat(skills[3 + sCursor].name, skillLimit), getColor(skills[3 + sCursor]));
+                                draw_text_border(camX + 340*3/4 + xmargin, camY + 190 + 70*3/4 - ymargin, string_concat(skills[3 + sCursor].name, skillLimit), getColor(skills[3 + sCursor]));
                             }
                             // draw the description
                             var tempAlpha = draw_get_alpha();

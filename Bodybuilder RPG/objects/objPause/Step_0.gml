@@ -5,7 +5,7 @@ var keyPause = input_check_pressed("start");
 if (instance_exists(objPlayer)) {
 	if (keyPause) {
 		// pause the game
-		if (!paused && !unpause && objPlayer.canMove && !objPlayer.cutscene) {
+		if (!paused && !unpause && objPlayer.canMove && !objPlayer.cutscene && !instance_exists(objTextbox)) {
 			paused = true;
             selection = "items";
             screen = "status";

@@ -34,8 +34,8 @@
   "nineSlice":null,
   "origin":6,
   "parent":{
-    "name":"Workouts",
-    "path":"folders/1 Sprites/Workouts.yy",
+    "name":"Guitar Minigame",
+    "path":"folders/1 Sprites/Workouts/Guitar Minigame.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

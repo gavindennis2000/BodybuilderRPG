@@ -29,24 +29,7 @@ switch (face) {
 }
 
 // player's hair color
-var hairColor = c_white;
-switch (global.outfit.hairColor) {
-	case 0:
-		hairColor = #663500;
-		break;
-	case 1:
-		hairColor = #ffff99;
-		break;
-	case 2:
-		hairColor = #1a0d00;
-		break;
-	case 3:
-		hairColor = #cc2900;
-		break;
-	case 4:
-		hairColor = #66ccff;
-		break;
-}
+var hairColor = getHairColor();
 
 // running animation speed
 image_speed = running ? 0.4 : 0.2;

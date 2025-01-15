@@ -63,6 +63,7 @@ if (ready && !instance_exists(objTextbox) && turn == "player" && menuX == 0) {
                                 index -= 2;
                                 sCursor += 2;
                             }
+                            if (selection != skills[index + sCursor]) { playSound(sndCursor); }
                             selection = skills[index + sCursor];
                             break;
                         }
@@ -78,6 +79,7 @@ if (ready && !instance_exists(objTextbox) && turn == "player" && menuX == 0) {
                                 index -= 2;
                                 sCursor += 2;
                             }
+                            if (selection != skills[index + sCursor]) { playSound(sndCursor); }
                             selection = skills[index + sCursor];
                             break;
                         }
@@ -202,6 +204,7 @@ if (ready && !instance_exists(objTextbox) && turn == "player" && menuX == 0) {
                     case skills[2 + sCursor]:
                         if (array_length(skills) <= 2 + sCursor + 2) { 
                             sCursor = 0;
+                            if (selection != skills[0]) { playSound(sndCursor); }
                             selection = skills[0];
                             break;
                         }
@@ -212,6 +215,7 @@ if (ready && !instance_exists(objTextbox) && turn == "player" && menuX == 0) {
                     case skills[3 + sCursor]:
                         if (array_length(skills) <= 3 + sCursor + 2) { 
                             sCursor = 0;
+                            if (selection != skills[1]) { playSound(sndCursor); }
                             selection = skills[1];
                             break;
                         }
@@ -319,20 +323,28 @@ if (ready && !instance_exists(objTextbox) && turn == "player" && menuX == 0) {
             case "skill":
                 switch (selection) {
                     case skills[0 + sCursor]:
-                        if (array_length(skills) > 1 + sCursor)
+                        if (array_length(skills) > 1 + sCursor) {
                             selection = skills[1 + sCursor];
+                            playSound(sndCursor);
+                        }
                         break;
                     case skills[1 + sCursor]:
-                        if (array_length(skills) > 0 + sCursor)
+                        if (array_length(skills) > 0 + sCursor) {
                             selection = skills[0 + sCursor];
+                            playSound(sndCursor);
+                        }
                         break;
                     case skills[2 + sCursor]:
-                        if (array_length(skills) > 3 + sCursor)
+                        if (array_length(skills) > 3 + sCursor) {
                             selection = skills[3 + sCursor];
+                            playSound(sndCursor);
+                        }
                         break;
                     case skills[3 + sCursor]:
-                        if (array_length(skills) > 2 + sCursor)
+                        if (array_length(skills) > 2 + sCursor) {
                             selection = skills[2 + sCursor];
+                            playSound(sndCursor);
+                        }
                         break;
                 }
                 break;
@@ -420,20 +432,28 @@ if (ready && !instance_exists(objTextbox) && turn == "player" && menuX == 0) {
             case "skill":
                 switch (selection) {
                     case skills[0 + sCursor]:
-                        if (array_length(skills) > 1 + sCursor)
+                        if (array_length(skills) > 1 + sCursor) {
+                            playSound(sndCursor);
                             selection = skills[1 + sCursor];
+                        }
                         break;
                     case skills[1 + sCursor]:
-                        if (array_length(skills) > 0 + sCursor)
+                        if (array_length(skills) > 0 + sCursor) {
+                            playSound(sndCursor);
                             selection = skills[0 + sCursor];
+                        }
                         break;
                     case skills[2 + sCursor]:
-                        if (array_length(skills) > 3 + sCursor)
+                        if (array_length(skills) > 3 + sCursor) {
+                            playSound(sndCursor);
                             selection = skills[3 + sCursor];
+                        }
                         break;
                     case skills[3 + sCursor]:
-                        if (array_length(skills) > 2 + sCursor)
+                        if (array_length(skills) > 2 + sCursor) {
+                            playSound(sndCursor);
                             selection = skills[2 + sCursor];
+                        }
                         break;
                 }
                 break;
@@ -453,10 +473,12 @@ if (ready && !instance_exists(objTextbox) && turn == "player" && menuX == 0) {
                         break;
                     case "skill":
                         screen = selection;
+                        sCursor = 0;
                         selection = skills[0];
                         break;
                     case "item":
                         screen = selection;
+                        sCursor = 0;
                         selection = inventory[0];
                         break;
                     case "escape":

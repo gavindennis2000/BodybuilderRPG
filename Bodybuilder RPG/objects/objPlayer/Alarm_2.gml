@@ -1,19 +1,19 @@
 /*gmlive*/if (TEST) { if (live_call()) return live_result; }
-// go to room after action prompt
 
+// go to minigame after action prompt
 if (fadeAlpha < 0.6) {
-	depth = -999;
+	depth = -198;
 	canMove = false;
 	fadeAlpha += 0.1;
     image_alpha -= 0.2;
 	alarm[2] = 2;
 }
 else {
-    switch (action) {
-        case "db bench":
-            break;
-        case "squat":
-            global.workout = "novice leg";
+    depth = -100;
+    switch (global.workout) {
+        case "intermediate push":
+        case "novice leg":
+        case "advanced pull":
             instance_create_layer(x, y, "Instances", objGuitar);
             break;
     }

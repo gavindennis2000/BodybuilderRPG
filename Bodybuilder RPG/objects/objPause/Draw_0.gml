@@ -107,33 +107,16 @@ if (paused) {
             // the player's sprite
             draw_sprite_part_ext(sprPlayerDown, -1, 32*global.outfit.color, 0, 32, 32, pX, pY, 2, 2, pColor, 1);
             // the player's hair
-            var hairColor = c_white;
-            switch (global.outfit.hairColor) {
-                case 0:
-                    hairColor = #663500;
-                    break;
-                case 1:
-                    hairColor = #ffff99;
-                    break;
-                case 2:
-                    hairColor = #1a0d00;
-                    break;
-                case 3:
-                    hairColor = #cc2900;
-                    break;
-                case 4:
-                    hairColor = #66ccff;
-                    break;
-            }
+            var hairColor = getHairColor();
             draw_sprite_part_ext(sprHairDown, -1, 32*global.outfit.hair, 0, 32, 40, pX, pY - 8, 2, 2, hairColor, 1);
             // the player's mame
             draw_text_border(pX - 80, pY + 8, global.characterName, c_white, 1);  // name
         
             // player's status
             var status = "", statsMin = global.statsMin;
-            if (statsMin[1] < 40) { status = "Pencil Neck"; }
-            else if (statsMin[1] < 70) { status = "Sleeper Build"; } 
-            else if (statsMin[1] < 100) { status = "Natty Daddy"; }
+            if (statsMin[1] < 30) { status = "Pencil Neck"; }
+            else if (statsMin[1] < 55) { status = "Sleeper Build"; } 
+            else if (statsMin[1] < 85) { status = "Natty Daddy"; }
             else { status = "Pro Card"; }
             draw_text_border(pX - 80, pY + 8 + 16, string_concat("Status: ", status), c_orange, 1, c_black);  // status
             

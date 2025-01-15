@@ -1,2 +1,3 @@
-// pause room music during workouts
-audio_pause_sound(soundID);
+// continues the slow down function
+
+slowDown(musicBuffer);

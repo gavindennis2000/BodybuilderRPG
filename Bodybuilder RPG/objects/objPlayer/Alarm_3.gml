@@ -1,6 +1,6 @@
 ///@description go to new chapter
 if (fadeAlpha < 1) {
-	depth = -999;
+	depth = -200;
 	canMove = false;
 	fadeAlpha += 0.05;
 	alarm[3] = 2;

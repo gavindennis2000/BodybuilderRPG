@@ -93,47 +93,47 @@ global.PRs = [
     {  // chapter 1
         name: "DB Bench",
         weight: "50 x ",
-        reps: irandom_range(2,9)
+        reps: irandom_range(1,5)
     },
     {
         name: "Pullups",
         weight: "",
-        reps: irandom_range(2,9)
+        reps: irandom_range(1,5)
     },
     {
         name: "Squats",
         weight: "225 x ",
-        reps: irandom_range(2,9)
+        reps: irandom_range(1,5)
     },
     {  // chapter 2
         name: "Bench Press",
         weight: "135 x ",
-        reps: irandom_range(2,9)
+        reps: irandom_range(1,5)
     },
     {
         name: "Deadlift",
         weight: "315 x ",
-        reps: irandom_range(2,9)
+        reps: irandom_range(1,5)
     },
     {
         name: "TBD",
         weight: "0 x ",
-        reps: irandom_range(2,9)
+        reps: irandom_range(1,5)
     },
     {  // chapter 3
         name: "TBD",
         weight: "0 x ",
-        reps: irandom_range(2,9)
+        reps: irandom_range(1,5)
     },
     {
         name: "TBD",
         weight: "0 x ",
-        reps: irandom_range(2,9)
+        reps: irandom_range(1,5)
     },
     {
         name: "TBD",
         weight: "0 x ",
-        reps: irandom_range(2,9)
+        reps: irandom_range(1,5)
     },
 ];
 

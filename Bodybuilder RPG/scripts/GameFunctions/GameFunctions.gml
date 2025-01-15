@@ -33,11 +33,11 @@ function initiateBattle(special = false, song = sndBattle) {
             global.enemies.gymbro,
             global.enemies.strongman,
         ];
-        if (global.statsMin[1] >= 20) {
+        if (global.statsMax[1] >= 20) {
             array_push(enemy, global.enemies.stoiclifter);
             array_push(enemy, global.enemies.stoiclifter);
         }
-        else debug("not strong enough for stoic")
+        else debug($"not strong enough for stoic; max: {global.statsMax[1]}");
     }
     // randomly pick enemy from the array
         var rand = irandom(array_length(enemy)-1);
@@ -69,12 +69,40 @@ function drawScoreExt(x, y, str, xscale, yscale) {
     draw_text_transformed_color(x, y, str, xscale, yscale, 0, c_white, c_white, c_white, c_white, 1);
 }
 
-function levelUp(stat1 = 1, stat2 = 1) {
-    stat1++;
-    stat2++;
+function getHairColor() {
+    var hairColor = c_white;
+    switch (global.outfit.hairColor) {
+        case 0:
+            hairColor = #663500;
+            break;
+        case 1:
+            hairColor = #ffff99;
+            break;
+        case 2:
+            hairColor = #1a0d00;
+            break;
+        case 3:
+            hairColor = #cc2900;
+            break;
+        case 4:
+            hairColor = #66ccff;
+            break;
+    }
+    return hairColor;
+}
+
+function levelUp(stat, amount) {
+    // levels up the player during minigames
+
+    // increase the stats
+    stat += amount;
+    // sound effect
     playSound(sndLevelUp);
-    levelUpY = room_height;
+    // set the location and opacity of the text
+    levelUpY = camera_get_view_y(view_camera[0]) + 270;
     levelUpAlpha = 1;
+
+    return stat;
 }
 
 function draw_text_border(x, y, string, color, alpha = 1, border = c_black) {

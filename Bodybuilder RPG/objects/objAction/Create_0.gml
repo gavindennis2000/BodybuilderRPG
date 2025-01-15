@@ -34,21 +34,6 @@ switch(prompt) {
 			}
 		}
 		break;
-		case "first paycheck":
-		global.stats.money += 1000;
-		instance_create_layer(x, y, layer, objTextbox, {
-			npcID: "jim",
-			text: [
-				"I'm paying you in advance so you can buy supplements and equipment.",
-				"Go find the Bodybuilding Nutrition Company (BBNC)  down south in Great Valliou.",
-				"Good luck, kid."
-			]
-		});
-		with (objItem) {
-			if (itemID = "locked door") { instance_destroy(); }
-		}
-		break;
-	
 	case "bunny hood coupon":
 		global.keyEvents.bunnyHoodCoupon = true;
 		instance_create_layer(x, y, "Instances", objTextbox, {
@@ -57,7 +42,7 @@ switch(prompt) {
 				"Go buy one at the college shop in Central Prairie Northeast."
 			],
 			npcID: -1
-		})
+		});
 		break;
 	case "db bench":
 		// hit some dumbbell bench
@@ -65,7 +50,7 @@ switch(prompt) {
 			with (objPlayer) {
 				canMove = false;
 				alarm[2] = 1;
-				/*temporary*/action = "db bench";
+				global.workout = "intermediate push";
 			}
 		}
 		else if (selection == 1) { instance_destroy(); }
@@ -92,6 +77,52 @@ switch(prompt) {
 				alarm[3] = 1;
 			}
 		}
+		break;
+	case "first paycheck":
+		global.stats.money += 1000;
+		instance_create_layer(x, y, layer, objTextbox, {
+			npcID: "jim",
+			text: [
+				"I'm paying you in advance so you can buy supplements and equipment.",
+				"Go find the Bodybuilding Nutrition Company (BBNC)  down south in Great Valliou.",
+				"Good luck, kid."
+			]
+		});
+		with (objItem) {
+			if (itemID = "locked door") { instance_destroy(); }
+		}
+		break;
+	case "game over":
+		if (selection == 0) {
+			// try again
+			global.stats.fatigue = 0;
+			room_goto(rMom);
+		}
+		else if (selection == 1) {
+			// exit to main menu
+			game_end();
+		}
+		break;
+	case "learn brace":
+		playSound(sndLevelUp);
+		global.skills[1].unlocked = true;
+		txt = $"{global.characterName} learned the skill \"Brace\".";
+		instance_create_layer(x, y, "Instances", objTextbox, {
+			npcID: -1,
+			text: [txt],
+			action: "learn brace 2"
+		})
+		break;
+	case "learn brace 2":
+		txt = [
+			"Bracing your core is incredibly important for safe squatting.",
+			"It will also reduce an opponent's attack damage by 75% for one turn during battle.",
+			"I recommend saving it for powerful attacks. Hope it helps!"
+		];
+		instance_create_layer(x, y, "Instances", objTextbox, {
+			npcID: "GYM RAT",
+			text: txt,
+		})
 		break;
 	case "mason philosophy":
 		if (selection == 0) {  // if the player selects work ethic
@@ -172,12 +203,13 @@ switch(prompt) {
 		if (selection == 0) {
 			with (objPlayer) {
 				canMove = false;
-				action = "squat";
+				global.workout = "novice leg";
 				alarm[2] = 1;
 			}
 		}
 		break;
 	case "squat help":
+		var action = -1;
 		if (selection == 0) {
 			txt = [
 				"Squatting is sort of like a rhythm game.",
@@ -194,9 +226,14 @@ switch(prompt) {
 				"Squats are harder than they look. If you decide you need some help, I'll be right here."
 			];
 		}
+		if (!global.skills[1].unlocked) {
+			array_push(txt, "Hey... I almost forgot.", );
+			action = "learn brace";
+		}
 		instance_create_layer(x, y, "Instances", objTextbox, {
 			text: txt,
-			npcID: "gym rat"
+			npcID: "gym rat",
+			action: action
 		})
 		break;
 	}

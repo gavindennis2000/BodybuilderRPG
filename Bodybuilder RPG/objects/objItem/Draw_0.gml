@@ -1,9 +1,8 @@
 
-if TEST and object_index != objNPC and drawSelf { draw_self(); }
 if (dist < 40) {
 	var alpha = 1/(dist/32)
 	// draw the action icon
-	if (instance_exists(objPlayer)) {
+	if (instance_exists(objPlayer) && !instance_exists(objTextbox)) {
 		if (objPlayer.canMove and !objPlayer.cutscene) { 
 			if (instance_exists(objPlayer)) {
 				if (dist <= 36)

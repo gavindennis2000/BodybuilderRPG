@@ -6,7 +6,6 @@ textIndex = 0;
 textIndexMax = 0
 face = "down";
 faceStart = "down";
-drawSelf = true;
 
 glowAlpha = 0;
 glowAlphaChange = 0.025;

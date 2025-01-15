@@ -27,6 +27,8 @@ switch (global.workout) {
         dist = 48;
 		break; 
 }
+// find the total number of notes in the given song
+maxReps = array_length(song);
 
 // play the song
 for (var i = 0; i < array_length(song); i++) {

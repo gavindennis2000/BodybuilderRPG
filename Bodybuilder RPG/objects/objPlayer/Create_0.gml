@@ -11,7 +11,7 @@ upright = "upright";
 downleft = "downleft";
 downright = "downright";
 face = down;
-action = -1;
+workout = -1;
 
 stand = "stand";
 run = "run";

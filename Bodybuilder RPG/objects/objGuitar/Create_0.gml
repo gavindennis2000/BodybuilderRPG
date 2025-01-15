@@ -9,12 +9,22 @@ if (instance_exists(objMusic)) {objMusic.workout(); }
 var camX = camera_get_view_x(view_camera[0]);
 var camY = camera_get_view_y(view_camera[0]);
 
-health = 10;
-reps = 0;
-var delay = 80;
-var aTime = 50;
-
-layer = layer_create(-1000, "guitar");
+// stats
+isPaused = false;  // boolean that checks if game is paused
+isExiting = false;  // boolean that check if minigame is over
+pauseSpd = 0;  // speed of notes before they are paused
+reps = 0;  // number of notes gotten by player
+maxReps = 0;  // total number of notes in each song
+var delay = 80;  // alarm time before notes start appearing
+var aTime = 50;  // alarm time before music starts playing
+var extra = 0;  // extra time added to the alarm
+layer = layer_create(-199, "guitar");  // assigns layer to stuff drawn by objGuitar
+selection = "no";  // selection for pausing
+exitSpd = 2;  // speed at which player sprite exits
+msg = [""];  // message to give to player after workout
+levelsToAdd = 0;  // levels to give the player after workout
+alarmTemp = 0;  // hold alarm time when pausing
+blackOut = false;  // the player blacks out when fatigue >= 100
 
 // write the songs bro
 notes1 = [  // [position, length] - Leg Novice
@@ -50,7 +60,7 @@ notes1 = [  // [position, length] - Leg Novice
 	[3, 8],[2,4],[1,4],[0,2],[1,4],[0,2],[0,4],
 	[0,6],[1,4],[0,2],[0,4], [0,6],[1,4],[2,2],[1,4],
 	[3,4],[3,6],[3,4],[3,4],
-	[3,4],[3,4],[3,4],[3,4],[3,4]
+	[3,4],[3,4],[3,4],[3,4],[3,2],[3,2]
 ]
 notes2 = [  // [position, length] - push intermediate
 	// verse 1
@@ -220,8 +230,6 @@ notes3 = [
 if (!variable_global_exists("chapter")) { global.chapter = 1; }
 if (!variable_global_exists("workout")) { global.workout = "novice leg"; }
 
-var extra;
-// global.workout = "advanced pull";
 switch(global.workout) {
 	case "novice leg":
 		extra = -20;
@@ -235,14 +243,18 @@ alarm[0] = aTime + delay  // play the wav file
 alarm[1] = delay + extra;  // make the notes
 alarm[2] = delay/2;  // create the picks
 
-pFinalX = camX;
-playerX = camX + 480;
+// variables for drawing stuff
+pFinalX = 96
+playerX = 480 + 96;
 playerMove = false;
 imgIndex = 0;
+image_speed = 0;
+tempImgSpd = 0;
+levelUpY = -1;
+levelUpAlpha = 0;
+drawFatigue = global.stats.fatigue;
+deadY = -1;  // draws the player fading when he's dead
 
-image_index = 0;
-
-debug(global.workout);
 switch(global.workout) {
 	case "novice leg":
 		song = sndRhythmLegNovice;
@@ -256,4 +268,76 @@ switch(global.workout) {
 	default: 
 		song = sndRhythmPullAdvanced;
 		break;
+}
+
+function exitMinigame() {
+	// returns to previous room and stuff
+
+	/*gmlive*/if (TEST) { if (live_call()) return live_result; }
+
+	instance_destroy(objNote);
+	isExiting = true;
+}
+
+function finishExit() {
+	// turns everything back to normal before ending the minigame
+
+	// destroy the guitar picks
+	instance_destroy(objPick);
+	with (objPlayer) {
+		// let the player move again
+		alarm[1] = 1;
+		image_alpha = 1;
+	}
+	with (objMusic) {
+		// ensure the guitar music is finished
+		if (audio_is_playing(workoutMusicBT)) { audio_stop_sound(workoutMusicBT); }
+		if (audio_is_playing(workoutMusicLead)) { audio_stop_sound(workoutMusicLead); }
+		
+		// resume the music
+		audio_resume_sound(soundID);
+		audio_sound_gain(soundID, 1, 200);
+	}
+	// add on to message if the player leveled up
+	if (levelsToAdd > 0) {
+		array_push(msg, $"{global.characterName}'s muscles have grown!");
+		switch (global.workout) {
+			case "novice leg":
+				array_push(msg, $"Legs: {global.stats.legs} -> {global.stats.legs + levelsToAdd}");
+				global.stats.legs += levelsToAdd;
+				if (global.stats.legs >= 30) { global.PRs[2].weight = "405 x "; }
+				else if (global.stats.legs >= 20 && global.PRs[2].weight != " 405 x ") { global.PRs[2].weight = "315 x "; }
+				if (reps > global.PRs[2].reps) { global.PRs[2].reps = reps; }
+				break;
+		}
+	}
+	// show message to player
+	instance_create_layer(x, y, "Instances", objTextbox, {
+		text: msg,
+		npcID: -1
+	});
+	// destroy this object
+	instance_destroy();
+}
+
+function incrementReps() {
+	// increments rep count and potentially levels up
+
+	/*gmlive*/if (TEST) { if (live_call()) return live_result; }
+
+	reps++;
+
+	if (global.workout == "novice leg") {
+		if ((reps % 10 == 0 && reps != 100)) {
+			// only improve legs if the player isn't sufficiently leveled already
+			if (10 + (2 * (reps div 10 )) > global.stats.legs) { 
+				levelsToAdd = levelUp(levelsToAdd, 2); 
+				image_alpha = 0;
+			}
+		}
+		else if (reps == 103 && global.stats.legs < 30) { 
+			levelsToAdd = levelUp(levelsToAdd, 2); 
+			image_alpha = 0;
+		}
+	}
 }

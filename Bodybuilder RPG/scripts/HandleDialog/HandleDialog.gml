@@ -479,19 +479,25 @@ function HandleDialog(){
 					case "squat rack":
 						if (!global.keyEvents.meetJim) {
 							text = [
-								[
-									"An empty combo rack with a barbell."
-								]
+								"An empty combo rack with a barbell."
 							];
-							break;
 						}
-						text = [
-							[
-								"An empty combo rack with a barbell.", 
-								"Hit some squats?"
-							]
-						]
-						prompt = ["Yes", "No", "squat"];
+						else {
+							if (global.stats.legs >= 30) {
+								text = [
+									"An empty combo rack with a barbell.", 
+									"You've already maxed out your potential for squats...",
+									"Hit some squats anyway?"
+								];
+							}
+							else {
+								text = [
+									"An empty combo rack with a barbell.", 
+									"Hit some squats?"
+								];
+							}
+							prompt = ["Yes", "No", "squat"];
+						}
 						break;
 					// treadmill
 					case "treadmill":
