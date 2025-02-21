@@ -341,7 +341,7 @@ switch (selection) {
             });
 
             // projectiles
-            if (projectile.sprNum != -1) {
+            if (projectile.itemX != -1) {
                 projectile.draw = true;
             }
 

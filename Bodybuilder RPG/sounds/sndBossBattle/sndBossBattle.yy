@@ -1,6 +1,6 @@
 {
   "$GMSound":"",
-  "%Name":"sndSulik",
+  "%Name":"sndBossBattle",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -9,8 +9,8 @@
   "bitRate":128,
   "compression":3,
   "conversionMode":0,
-  "duration":80.0,
-  "name":"sndSulik",
+  "duration":49.666668,
+  "name":"sndBossBattle",
   "parent":{
     "name":"OST",
     "path":"folders/4 Music/OST.yy",
@@ -19,7 +19,7 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"sndSulik.wav",
+  "soundFile":"sndBossBattle.wav",
   "type":1,
   "volume":1.0,
 }

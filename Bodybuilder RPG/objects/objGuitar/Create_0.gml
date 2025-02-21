@@ -5,6 +5,9 @@
 // stop whatever music is currently playing
 if (instance_exists(objMusic)) {objMusic.workout(); }
 
+// set the return room for if the player dies
+global.returnRoom = room;
+
 // get camera position
 var camX = camera_get_view_x(view_camera[0]);
 var camY = camera_get_view_y(view_camera[0]);

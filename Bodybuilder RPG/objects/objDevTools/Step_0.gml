@@ -1,7 +1,11 @@
 if (global.devTools) {
 	if (keyboard_check_pressed(ord("G"))) { game_restart(); }
 	if (keyboard_check_pressed(ord("Q"))) { debug(global.keyEvents); }
-	if input_check_pressed("l1") { if (!instance_exists(objGuitar)) initiateBattle(true); }
+	if input_check_pressed("l1") { 
+		if (!instance_exists(objGuitar) && !instance_exists(objBattle)) {
+			initiateBattle(true); 
+		}
+	}
     if (keyboard_check_pressed(ord("U"))) { global.ultimate = global.ultimate ? false : true; }
 	if (keyboard_check_pressed(ord("R"))) { room_restart(); }
 	if (keyboard_check_pressed(ord("F"))) { showDevTools = showDevTools ? false : true; }

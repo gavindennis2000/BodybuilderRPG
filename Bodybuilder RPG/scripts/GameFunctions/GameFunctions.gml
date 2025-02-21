@@ -4,6 +4,7 @@ function initiateBattle(special = false, song = sndBattle) {
     // random encounters only happen in the overworld
     // unless there is a special condition
     if (room != rOverworld && !special ) { exit; }
+    if (instance_exists(objBattle)) { exit; }
         
     // update the global statuses
     global.battle = true;
@@ -12,7 +13,7 @@ function initiateBattle(special = false, song = sndBattle) {
     global.returnRoom = room;
     
     // play the battle music
-    if (instance_exists(objMusic)) {
+    if (instance_exists(objMusic) && !global.silenceMusic) {
         with (objMusic) {
             audio_pause_sound(soundID);
             audio_play_sound(sndStartBattle, 1, false, 1);
@@ -31,8 +32,11 @@ function initiateBattle(special = false, song = sndBattle) {
             global.enemies.dyel,
             global.enemies.gymbro,
             global.enemies.gymbro,
-            global.enemies.strongman,
         ];
+        if (global.statsMax[1] >= 15) {
+            array_push(enemy, global.enemies.strongman);
+        }
+        else debug($"not strong enough for strongman; max: {global.statsMax[1]}");
         if (global.statsMax[1] >= 20) {
             array_push(enemy, global.enemies.stoiclifter);
             array_push(enemy, global.enemies.stoiclifter);

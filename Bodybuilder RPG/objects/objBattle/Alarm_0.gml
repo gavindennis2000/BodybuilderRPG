@@ -1,4 +1,4 @@
-// increase fadeblack when going back to old room
+// go back to previous room
 
 /*gmlive*/if (TEST) { if (live_call()) return live_result; }
 if (instance_exists(objTextbox)) {

@@ -4,11 +4,10 @@
 
 if (fadeAlpha < 1) {
 	canMove = false;
-	depth = -999;
-	fadeAlpha += 0.2;
+	depth = -1000;
+	fadeAlpha += 0.1;
 	alarm[4] = 2;
 }
 else {
 	room_goto(rGameOver);
-	instance_destroy();
 }

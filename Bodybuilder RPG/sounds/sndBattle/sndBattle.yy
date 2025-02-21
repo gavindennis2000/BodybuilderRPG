@@ -7,7 +7,7 @@
   },
   "bitDepth":1,
   "bitRate":128,
-  "compression":1,
+  "compression":3,
   "conversionMode":0,
   "duration":50.823536,
   "name":"sndBattle",

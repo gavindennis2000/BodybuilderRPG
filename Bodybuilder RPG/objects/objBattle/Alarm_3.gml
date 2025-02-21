@@ -1,14 +1,16 @@
-// handle death
+// handle battle victory
 
 /*gmlive*/if (TEST) { if (live_call()) return live_result; }
 
-if (audio_sound_get_gain(global.battleSong) > 0) {
+if (audio_is_playing(sndDeath)) {
+    alarm[3] = 1;
+}
+
+else if (audio_sound_get_gain(global.battleSong) > 0) {
     audio_sound_gain(global.battleSong, 0, 500);
     alarm[3] = 40;
 }
-else if (audio_is_playing(sndDeath)) {
-    alarm[3] = 1;
-}
+
 else if (turn == "win") {
     // play the fanfare
     audio_play_sound(sndFanfare, 1, true);
@@ -112,20 +114,4 @@ else if (turn == "win") {
 
     // go back to the previous room
     alarm[0] = 1;
-}
-
-else if (turn == "lose") {
-    // play the fanfare
-    // audio_play_sound(sndFanfare, 1, true);
-
-    // game over text
-    instance_create_layer(x, y, "Instances", objTextbox, {
-        text: [
-            $"{global.characterName} blacked out.",
-            "Try Again?"
-        ],
-        prompt: [
-            "Yes", "No", "game over"
-        ]
-    })
 }

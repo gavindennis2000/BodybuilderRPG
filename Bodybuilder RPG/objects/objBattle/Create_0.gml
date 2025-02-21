@@ -1,6 +1,6 @@
 /*gmlive*/if (TEST) { if (live_call()) return live_result; }
     
-layer = layer_create(-1000, "battle");
+layer = layer_create(-998, "battle");
 camAngle = real(camera_get_view_angle(view_camera[0]));
 whiteIncrease = 0;
 fadeWhite = 0;
@@ -109,7 +109,8 @@ ultimateAlpha = 0
 projectile = {
     draw: false,
     spr: sprItems,
-    sprNum: -1,
+    itemX: -1,
+    itemY: -1,
     imgIndex: 0,
     x: enemy.x,
     y: enemy.y,
@@ -293,6 +294,7 @@ function enemyMove(m) {
             
             break;
         case "Release":
+            // strongman throws atlas stone
             // special effects
             playSound(sndUseSkill);
             skillFlash("enemy");
@@ -300,7 +302,8 @@ function enemyMove(m) {
             // projectile
             projectile.x = enemy.x;
             projectile.y = enemy.y;
-            projectile.sprNum = 10;
+            projectile.itemX = 0;
+            projectile.itemY = 1;
             
             // do all the enemy attack stuff
             enemySkill(m);
@@ -557,11 +560,13 @@ function move(m) {
     }
 }
 
-function playerDead() {
+playerDead = function() {
     playSound(sndDeath);
-    turn = "lose";
     deadY = 0;
-    alarm[3] = 60;
+    // prepare to fade the room
+    with (objPlayer) { alarm[4] = 180;  }
+    // slow the music
+    with(objMusic) { slowDown(global.battleSong); }
 }
 
 function screenShake() {

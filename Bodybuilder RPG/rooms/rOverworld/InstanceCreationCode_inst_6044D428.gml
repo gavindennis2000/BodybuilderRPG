@@ -1,2 +1,0 @@
-npcID = "harvey";
-HandleDialog();

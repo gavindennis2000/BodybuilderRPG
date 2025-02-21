@@ -491,6 +491,7 @@
     {"id":{"name":"snd321go","path":"sounds/snd321go/snd321go.yy",},},
     {"id":{"name":"sndBattle","path":"sounds/sndBattle/sndBattle.yy",},},
     {"id":{"name":"sndBattleReady","path":"sounds/sndBattleReady/sndBattleReady.yy",},},
+    {"id":{"name":"sndBossBattle","path":"sounds/sndBossBattle/sndBossBattle.yy",},},
     {"id":{"name":"sndCentralPrairie","path":"sounds/sndCentralPrairie/sndCentralPrairie.yy",},},
     {"id":{"name":"sndCriticalAttack","path":"sounds/sndCriticalAttack/sndCriticalAttack.yy",},},
     {"id":{"name":"sndCursor","path":"sounds/sndCursor/sndCursor.yy",},},

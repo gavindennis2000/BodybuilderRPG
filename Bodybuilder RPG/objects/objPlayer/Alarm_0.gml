@@ -1,5 +1,7 @@
+// go to room from door
+
 /*gmlive*/if (TEST) { if (live_call()) return live_result; }
-///@description go to room from door
+
 if (fadeAlpha < 1) {
 	canMove = false;
 	depth = -200;

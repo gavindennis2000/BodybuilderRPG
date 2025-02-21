@@ -47,7 +47,7 @@ if (room == rBattle) {
 
     // draw enemy projectiles
     if (projectile.draw) {
-        draw_sprite_part_ext(projectile.spr, projectile.imgIndex, projectile.sprNum*32, 0, 32, 32, projectile.x, projectile.y, scale, scale, c_white, 0.75);
+        draw_sprite_part_ext(projectile.spr, projectile.imgIndex, projectile.itemX*32, projectile.itemY*32, 32, 32, projectile.x, projectile.y, scale, scale, c_white, 0.75);
         projectile.x -= 1.75*projectile.spd;
         projectile.y += projectile.spd;
     }
@@ -57,26 +57,33 @@ if (room == rBattle) {
         // draw the player fading
         draw_sprite_part_ext(player.spr, player.imgSpd, 32*global.outfit.color, 0, 32, 32 - deadY, player.x, player.y, scale, scale, c_black, 0.7);
         // player's hair
-        draw_sprite_part_ext(player.hair, player.imgSpd, 32*global.outfit.hair, 0, 32, 40 - deadY, player.x, player.y - 8, scale, scale, c_black, 0.7);
+        draw_sprite_part_ext(player.hair, player.imgSpd, 32*global.outfit.hair, 0, 32, 40 - deadY - 8, player.x, player.y - 8, scale, scale, c_black, 0.7);
         if (deadY < 40) {
             deadY++;
         }
     }
     else {
-        // the player flashes white when using a skill
         if (pSkillAlpha < 1) {
+            // the player flashes white when using a skill
             var oldFog = gpu_get_fog();
             gpu_set_fog(true, pSkillColor, 0, 0);
             draw_sprite_part_ext(player.spr, player.imgSpd, 32*global.outfit.color, 0, 32, 32, player.x, player.y, scale, scale, c_white, 1);
-            // draw the player's hair
-            draw_sprite_part_ext(player.hair, player.imgSpd, 32*global.outfit.hair, 0, 32, 40, player.x, player.y - 8, scale, scale, hairColor, 1);
             // reset the fog
             gpu_set_fog(oldFog[0], oldFog[1], oldFog[2], oldFog[3]);
         }
         // draw the player
         draw_sprite_part_ext(player.spr, player.imgSpd, 32*global.outfit.color, 0, 32, 32, player.x, player.y, scale, scale, c_white, pSkillAlpha);
+        if (pSkillAlpha < 1) {
+            // the player's hair
+            var oldFog = gpu_get_fog();
+            gpu_set_fog(true, pSkillColor, 0, 0);
+            // draw the player's hair
+            draw_sprite_part_ext(player.hair, player.imgSpd, 32*global.outfit.hair, 0, 32, 40, player.x, player.y - 8, scale, scale, hairColor, 1);
+            // reset the fog
+            gpu_set_fog(oldFog[0], oldFog[1], oldFog[2], oldFog[3]);
+        }
         // draw the player's hair
-        draw_sprite_part_ext(player.hair, player.imgSpd, 32*global.outfit.hair, 0, 32, 40, player.x, player.y - 8, scale, scale, hairColor, pSkillAlpha + 0.5);
+        draw_sprite_part_ext(player.hair, player.imgSpd, 32*global.outfit.hair, 0, 32, 40, player.x, player.y - 8, scale, scale, hairColor, pSkillAlpha);
     }
 
     // move the players

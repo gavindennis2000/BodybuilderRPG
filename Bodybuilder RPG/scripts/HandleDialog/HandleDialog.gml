@@ -74,7 +74,21 @@ function HandleDialog(){
 		switch (global.chapter) {
 			case 1:
 				switch (npcID) {
-							
+					// old person 1
+					case "old person 1":
+						text = [
+							"This weather would be perfect for sailing across the lake.",
+							"I used to have a yacht, but I donated all of my possessions to the church in Highland.",
+							"That's right! I might not look like it but I'm a bodybuilder too!",
+							"I'm trying to collect the three Strength Stones to form the Power Polygon before I die!",
+							""
+						];
+						prompt = [
+							"Strength Stones?",
+							"Power Polygon?",
+							"ask about strength stones"
+						]
+						break;
 					// mom
 					case "mom":
 						if (!global.keyEvents.meetJim) {

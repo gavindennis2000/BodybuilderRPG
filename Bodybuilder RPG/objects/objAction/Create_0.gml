@@ -1,7 +1,40 @@
 /*gmlive*/if (TEST) { if (live_call()) return live_result; }
 
 var txt = "";
+
+textbox = function(txt) {
+	instance_create_layer(x, y, layer, objTextbox, { text: txt });
+}
+
 switch(prompt) {
+	case "ask about strength stones":
+		if (selection == 0) {
+			// strength stones
+			txt = [
+				"The Strength Stones are bestowed to the individuals with the most impressive muscles groups.",
+				"They are held by the three bodybuilding titans of the land.",
+				"One possesses the most proud of chests...",
+				"Another a mountainous tortilla chip shaped back...",
+				"And the last a succulent pair of thighs.",
+				"In my old age I doubt I could even challenge these titans.",
+				"But I won't feel fulfilled unless I try my absolute hardest!"
+			];
+		}
+		else {
+			// power polygon
+			txt = [
+				"Legend says that the one who possesses all three of the Strength Stones can achieve ultimate mass.",
+				"The three stones combine to form the Power Polygon! A beautiful relic indeed.",
+				"But this will only happen if the person is deemed worthy by the God of Gains.",
+				"A young lifter from Dairygold named Sulik had greater muscles than all the Stone bearers",
+				"But the Power Polygon deemed him unworthy due to his lack of heart.",
+				"Or maybe he was using steroids... I don't remember.",
+				"I'm just a crazy old man, I might be making all this stuff up."
+
+			];
+		}
+		textbox(txt);
+		break;
 	case "ask about strongman":
 		// get the right text based on the selection
 		txt = [""];
@@ -95,8 +128,13 @@ switch(prompt) {
 	case "game over":
 		if (selection == 0) {
 			// try again
+			// reset the fatigue and ultimate stats
 			global.stats.fatigue = 0;
-			room_goto(rMom);
+			global.stats.ultimate = 0;
+			// set the return room to mom's house if dying at the overworld
+			if (global.returnRoom == rOverworld) { global.returnRoom = rMom; }
+			// return to the previous room
+			room_goto(global.returnRoom);
 		}
 		else if (selection == 1) {
 			// exit to main menu

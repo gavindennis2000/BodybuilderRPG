@@ -13,6 +13,9 @@ workoutMusicLead = -1  // isolated guitar track during guitar workouts
 musicBuffer = -1;  // holds music for functions
 
 // set the loop points of each song
+// boss theme
+audio_sound_loop_start(sndBossBattle, 5);
+audio_sound_loop_end(sndBossBattle, 49.667);
 // pump palace
 audio_sound_loop_start(sndPumpPalace, 42);
 audio_sound_loop_end(sndPumpPalace, 2*60 + 50);
@@ -101,9 +104,14 @@ function playGuitar(start = 0) {
 function playMusic() {
 	// plays the current song
 
+	if (global.silenceMusic) {
+		// if dev tool is flagged, don't play any music
+		exit;
+	}
+
 	/*gmlive*/if (TEST) { if (live_call()) return live_result; }
     
-    // don't interupt the battle music
+    // don't interrupt the battle music
     if (audio_is_playing(sndBattle)) { exit; }
 	
 	if (current == previous) { 
@@ -145,7 +153,7 @@ slowDown = function(song) {
 	if (!audio_is_playing(song)) { exit; }
 
 	var pitch = audio_sound_get_pitch(song);
-	audio_sound_pitch(song, pitch/1.005);
+	audio_sound_pitch(song, pitch/1.0025);
 
 	// load the song into music buffer
 	musicBuffer = song;

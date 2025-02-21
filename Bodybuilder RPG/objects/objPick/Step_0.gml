@@ -6,7 +6,9 @@ missNote = function() {
 	objMusic.missNote();
 	playSound(sndMiss);
 	with (objGuitar) { image_speed = 0; }
-	global.stats.fatigue += 1;
+	if (instance_exists(objNote)) {
+		global.stats.fatigue += 1;
+	}
 }
 
 if (objGuitar.isPaused || objGuitar.blackOut) {
@@ -38,7 +40,8 @@ if (press) {
 		else { 
 			missNote();
 		}
-	} else { 
+	} 
+	else { 
 		missNote();
 	}
 }

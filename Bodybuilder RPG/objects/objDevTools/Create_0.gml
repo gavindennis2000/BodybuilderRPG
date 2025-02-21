@@ -2,6 +2,7 @@ if (!TEST) { instance_destroy(); }
 
 global.devTools = true;
 global.ultimate = false;
+global.silenceMusic = true;
 showKeyEvents = false;
 showDevTools = false;
 live = false;

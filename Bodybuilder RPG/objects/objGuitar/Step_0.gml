@@ -15,7 +15,9 @@ if (global.stats.fatigue >= 100 && !blackOut) {
     blackOut = true;
     deadY = 0;
     playSound(sndDeath);
-    alarm[4] = 120;
+    with (objPlayer) {
+        alarm[4] = 180;
+    }
     with(objMusic) {
         audio_stop_sound(workoutMusicLead);
         slowDown(workoutMusicBT);
