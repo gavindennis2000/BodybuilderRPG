@@ -106,6 +106,7 @@
     {"id":{"name":"objBattle","path":"objects/objBattle/objBattle.yy",},},
     {"id":{"name":"objBlank","path":"objects/objBlank/objBlank.yy",},},
     {"id":{"name":"objCamera","path":"objects/objCamera/objCamera.yy",},},
+    {"id":{"name":"objCardio","path":"objects/objCardio/objCardio.yy",},},
     {"id":{"name":"objController","path":"objects/objController/objController.yy",},},
     {"id":{"name":"objDevTools","path":"objects/objDevTools/objDevTools.yy",},},
     {"id":{"name":"objDoor","path":"objects/objDoor/objDoor.yy",},},

@@ -339,7 +339,6 @@ switch (selection) {
                     textBuffer
                 ]
             });
-
             // projectiles
             if (projectile.itemX != -1) {
                 projectile.draw = true;

@@ -119,7 +119,7 @@ projectile = {
 // screen shake
 shakeValue = 0;
 
-function calculateDamage(muscleGroup, coefficient = 0) {
+calculateDamage = function(muscleGroup, coefficient = 0) {
     // calculates damage based on muscle group
     // and enemy's strengths/weaknesses
 
@@ -154,14 +154,14 @@ function calculateDamage(muscleGroup, coefficient = 0) {
     return round(dmg * rand);
 }
 
-function dead() {
+dead = function() {
     playSound(sndDeath);
     turn = "win";
     deadY = 0;
     alarm[3] = 60;
 }
 
-function endEnemyTurn() {
+endEnemyTurn = function() {
     // resets everything for the player's turn
 
     if TEST { if (live_call()) return live_result; }
@@ -202,7 +202,7 @@ function endEnemyTurn() {
     turn = "player";
 }
 
-function enemyMove(m) {
+enemyMove = function(m) {
     if TEST { if (live_call(m)) return live_result; }
     // the enemy's move
 
@@ -401,7 +401,7 @@ function enemyMove(m) {
     }
 }
 
-function enemySkill(m, sfx = sndScreenShake) {
+enemySkill = function(m, sfx = sndScreenShake) {
     // used for the bulk of enemy attacks
     // takes attack and sound effect as argument
 
@@ -427,7 +427,7 @@ function enemySkill(m, sfx = sndScreenShake) {
     alarm[1] = 15;
 }
 
-function enemyTurn() {
+enemyTurn = function() {
     // handle the enemy's turn
     if TEST { if (live_call()) return live_result; }
 
@@ -443,7 +443,7 @@ function enemyTurn() {
     }
 }
 
-function getColor(select) {
+getColor = function(select) {
     // finds the correct color for menu options
     
     /*gmlive*/if (TEST) { if (live_call(select)) return live_result; }
@@ -465,14 +465,14 @@ function getColor(select) {
     return color;
 }
 
-function goBack() {
+goBack = function() {
     // goes back to previous room
 
     alarm[0] = 1;
     audio_sound_gain(global.battleSong, 0, 1000);
 }
 
-function move(m) {
+move = function(m) {
     if TEST { if (live_call(m)) return live_result; }
     // the player's move
 
@@ -569,7 +569,7 @@ playerDead = function() {
     with(objMusic) { slowDown(global.battleSong); }
 }
 
-function screenShake() {
+screenShake = function() {
     // make the whole screen shake!
     // man, I could really use a milkshake
 
@@ -577,7 +577,7 @@ function screenShake() {
     if (sfxBuffer != -1) playSound(sfxBuffer);
 }
 
-function skillFlash(type, move = "skill") {
+skillFlash = function(type, move = "skill") {
     // flash the enemy or player when using a skill
     var color = c_white;
     switch (move) {

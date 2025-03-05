@@ -77,6 +77,16 @@ switch(prompt) {
 			npcID: -1
 		});
 		break;
+	case "cardio":
+		// play games on the treadmill
+		if (selection == 0) {
+			with (objPlayer) {
+				canMove = false;
+				alarm[2] = 1;
+				global.workout = "cardio";
+			}
+		}
+		break;
 	case "db bench":
 		// hit some dumbbell bench
 		if (selection == 0) {

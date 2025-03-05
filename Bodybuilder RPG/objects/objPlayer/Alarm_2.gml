@@ -16,5 +16,8 @@ else {
         case "advanced pull":
             instance_create_layer(x, y, "Instances", objGuitar);
             break;
+        case "cardio":
+            instance_create_layer(x, y, "Instances", objCardio);
+            break;
     }
 }
