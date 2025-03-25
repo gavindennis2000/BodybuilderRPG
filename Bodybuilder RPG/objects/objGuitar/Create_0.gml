@@ -3,7 +3,7 @@
 /*gmlive*/if (TEST) { if (live_call()) return live_result; }
 
 // stop whatever music is currently playing
-if (instance_exists(objMusic)) {objMusic.workout(); }
+if (instance_exists(objMusic)) {objMusic.preMinigame(); }
 
 // set the return room for if the player dies
 global.returnRoom = room;

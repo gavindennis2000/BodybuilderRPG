@@ -1,4 +1,25 @@
-if (!instance_exists(objPlayer)) { follow = noone; }
+/*gmlive*/if (TEST) { if (live_call()) return live_result; }
+
+if (!instance_exists(objPlayer)) { 
+	follow = noone; 
+}
+
+var showRoomAndPlayMusic = function() {
+	with (objController) { showRoom(); }
+	if (room == rOverworld) {
+		// play the right overworld music
+		with (objMusic) {
+			var newSong = getCurrentSong();
+			// debug($"new song: {audio_get_name(newSong)} current {audio_get_name(current)}");
+			if (newSong != current && global.prevRoom != -1) {
+				previous = current;
+				current = getCurrentSong();
+				roomEnd();
+				alarm[0] = 30;
+			}
+		}
+	}
+}
 
 if (follow != noone) {
 	xTo = follow.x + 16;
@@ -29,41 +50,41 @@ if (room == rOverworld && instance_exists(objPlayer)) {
 			with (objController) { showRoom(); }
 		}
 		else if (objPlayer.y >= 1152 and objPlayer.y < 1152*2) {
-			town = "nesleigh";
+			town = "creatinea";
 			
 			global.prevRoom = global.roomVar;
-			global.roomVar = "Nesleigh";
-			with (objController) { showRoom(); }
+			global.roomVar = "Creatinea";
+			showRoomAndPlayMusic()
 		}
 		else {
 			town = "end of the world sw";
 			
 			global.prevRoom = global.roomVar;
 			global.roomVar = "The End of the World";
-			with (objController) { showRoom(); }
+			showRoomAndPlayMusic()
 		}
 	} else if (objPlayer.x >= 1920 and objPlayer.x < 1920*2) {  
 		// middle of the world
 		if (objPlayer.y < 1152) {
-			town = "dairygold";
+			town = "anabolic heights";
 			
 			global.prevRoom = global.roomVar;
-			global.roomVar = "Dairygold";
-			with (objController) { showRoom(); }
+			global.roomVar = "Anabolic Heights";
+			showRoomAndPlayMusic()
 		}
 		else if (objPlayer.y >= 1152 and objPlayer.y < 1152*2) {
 			town = "central prairie";
 			
 			global.prevRoom = global.roomVar;
 			global.roomVar = "Central Prairie";
-			with (objController) { showRoom(); }
+			showRoomAndPlayMusic()
 		}
 		else {
-			town = "great valliou";
+			town = "wheyford";
 			
 			global.prevRoom = global.roomVar;
-			global.roomVar = "Great Valliou";
-			with (objController) { showRoom(); }
+			global.roomVar = "Wheyford";
+			showRoomAndPlayMusic()
 		}
 	} else if (objPlayer.x >= 1920*2) {  
 		// right side of the world
@@ -72,21 +93,21 @@ if (room == rOverworld && instance_exists(objPlayer)) {
 			
 			global.prevRoom = global.roomVar;
 			global.roomVar = "The End of the World";
-			with (objController) { showRoom(); }
+			showRoomAndPlayMusic()
 		}
 		else if (objPlayer.y >= 1152 and objPlayer.y < 1152*2) {
-			town = "highland";
+			town = "leangroundburg";
 			
 			global.prevRoom = global.roomVar;
-			global.roomVar = "Highland";
-			with (objController) { showRoom(); }
+			global.roomVar = "Leangroundburg";
+			showRoomAndPlayMusic()
 		}
 		else {
 			town = "end of the world se";
 			
 			global.prevRoom = global.roomVar;
 			global.roomVar = "The End of the World";
-			with (objController) { showRoom(); }
+			showRoomAndPlayMusic()
 		}
 	}
 	
@@ -97,7 +118,7 @@ if (room == rOverworld && instance_exists(objPlayer)) {
 			townX = 0;
 			townY = 0;
 			break;
-		case "dairygold":
+		case "anabolic heights":
 			townX = townW;
 			townY = 0;
 			break;
@@ -106,7 +127,7 @@ if (room == rOverworld && instance_exists(objPlayer)) {
 			townY = 0;
 			break;
 			
-		case "nesleigh":
+		case "creatinea":
 			townX = 0;
 			townY = townH;
 			break;
@@ -114,7 +135,7 @@ if (room == rOverworld && instance_exists(objPlayer)) {
 			townX = townW;
 			townY = townH;
 			break;
-		case "highland":
+		case "leangroundburg":
 			townX = townW * 2;
 			townY = townH;
 			break;
@@ -123,7 +144,7 @@ if (room == rOverworld && instance_exists(objPlayer)) {
 			townX = townW * 0;
 			townY = townH * 2;
 			break;
-		case "great valliou":
+		case "wheyford":
 			townX = townW;
 			townY = townH * 2;
 			break;

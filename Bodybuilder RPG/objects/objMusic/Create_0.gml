@@ -13,14 +13,16 @@ workoutMusicLead = -1  // isolated guitar track during guitar workouts
 musicBuffer = -1;  // holds music for functions
 
 // set the loop points of each song
-// boss theme
-audio_sound_loop_start(sndBossBattle, 5);
-audio_sound_loop_end(sndBossBattle, 49.667);
-// pump palace
-audio_sound_loop_start(sndPumpPalace, 42);
-audio_sound_loop_end(sndPumpPalace, 2*60 + 50);
+	// boss theme
+	audio_sound_loop_start(sndBossBattle, 5);
+	audio_sound_loop_end(sndBossBattle, 49.667);
+	// brawn patrol
+	audio_sound_loop_start(sndBrawnPatrol, 10.667);	
+	// pump palace
+	audio_sound_loop_start(sndPumpPalace, 42);
+	audio_sound_loop_end(sndPumpPalace, 2*60 + 50);
 
-function cutscene(song = sndError) {
+cutscene = function(song = sndError) {
     if (audio_sound_get_gain(soundID) > 0) {
         next = song;
         audio_sound_gain(soundID, 0, 500);
@@ -35,6 +37,37 @@ function cutscene(song = sndError) {
     }
 }
 
+getCurrentSong = function() {
+	// get's current song at start of room
+	var current = -1;
+	switch (room) {
+		case rOverworld:
+			switch (global.roomVar) {
+				case "Wheyford":
+					current = sndWheyford;
+					break;
+				case "Anabolic Heights":
+					current = sndAnabolicHeights;
+					break;
+				case "Central Prairie":
+				default:
+					current = sndCentralPrairie
+					break;
+			}
+			break;
+		case rHouse:
+			current = (global.roomID == "mom") ? sndMom : sndCentralPrairie;
+			break;
+		case rMom:
+			current = sndMom
+			break;
+		case rPumpPalace:
+			current = sndPumpPalace
+			break;
+	}
+	return current;
+}
+
 function hitNote() {
 	audio_sound_gain(workoutMusicLead, 1, 0);
 }
@@ -43,7 +76,7 @@ function missNote() {
 	audio_sound_gain(workoutMusicLead, 0, 0);
 }
 
-function pauseGuitar() {
+function pauseMinigame() {
 	// pauses and resumes guitar songs
 
 	switch(global.workout) {
@@ -72,17 +105,18 @@ function pauseGuitar() {
 	}
 }
 
-function playGuitar(start = 0) {
+function playMinigame(start = 0) {
 	// play the lead and backing tracks
 
-	var bt, lead, pos = start;
+	if (global.silenceMusic) {
+		// if dev tool is flagged, don't play any music
+		exit;
+	}
+	
+	var bt, lead, pos = start, loop = false;
 	
 	switch(global.workout) {
-		case "novice leg":
-		default:
-			bt = sndRhythmLegNovice;
-			lead = sndLeadLegNovice;
-			break;
+		
 		case "intermediate push":
 			bt = sndRhythmPushIntermediate;
 			lead = sndLeadPushIntermediate;
@@ -91,14 +125,27 @@ function playGuitar(start = 0) {
 			bt = sndRhythmPullAdvanced;
 			lead = sndLeadPullAdvanced;
 			break;
+		case "cardio":
+			bt = sndBrawnPatrol
+			audio_sound_gain(sndBrawnPatrol, 1, 0);
+			lead = -1;
+			loop = true;
+			break;
+		case "novice leg":
+		default:
+			bt = sndRhythmLegNovice;
+			lead = sndLeadLegNovice;
+			break;
 	}
 	
 	audio_pause_sound(soundID);
 	
 	audio_sound_set_track_position(bt, pos)
 	audio_sound_set_track_position(lead, pos);
-	workoutMusicBT = audio_play_sound(bt, 1, false);
-	workoutMusicLead = audio_play_sound(lead, 1, false);
+	workoutMusicBT = audio_play_sound(bt, 1, loop);
+	if (lead != -1) {
+		workoutMusicLead = audio_play_sound(lead, 1, loop);
+	}
 }
 
 function playMusic() {
@@ -114,7 +161,12 @@ function playMusic() {
     // don't interrupt the battle music
     if (audio_is_playing(sndBattle)) { exit; }
 	
-	if (current == previous) { 
+	var playing = audio_get_name(soundID);
+	if (current == previous || 
+		playing == sndCentralPrairie ||
+		playing == sndWheyford ||
+		playing == sndAnabolicHeights
+	) { 
 		audio_sound_gain(soundID, 1, 150);  // reset the volume
 		exit; 
 	}
@@ -123,8 +175,14 @@ function playMusic() {
 		audio_stop_sound(previous);
 		audio_stop_sound(current);
 		
-		if (room == rOverworld && !global.cutscene) {
-			audio_sound_set_track_position(current, songTime)
+		if (room == rOverworld && !global.cutscene &&
+			previous != sndAnabolicHeights &&
+			previous != sndCentralPrairie &&
+			previous != sndWheyford) {
+			audio_sound_set_track_position(current, songTime);
+		}
+		else {
+			audio_sound_set_track_position(current, 0);
 		}
 		
 		// play the song
@@ -162,8 +220,8 @@ slowDown = function(song) {
 	else audio_stop_sound(song);
 }
 
-function workout() {
-	// fade the room music when working out
+function preMinigame() {
+	// fade the room music before a minigame
 	
 	audio_sound_gain(soundID, 0, 1000);	
 }

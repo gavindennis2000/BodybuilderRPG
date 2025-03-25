@@ -1,22 +1,14 @@
 if (TEST) { if (live_call()) return live_result; }
 
+if (room == rBattle) { 
+    exit; 
+}
+
 // set previous music
 previous = current;
-
-switch (room) {
-	case rOverworld:
-		current = sndCentralPrairie
-		break;
-	case rHouse:
-		current = (global.roomID == "mom") ? sndMom : sndCentralPrairie;
-		break;
-	case rMom:
-		current = sndMom
-		break;
-	case rPumpPalace:
-		current = sndPumpPalace
-		break;
-}
+current = getCurrentSong();
 
 // play the music
 alarm[0] = 30
+debug(audio_get_name(previous));
+debug(audio_get_name(current));

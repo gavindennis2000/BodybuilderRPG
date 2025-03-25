@@ -4,7 +4,8 @@
 
 // don't draw npc sprites during workout minigames
 if (
-	instance_exists(objGuitar)
+	instance_exists(objGuitar) ||
+	instance_exists(objCardio)
 ) { exit; }
 
 event_inherited();

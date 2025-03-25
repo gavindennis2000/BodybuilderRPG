@@ -8,5 +8,5 @@ if (fadeAlpha > 0) {
 }
 else {
 	depth = -100;
-	canMove = true;
+	canMove = (!instance_exists(objTextbox));
 }

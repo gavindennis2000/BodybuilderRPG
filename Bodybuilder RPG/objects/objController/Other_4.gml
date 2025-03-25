@@ -51,6 +51,10 @@ switch (room) {
 		}
 		break;
 		
+	case rOverworld:
+	case rBattle:
+		break;
+		
 	default: 
 		global.roomVar = -1
 		global.subRoom = -1;

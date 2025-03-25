@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":3,
   "conversionMode":0,
-  "duration":128.0,
+  "duration":117.333336,
   "name":"sndCentralPrairie",
   "parent":{
     "name":"OST",

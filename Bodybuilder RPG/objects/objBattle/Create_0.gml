@@ -175,7 +175,7 @@ endEnemyTurn = function() {
         global.stats.fatigue += playerDamage;
         var ultimateIncrease = round(playerDamage * 0.1);
         if (enemy.attacks[enemy.attackIndex].effect == "ultimate") {
-            debug("ultimate increased");
+            debug("objBattle: ultimate increased");
             ultimateIncrease *= 3;
         }
         global.stats.ultimate += ultimateIncrease;

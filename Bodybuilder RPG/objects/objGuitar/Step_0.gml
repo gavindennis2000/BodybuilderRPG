@@ -55,7 +55,7 @@ if (pause || (confirm && isPaused && selection == "no")) {
     if (isPaused) {
         isPaused = false;
         alarm[3] = alarmTemp;
-        objMusic.pauseGuitar();
+        objMusic.pauseMinigame();
         with (objNote) {
             visible = true;
             spd = other.pauseSpd;
@@ -69,7 +69,7 @@ if (pause || (confirm && isPaused && selection == "no")) {
         debug($"Alarm temp: {alarmTemp}")
         alarm[3] = -1;
         selection = "no";
-        objMusic.pauseGuitar();
+        objMusic.pauseMinigame();
         with (objNote) {
             visible = false;
             other.pauseSpd = spd;

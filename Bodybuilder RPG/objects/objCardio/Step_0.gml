@@ -8,6 +8,7 @@ if (counter1 % 60 == 0)
 // press start to quit
 if (scale == 1 && input_check_pressed("start")) {
     endMinigame = true;
+	audio_sound_gain(sndBrawnPatrol, 0, 500);
 }
 
 if (scale == 0 && endMinigame) {
@@ -17,7 +18,10 @@ if (scale == 0 && endMinigame) {
 		image_alpha = 1;
 	}
 	with (objMusic) {
- 
+		// resume the music
+		audio_stop_sound(sndBrawnPatrol);
+		audio_resume_sound(soundID);
+		audio_sound_gain(soundID, 1, 200);
 	}
 
     // destroy self
