@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":3,
   "conversionMode":0,
-  "duration":120.0,
+  "duration":78.0,
   "name":"sndMom",
   "parent":{
     "name":"OST",

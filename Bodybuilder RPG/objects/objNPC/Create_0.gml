@@ -17,7 +17,7 @@ switch(npcID) {
         faceStart = "up";
         // play sulik's theme
         with (objMusic) {
-            cutscene(sndSulik);
+            cutscene(sndSamuel);
         }
         break;
 }

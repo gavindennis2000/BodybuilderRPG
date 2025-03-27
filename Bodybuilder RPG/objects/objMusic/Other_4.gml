@@ -6,9 +6,9 @@ if (room == rBattle) {
 
 // set previous music
 previous = current;
-current = getCurrentSong();
+if (variable_instance_exists(self, "getCurrentSong")) {
+    current = getCurrentSong();
+}
 
 // play the music
 alarm[0] = 30
-debug(audio_get_name(previous));
-debug(audio_get_name(current));

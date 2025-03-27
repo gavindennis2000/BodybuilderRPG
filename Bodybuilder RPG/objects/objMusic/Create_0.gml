@@ -13,14 +13,9 @@ workoutMusicLead = -1  // isolated guitar track during guitar workouts
 musicBuffer = -1;  // holds music for functions
 
 // set the loop points of each song
-	// boss theme
-	audio_sound_loop_start(sndBossBattle, 5);
-	audio_sound_loop_end(sndBossBattle, 49.667);
-	// brawn patrol
-	audio_sound_loop_start(sndBrawnPatrol, 10.667);	
-	// pump palace
-	audio_sound_loop_start(sndPumpPalace, 42);
-	audio_sound_loop_end(sndPumpPalace, 2*60 + 50);
+SetLoopPoints();
+
+// function definitions below
 
 cutscene = function(song = sndError) {
     if (audio_sound_get_gain(soundID) > 0) {
@@ -49,6 +44,12 @@ getCurrentSong = function() {
 				case "Anabolic Heights":
 					current = sndAnabolicHeights;
 					break;
+				case "Leangroundburg":
+					current = sndLeangroundburg;
+					break;
+				case "Creatine Island":
+					current = sndCreatineIsland;
+					break;
 				case "Central Prairie":
 				default:
 					current = sndCentralPrairie
@@ -68,15 +69,15 @@ getCurrentSong = function() {
 	return current;
 }
 
-function hitNote() {
+hitNote = function() {
 	audio_sound_gain(workoutMusicLead, 1, 0);
 }
 
-function missNote() {
+missNote = function() {
 	audio_sound_gain(workoutMusicLead, 0, 0);
 }
 
-function pauseMinigame() {
+pauseMinigame = function() {
 	// pauses and resumes guitar songs
 
 	switch(global.workout) {
@@ -105,7 +106,7 @@ function pauseMinigame() {
 	}
 }
 
-function playMinigame(start = 0) {
+playMinigame = function(start = 0) {
 	// play the lead and backing tracks
 
 	if (global.silenceMusic) {
@@ -116,7 +117,6 @@ function playMinigame(start = 0) {
 	var bt, lead, pos = start, loop = false;
 	
 	switch(global.workout) {
-		
 		case "intermediate push":
 			bt = sndRhythmPushIntermediate;
 			lead = sndLeadPushIntermediate;
@@ -148,24 +148,28 @@ function playMinigame(start = 0) {
 	}
 }
 
-function playMusic() {
+playMusic = function() {
 	// plays the current song
 
+	/*set up gmlive for this function*/ if (TEST) { if (live_call()) return live_result; }
+
+	// if dev tool is flagged, don't play any music
 	if (global.silenceMusic) {
-		// if dev tool is flagged, don't play any music
 		exit;
 	}
-
-	/*gmlive*/if (TEST) { if (live_call()) return live_result; }
     
     // don't interrupt the battle music
-    if (audio_is_playing(sndBattle)) { exit; }
+    if (audio_is_playing(sndBattle) || audio_is_playing(sndBossBattle)) { 
+		exit; 
+	}
 	
 	var playing = audio_get_name(soundID);
 	if (current == previous || 
 		playing == sndCentralPrairie ||
 		playing == sndWheyford ||
-		playing == sndAnabolicHeights
+		playing == sndAnabolicHeights ||
+		playing == sndLeangroundburg ||
+		playing == sndCreatineIsland
 	) { 
 		audio_sound_gain(soundID, 1, 150);  // reset the volume
 		exit; 
@@ -178,7 +182,10 @@ function playMusic() {
 		if (room == rOverworld && !global.cutscene &&
 			previous != sndAnabolicHeights &&
 			previous != sndCentralPrairie &&
-			previous != sndWheyford) {
+			previous != sndWheyford && 
+			previous != sndLeangroundburg &&
+			previous != sndCreatineIsland
+		) {
 			audio_sound_set_track_position(current, songTime);
 		}
 		else {
@@ -194,7 +201,13 @@ function playMusic() {
 	
 }
 
-function roomEnd() {
+preMinigame = function() {
+	// fade the room music before a minigame
+	
+	audio_sound_gain(soundID, 0, 1000);	
+}
+
+roomEnd = function() {
 	// quiets the music when exiting a room
 	
 	if (room == rOverworld) {
@@ -203,12 +216,15 @@ function roomEnd() {
 	audio_sound_gain(soundID, 0.5, 250)	
 }
 
+
 slowDown = function(song) {
 	// slows down song playing when player blacks out
 
-	/*gmlive*/if (TEST) { if (live_call()) return live_result; }
+	/*gmlive*/if (TEST) { if (live_call(song)) return live_result; }
 	
-	if (!audio_is_playing(song)) { exit; }
+	if (!audio_is_playing(song)) { 
+		exit; 
+	}
 
 	var pitch = audio_sound_get_pitch(song);
 	audio_sound_pitch(song, pitch/1.0025);
@@ -216,12 +232,10 @@ slowDown = function(song) {
 	// load the song into music buffer
 	musicBuffer = song;
 
-	if (pitch > 0.1) { alarm[2] = 1; }
-	else audio_stop_sound(song);
-}
-
-function preMinigame() {
-	// fade the room music before a minigame
-	
-	audio_sound_gain(soundID, 0, 1000);	
+	if (pitch > 0.1) { 
+		alarm[2] = 1; 
+	}
+	else {
+		audio_stop_sound(song);
+	}
 }

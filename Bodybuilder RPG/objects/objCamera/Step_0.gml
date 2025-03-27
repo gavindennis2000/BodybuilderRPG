@@ -50,10 +50,10 @@ if (room == rOverworld && instance_exists(objPlayer)) {
 			with (objController) { showRoom(); }
 		}
 		else if (objPlayer.y >= 1152 and objPlayer.y < 1152*2) {
-			town = "creatinea";
+			town = "creatine island";
 			
 			global.prevRoom = global.roomVar;
-			global.roomVar = "Creatinea";
+			global.roomVar = "Creatine Island";
 			showRoomAndPlayMusic()
 		}
 		else {
@@ -127,7 +127,7 @@ if (room == rOverworld && instance_exists(objPlayer)) {
 			townY = 0;
 			break;
 			
-		case "creatinea":
+		case "creatine island":
 			townX = 0;
 			townY = townH;
 			break;

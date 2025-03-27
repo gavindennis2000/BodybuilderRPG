@@ -1,6 +1,6 @@
 {
   "$GMSound":"",
-  "%Name":"sndCentralPrairie",
+  "%Name":"sndSamuel",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -9,17 +9,17 @@
   "bitRate":128,
   "compression":3,
   "conversionMode":0,
-  "duration":117.333336,
-  "name":"sndCentralPrairie",
+  "duration":80.0,
+  "name":"sndSamuel",
   "parent":{
-    "name":"Overworld",
-    "path":"folders/4 Music/OST/Overworld.yy",
+    "name":"OST",
+    "path":"folders/4 Music/OST.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"sndCentralPrairie.wav",
+  "soundFile":"sndSamuel.wav",
   "type":1,
   "volume":1.0,
 }

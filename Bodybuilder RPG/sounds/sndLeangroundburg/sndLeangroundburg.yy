@@ -1,6 +1,6 @@
 {
   "$GMSound":"",
-  "%Name":"sndCentralPrairie",
+  "%Name":"sndLeangroundburg",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -9,8 +9,8 @@
   "bitRate":128,
   "compression":3,
   "conversionMode":0,
-  "duration":117.333336,
-  "name":"sndCentralPrairie",
+  "duration":108.0,
+  "name":"sndLeangroundburg",
   "parent":{
     "name":"Overworld",
     "path":"folders/4 Music/OST/Overworld.yy",
@@ -19,7 +19,7 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"sndCentralPrairie.wav",
+  "soundFile":"sndLeangroundburg.wav",
   "type":1,
   "volume":1.0,
 }

@@ -1,5 +1,7 @@
-function initiateBattle(special = false, song = sndBattle) {
+function initiateBattle(special = false, song = sndBossBattle) {
     // initiates battle during overworld
+
+    /*gmlive*/if (TEST) { if (live_call(special = false, song = sndBossBattle)) return live_result; }
     
     // random encounters only happen in the overworld
     // unless there is a special condition
@@ -36,12 +38,12 @@ function initiateBattle(special = false, song = sndBattle) {
         if (global.statsMax[1] >= 15) {
             array_push(enemy, global.enemies.strongman);
         }
-        else debug($"not strong enough for strongman; max: {global.statsMax[1]}");
+        else debug($"GameFunctions: not srong enough for strongman; max: {global.statsMax[1]}");
         if (global.statsMax[1] >= 20) {
             array_push(enemy, global.enemies.stoiclifter);
             array_push(enemy, global.enemies.stoiclifter);
         }
-        else debug($"not strong enough for stoic; max: {global.statsMax[1]}");
+        else debug($"GameFunctions: not strong enough for stoic; max: {global.statsMax[1]}");
     }
     // randomly pick enemy from the array
         var rand = irandom(array_length(enemy)-1);
@@ -51,7 +53,7 @@ function initiateBattle(special = false, song = sndBattle) {
 }
 
 function debug(str1, str2="", str3="", str4="") {
-    var str = string_concat(str1, str2, str3, str4);
+    var str = string_concat(object_get_name(object_index), ": ", str1, str2, str3, str4);
     show_debug_message(str);
 }
 

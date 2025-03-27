@@ -1,3 +1,2 @@
 #macro TEST true
-var rm = rPumpPalace;
-room_goto(rm);
+room_goto(rMom);
