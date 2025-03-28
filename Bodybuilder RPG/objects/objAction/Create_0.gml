@@ -152,8 +152,15 @@ switch(prompt) {
 		}
 		break;
 	case "golden drumstick":
-		var str = $"{global.characterName} received the Golden Drumstick.";
-		createTextbox(str, false, "go to chapter 1");
+		if (selection == 1) {
+			exit;
+		}
+		createTextbox([
+			$"{global.characterName} received the Golden Drumstick.",
+			"Determination in the gym will only get you so far.",
+			"You must make new friends, travel to new lands, and drink copious amounts of chocolate milk.",
+			$"Good luck on your journey.",
+		], false, "go to chapter 1");
 		playSound(sndLevelUp);
 		global.stats.arms += 2;
 		global.stats.chest += 2;
@@ -246,8 +253,15 @@ switch(prompt) {
 		}
 		break;
 	case "nectar of the guardians":
-		var str = $"{global.characterName} received the Nectar of the Guardians.";
-		createTextbox(str, false, "go to chapter 1");
+		if (selection == 1) { 
+			exit;
+		}
+		createTextbox([
+			$"{global.characterName} received the Nectar of the Guardians.",
+			"Determination in the gym will only get you so far.",
+			"You must make new friends, travel to new lands, and drink copious amounts of chocolate milk.",
+			$"Good luck on your journey.",
+		], false, "go to chapter 1");
 		playSound(sndLevelUp);
 		objController.addItem("Choc. Milk", 98);
 		break;
@@ -308,8 +322,16 @@ switch(prompt) {
 		})
 		break;
 	case "trapezius of power":
-		var str = $"{global.characterName} received the Trapezius of Power.";
-		createTextbox(str, false, "go to chapter 1");
+		if (selection == 1) {
+			exit;
+		}
+		createTextbox([
+			$"{global.characterName} received the Trapezius of Power.",
+			"Determination in the gym will only get you so far.",
+			"In order to be the best, you need to win inside and outside the weight room.",
+			"You must make new friends, travel to new lands, and occasionally drink copious amounts of chocolate milk.",
+			$"Good luck on your journey.",
+		], false, "go to chapter 1");
 		playSound(sndLevelUp);
 		global.trapezius = true;
 		break;

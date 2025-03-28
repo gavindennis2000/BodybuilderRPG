@@ -17,8 +17,6 @@ if (position == "start") {
                 "You are an individual fortunate enough to possess all of these traits!",
                 "In fact, you have the potential to become the greatest bodybuilder of all time!",
                 "But it will be a challenge far greater than anything your mind can fathom...",
-                "Determination in the gym will only get you so far.",
-                "You must make new friends, travel to new lands, and drink copious amounts of chocolate milk.",
                 str4,
                 "Come forth, and receive your gift from the Guardians of Gains!"
             ]
