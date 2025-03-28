@@ -35,11 +35,37 @@ if (room != rBattle) {
 	image_speed = running ? 0.4 : 0.2;
 	if (state == "stand") {image_index = 0; }
 
-	// draw the player a little higher than the ground
-	draw_sprite_part_ext(sprite_index, image_index, global.outfit.color*32, 0, 32, 32, x, y - 4, image_xscale, image_yscale, image_blend, image_alpha);
-	// draw the player's hair
-	draw_sprite_part_ext(hair, image_index, global.outfit.hair*32, 0, 32, 32, x, y - 8, image_xscale, image_yscale, hairColor, image_alpha);
+	if (teleport != 0) {
+		// flash the screen during the first iteration
+		if (teleport <= 250 && teleport >= 230) {
+			draw_clear(c_silver);
+		}
+		// draw an afterimage of the player
+		for (var i = -3; i <= 0; i++) {
+			var yDis = 8 * i - teleport;
+			var teleportAlpha = image_alpha / (abs(i) + 1);
+			// draw the player a little higher than the ground
+			draw_sprite_part_ext(sprite_index, image_index, global.outfit.color*32, 0, 32, 32, x, y - 4 + yDis, image_xscale, image_yscale, image_blend, teleportAlpha);
+			// draw the player's hair
+			draw_sprite_part_ext(hair, image_index, global.outfit.hair*32, 0, 32, 32, x, y - 8 + yDis, image_xscale, image_yscale, hairColor, teleportAlpha);
+		}
+		// final iteration: reset the player position
+		if (teleport < 4) {
+			teleport = 0;
+			canMove = true;
+		}
+		else {
+			teleport -= 4;
+		}
+	}
+	else {
+		// draw the player a little higher than the ground
+		draw_sprite_part_ext(sprite_index, image_index, global.outfit.color*32, 0, 32, 32, x, y - 4, image_xscale, image_yscale, image_blend, image_alpha);
+		// draw the player's hair
+		draw_sprite_part_ext(hair, image_index, global.outfit.hair*32, 0, 32, 32, x, y - 8, image_xscale, image_yscale, hairColor, image_alpha);
+	}
 }
+
 // fade during room changes
 if (fadeAlpha > 0) {
 	var alpha = draw_get_alpha();

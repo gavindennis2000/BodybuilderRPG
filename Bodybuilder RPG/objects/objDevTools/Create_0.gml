@@ -10,8 +10,11 @@ showKeyEvents = false;
 showDevTools = false;
 live = false;
 
-// gavin's stuff
-global.keyEvents.meetSulik = true;
-global.keyEvents.meetJim = true;
-global.keyEvents.enterSulik = true;
+/* gavin's stuff below */
+
+global.chapter = 0;
+
+// global.keyEvents.meetSulik = true;
+// global.keyEvents.meetJim = true;
+// global.keyEvents.enterSulik = true;
 global.silenceMusic = false;

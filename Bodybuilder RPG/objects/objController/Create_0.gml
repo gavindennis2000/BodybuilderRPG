@@ -15,7 +15,7 @@ global.bunnyHood = false;
 
 global.roomID = "mom";
 
-global.chapter = 1;
+global.chapter = (!variable_global_exists("chapter")) ? 1 : global.chapter;
 global.characterName = "GAVIN";
 
 global.cutscene = false; 

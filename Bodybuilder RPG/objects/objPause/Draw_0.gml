@@ -50,9 +50,11 @@ if (paused) {
     draw_text_border(camX + 480*5/6 + menuX + 10, camY + optionY, "Quit", getColor("quit"), 1);
     
     // chapter number
-    var chapter = "I";
-    global.chapter = 1;
+    var chapter;
     switch (global.chapter) {
+        case 0:
+            chapter = "Prologue: Bodybuilding Destiny";
+            break;
         case 2:
             chapter = "II: Overcoming the Lifetime \nIntermediate Prophecy"
             break;
@@ -60,7 +62,7 @@ if (paused) {
             chapter = "III: From DYEL to Fake \nNatty Accusations"
             break;
         case 4:
-            chapter = "IV: Sulik Era! Dethrone the King"
+            chapter = "IV: Samuel Era! Dethrone the King"
             break;
         case 1:
         default:

@@ -1,10 +1,22 @@
 /*gmlive*/if (TEST) { if (live_call()) return live_result; }
 
+hSp -= hSpChange;
+if (hSp <= -1 || hsp >= 1) {
+	hSpChange = -hSpChange;
+}
+
 with (objNPC) {
 	itemID = "npc";	
 }
 
 var drawItem = function(tX, tY, imgIndex) {
+	// draw the item using sprItems
+
+	if (tX == -1 || tY == -1) { exit; }
+	draw_sprite_part(sprItems, imgIndex, 32*tX, 32*tY, 32, 32, other.x, other.y);	
+}
+
+var drawItemMoving = function(tX, tY, imgIndex) {
 	// draw the item using sprItems
 
 	if (tX == -1 || tY == -1) { exit; }
@@ -28,6 +40,10 @@ with (objItem) {
 			if (!place_meeting(x-1, y, objItem)) { tX = 5; }
 			else if (!place_meeting(x+1, y, objItem)) { tX = 7; }
 			else { tX = 6; }
+			tY = 0;
+			break;
+		case "golden drumstick":
+			tX = 11;
 			tY = 0;
 			break;
 		case "locked door":
@@ -81,6 +97,10 @@ with (objItem) {
 				}
 			}		
 			break;
+		case "nectar of the guardians":
+			tX = 10;
+			tY = 0;
+			break;
 		case "sign":
 			tX = 8;
 			tY = 0;	
@@ -88,6 +108,10 @@ with (objItem) {
 		case "squat rack":
 			tX = 3;
 			tY = 1;
+			break;
+		case "trapezius of power":
+			tX = 12;
+			tY = 0;
 			break;
 		case "treadmill":
 			tX = 9;

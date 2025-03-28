@@ -37,10 +37,10 @@ switch(global.roomID) {
             pFace = "down";	
         }
         // create bookshelves
-        with instance_create_layer(128, 128, layer, objItem) { itemID = "book"; text = ["Scientific Principles of Hypertrophy Training by Dr. Mike Israetel et al.", "The GOAT of bodybuilding textbooks!"]; }
-        with instance_create_layer(128 + 32, 128, layer, objItem) {itemID = "book"; text = ["ProgrammingToWin 2 by Izzy Narvaez", "Great powerlifting program!"]; }
+        with instance_create_layer(128, 128, layer, objItem) { itemID = "book"; text = ["The Rapid Fat Loss Handbook by Lyle McDonald."]; }
+        with instance_create_layer(128 + 32, 128, layer, objItem) {itemID = "book"; text = ["ProgrammingToWin by Izzy Narvaez."]; }
         with instance_create_layer(128 + 64, 128, layer, objItem) {itemID = "book"; text = ["The Art and Science of Lifting by Greg Knuckols and Omar Isuf."]; }
-        with instance_create_layer(128 + 96, 128, layer, objItem) {itemID = "book"; text = ["Starting Strength by Mark Rippetoe."]; }
+        with instance_create_layer(128 + 96, 128, layer, objItem) {itemID = "book"; text = ["Scientific Principles of Hypertrophy Training by Dr. Mike Israetel et al."]; }
     
         // create mom
         instance_create_layer(320, 224, layer, objNPC, {npcID: "mom"})

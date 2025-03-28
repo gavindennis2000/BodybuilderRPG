@@ -1,3 +1,5 @@
+/*set up gmlive for this function*/ if (TEST) { if (live_call()) return live_result; }
+
 // fade in new room
 
 if (fadeAlpha > 0) {
@@ -9,4 +11,12 @@ if (fadeAlpha > 0) {
 else {
 	depth = -100;
 	canMove = (!instance_exists(objTextbox));
+
+	if (room == rSpace) {
+		debug(global.chapter);
+
+		if (global.chapter == 0) {
+			canMove = false;
+		}
+	}
 }

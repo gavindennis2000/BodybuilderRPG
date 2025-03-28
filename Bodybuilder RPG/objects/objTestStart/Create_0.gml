@@ -1,2 +1,2 @@
 #macro TEST true
-room_goto(rMom);
+room_goto(rSpace);

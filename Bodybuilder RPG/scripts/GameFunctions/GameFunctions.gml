@@ -1,7 +1,7 @@
-function initiateBattle(special = false, song = sndBossBattle) {
+function initiateBattle(special = false, song = sndBattle) {
     // initiates battle during overworld
 
-    /*gmlive*/if (TEST) { if (live_call(special = false, song = sndBossBattle)) return live_result; }
+    /*gmlive*/if (TEST) { if (live_call(special = false, song = sndBattle)) return live_result; }
     
     // random encounters only happen in the overworld
     // unless there is a special condition

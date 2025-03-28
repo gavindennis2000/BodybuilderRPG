@@ -1,5 +1,7 @@
 // room start
 
+/*set up gmlive for this function*/ if (TEST) { if (live_call()) return live_result; }
+
 if (!instance_exists(objDevTools)) { instance_create_layer(x, y, layer, objDevTools); }
 if (!instance_exists(objCamera)) { instance_create_layer(x, y, layer, objCamera); }
 if (!instance_exists(objMusic)) { instance_create_layer(x, y, layer, objMusic); }
@@ -13,23 +15,12 @@ global.prevRoom = global.roomVar;
 global.prevSub = global.subRoom;
 
 switch (room) {
+	case rBattle:
+		break;
 	case rMom:
 		global.roomVar = "Mom's House";
 		global.subRoom = "Basement";
 		break;
-		
-	// pump palace
-	case rPumpPalace:
-		switch(global.roomID) {
-			case "pp cp":
-			default:
-				global.roomVar = "Pump Palace - Central Prairie";
-				global.subRoom = -1;
-				break;
-		}
-		break;	
-		
-	// houses
 	case rHouse:
 		switch(global.roomID) {
 			case "mom":
@@ -50,11 +41,20 @@ switch (room) {
 				break;
 		}
 		break;
-		
-	case rOverworld:
-	case rBattle:
+	case rOverworld:	
+	case rPumpPalace:
+		switch(global.roomID) {
+			case "pp cp":
+			default:
+				global.roomVar = "Pump Palace - Central Prairie";
+				global.subRoom = -1;
+				break;
+		}
+		break;	
+	case rSpace:
+		global.roomVar = "???";
+		global.subRoom = -1;
 		break;
-		
 	default: 
 		global.roomVar = -1
 		global.subRoom = -1;

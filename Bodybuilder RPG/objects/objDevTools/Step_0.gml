@@ -1,3 +1,5 @@
+/*set up gmlive for this function*/ if (TEST) { if (live_call()) return live_result; }
+
 if (global.devTools) {
 	if (keyboard_check_pressed(ord("G"))) { game_restart(); }
 	if (keyboard_check_pressed(ord("Q"))) { debug(global.keyEvents); }
@@ -13,6 +15,7 @@ if (global.devTools) {
 	if (keyboard_check_pressed(ord("B"))) { global.bicycle = global.bicycle ? false : true; }
 	if (keyboard_check_pressed(ord("E"))) { global.noEncounters = global.noEncounters ? false : true; }
 	if (keyboard_check_pressed(ord("L"))) { room_set_live(room, live ? false : true); live = live ? false : true}
+	if (keyboard_check_pressed(ord("Z"))) { debug($"x: {objPlayer.x} y: {objPlayer.y}"); }
 }
 
 if (global.ultimate) {
