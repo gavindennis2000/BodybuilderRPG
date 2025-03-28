@@ -140,6 +140,7 @@ global.PRs = [
 // battle stuff
 global.battle = false;
 global.noEncounters = true;
+global.trapezius = false;
 global.enemies = {
     dyel: {
         // drawing info
@@ -507,6 +508,24 @@ function setMinAndMax() {
     global.statsMin = statsArr[4];
 }
 
+function addItem(item, q = 1) {
+    switch (item) {
+        case "Choc. Milk":
+            for (var i = 0; i < array_length(global.inventory); i++) {
+                // increase the quantity of the item in the inventory
+                if (global.inventory[i].name == item) {
+                    global.inventory[i].quantity += q;
+                    exit;
+                }
+            }
+        default:
+            array_push(global.inventory, {
+                name: item,
+                quantity: 1
+            });
+            break;
+    }
+}
 function useItem(item) {
     // uses item from inventory during battle or pause menu
 

@@ -11,3 +11,19 @@ function dialog() {
         });
     }
 }
+
+function createTextbox(text, prompt = false, action = -1, npcID = -1) {
+    // create textbox shortcut
+
+    // convert text to array
+    if (!is_array(text)) {
+        text = [text];
+    }
+    // create the object
+    instance_create_layer(0, 0, "Instances", objTextbox, {
+        text: text,
+        prompt: prompt,
+        action: action,
+        npcID: npcID,
+    });
+}

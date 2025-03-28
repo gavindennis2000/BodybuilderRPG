@@ -1,8 +1,9 @@
 /*gmlive*/if (TEST) { if (live_call()) return live_result; }
 
 hSp -= hSpChange;
-if (hSp <= -1 || hsp >= 1) {
-	hSpChange = -hSpChange;
+hSpChange *= 1.05;
+if (hSp <= -2 || hSp >= 2) {
+	hSpChange = -0.1 * -sign(hSp);
 }
 
 with (objNPC) {
@@ -16,11 +17,13 @@ var drawItem = function(tX, tY, imgIndex) {
 	draw_sprite_part(sprItems, imgIndex, 32*tX, 32*tY, 32, 32, other.x, other.y);	
 }
 
-var drawItemMoving = function(tX, tY, imgIndex) {
+var drawItemMoving = function(tX, tY, imgIndex, hSp = objItemTiles.hSp) {
 	// draw the item using sprItems
 
 	if (tX == -1 || tY == -1) { exit; }
-	draw_sprite_part(sprItems, imgIndex, 32*tX, 32*tY, 32, 32, other.x, other.y);	
+	draw_sprite_part(sprItems, imgIndex, 32*tX, 32*tY + hSp, 32, 32, other.x, other.y);	
+
+	draw_ellipse_color(other.x + 8, other.y + 34, other.x + 24, other.y + 38, c_black, c_black, false);
 }
 
 var tX = 0, tY = 0, imgIndex = 0;
@@ -136,5 +139,17 @@ with (objItem) {
 			tY = 0;		
 			break;
 	}
-	with (other) { drawItem(tX, tY, imgIndex); }
+	if (itemID == "nectar of the guardians" ||
+		itemID == "golden drumstick" ||
+		itemID == "trapezius of power"
+	) {
+		with (other) { 
+			drawItemMoving(tX, tY, imgIndex); 
+		}
+	}
+	else {
+		with (other) { 
+			drawItem(tX, tY, imgIndex); 
+		}
+	}
 }

@@ -151,6 +151,23 @@ switch(prompt) {
 			game_end();
 		}
 		break;
+	case "golden drumstick":
+		var str = $"{global.characterName} received the Golden Drumstick.";
+		createTextbox(str, false, "go to chapter 1");
+		playSound(sndLevelUp);
+		global.stats.arms += 2;
+		global.stats.chest += 2;
+		global.stats.shoulders += 2;
+		global.stats.back += 2;
+		global.stats.legs += 2;
+		break;
+	case "go to chapter 1":
+		with (objPlayer) {
+			alarm[3] = 1;
+			canMove = false;
+		}
+		global.chapter = 1;
+		break;
 	case "learn brace":
 		playSound(sndLevelUp);
 		global.skills[1].unlocked = true;
@@ -228,6 +245,12 @@ switch(prompt) {
 			instance_create_layer(x, y, layer, objTextbox, { text: ["Wow! Unlimited grip strength!"] });
 		}
 		break;
+	case "nectar of the guardians":
+		var str = $"{global.characterName} received the Nectar of the Guardians.";
+		createTextbox(str, false, "go to chapter 1");
+		playSound(sndLevelUp);
+		objController.addItem("Choc. Milk", 98);
+		break;
 	case "pullups":
 		// pullups with mason
 		global.keyEvents.meetMason= true;
@@ -284,6 +307,12 @@ switch(prompt) {
 			action: action
 		})
 		break;
-	}
+	case "trapezius of power":
+		var str = $"{global.characterName} received the Trapezius of Power.";
+		createTextbox(str, false, "go to chapter 1");
+		playSound(sndLevelUp);
+		global.trapezius = true;
+		break;
+}
 
 instance_destroy();

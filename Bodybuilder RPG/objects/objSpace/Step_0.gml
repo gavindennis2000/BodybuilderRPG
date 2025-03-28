@@ -36,7 +36,7 @@ else if (position == "next" && objPlayer.y <= 480) {
             "In the center, you'll find the Golden Drumstick...",
             "Take this if you are a serious lifter seeking a true test of skill!",
             "Finally, on the right is the Trapezius of Power!",
-            "I strongly recommend against this unless you are a nihilist.",
+            "I strongly recommend against this one unless you are a nihilist.",
             "Choose your item wisely. There will be no second `chances..."
         ]
     });

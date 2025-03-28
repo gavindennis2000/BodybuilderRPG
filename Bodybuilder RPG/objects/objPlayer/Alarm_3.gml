@@ -1,4 +1,5 @@
 ///@description go to new chapter
+canMove = false;
 if (fadeAlpha < 1) {
 	depth = -200;
 	canMove = false;
@@ -7,8 +8,15 @@ if (fadeAlpha < 1) {
 }
 else if (fadeAlpha == 1) {
 	fadeAlpha += 0.05;
-	alarm[3] = 120;
+	alarm[3] = 60;
 }
 else {
-	room_restart();
+	if (room == rMom) {
+		room_restart();
+	}
+	else {
+		room_goto(rMom);
+		x = 384;
+		y = 320;
+	}
 }

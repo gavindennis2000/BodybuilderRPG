@@ -41,7 +41,7 @@ if (room != rBattle) {
 			draw_clear(c_silver);
 		}
 		// draw an afterimage of the player
-		for (var i = -3; i <= 0; i++) {
+		for (var i = -(teleport / 4); i <= 0; i++) {
 			var yDis = 8 * i - teleport;
 			var teleportAlpha = image_alpha / (abs(i) + 1);
 			// draw the player a little higher than the ground
@@ -50,12 +50,12 @@ if (room != rBattle) {
 			draw_sprite_part_ext(hair, image_index, global.outfit.hair*32, 0, 32, 32, x, y - 8 + yDis, image_xscale, image_yscale, hairColor, teleportAlpha);
 		}
 		// final iteration: reset the player position
-		if (teleport < 4) {
+		if (teleport < 6) {
 			teleport = 0;
 			canMove = true;
 		}
 		else {
-			teleport -= 4;
+			teleport -= 6;
 		}
 	}
 	else {
