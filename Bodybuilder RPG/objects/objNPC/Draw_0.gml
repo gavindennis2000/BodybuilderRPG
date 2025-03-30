@@ -39,7 +39,7 @@ switch (npcID) {
         npcHair = 2;
 		npcHairColor = #7a6a2b
         break;
-	case "sulik":
+	case "samuel":
 		npcImg = 2;
 		npcHair = -1;
 		break;

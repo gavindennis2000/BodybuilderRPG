@@ -1,8 +1,8 @@
 /*gmlive*/if (TEST) { if (live_call()) return live_result; }
 
 switch (npcID) {
-    case "sulik":
-        // sulik exits the screen
+    case "samuel":
+        // samuel exits the screen
         if (targetY == -1) {
             targetY = y + 128;
             face = "down";
@@ -15,15 +15,18 @@ switch (npcID) {
             y++;
             alarm[2] = 1;
         }
-        // destroy sulik's instance
+        // destroy samuel's instance
         else if (targetY == y) {
             global.cutscene = false; 
             objPlayer.cutscene = false;
-            // end sulik's theme
+            // end samuel's theme
             with (objMusic) {
-                cutscene(previous);
+                endCutscene();
             }
             instance_destroy();
+            with (objPlayer) {
+                canMove = true;
+            }
         }
         break;
     

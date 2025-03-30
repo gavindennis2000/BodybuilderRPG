@@ -8,6 +8,7 @@ loopStart = -1;
 loopEnd = -1;
 songTime = -1;
 soundID = -1;
+cutsceneID = -1;
 workoutMusicBT = -1  // music that plays during guitar workouts
 workoutMusicLead = -1  // isolated guitar track during guitar workouts
 musicBuffer = -1;  // holds music for functions
@@ -19,17 +20,22 @@ SetLoopPoints();
 
 cutscene = function(song = sndError) {
     if (audio_sound_get_gain(soundID) > 0) {
-        next = song;
+        objMusic.next = song;
         audio_sound_gain(soundID, 0, 500);
-        alarm[1] = 30;
+        alarm[1] = 31;
     }
     else {
-        audio_stop_all();
+        audio_pause_sound(soundID);
         audio_sound_gain(soundID, 1, 0);
-        previous = current;
-        current = next;
-        playMusic();
+		objMusic.cutsceneID = audio_play_sound(song, 1, true);
     }
+}
+
+endCutscene = function(song = sndError) {
+	if (audio_sound_get_gain(cutsceneID) == 1) {
+		audio_sound_gain(cutsceneID, 0, 500);
+		alarm[3] = 30;
+	}
 }
 
 getCurrentSong = function() {

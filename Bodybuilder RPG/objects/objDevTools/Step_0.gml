@@ -16,6 +16,7 @@ if (global.devTools) {
 	if (keyboard_check_pressed(ord("E"))) { global.noEncounters = global.noEncounters ? false : true; }
 	if (keyboard_check_pressed(ord("L"))) { room_set_live(room, live ? false : true); live = live ? false : true}
 	if (keyboard_check_pressed(ord("Z"))) { debug($"x: {objPlayer.x} y: {objPlayer.y}"); }
+	if (keyboard_check_pressed(ord("Q"))) { debug("\n", global.keyEvents); }
 }
 
 if (global.ultimate) {

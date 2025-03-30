@@ -10,7 +10,7 @@ var textY = camY + 8;
 
 // draw the next arrow/prompt
 if (next) {
-	if (numberOfTexts <= 1 and prompt != false) {
+	if (numberOfTexts <= 1 && prompt != false && prompt != -1) {
 		// draw the text
 		draw_set_font(fontText);
 		draw_set_color(c_white);
@@ -66,7 +66,7 @@ if (npcID != "item" && npcID != -1) {
 	}
     
     // hidden names mid change
-    if (npcID == "sulik" && action == "exit sulik" && numberOfTexts >= array_length(text)-1)
+    if (npcID == "samuel" && action == "exit samuel" && numberOfTexts >= array_length(text)-1)
 	   name = "???";
     
 	draw_text_border(camX + 4, camY - 2, string_upper(name), c_white, 1);

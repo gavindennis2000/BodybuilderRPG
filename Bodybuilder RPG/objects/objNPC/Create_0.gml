@@ -10,14 +10,19 @@ npcHairColor = c_white;
 
 // take care of cutscenes
 switch(npcID) {
-    case "sulik":
+    case "samuel":
         alarm[1] = 60;
         targetY = objPlayer.y + 32;
         face = "up";
         faceStart = "up";
-        // play sulik's theme
+        // play samuel's theme
         with (objMusic) {
             cutscene(sndSamuel);
+        }
+        with (objItem) {
+            if (itemID == "locked door" && y == 2176 - 32) {
+                itemID = "door";
+            }
         }
         break;
 }

@@ -8,6 +8,9 @@ var showRoomAndPlayMusic = function() {
 	with (objController) { showRoom(); }
 	if (room == rOverworld) {
 		// play the right overworld music
+		if (global.cutscene) {
+			exit;
+		}
 		with (objMusic) {
 			var newSong = getCurrentSong();
 			// debug($"new song: {audio_get_name(newSong)} current {audio_get_name(current)}");

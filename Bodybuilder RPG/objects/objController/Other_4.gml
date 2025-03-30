@@ -72,26 +72,26 @@ if (room != rBattle) {
 // set new min and max for muscle groups
 setMinAndMax()
 
-// key event stuff
-// first time at pump palace
-if (room == rPumpPalace && !global.keyEvents.meetJim) {
-	// block off the doors
-	with (objDoor) {
-		instance_create_layer(x, y, layer, objItem, {
-			itemID: "locked door",
-			text: [
-				"I need to introduce myself to Mr. Ohner before I leave."
-			]
-		})
-	}
-}
+// // key event stuff
+// // first time at pump palace
+// if (room == rPumpPalace && !global.keyEvents.meetJim) {
+// 	// block off the doors
+// 	with (objDoor) {
+// 		instance_create_layer(x, y, layer, objItem, {
+// 			itemID: "locked door",
+// 			text: [
+// 				"I need to introduce myself to Mr. Ohner before I leave."
+// 			]
+// 		})
+// 	}
+// }
 
-// enter sulik cutscene
-if (room == rOverworld && global.keyEvents.enterSulik && !global.keyEvents.meetSulik) {
-    global.keyEvents.meetSulik = true;
-    global.cutscene = true;
-    with (objPlayer) { cutscene = true; }
-    instance_create_layer(objPlayer.x, objPlayer.y + 128, layer, objNPC, {
-        npcID: "sulik"
-    });
-}
+// // enter samuel cutscene
+// if (room == rOverworld && global.keyEvents.enterSamuel && !global.keyEvents.meetSamuel) {
+//     global.keyEvents.meetSamuel = true;
+//     global.cutscene = true;
+//     with (objPlayer) { cutscene = true; }
+//     instance_create_layer(objPlayer.x, objPlayer.y + 128, layer, objNPC, {
+//         npcID: "samuel"
+//     });
+// }

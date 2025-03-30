@@ -3,4 +3,11 @@ if (!instance_exists(objController)) { instance_create_layer(x, y, "Instances", 
 if (!instance_exists(objPlayer)) { instance_create_layer(x, y, "Instances", objPlayer); }
 if (!instance_exists(objCamera)) { instance_create_layer(x, y, "Instances", objCamera); }
 
+switch (room) {
+    case rMom:
+        with (objPlayer) {
+            face = "up";
+        }
+        break;
+}
 instance_destroy();

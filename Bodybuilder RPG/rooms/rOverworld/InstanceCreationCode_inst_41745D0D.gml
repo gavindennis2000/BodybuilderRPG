@@ -1,6 +1,6 @@
 // mason's house door
 
-if (!global.keyEvents.meetSulik) {
+if (!global.keyEvents.meetSamuel) {
     instance_create_layer(x, y, layer, objItem, {
         text: ["The door is locked."], 
         itemID: "locked door"

@@ -26,7 +26,7 @@ switch(prompt) {
 				"Legend says that the one who possesses all three of the Strength Stones can achieve ultimate mass.",
 				"The three stones combine to form the Power Polygon! A beautiful relic indeed.",
 				"But this will only happen if the person is deemed worthy by the God of Gains.",
-				"A young lifter from Dairygold named Sulik had greater muscles than all the Stone bearers",
+				"A young lifter from Dairygold named Samuel had greater muscles than all the Stone bearers",
 				"But the Power Polygon deemed him unworthy due to his lack of heart.",
 				"Or maybe he was using steroids... I don't remember.",
 				"I'm just a crazy old man, I might be making all this stuff up."
@@ -101,14 +101,15 @@ switch(prompt) {
 	case "escape battle":
 		with (objBattle) { move("escape"); }
 		break;
-	case "exit sulik":
+	case "exit samuel":
 		// after you talk to sulik, he walks away and no encounters is turned off
 		with (objNPC) {
-			if (npcID == "sulik") {
+			if (npcID == "samuel") {
 				alarm[2] = 30;
 			}
 		}
 		global.noEncounters = false;
+		debug("no encounters turned off");
 		break;
 	case "finish chapter":
 		// finish chapter
@@ -119,20 +120,6 @@ switch(prompt) {
 				canMove = false;
 				alarm[3] = 1;
 			}
-		}
-		break;
-	case "first paycheck":
-		global.stats.money += 1000;
-		instance_create_layer(x, y, layer, objTextbox, {
-			npcID: "jim",
-			text: [
-				"I'm paying you in advance so you can buy supplements and equipment.",
-				"Go find the Bodybuilding Nutrition Company (BBNC)  down south in Great Valliou.",
-				"Good luck, kid."
-			]
-		});
-		with (objItem) {
-			if (itemID = "locked door") { instance_destroy(); }
 		}
 		break;
 	case "game over":
@@ -230,12 +217,26 @@ switch(prompt) {
 		// meet jim ohner and get first pay check
 		if (global.keyEvents.meetJim) { break; }
 		global.keyEvents.meetJim = true;
-		txt = string_concat(global.characterName, " received $1000."); 
 		playSound(sndLevelUp);
 		instance_create_layer(x, y, "Instances", objTextbox, {
-			text: [txt],
-			action: "first paycheck"
-		})
+			text: [
+				$"{global.characterName} received $1000"
+			],
+			action: [
+				[
+					"I'm paying you in advance so you can buy supplements and equipment.",
+					"Go find the Bodybuilding Nutrition Company (BBNC) down south in Wheyford.",
+					"Good luck, kid."
+				],
+				-1,
+				-1,
+				"jim"
+			]
+		});
+		global.stats.money += 1000;
+		with (objItem) {
+			if (itemID = "locked door") { instance_destroy(); }
+		}
 		break;
 	case "move the atlas stone":
 		// move the atlas stone
@@ -299,8 +300,9 @@ switch(prompt) {
 			txt = [
 				"Squatting is sort of like a rhythm game.",
 				"You need to carefully time when you bounce out of the hole and take advantage of the stretch reflex.",
-				"If you can't figure it out, try to find another way to build up your legs.",
-				"The sensei at the Great Valliou Dojo is pretty stacked, so maybe combat would be a good option.",
+				"If you wuss out and leave the workout early, you'll keep all the fatigue but none of the gains.",
+				"If you can't figure squats out, try to find another way to build up your legs.",
+				"The owner of the Wheyford Boxing Gym is pretty stacked, so maybe combat would be a good option.",
 				"The BBNC shop in that area should sell some knee sleeves too.",
 				"They're a bit pricey, but should buff up your leg power!"
 			];

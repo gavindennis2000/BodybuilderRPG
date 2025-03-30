@@ -1,2 +1,2 @@
 #macro TEST true
-room_goto(rSpace);
+room_goto(FIRSTROOM);

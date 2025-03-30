@@ -37,9 +37,9 @@ if (room != rBattle) {
 
 	if (teleport != 0) {
 		// flash the screen during the first iteration
-		if (teleport <= 250 && teleport >= 230) {
-			draw_clear(c_silver);
-		}
+		// if (teleport <= 250 && teleport >= 230) {
+		// 	draw_clear(c_silver);
+		// }
 		// draw an afterimage of the player
 		for (var i = -(teleport / 4); i <= 0; i++) {
 			var yDis = 8 * i - teleport;

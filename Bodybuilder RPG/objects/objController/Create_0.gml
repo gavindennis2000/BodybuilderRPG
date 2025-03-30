@@ -1,3 +1,6 @@
+// objController Create
+
+/*set up gmlive for this function*/ if (TEST) { if (live_call()) return live_result; }
 
 // global variables
 global.roomVar = -1;
@@ -57,13 +60,14 @@ global.keyItems = [
 
 // key events struct
 global.keyEvents = {
+    meetMom: false,
     meetJim: false,
 	unlockedDoor: false,
 	atlasStone: false,
 	meetMason: false,
     meetJim: false,
-    enterSulik: false, 
-    meetSulik: false,
+    enterSamuel: false, 
+    meetSamuel: false,
     bunnyHoodCoupon: false,
 }
 

@@ -26,10 +26,12 @@ var drawItemMoving = function(tX, tY, imgIndex, hSp = objItemTiles.hSp) {
 	draw_ellipse_color(other.x + 8, other.y + 34, other.x + 24, other.y + 38, c_black, c_black, false);
 }
 
-var tX = 0, tY = 0, imgIndex = 0;
+var tX, tY, imgIndex = 0;
 image_speed = 0.15;
 
 with (objItem) {
+	tX = -1;
+	tY = -1;
 	switch (itemID) {
 		case "atlas stone":
 			tX = 0;
@@ -39,11 +41,25 @@ with (objItem) {
 			tX = 4;
 			tY = 0;
 			break;
+		case "bench press":
+			draw_sprite(sprItemsWorkout, 0, x - 32, y - 32);
+			break;
 		case "book":
 			if (!place_meeting(x-1, y, objItem)) { tX = 5; }
 			else if (!place_meeting(x+1, y, objItem)) { tX = 7; }
 			else { tX = 6; }
 			tY = 0;
+			break;
+		case "chest flyes":
+			image_speed = 0.8;
+			sprite_index = sprChestFlyes
+			mask_index = sprWall;
+			draw_sprite(sprite_index, -1, x - 32, y - 32);
+			break;
+		case "db bench":
+			tX = -1;
+			tY = -1;
+			draw_sprite(sprItemsWorkout, 1, x - 32, y - 32);
 			break;
 		case "golden drumstick":
 			tX = 11;
@@ -109,8 +125,7 @@ with (objItem) {
 			tY = 0;	
 			break;
 		case "squat rack":
-			tX = 3;
-			tY = 1;
+			draw_sprite(sprItemsWorkout, 2, x - 32, y - 32);
 			break;
 		case "trapezius of power":
 			tX = 12;
