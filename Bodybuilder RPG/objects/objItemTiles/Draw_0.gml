@@ -116,7 +116,7 @@ with (objItem) {
 				}
 			}		
 			break;
-		case "nectar of the guardians":
+		case "nectar of the gains":
 			tX = 10;
 			tY = 0;
 			break;
@@ -154,7 +154,7 @@ with (objItem) {
 			tY = 0;		
 			break;
 	}
-	if (itemID == "nectar of the guardians" ||
+	if (itemID == "nectar of the gains" ||
 		itemID == "golden drumstick" ||
 		itemID == "trapezius of power"
 	) {

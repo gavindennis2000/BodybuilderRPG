@@ -2,10 +2,6 @@
 
 // don't draw in the battle room
 if (room != rBattle) {
-	global.outfit.color = 1;
-	global.outfit.hair = 4;
-	global.outfit.hairColor = 0;
-
 	var hair = sprHairDown;
 
 	// player's direction
@@ -66,13 +62,3 @@ if (room != rBattle) {
 	}
 }
 
-// fade during room changes
-if (fadeAlpha > 0) {
-	var alpha = draw_get_alpha();
-	draw_set_alpha(fadeAlpha);
-	var camX = camera_get_view_x(view_camera[0]);
-	var camY = camera_get_view_y(view_camera[0]);
-	var b = c_black;
-	draw_rectangle_color(camX, camY, camX+480, camY + 270, b, b, b, b, false);
-	draw_set_alpha(alpha);
-}

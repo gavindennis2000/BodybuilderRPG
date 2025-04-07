@@ -18,7 +18,7 @@ if (position == "start") {
                 "In fact, you have the potential to become the greatest bodybuilder of all time!",
                 "But it will be a challenge far greater than anything your mind can fathom...",
                 str4,
-                "Come forth, and receive your gift from the Guardians of Gains!"
+                "Come forth, and receive your gift from the Goddess of Gains!"
             ]
         });
     }
@@ -26,10 +26,14 @@ if (position == "start") {
 
 else if (position == "next" && objPlayer.y <= 480) {
     position = "final";
+    with (objPlayer) {
+        targetX = 0;
+        targetY = 0;
+    }
     instance_create_layer(x, y, layer, objTextbox, {
         text: [
             "Three possible choices await you:",
-            "On the left, the Nectar of the Guardians...",
+            "On the left, the Nectar of the Gains...",
             "Take this if you are a casual lifter who is not looking for a challenge.",
             "In the center, you'll find the Golden Drumstick...",
             "Take this if you are a serious lifter seeking a true test of skill!",

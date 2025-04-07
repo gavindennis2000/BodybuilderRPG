@@ -4,7 +4,7 @@ if (fadeAlpha < 1) {
 	depth = -200;
 	canMove = false;
 	fadeAlpha += 0.05;
-	alarm[3] = 2;
+	alarm[3] = (teleportExit != 0) ? 2 : 2;
 }
 else if (fadeAlpha == 1) {
 	fadeAlpha += 0.05;

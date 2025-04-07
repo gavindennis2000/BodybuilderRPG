@@ -66,11 +66,14 @@ getCurrentSong = function() {
 			current = (global.roomID == "mom") ? sndMom : sndCentralPrairie;
 			break;
 		case rMom:
-			current = sndMom
+			current = sndMom;
 			break;
 		case rPumpPalace:
-			current = sndPumpPalace
+			current = sndPumpPalace;
 			break;
+		case rSpace:
+			current = sndSpace;
+			break;	
 	}
 	return current;
 }

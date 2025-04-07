@@ -31,6 +31,9 @@ function SetLoopPoints() {
 	audio_sound_loop_start(sndPumpPalace, 42);
 	audio_sound_loop_end(sndPumpPalace, 2*60 + 50);
     
+	// space
+	audio_sound_loop_start(sndSpace, 5.33);
+
 	// wheyford
 	audio_sound_loop_start(sndWheyford, 10.97);
 }

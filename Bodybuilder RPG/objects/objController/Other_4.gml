@@ -52,7 +52,7 @@ switch (room) {
 		}
 		break;	
 	case rSpace:
-		global.roomVar = "???";
+		global.roomVar = "StairWhey to Heaven";
 		global.subRoom = -1;
 		break;
 	default: 

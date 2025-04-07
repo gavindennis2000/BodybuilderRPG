@@ -23,16 +23,16 @@ counter = 0;
 
 // create the legendary items
 instance_create_layer(192 + 32, 128-32, "Instances", objItem, {
-    itemID: "nectar of the guardians",
+    itemID: "nectar of the gains",
     text: [
-        "The Nectar of the Guardians is for casual lifters who aren't looking for a serious challenge.",
+        "The Nectar of the Gains is for casual lifters who aren't looking for a serious challenge.",
         "With this, you will have a near infinite supply of a rejuvenating chocolate-flavored beverage.",
-        "Take the Nectar of the Guardians?"
+        "Take the Nectar of the Gains?"
     ],
     prompt: [
         "Yes",
         "No",
-        "nectar of the guardians"
+        "nectar of the gains"
     ]
 });
 instance_create_layer(352, 128-32, "Instances", objItem, {
@@ -52,8 +52,9 @@ instance_create_layer(512 - 32, 128-32, "Instances", objItem, {
     itemID: "trapezius of power",
     text: [
         "The Trapezius of Power is only suited for the most legendary of lifters.",
-        "Despite it's name, this legendary item actually makes your enemies twice as powerful!",
+        "Despite it's name, this epic item actually doubles the fatigue you accumulate!",
         "Ironic isn't it? Take the Drumstick if you aren't already a seasoned lifter.",
+        "If you can handle the difficulty, you will be rewarded at the end of your journey.",
         "Take the Trapezius of Power?"
     ],
     prompt: [

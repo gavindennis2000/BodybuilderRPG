@@ -2,8 +2,18 @@
 
 var txt = "";
 
+playerCanMove = function() {
+	if (instance_exists(objPlayer)) {
+		objPlayer.canMove = true;
+	}
+}
+
 textbox = function(txt) {
 	instance_create_layer(x, y, layer, objTextbox, { text: txt });
+}
+
+if (selection == 1) {
+	playerCanMove();
 }
 
 switch(prompt) {
@@ -142,10 +152,16 @@ switch(prompt) {
 		if (selection == 1) {
 			exit;
 		}
+		with (objItem) {
+			if (itemID == "golden drumstick") {
+				instance_destroy();
+			}
+		}
 		createTextbox([
 			$"{global.characterName} received the Golden Drumstick.",
-			"Determination in the gym will only get you so far.",
-			"You must make new friends, travel to new lands, and drink copious amounts of chocolate milk.",
+			"Determination in the gym will only take you so far.",
+			"In order to be the best, you need to win inside and outside the weight room.",
+			"You must make new friends, travel to new lands, and spend half your paycheck on protein-rich foods.",
 			$"Good luck on your journey.",
 		], false, "go to chapter 1");
 		playSound(sndLevelUp);
@@ -158,6 +174,7 @@ switch(prompt) {
 	case "go to chapter 1":
 		with (objPlayer) {
 			alarm[3] = 1;
+			teleportExit = true;
 			canMove = false;
 		}
 		global.chapter = 1;
@@ -253,13 +270,19 @@ switch(prompt) {
 			instance_create_layer(x, y, layer, objTextbox, { text: ["Wow! Unlimited grip strength!"] });
 		}
 		break;
-	case "nectar of the guardians":
+	case "nectar of the gains":
 		if (selection == 1) { 
 			exit;
 		}
+		with (objItem) {
+			if (itemID == "nectar of the gains") {
+				instance_destroy();
+			}
+		}
 		createTextbox([
-			$"{global.characterName} received the Nectar of the Guardians.",
-			"Determination in the gym will only get you so far.",
+			$"{global.characterName} received the Nectar of the Gains.",
+			"Determination in the gym will only take you so far.",
+			"In order to be the best, you need to win inside and outside the weight room.",
 			"You must make new friends, travel to new lands, and drink copious amounts of chocolate milk.",
 			$"Good luck on your journey.",
 		], false, "go to chapter 1");
@@ -327,15 +350,31 @@ switch(prompt) {
 		if (selection == 1) {
 			exit;
 		}
+		with (objItem) {
+			if (itemID == "trapezius of power") {
+				instance_destroy();
+			}
+		}
 		createTextbox([
 			$"{global.characterName} received the Trapezius of Power.",
-			"Determination in the gym will only get you so far.",
+			"Determination in the gym will only take you so far.",
 			"In order to be the best, you need to win inside and outside the weight room.",
-			"You must make new friends, travel to new lands, and occasionally drink copious amounts of chocolate milk.",
+			"You must make new friends, travel to new lands, and learn to understand your enemies.",
 			$"Good luck on your journey.",
 		], false, "go to chapter 1");
 		playSound(sndLevelUp);
-		global.trapezius = true;
+
+		// unlock the trapezius key item
+		for (var i = 0; i < array_length(global.keyItems); i++) {
+			if (global.keyItems[i].name != "Trapezius of Power") {
+				continue;
+			}
+			global.keyItems[i].value = true;
+			break;
+		}
+
+		// add screen wipe taco to inventory
+		objController.addItem("Anabolic Taco", 1);
 		break;
 }
 

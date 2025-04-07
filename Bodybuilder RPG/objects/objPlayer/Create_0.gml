@@ -19,6 +19,7 @@ state = stand;
 canMove = true;
 cutscene = false;  // perma can't move during cutscenes
 teleport = 0;  // used for drawing multiple copies of player during teleports
+teleportExit = false;
 
 // movement
 targetX = 0;

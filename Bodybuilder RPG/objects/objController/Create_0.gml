@@ -29,16 +29,16 @@ global.inventory = [
     {
         name: "Choc. Milk",
         quantity: 1,
-        description: "Central Prairie's flagship drink - Reduces fatigue by 50%"
+        description: "Central Prairie's flagship drink - Reduces fatigue by 50%."
     },
 ]
 
-// key items struct
+// key items struct array
 global.keyItems = [
     {
         name: "Serva Grips", 
         value: false,
-        description: "Certified death grip technology"
+        description: "Certified death grip technology."
     },
     {
         name: "Yacht",
@@ -46,14 +46,14 @@ global.keyItems = [
         description: "Do you need a description? It's a freakin yacht!"
     },
     {
-        name: "Bunny Hood",
+        name: "Magic Hat",
         value: false,
-        description: "Become the fastest bodybuilder ever! Equip with 'B'"
+        description: "Become the fastest bodybuilder ever! Equip with 'B'."
     },
     {
-        name: "Bicycle",
+        name: "Trapezius of Power",
         value: false,
-        description: "Time to hop on cycle! Use to teleport between gyms"
+        description: "An emblem of determination. Doubles accumulated fatigue."
     },
 	
 ]
@@ -513,23 +513,28 @@ function setMinAndMax() {
 }
 
 function addItem(item, q = 1) {
-    switch (item) {
-        case "Choc. Milk":
-            for (var i = 0; i < array_length(global.inventory); i++) {
-                // increase the quantity of the item in the inventory
-                if (global.inventory[i].name == item) {
-                    global.inventory[i].quantity += q;
-                    exit;
-                }
+    // adds item to inventory
+
+    // if item exists in inventory, increment the quantity, then exit
+    for (var i = 0; i < array_length(global.inventory); i++) {
+        if (global.inventory[i].name == item) {
+            global.inventory[i].quantity += q;
+            if (global.inventory[i].quantity > 99) {
+                global.inventory[i].quantity = 99;
             }
-        default:
-            array_push(global.inventory, {
-                name: item,
-                quantity: 1
-            });
-            break;
+            exit;
+        }
     }
+
+    // if item doesn't exist, create it
+    array_push(global.inventory, {
+        name: item,
+        quantity: q,
+        description: GetDescription(item)
+    });
+    exit;
 }
+
 function useItem(item) {
     // uses item from inventory during battle or pause menu
 
