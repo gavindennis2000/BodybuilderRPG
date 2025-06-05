@@ -6,7 +6,7 @@
   "name":"__input_multiplayer_assignment_tick",
   "parent":{
     "name":"Ticks",
-    "path":"folders/9Extensions/Input/(System)/Ticks.yy",
+    "path":"folders/9 Extensions/Input/(System)/Ticks.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

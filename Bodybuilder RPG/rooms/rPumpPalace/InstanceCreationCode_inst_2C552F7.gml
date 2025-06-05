@@ -1,1 +1,0 @@
-text = ["Mom's House"];

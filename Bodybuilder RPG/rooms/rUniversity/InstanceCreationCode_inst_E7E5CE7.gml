@@ -1,1 +1,0 @@
-text = ["Academic Research Center"];

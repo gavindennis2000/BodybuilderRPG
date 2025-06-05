@@ -6,7 +6,7 @@
   "name":"input_source_add",
   "parent":{
     "name":"18  Sources",
-    "path":"folders/9Extensions/Input/18  Sources.yy",
+    "path":"folders/9 Extensions/Input/18  Sources.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

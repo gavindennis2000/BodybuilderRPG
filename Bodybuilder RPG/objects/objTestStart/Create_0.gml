@@ -1,2 +1,2 @@
 #macro TEST true
-room_goto(FIRSTROOM);
+room_goto(rTest);

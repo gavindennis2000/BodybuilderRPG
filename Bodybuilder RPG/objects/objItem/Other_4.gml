@@ -1,1 +1,0 @@
-textIndexMax = array_length(text)-1;
