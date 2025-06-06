@@ -34,10 +34,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"sprPlayerMask",
-    "path":"sprites/sprPlayerMask/sprPlayerMask.yy",
+  "spriteId":null,
+  "spriteMaskId":{
+    "name":"sprWall",
+    "path":"sprites/sprWall/sprWall.yy",
   },
-  "spriteMaskId":null,
   "visible":true,
 }
