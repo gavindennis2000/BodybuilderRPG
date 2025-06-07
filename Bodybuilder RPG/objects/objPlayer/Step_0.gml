@@ -16,6 +16,9 @@ if (TEST) {
                 break;
         }
     }
+    if (input_check_pressed("start")) {
+        instance_create_layer(x, y, layer, objTextbox);
+    }
 }
 
 var canCertainlyMove = (canMove && targetX == 0 && targetY == 0);

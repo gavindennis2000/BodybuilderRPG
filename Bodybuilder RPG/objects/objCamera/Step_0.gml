@@ -9,11 +9,11 @@ if (target == noone)
 var diffX = objPlayer.x - x;
 var diffY = objPlayer.y - y; 
 
-if ((diffX >= camWidth || diffX <= -32) && xTo == -1) {
-    xTo = x + sign(diffX) * camWidth;
+if ((diffX >= CAM_WIDTH || diffX <= -32) && xTo == -1) {
+    xTo = x + sign(diffX) * CAM_WIDTH;
 }
-if ((diffY >= camHeight || diffY <= -32) && yTo == -1) {
-    yTo = y + sign(diffY) * camHeight;
+if ((diffY >= CAM_HEIGHT || diffY <= -32) && yTo == -1) {
+    yTo = y + sign(diffY) * CAM_HEIGHT;
 }
 
 var changeAmount = 7;
