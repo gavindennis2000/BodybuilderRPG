@@ -6,7 +6,7 @@ if (!TEST) {
     exit;
 }
 
-var testString = $"targetX: {targetX} targetY: {targetY}";
+var testString = $"Player modX: {x % 512} player modY: {y % 288}";
 
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);

@@ -2,6 +2,19 @@
 
 sprite_index = sprAndro;
 
+// find which character the player is 
+switch (global.character) {
+    case "andro":
+        sprite_index = sprAndro;
+        break;
+    case "ana":
+        sprite_index = sprAna;
+        break;
+    case "doms":
+        sprite_index = sprDoms;
+        break;
+}
+// find which way the player is facing
 var yPart = 0;
 switch (face) {
     case "down":
@@ -19,4 +32,4 @@ switch (face) {
 }
 
 // draw_sprite(sprWall, 0, x, y);
-draw_sprite_part_ext(sprite_index, image_index, 0, 0 + (yPart * 32), 32, 32, x - 32, y - 42, image_xscale * 4, image_yscale * 4, image_blend, image_alpha);
+draw_sprite_part_ext(sprite_index, image_index, 0, 0 + (yPart * 32), 32, 32, x - 16, y - 21, image_xscale * 2, image_yscale * 2, image_blend, image_alpha);
