@@ -8,8 +8,8 @@
   "name":"objAltController",
   "overriddenProperties":[],
   "parent":{
-    "name":"Controllers",
-    "path":"folders/2 Objects/Controllers.yy",
+    "name":"Spawners and Handlers",
+    "path":"folders/2 Objects/Controllers/Spawners and Handlers.yy",
   },
   "parentObjectId":null,
   "persistent":false,

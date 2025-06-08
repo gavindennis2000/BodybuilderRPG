@@ -1,5 +1,7 @@
 /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
+//
+layer = layer_create(layer_get_depth(layer_get_id("Instances")) - 1, "Player");
 // movement stuff
 targetX = 0;
 targetY = 0;

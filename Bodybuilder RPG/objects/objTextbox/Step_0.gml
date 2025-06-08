@@ -8,10 +8,10 @@ if (currentTextObj == -1) {
         show_debug_message("no text for dialog");
         instance_destroy();
     }
-    currentTextObj = (is_array(text)) ? text[0] : text;
+    currentTextObj = (is_array(text)) ? variable_clone(text[0]) : variable_clone(text);
 }
 var confirm = input_check_pressed("south");
-var getNext = function() {
+var getNextChar = function() {
     // grabs next char from currentTextObj and feeds it to drawText
     if (string_length(currentTextObj.text) >= next) {
         if ((setNewLine && string_char_at(currentTextObj.text, next) == " ") || string_char_at(currentTextObj.text, next) == "`") {
@@ -35,7 +35,7 @@ if (fade != 0)
 
 if (counter % 2 == 0) {
     // keep building the current text string
-    getNext();
+    getNextChar();
 }
 
 // increment counter
@@ -55,6 +55,6 @@ if (confirm) {
     }
     else {
         while (string_length(currentTextObj.text) >= next)
-            getNext();
+            getNextChar();
     }
 }

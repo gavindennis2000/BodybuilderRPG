@@ -29,24 +29,25 @@ var keyUp = input_check("up");
 var keyDown = input_check("down");
 var keyAny = (keyLeft || keyRight || keyUp || keyDown);
 
-var keyEast = input_check("east");
+var keyRun = input_check("east");
+var keyAction = input_check_pressed("south");
 
 var noTarget = (targetX == 0 && targetY == 0);
 
 // player movement
 
 // run when holding 'b'
-if (keyEast && canCertainlyMove) {
+if (keyRun && canCertainlyMove) {
     runSpeed = originalRunSpeed * 2;
     runSpeedAnimation = originalRunSpeedAnimation * 1.5;
 }
 
 // set animation speed for player walking
-image_speed = (keyAny || targetX != 0 || targetY != 0) ? runSpeedAnimation : 0;
+image_speed = (canMove && (keyAny || targetX != 0 || targetY != 0)) ? runSpeedAnimation : 0;
 image_index = (image_speed != 0) ? image_index : 0;
 
 if (keyLeft) { 
-    if (noTarget)
+    if (noTarget && canMove)
         face = "left";
 
     if (!place_meeting(x - 32, y, objWall) && canCertainlyMove) {
@@ -55,7 +56,7 @@ if (keyLeft) {
 }
 
 else if (keyRight) {
-    if (noTarget)
+    if (noTarget && canMove)
         face = "right";
 
     if (!place_meeting(x + 32, y, objWall) && canCertainlyMove) {
@@ -64,7 +65,7 @@ else if (keyRight) {
 }
 
 else if (keyUp) {
-    if (noTarget)
+    if (noTarget && canMove)
         face = "up";
 
     if (!place_meeting(x, y - 32, objWall) && canCertainlyMove) {
@@ -72,7 +73,7 @@ else if (keyUp) {
     }
 }
 
-else if (keyDown) {
+else if (keyDown && canMove) {
     if (noTarget)
         face = "down";
 
@@ -92,4 +93,13 @@ if (targetX != 0 || targetY != 0) {
 if (targetX == 0 && targetY == 0) {
     runSpeed = originalRunSpeed;
     runSpeedAnimation = originalRunSpeedAnimation;
+
+    var door = instance_place(x, y, objDoor);
+    if (door != noone) {
+        canMove = false;
+        with (door) {
+            if (opened == 0)
+                opened = 1;
+        }
+    }
 }

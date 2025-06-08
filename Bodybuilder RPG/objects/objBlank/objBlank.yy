@@ -6,8 +6,8 @@
   "name":"objBlank",
   "overriddenProperties":[],
   "parent":{
-    "name":"2 Objects",
-    "path":"folders/2 Objects.yy",
+    "name":"Controllers",
+    "path":"folders/2 Objects/Controllers.yy",
   },
   "parentObjectId":null,
   "persistent":false,

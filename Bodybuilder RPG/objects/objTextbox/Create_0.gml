@@ -3,7 +3,7 @@ if (TEST) { if (live_call()) {  // GMLive
     return live_result;
 }}
 
-layer = layer_create(layer_get_depth(layer_get_id("Instances")) - 1, "TextBox");
+layer = layer_create(layer_get_depth(layer_get_id("Instances")) - 10, "TextBox");
 fade = 1;
 sampleText = [
     {
@@ -43,7 +43,7 @@ picYTop = picY - CAM_HEIGHT + 96;
 
 // find out if textbox should be at top or bottom of screen
 if (instance_exists(objPlayer)) {
-    if (objPlayer.y >= camera_get_view_y(view_camera[0]) + CAM_WIDTH / 2 - 32) {
+    if (objPlayer.y >= camera_get_view_y(view_camera[0]) + CAM_WIDTH / 2 - 96) {
         screen = "top";
         textboxY = textboxYTop;
         textY = textYTop;

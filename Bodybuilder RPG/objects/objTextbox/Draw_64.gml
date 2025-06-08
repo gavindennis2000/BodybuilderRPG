@@ -61,11 +61,12 @@ if (destroy) {
 
 // get the textbox color
 var color1, color2 = c_black;
-var name = currentTextObj.name;
+var name = variable_struct_exists(currentTextObj, "name") ? currentTextObj.name : "monologue";
 switch (name) {
     case "andro":
     case "ana":
     case "doms":
+    case "monologue":
         color1 = #00364d; 
         break;
     case "jim":
@@ -104,13 +105,13 @@ if (fade != 0)
     exit;
 
 // the picture
-var pictureIndex = 1;
+var pictureIndex = getPictureIndex(name);
 if (pictureIndex != -1)
     draw_rectangle_color(picX, picY, picX + picLength, picY + picLength, c_white, c_white, c_white, c_white, false);
 else {
     textX -= picLength;
 }
-if (name != -1) {
+if (name != "monologue") {
     // the name
     fontXY(fa_center, fa_bottom);
     drawTextOutline(picX + picLength / 2, picY + 1, string_upper(name));
