@@ -3,6 +3,13 @@ if (TEST) { if (live_call()) {  // GMLive
     return live_result;
 }}
 
+if (currentTextObj == -1) {
+    if (text == -1) {
+        show_debug_message("no text for dialog");
+        instance_destroy();
+    }
+    currentTextObj = (is_array(text)) ? text[0] : text;
+}
 var confirm = input_check_pressed("south");
 var getNext = function() {
     // grabs next char from currentTextObj and feeds it to drawText
@@ -20,7 +27,6 @@ var getNext = function() {
     }
     else if (!readyForNext) {
         readyForNext = true;
-        show_debug_message("ready for next");
     }
 }
 
@@ -42,14 +48,12 @@ if (confirm) {
         counter = 0;
         drawText = "";
         checkNewLineAt = checkNewLineAtAmount;
-        show_debug_message($"textindex {textIndex} arraylength {array_length(text)}");
         if (++textIndex < array_length(text))
             currentTextObj = text[textIndex];
         else 
             destroy = true;
     }
     else {
-        show_debug_message("getting all");
         while (string_length(currentTextObj.text) >= next)
             getNext();
     }

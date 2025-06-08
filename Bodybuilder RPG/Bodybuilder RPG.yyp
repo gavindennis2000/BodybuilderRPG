@@ -441,6 +441,7 @@
     {"id":{"name":"input_x","path":"scripts/input_x/input_x.yy",},},
     {"id":{"name":"input_xy","path":"scripts/input_xy/input_xy.yy",},},
     {"id":{"name":"input_y","path":"scripts/input_y/input_y.yy",},},
+    {"id":{"name":"textbox","path":"scripts/textbox/textbox.yy",},},
     {"id":{"name":"sprAna","path":"sprites/sprAna/sprAna.yy",},},
     {"id":{"name":"sprAndro","path":"sprites/sprAndro/sprAndro.yy",},},
     {"id":{"name":"sprDoms","path":"sprites/sprDoms/sprDoms.yy",},},
