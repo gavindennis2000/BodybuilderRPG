@@ -16,7 +16,7 @@ if ((diffY >= CAM_HEIGHT || diffY <= -32) && yTo == -1) {
     yTo = y + sign(diffY) * CAM_HEIGHT;
 }
 
-var changeAmount = 7;
+var changeAmount = 6;
 if (x != xTo && xTo != -1) {
     if (round((xTo - x ) / changeAmount) == 0)
         x += sign(xTo - x);

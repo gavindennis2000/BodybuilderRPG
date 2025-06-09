@@ -4,4 +4,4 @@ if (TEST) { if (live_call()) {  // GMLive
 }}
 
 image_speed = 0;
-opened = 0;
+opened = false;

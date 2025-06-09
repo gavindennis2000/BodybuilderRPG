@@ -13,6 +13,9 @@ switch (global.character) {
     case "doms":
         sprite_index = sprDoms;
         break;
+    case "samson":
+        sprite_index = sprSamson;
+        break;
 }
 // find which way the player is facing
 var yPart = 0;

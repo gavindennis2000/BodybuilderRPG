@@ -12,6 +12,9 @@ if (TEST) {
                 global.character = "doms";
                 break;
             case "doms":
+                global.character = "samson";
+                break;
+            case "samson":
                 global.character = "andro";
                 break;
         }
@@ -98,8 +101,8 @@ if (targetX == 0 && targetY == 0) {
     if (door != noone) {
         canMove = false;
         with (door) {
-            if (opened == 0)
-                opened = 1;
+            if (!opened)
+                opened = true;
         }
     }
 }

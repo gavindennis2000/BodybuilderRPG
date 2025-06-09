@@ -16,8 +16,7 @@ if (touching && !instance_exists(objTextbox)) {
         instance_create_layer(x, y, layer, objAction);
     if (input_check_pressed("south") && objPlayer.canMove) {
         // get and show dialog
-        var text = handleDialog(-1, itemID);
-        debug(text);
-        textbox(text);
+        var finalText = (text == -1) ? handleDialog(-1, itemID) : text;
+        textbox(finalText);
     }
 }

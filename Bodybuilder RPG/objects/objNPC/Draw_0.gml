@@ -7,6 +7,7 @@ if (TEST) { if (live_call()) {  // GMLive
 var imageY = 0;
 
 // get the npc's sprite_index
+sprite_index = sprNPC;  // default
 switch (npcID) {
 	case "ana":
 		sprite_index = sprAna;
@@ -17,8 +18,17 @@ switch (npcID) {
 	case "doms":
 		sprite_index = sprDoms;
 		break;
+	case "samson":
+		sprite_index = sprSamson;
+		break;
+	case "mom":
+		image_index = 3;
+		break;
+	case "jim":
+		image_index = 2;
+		break;
 	default:
-		sprite_index = sprNPC;
+		image_index = 0;
 		break;
 }
 

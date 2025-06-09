@@ -6,7 +6,7 @@ function handleDoors(doorID){
 	switch (doorID) {
 		
 		case inst_5A092949:
-			// mom's basement
+			// mom's basement -> mom's house
 			global.pX = 416 -32;
 			global.pY = 352;
 			global.pFace = "left";
@@ -14,10 +14,26 @@ function handleDoors(doorID){
 			global.roomTransition = "fade";
 			break;
 		case inst_7F4DBE81:
-			// mom's basement
+			// mom's house -> basement
 			global.pX = 416 -32;
 			global.pY = 64;
 			global.pFace = "left";
+			global.roomGoto = rMom;
+			global.roomTransition = "fade";
+			break;
+		case inst_3088334D:
+			// mom's house -> overworld
+			global.pX = 864;
+			global.pY = 448 + 32;
+			global.pFace = "down";
+			global.roomGoto = rOverworld;
+			global.roomTransition = "fade";
+			break;
+		case inst_7C4D478B:
+			// overworld -> mom's house
+			global.pX = 224;
+			global.pY = 512 - 32;
+			global.pFace = "up";
 			global.roomGoto = rMom;
 			global.roomTransition = "fade";
 			break;

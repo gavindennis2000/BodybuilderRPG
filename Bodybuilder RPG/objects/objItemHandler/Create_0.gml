@@ -19,6 +19,20 @@ with (objItem) {
             itemID = "home bed";
             break;
         
+        // overworld
+        case inst_31A09F3:
+            itemID = "sign";
+            text = {
+                text: $"Mom's House."
+            };
+            break;
+        case inst_624F3169:
+            itemID = "sign";
+            text = {
+                text: $"Mason's House."
+            };
+            break;
+            
         // not found
         default:
             itemID = "item not found";
