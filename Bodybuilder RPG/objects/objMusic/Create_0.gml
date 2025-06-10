@@ -15,11 +15,14 @@ if (!variable_global_exists("previousSong"))
     global.previousSong = -1;
 if (!variable_global_exists("songPlaying"))
     global.songPlaying = -1;
+if (!variable_global_exists("trackPosition"))
+    global.trackPosition = {
+        name: -1,
+        position: -1
+    };
 
 getCurrentSong = function() {
     // get's current song at start of room
-
-    debug("doing something");
 
     /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
@@ -30,7 +33,7 @@ getCurrentSong = function() {
             global.currentSong = sndAnabolicHeights;
             break;
         case "Central Prairie":
-        case "Overworld":
+        // case "Overworld":
             global.currentSong = sndCentralPrairie;
             break;
         case "Creatine Island":
@@ -49,8 +52,6 @@ getCurrentSong = function() {
             global.currentSong = -1;
             break;
     }
-
-    debug($"current: {audio_get_name(global.currentSong)} previous: {audio_get_name(global.previousSong)} songplaying: {audio_get_name(global.songPlaying)}");
 
     return;
 }

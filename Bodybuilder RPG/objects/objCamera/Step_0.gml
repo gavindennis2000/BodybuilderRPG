@@ -78,10 +78,13 @@ if (room == rOverworld) {
 
         // play the right overworld music
         with (objMusic) {
-            if (global.roomVar != global.prevRoomVar)
+            if (global.roomVar != global.prevRoomVar) {
                 audio_sound_gain(global.songPlaying, 0.3, 600);
             getCurrentSong();
+            // if (global.currentSong == global.previousSong)
+            //     global.previousSong = -1;
             alarm_set(0, aTime * 2);
+            }
         }
     }
 }
