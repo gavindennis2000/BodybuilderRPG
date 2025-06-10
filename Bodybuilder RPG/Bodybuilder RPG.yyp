@@ -460,6 +460,7 @@
     {"id":{"name":"input_y","path":"scripts/input_y/input_y.yy",},},
     {"id":{"name":"textbox","path":"scripts/textbox/textbox.yy",},},
     {"id":{"name":"bgTest","path":"sprites/bgTest/bgTest.yy",},},
+    {"id":{"name":"bgTest2","path":"sprites/bgTest2/bgTest2.yy",},},
     {"id":{"name":"sprAna","path":"sprites/sprAna/sprAna.yy",},},
     {"id":{"name":"sprAndro","path":"sprites/sprAndro/sprAndro.yy",},},
     {"id":{"name":"sprDoms","path":"sprites/sprDoms/sprDoms.yy",},},

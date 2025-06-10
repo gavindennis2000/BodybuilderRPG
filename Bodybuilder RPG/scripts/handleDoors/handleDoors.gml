@@ -4,7 +4,7 @@ function handleDoors(doorID){
 	/*gmlive*/ if (TEST) { if (live_call(doorID)) return live_result; }
 	
 	switch (doorID) {
-		
+		// mom's house
 		case inst_5A092949:
 			// mom's basement -> mom's house
 			global.pX = 416 -32;
@@ -23,12 +23,13 @@ function handleDoors(doorID){
 			break;
 		case inst_3088334D:
 			// mom's house -> overworld
-			global.pX = 864;
-			global.pY = 448 + 32;
+			global.pX = 1856;
+			global.pY = 704 + 32;
 			global.pFace = "down";
 			global.roomGoto = rOverworld;
 			global.roomTransition = "fade";
 			break;
+		// overworld
 		case inst_7C4D478B:
 			// overworld -> mom's house
 			global.pX = 224;
@@ -37,6 +38,7 @@ function handleDoors(doorID){
 			global.roomGoto = rMom;
 			global.roomTransition = "fade";
 			break;
+		// default
 		default:
 			global.pX = 384 - 32;
 			global.pY = 192;
