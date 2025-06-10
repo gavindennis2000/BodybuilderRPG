@@ -26,8 +26,8 @@ goToNextRoom = function() {
 
     /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
-    debug("going to next room");
     alarm[0] = alarmTime;
+    audio_sound_gain(global.songPlaying, 0.3, 600);
 
     return;
 }
@@ -39,12 +39,11 @@ showRoomVarFunc = function() {
 
     /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
-    debug("showing roomvar");
-
     if (global.roomVar == global.prevRoomVar)
         exit;
 
     alarm[2] = 120;
+    showRoomVarAlpha = 0;
     showRoomVar = true;
 
     return;

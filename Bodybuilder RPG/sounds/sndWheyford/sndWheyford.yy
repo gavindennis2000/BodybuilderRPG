@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"sndWheyford",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":3,
+  "conversionMode":0,
+  "duration":98.74286,
+  "name":"sndWheyford",
+  "parent":{
+    "name":"Overworld",
+    "path":"folders/4 Music/OST/Overworld.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndWheyford.wav",
+  "type":1,
+  "volume":1.0,
+}

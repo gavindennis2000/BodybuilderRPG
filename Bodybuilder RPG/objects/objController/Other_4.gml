@@ -12,6 +12,8 @@ if (!instance_exists(objItemHandler))
     instance_create_layer(0, 0, "Instances", objItemHandler);
 if (!instance_exists(objNPCHandler))
     instance_create_layer(0, 0, "Instances", objNPCHandler);
+if (!instance_exists(objMusic))
+    instance_create_layer(0, 0, "Instances", objMusic);
 
 // find out which room the player is in
 global.prevRoomVar = global.roomVar;

@@ -39,3 +39,49 @@ else {
 
 // adjust the camera
 camera_set_view_pos(view_camera[0], x, y);
+
+if (room == rOverworld) {
+    divX = (xTo != -1) ? xTo div CAM_WIDTH : x div CAM_WIDTH;
+    divY = (yTo != -1) ? yTo div CAM_HEIGHT : y div CAM_HEIGHT;
+
+    if (divX != prevDivX || divY != prevDivY) {
+        prevDivX = divX;
+        prevDivY = divY;
+
+        // find which section of overworld the player is in
+        if (divY == 0) {
+            global.prevRoomVar = global.roomVar;
+            global.roomVar = "Anabolic Heights";
+        }
+        else if (divX == 2 || divX == 3) {
+            if (divY == 1 || divY == 2) {
+                global.prevRoomVar = global.roomVar;
+                global.roomVar = "Central Prairie";
+            }
+            else {
+                global.prevRoomVar = global.roomVar;
+                global.roomVar = "Wheyford";
+            }
+        }
+        else if (divX == 0 || divX == 1) {
+            global.prevRoomVar = global.roomVar;
+            global.roomVar = "Creatine Island";
+        }
+        else {
+            global.prevRoomVar = global.roomVar;
+            global.roomVar = "Leangroundburg";
+        }
+
+        // show the room var via objController
+        with (objController)
+            showRoomVarFunc();
+
+        // play the right overworld music
+        with (objMusic) {
+            if (global.roomVar != global.prevRoomVar)
+                audio_sound_gain(global.songPlaying, 0.3, 600);
+            getCurrentSong();
+            alarm_set(0, aTime * 2);
+        }
+    }
+}
