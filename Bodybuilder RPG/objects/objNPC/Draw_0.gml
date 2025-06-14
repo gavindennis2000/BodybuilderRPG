@@ -48,4 +48,10 @@ switch (face) {
 		break;
 }
 
+if (instance_exists(objPlayer) && y >= objPlayer.y)
+	depth = objPlayer.depth - 1;
+else if (instance_exists(objPlayer))
+	depth = objPlayer.depth + 1;
+else depth = depthStart;
+
 draw_sprite_part_ext(sprite_index, image_index, 0, 0 + 32 * imageY, 32, 32, x - 16, y - 21, 2, 2, image_blend, image_alpha);

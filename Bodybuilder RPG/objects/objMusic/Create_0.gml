@@ -4,7 +4,7 @@ if (TEST) { if (live_call()) {  // GMLive
 }}
 
 var brandonIsInRoom = false;
-if (TEST && brandonIsInRoom)
+if (TEST && NO_MUSIC)
     instance_destroy();
 
 aTime = 20;
@@ -44,6 +44,9 @@ getCurrentSong = function() {
             break;
         case "Mom's House":
             global.currentSong = sndMom;
+            break;
+        case "Pump Palace":
+            global.currentSong = sndPumpPalace;
             break;
         case "Wheyford":
             global.currentSong = sndWheyford;

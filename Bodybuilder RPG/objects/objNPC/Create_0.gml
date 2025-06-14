@@ -7,7 +7,14 @@ if (TEST) { if (live_call()) {  // GMLive
 // set animation to off
 image_speed = 0;
 image_index = 0;
-faceStart = face;
+faceStart = (variable_instance_exists(self, "faceStart")) ? faceStart : face;
+depthStart = depth;
+
+// handle moving npcs
+xTo = x;
+yTo = y;
+if (array_length(directions) > 0)
+    alarm[1] = 1;
 
 // handle player interactions
 touching = false;

@@ -23,13 +23,37 @@ with (objItem) {
         case inst_31A09F3:
             itemID = "sign";
             text = {
-                text: $"Mom's House."
+                text: $"Mom's House"
             };
             break;
         case inst_624F3169:
             itemID = "sign";
             text = {
-                text: $"Mason's House."
+                text: $"Harvey's House"
+            };
+            break;
+        case inst_74DD81CD:
+            itemID = "sign";
+            text = {
+                text: $"Mason's House"
+            };
+            break;
+        case inst_410CADC5:
+            itemID = "sign";
+            text = {
+                text: $"Ana's House"
+            };
+            break;
+        case inst_1046573B:
+            itemID = "sign";
+            text = {
+                text: $"Central Prairie Community College"
+            };
+            break;
+        case inst_3AD879B1:
+            itemID = "sign";
+            text = {
+                text: $"Pump Palace Bodybuilding Gym"
             };
             break;
             

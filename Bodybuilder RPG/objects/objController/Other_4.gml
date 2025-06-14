@@ -15,6 +15,9 @@ if (!instance_exists(objNPCHandler))
 if (!instance_exists(objMusic))
     instance_create_layer(0, 0, "Instances", objMusic);
 
+// handle any events
+handleEvents();
+
 // find out which room the player is in
 global.prevRoomVar = global.roomVar;
 switch (room) {
@@ -24,6 +27,10 @@ switch (room) {
     case rOverworld:
         global.roomVar = "Overworld";
         break;
+    case rPumpPalace:
+        global.roomVar = "Pump Palace";
+        break;
+
     default:
         global.roomVar = "Unknown";
         break;
@@ -31,6 +38,7 @@ switch (room) {
 showRoomVarFunc();
 
 // fade in the room
+fadeAmount = 1;
 if (fadeAmount > 0) {
     alarm[1] = alarmTime;
 }

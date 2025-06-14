@@ -14,7 +14,7 @@ if (instance_exists(objPlayer))
 
 if (touching && !instance_exists(objTextbox)) {
     if (!instance_exists(objAction))
-        instance_create_layer(x, y, layer, objAction);
+        instance_create_layer(x, y, "Instances", objAction);
     if (input_check_pressed("south") && objPlayer.canMove) {
         // face the player
         var pFace = objPlayer.face; 

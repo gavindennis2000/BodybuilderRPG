@@ -29,6 +29,7 @@ next = 1;  // index of character to be transferred from text object to drawText
 readyForNext = false;  // lets player move on to next paragraph of text
 destroy = false;  // used to fade out textbox
 screen = -1;  // will the dialog box be on top or bottom?
+selection = 0;
 
 // where the textbox is drawn at
 textboxY = CAM_HEIGHT - 96;

@@ -12,7 +12,7 @@ if (fadeAmount > 0) {
 else {
     fadeAmount = 0;
     with (objPlayer)
-        canMove = true;
+        canMove = (!instance_exists(objTextbox));
     exit;
 }
 

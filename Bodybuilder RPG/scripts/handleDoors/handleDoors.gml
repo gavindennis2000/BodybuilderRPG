@@ -38,12 +38,46 @@ function handleDoors(doorID){
 			global.roomGoto = rMom;
 			global.roomTransition = "fade";
 			break;
+		case inst_1F15BCE2:
+			// overworld -> pump palace right door
+			global.pX = 768;
+			global.pY = 256 - 32;
+			global.pFace = "up";
+			global.roomGoto = rPumpPalace;
+			global.roomTransition = "fade";
+			break;
+		case inst_6813D5EC:
+			// overworld -> pump palace left door
+			global.pX = 768 - 32;
+			global.pY = 256 - 32;
+			global.pFace = "up";
+			global.roomGoto = rPumpPalace;
+			global.roomTransition = "fade";
+			break;
+
+		// pump palace
+		case inst_9B9658A:
+		// pump palace right door -> overworld
+			global.pX = 1280;
+			global.pY = 448 + 32;
+			global.pFace = "down";
+			global.roomGoto = rOverworld;
+			global.roomTransition = "fade";
+			break;
+		case inst_1A758F22:
+		// pump palace left door -> overworld
+			global.pX = 1280 - 32;
+			global.pY = 448 + 32;
+			global.pFace = "down";
+			global.roomGoto = rOverworld;
+			global.roomTransition = "fade";
+			break;
 		// default
 		default:
-			global.pX = 384 - 32;
-			global.pY = 192;
-			global.pFace = "left";
-			global.roomGoto = rMom;
+			global.pX = self.x;
+			global.pY = self.y + 32;
+			global.pFace = "down";
+			global.roomGoto = room;
 			global.roomTransition = "fade";
 			break;
 	}

@@ -9,6 +9,11 @@ with (objNPC) {
         case inst_25C30024:
             npcID = "mom";
             break;
+
+        // pump palace
+        case inst_2EDD4AC:
+            npcID = "jim";
+            break;
         
         // not found
         default:

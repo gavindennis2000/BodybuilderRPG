@@ -62,6 +62,9 @@ if (destroy) {
 // get the textbox color
 var color1, color2 = c_black;
 var name = variable_struct_exists(currentTextObj, "name") ? currentTextObj.name : "monologue";
+var alias = variable_struct_exists(currentTextObj, "alias") ? currentTextObj.alias: -1;
+var emotion = variable_struct_exists(currentTextObj, "emotion") ? currentTextObj.emotion : "neutral";
+var tone = variable_struct_exists(currentTextObj, "tone") ? currentTextObj.tone : -1;
 switch (name) {
     case "andro":
     case "ana":
@@ -73,10 +76,13 @@ switch (name) {
         color1 = #264d00;
         break;
     case "enemy":
-        color1 = #4d0000
+        color1 = #4d0000;
         break;
     case "samson":
-        color1 = #32004d
+        color1 = #32004d;
+        break;
+    case "mom":
+        color1 = #85044d;
         break;
     default:
         color1 = #1a1a1a;
@@ -97,7 +103,6 @@ draw_rectangle_color(  // main
 draw_set_alpha(alpha);
 
 // draw the talker's name, picture, and speech
-draw_set_font(fTextbox);
 var picX = 16;
 var picLength = 68;
 var textX = picX + picLength + 10;
@@ -106,18 +111,67 @@ if (fade != 0)
 
 // the picture
 var pictureIndex = getPictureIndex(name);
-if (pictureIndex != -1)
-    draw_rectangle_color(picX, picY, picX + picLength, picY + picLength, c_white, c_white, c_white, c_white, false);
+switch (emotion) {
+    // get the emotion of the talker for the portrait
+    case "happy":
+        pictureIndex += 1;
+        break;
+    case "frustrated":
+        pictureIndex += 2;
+        break;
+    case "cocky":
+        pictureIndex += 3;
+        break;
+    case "angry":
+        pictureIndex += 4;
+        break;
+    case "neutral":
+    default:
+        break;
+}
+if (pictureIndex != -1) {
+    var getAlpha = draw_get_alpha();
+    var rectColor = c_white;
+    draw_set_alpha(0.1);
+    draw_rectangle_color(picX, picY, picX + picLength, picY + picLength, rectColor, rectColor, rectColor, rectColor, false);
+    draw_set_alpha(getAlpha);
+    draw_sprite_ext(sprPortraits, pictureIndex, picX, picY, 2, 2, 0, c_white, image_alpha);
+}
 else {
     textX -= picLength;
 }
 if (name != "monologue") {
     // the name
     fontXY(fa_center, fa_bottom);
-    drawTextOutline(picX + picLength / 2, picY + 1, string_upper(name));
+    draw_set_font(fTextbox)
+    drawTextOutline(picX + picLength / 2, picY + 1, string_upper(alias != -1 ? alias : name));
 }
 if (drawText != "") {
+    // get the font size
+    switch (tone) {
+        // set the tone of the talker
+        case "quiet":
+            draw_set_font(fTextboxSmall);
+            break;
+        case "loud":
+            draw_set_font(fTextboxLarge);
+            break;
+        default:    
+            draw_set_font(fTextbox);
+            break;
+    }
     // the text 
     fontXY(fa_left, fa_top);
     drawTextOutline(textX, textY, drawText);
+
+    if (readyForNext) {
+        // if there's a prompt, display it
+        if (is_array(prompt)) {
+            fontXY(fa_center, fa_bottom);
+            var selectedColor = c_yellow;
+            var strLength = string_length(prompt[0]);
+            drawTextOutline(CAM_WIDTH/2 + picX + picLength/2 - strLength * 2 - 64, textY + picLength + 8, $"\n{prompt[0]}", selection == 0 ? selectedColor : c_white);
+            drawTextOutline(CAM_WIDTH/2 + picX + picLength/2 + strLength * 2 + 64, textY + picLength + 8, $"\n{prompt[2]}", selection == 1 ? selectedColor : c_white);
+        }
+    }
 }

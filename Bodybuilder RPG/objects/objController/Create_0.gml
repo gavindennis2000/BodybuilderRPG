@@ -4,7 +4,16 @@
 
 layer = layer_create(layer_get_depth(layer_get_id("Instances")) - 2, "Controller");
 // global stuff
+global.events = {
+    startCh1: false,
+    meetMom: false,
+    meetJim: false,
+    meetAna: false,
+}
 global.chapter = 1;
+global.character = "andro";
+global.characterName = "andro";
+global.party = ["andro"];
 global.roomVar = -1;
 global.prevRoomVar = -1;
 

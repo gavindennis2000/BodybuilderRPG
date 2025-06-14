@@ -1,10 +1,11 @@
-// Script assets have changed for v2.3.0 see
-// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function textbox(text, canMove = false, action = -1) {
+function textbox(text, canMove = true, stopMove = true) {
+	// simple, easy way to create a textbox and configure the player's movement
+
+	/*gmlive*/ if (TEST) { if (live_call(text, canMove, stopMove)) return live_result; }
 	if (instance_exists(objPlayer))
-		objPlayer.canMove = canMove;
+		objPlayer.canMove = stopMove ? false : true;
 	instance_create_layer(0, 0, "Instances", objTextbox, {
 		text: text, 
-		action, action
+		canMove: canMove,
 	});
 }
