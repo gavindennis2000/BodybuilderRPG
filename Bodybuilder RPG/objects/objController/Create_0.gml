@@ -9,8 +9,11 @@ global.events = {
     meetMom: false,
     meetJim: false,
     meetAna: false,
+    bbnc: false,
 }
 global.chapter = 1;
+global.cutscene = false; 
+global.cutsceneSong = -1;
 global.character = "andro";
 global.characterName = "andro";
 global.party = ["andro"];
@@ -25,6 +28,7 @@ global.roomTransition = "";
 global.pFace = ""
 // cutscenes
 global.cutscene = -1;
+cutsceneY = 0;
 
 fadeAmount = 0;
 fadeAmountChange = 0.15;

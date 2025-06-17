@@ -56,6 +56,32 @@ with (objItem) {
                 text: $"Pump Palace Bodybuilding Gym"
             };
             break;
+        case inst_178CDEA8:
+            itemID = "sign";
+            text = $"Bodybuilding Nutrition Company"
+            break;
+        
+        // stores
+        // bbnc
+        case inst_2F5A5C4E:
+            itemID = "wall";
+            text = [
+                {
+                    name: "Clerk",
+                    text: $"Welcome to BBNC! Home to all your hypertrophy needs!"
+                },
+                {
+                    name: "Clerk",
+                    text: $"Are you trying to buy some supplements?",
+                    prompt: [
+                        "Yes",
+                        [],
+                        "No",
+                        []
+                    ]
+                }
+            ]
+            break;
             
         // not found
         default:

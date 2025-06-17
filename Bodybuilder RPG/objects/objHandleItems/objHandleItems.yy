@@ -1,15 +1,15 @@
 {
   "$GMObject":"",
-  "%Name":"objWall",
+  "%Name":"objHandleItems",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"objWall",
+  "name":"objHandleItems",
   "overriddenProperties":[],
   "parent":{
-    "name":"Walls and Items",
-    "path":"folders/2 Objects/Walls and Items.yy",
+    "name":"Spawners and Handlers",
+    "path":"folders/2 Objects/Controllers/Spawners and Handlers.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -29,10 +29,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"sprWall",
-    "path":"sprites/sprWall/sprWall.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

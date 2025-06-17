@@ -10,6 +10,17 @@ if (fadeAmount != 0) {
     draw_set_alpha(alpha);
 }
 
+// cutscenes: show some cool black bars
+if (global.cutscene || cutsceneY != 0) {
+    var amount = 1;
+    if (global.cutscene && cutsceneY < 32)
+        cutsceneY += amount;
+    else if (!global.cutscene)
+        cutsceneY -= amount;
+    draw_rectangle_color(0, 0, CAM_WIDTH, cutsceneY, c_black, c_black, c_black, c_black, false);
+    draw_rectangle_color(0, CAM_HEIGHT, CAM_WIDTH, CAM_HEIGHT - cutsceneY, c_black, c_black, c_black, c_black, false);
+}
+
 // show the name of the room at the beginning of room start
 if (showRoomVar) {
     // set the opacity of the text

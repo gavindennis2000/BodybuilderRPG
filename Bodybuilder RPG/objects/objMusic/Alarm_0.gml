@@ -3,12 +3,19 @@ if (TEST) { if (live_call()) {  // GMLive
     return live_result;
 }}
 
+debug($"{global.cutscene} {audio_get_name(global.cutsceneSong)}");
+
 if (global.currentSong == -1)
     audio_stop_sound(global.songPlaying);
 else if (global.currentSong == global.previousSong)
     audio_sound_gain(global.songPlaying, 1, 200);
 else {
-    if (audio_get_name(global.songPlaying) == audio_get_name(global.currentSong))  
+    if (global.cutscene && global.cutsceneSong != -1) {
+        audio_stop_sound(global.songPlaying);
+        global.songPlaying = audio_play_sound(global.cutsceneSong, 1, true, 0.25);
+        audio_sound_gain(global.songPlaying, 1, 200);
+    }
+    else if (audio_get_name(global.songPlaying) == audio_get_name(global.currentSong))  
         audio_sound_gain(global.songPlaying, 1, 200);
     else {
         audio_stop_sound(global.songPlaying);

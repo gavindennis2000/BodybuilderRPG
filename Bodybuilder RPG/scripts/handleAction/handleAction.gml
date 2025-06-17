@@ -31,6 +31,41 @@ function handleAction(action) {
                 text: "ANA has joined the party."
             }, true);
             global.party = ["andro", "ana"];
+            global.cutscene = false;
+            with (objMusic) {
+                audio_sound_gain(global.songPlaying, 0, aTime * 4);
+                alarm_set(0, aTime);
+            }
+            break;
+        case "bbnc robbery 2":
+            // handle further dialog with robber in bbnc
+            with (objNPC) {
+                if (npcID == "robber") {
+                    faceStart = "down";
+                    face = "down";
+                }
+            }
+            textbox([
+                {
+                    name: "enemy",
+                    alias: "robber",
+                    text: "Not so fast! You're not going anywhere!"
+                },
+                {
+                    name: "enemy",
+                    alias: "robber",
+                    text: "You leave that door, and clerky here is getting the axe."
+                },
+                {
+                    name: "ana",
+                    emotion: "angry",
+                    text: "Guess we don't have much of a choice... Brace yourself!",
+                    action: "bbnc robbery fight"
+                }
+            ], false);
+            break;
+        case "bbnc robbery fight":
+
             break;
         case "enter ana":
             with (objPlayer)
@@ -58,7 +93,7 @@ function handleAction(action) {
                                 {
                                     name: "ana",
                                     text: $"I can't believe you'd give me attitude after I helped you get this job.",
-                                    emotion: "angry"
+                                    emotion: "frustrated"
                                 }
                             ]
                         ]
@@ -81,6 +116,10 @@ function handleAction(action) {
             break;
         case "meet jim":
             global.events.meetJim = true;
+            with (objItem) {
+                if (itemID == "locked door")
+                    instance_destroy();
+            }
             break;
     }
     debug($"action handled: {action}");

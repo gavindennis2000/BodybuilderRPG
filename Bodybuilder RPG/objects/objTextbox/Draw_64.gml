@@ -168,10 +168,13 @@ if (drawText != "") {
         // if there's a prompt, display it
         if (is_array(prompt)) {
             fontXY(fa_center, fa_bottom);
+            draw_set_font(fTextbox);
             var selectedColor = c_yellow;
             var strLength = string_length(prompt[0]);
-            drawTextOutline(CAM_WIDTH/2 + picX + picLength/2 - strLength * 2 - 64, textY + picLength + 8, $"\n{prompt[0]}", selection == 0 ? selectedColor : c_white);
-            drawTextOutline(CAM_WIDTH/2 + picX + picLength/2 + strLength * 2 + 64, textY + picLength + 8, $"\n{prompt[2]}", selection == 1 ? selectedColor : c_white);
+            var prompt1X = CAM_WIDTH / 2 + picLength - CAM_WIDTH / 4;
+            var prompt2X = CAM_WIDTH / 2 + picLength / 2 + CAM_WIDTH / 4;
+            drawTextOutline(prompt1X, textY + picLength + 8, $"\n{prompt[0]}", selection == 0 ? selectedColor : c_white);
+            drawTextOutline(prompt2X, textY + picLength + 8, $"\n{prompt[2]}", selection == 1 ? selectedColor : c_white);
         }
     }
 }

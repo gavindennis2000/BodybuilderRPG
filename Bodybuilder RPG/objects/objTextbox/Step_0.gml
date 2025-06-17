@@ -5,9 +5,15 @@ if (TEST) { if (live_call()) {  // GMLive
 
 if (currentTextObj == -1) {
     if (text == -1) {
+        debug("no text to show");
         instance_destroy();
     }
-    currentTextObj = (is_array(text)) ? variable_clone(text[0]) : variable_clone(text);
+    if (is_string(text))
+        currentTextObj = {
+            text: text,
+        }
+    else
+        currentTextObj = (is_array(text)) ? variable_clone(text[0]) : variable_clone(text);
     prompt = (variable_struct_exists(currentTextObj, "prompt")) ? currentTextObj.prompt : -1;
     canMove = (variable_struct_exists(currentTextObj, "canMove")) ? currentTextObj.canMove : canMove;
     action = (variable_struct_exists(currentTextObj, "action")) ? currentTextObj.action: -1;
@@ -15,6 +21,10 @@ if (currentTextObj == -1) {
 var confirm = input_check_pressed("south");
 var getNextChar = function() {
     // grabs next char from currentTextObj and feeds it to drawText
+    if (text == -1) {
+        debug("no text to show");
+        instance_destroy();
+    }
     if (string_length(currentTextObj.text) >= next) {
         if ((setNewLine && string_char_at(currentTextObj.text, next) == " ") || string_char_at(currentTextObj.text, next) == "`") {
             drawText = string_concat(drawText, "\n");

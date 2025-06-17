@@ -1,6 +1,6 @@
 {
   "$GMSound":"",
-  "%Name":"sndMom",
+  "%Name":"sndSamson",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -9,8 +9,8 @@
   "bitRate":128,
   "compression":3,
   "conversionMode":0,
-  "duration":78.0,
-  "name":"sndMom",
+  "duration":80.0,
+  "name":"sndSamson",
   "parent":{
     "name":"Character Themes",
     "path":"folders/4 Music/OST/Character Themes.yy",
@@ -19,7 +19,7 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"sndMom.wav",
+  "soundFile":"sndSamson.wav",
   "type":1,
   "volume":1.0,
 }

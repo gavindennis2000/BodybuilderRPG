@@ -1,6 +1,6 @@
 {
   "$GMSound":"",
-  "%Name":"sndMom",
+  "%Name":"sndAna",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -10,7 +10,7 @@
   "compression":3,
   "conversionMode":0,
   "duration":78.0,
-  "name":"sndMom",
+  "name":"sndAna",
   "parent":{
     "name":"Character Themes",
     "path":"folders/4 Music/OST/Character Themes.yy",
@@ -19,7 +19,7 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"sndMom.wav",
+  "soundFile":"sndAna.wav",
   "type":1,
   "volume":1.0,
 }

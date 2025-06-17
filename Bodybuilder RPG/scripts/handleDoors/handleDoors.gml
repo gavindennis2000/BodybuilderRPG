@@ -54,10 +54,18 @@ function handleDoors(doorID){
 			global.roomGoto = rPumpPalace;
 			global.roomTransition = "fade";
 			break;
+		case inst_56C4F286:
+			// overworld -> bbnc
+			global.pX = 256;
+			global.pY = 256 - 32;
+			global.pFace = "up";
+			global.roomGoto = rStores;
+			global.roomTransition = "fade";
+			break;
 
 		// pump palace
 		case inst_9B9658A:
-		// pump palace right door -> overworld
+			// pump palace right door -> overworld
 			global.pX = 1280;
 			global.pY = 448 + 32;
 			global.pFace = "down";
@@ -65,13 +73,24 @@ function handleDoors(doorID){
 			global.roomTransition = "fade";
 			break;
 		case inst_1A758F22:
-		// pump palace left door -> overworld
+			// pump palace left door -> overworld
 			global.pX = 1280 - 32;
 			global.pY = 448 + 32;
 			global.pFace = "down";
 			global.roomGoto = rOverworld;
 			global.roomTransition = "fade";
 			break;
+
+		// stores
+		case inst_1F9D8954:
+			// bbnc -> overworld
+			global.pX = 1248;
+			global.pY = 1056 + 32;
+			global.pFace = "down";
+			global.roomGoto = rOverworld;
+			global.roomTransition = "fade";
+			break;
+
 		// default
 		default:
 			global.pX = self.x;

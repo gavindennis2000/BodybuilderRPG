@@ -3,7 +3,10 @@ function ch1Dialog(npcID = -1, itemID = -1){
 
 	/*gmlive*/ if (TEST) { if (live_call(npcID, itemID)) return live_result; }
 	
-	var textObj;
+	var textObj = [{
+		name: npcID,
+		text: ""
+	}];
 	if (npcID != -1) {
 		switch (npcID) {
 			case "mom":
@@ -31,10 +34,7 @@ function ch1Dialog(npcID = -1, itemID = -1){
 									},
 								],
 								"It's nothing",
-								[{
-									name: "andro",
-									text: "It's nothing..."
-								}],
+								[],
 							]
 						},
 						{
@@ -45,7 +45,7 @@ function ch1Dialog(npcID = -1, itemID = -1){
 						},
 						{
 							name: "mom",
-							text: "Do you know how to get to the gym?",
+							text: "Do you know how to get to work?",
 							prompt: [
 								"Yes",
 								[],
@@ -115,7 +115,7 @@ function ch1Dialog(npcID = -1, itemID = -1){
 						},
 						{
 							name: "jim",
-							text: $"You're all skin and bones! If you want to work at my bodybuilding gym, you're gonna need some serious mass!",
+							text: $"You're all skin and bones! If you want to work at a bodybuilding gym, you're gonna need to put on some serious mass!",
 							emotion: "cocky"
 						},
 						{
@@ -154,14 +154,14 @@ function ch1Dialog(npcID = -1, itemID = -1){
 						},
 						{
 							name: "jim",
-							text: "Take this delivery to my business associate down south."
+							text: "Take this delivery to my business associate at Bodybuilding Nutrition Company (BBNC)."
 						},
 						{
 							text: $"JIM handed {string_upper(global.characterName)} the goods."
 						},
 						{
 							name: "jim",
-							text: "Head to the southwest corner of Wheyford and you'll find him at the House of Gain gym."
+							text: "You'll find BBNC in Wheyford, two blocks south of here."
 						},
 						{
 							name: "jim",
@@ -172,6 +172,10 @@ function ch1Dialog(npcID = -1, itemID = -1){
 				}
 				else {
 					textObj = [
+						{
+							name: "jim",
+							text: "You'll find BBNC in Wheyford, two blocks south of here."
+						},
 						{
 							name: "jim",
 							text: "I'm busy running a business. If you need help, try talking to some of the lifters around the gym.",

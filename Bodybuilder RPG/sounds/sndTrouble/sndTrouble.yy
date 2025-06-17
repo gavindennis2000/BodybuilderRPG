@@ -1,6 +1,6 @@
 {
   "$GMSound":"",
-  "%Name":"sndMom",
+  "%Name":"sndTrouble",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -9,17 +9,17 @@
   "bitRate":128,
   "compression":3,
   "conversionMode":0,
-  "duration":78.0,
-  "name":"sndMom",
+  "duration":80.0,
+  "name":"sndTrouble",
   "parent":{
-    "name":"Character Themes",
-    "path":"folders/4 Music/OST/Character Themes.yy",
+    "name":"OST",
+    "path":"folders/4 Music/OST.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"sndMom.wav",
+  "soundFile":"sndTrouble.wav",
   "type":1,
   "volume":1.0,
 }
