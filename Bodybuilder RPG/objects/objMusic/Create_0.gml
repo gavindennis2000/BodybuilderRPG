@@ -3,7 +3,6 @@ if (TEST) { if (live_call()) {  // GMLive
     return live_result;
 }}
 
-var brandonIsInRoom = false;
 if (TEST && NO_MUSIC)
     instance_destroy();
 
@@ -57,4 +56,11 @@ getCurrentSong = function() {
     }
 
     return;
+}
+
+playBattleMusic = function(music) {
+    // pauses current music and plays battle music
+
+    audio_pause_sound(global.songPlaying);
+    global.battleMusic = audio_play_sound(music, 1, true);
 }

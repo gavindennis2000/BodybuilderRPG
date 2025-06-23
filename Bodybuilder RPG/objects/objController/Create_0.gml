@@ -3,6 +3,7 @@
 /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
 layer = layer_create(layer_get_depth(layer_get_id("Instances")) - 2, "Controller");
+
 // global stuff
 global.events = {
     startCh1: false,
@@ -21,18 +22,68 @@ global.roomVar = -1;
 global.prevRoomVar = -1;
 
 // room transitioning
-global.pX = -1;
-global.pY = -1;
-global.roomGoto = -1;
-global.roomTransition = "";
-global.pFace = ""
+global.roomChange = {
+    x: -1,
+    y: -1,
+    room: -1,
+    transition: "fade",
+    face: "up"
+}
+fadeAmount = 0;
+fadeAmountChange = 0.15;
+alarmTime = 2;
+
 // cutscenes
 global.cutscene = -1;
 cutsceneY = 0;
 
-fadeAmount = 0;
-fadeAmountChange = 0.15;
-alarmTime = 2;
+// battle engine
+global.battle = false;
+global.battleData = {
+    party: [],
+    enemies: []
+};
+global.battleMusic = -1;
+global.noEncounters = true;
+global.stats = {
+    andro: {
+        level: 1,
+        xp: 0,
+        next: 100,
+        hp: 100,
+        maxhp: 100,
+        skill: 1,
+        maxskill: 1,
+        strength: 10,
+        endurance: 10,
+        cardio: 20,
+    },
+    ana: {
+        level: 1,
+        xp: 0,
+        next: 100,
+        hp: 80,
+        maxhp: 80,
+        skill: 3,
+        maxskill: 3,
+        strength: 5,
+        endurance: 10,
+        cardio: 10,
+    },
+    doms: {
+        level: 10,
+        xp: 0,
+        next: 100 * power(1.5, 9),
+        hp: 100,
+        maxhp: 100,
+        skill: 1,
+        maxskill: 1,
+        strength: 10,
+        endurance: 10,
+        cardio: 10,
+    },
+
+}
 
 goToNextRoom = function() {
     // goes to next room
@@ -40,7 +91,12 @@ goToNextRoom = function() {
     /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
     alarm[0] = alarmTime;
-    audio_sound_gain(global.songPlaying, 0.3, 600);
+
+    if (room == rBattle) {
+        audio_sound_gain(global.battleMusic, 0, 600);
+    }
+    else
+        audio_sound_gain(global.songPlaying, 0.3, 600);
 
     return;
 }

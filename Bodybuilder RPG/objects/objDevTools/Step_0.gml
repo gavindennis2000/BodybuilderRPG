@@ -9,3 +9,7 @@ if (keyboard_check_pressed(ord("R"))) {
 if (keyboard_check_pressed(ord("G"))) {
     game_restart();
 }
+
+if (keyboard_check_pressed(ord("B")) && !global.battle) {
+    startBattle(["robber"], true);
+}

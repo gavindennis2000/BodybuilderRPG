@@ -43,17 +43,15 @@ picYBottom = picY;
 picYTop = picY - CAM_HEIGHT + 96;
 
 // find out if textbox should be at top or bottom of screen
-if (instance_exists(objPlayer)) {
-    if (objPlayer.y >= camera_get_view_y(view_camera[0]) + CAM_WIDTH / 2 - 96) {
-        screen = "top";
-        textboxY = textboxYTop;
-        textY = textYTop;
-        picY = picYTop;
-    }
-    else {
-        screen = "bottom";
-        textboxY = textboxYBottom;
-        textY = textYBottom;
-        picY = picYBottom;
-    }
+if (instance_exists(objPlayer) && objPlayer.y < camera_get_view_y(view_camera[0]) + CAM_WIDTH / 2 - 96) {
+    screen = "bottom";
+    textboxY = textboxYBottom;
+    textY = textYBottom;
+    picY = picYBottom;
+}
+else {
+    screen = "top";
+    textboxY = textboxYTop;
+    textY = textYTop;
+    picY = picYTop;
 }

@@ -7,7 +7,7 @@ if (TEST) { if (live_call()) {  // GMLive
 if (text == -1)
     exit;
 
-screen = (objPlayer.y >= camera_get_view_y(view_camera[0]) + CAM_WIDTH / 2 - 96) ? "top" : "bottom";
+screen = (instance_exists(objPlayer) && objPlayer.y < camera_get_view_y(view_camera[0]) + CAM_WIDTH / 2 - 96) ? "bottom" : "top";
 if (screen == "top" && textY != textYTop) {
     var increment = 8;
     if (textY < CAM_HEIGHT) {

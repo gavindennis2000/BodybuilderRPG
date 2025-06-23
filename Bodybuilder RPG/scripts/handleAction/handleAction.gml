@@ -65,7 +65,8 @@ function handleAction(action) {
             ], false);
             break;
         case "bbnc robbery fight":
-
+            global.cutscene = false;
+            startBattle(["robber"], true);
             break;
         case "enter ana":
             with (objPlayer)

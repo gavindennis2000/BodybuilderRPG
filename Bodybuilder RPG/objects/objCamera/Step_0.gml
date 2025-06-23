@@ -1,9 +1,9 @@
-// obj
+// objCamera step
 if (TEST) { if (live_call()) {  // GMLive
     return live_result;
 }}
 
-if (target == noone) 
+if (target == noone || !instance_exists(objPlayer)) 
     exit;
 
 var diffX = objPlayer.x - x;

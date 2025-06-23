@@ -4,8 +4,6 @@ if (TEST) { if (live_call()) {  // GMLive
 }}
 
 // remember the track position for the overworld
-debug($"setting track position");
-
 if (room == rOverworld) {
     global.trackPosition = {
         name: audio_get_name(global.songPlaying),

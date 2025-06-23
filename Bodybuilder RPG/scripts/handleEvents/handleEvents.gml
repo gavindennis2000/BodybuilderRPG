@@ -54,8 +54,7 @@ function handleEvents(){
     }
 
     // catch the robbers at bbnc
-    global.events.meetAna = true;
-    if (global.events.meetAna && !global.events.bbnc && room == rStores && global.roomVar = "BBNC") {
+    else if (global.events.meetAna && !global.events.bbnc && room == rStores && global.roomVar = "BBNC") {
         // global.events.bbnc = true;
         debug("bbnc robbery");
         global.cutscene = true;

@@ -4,6 +4,8 @@ if (TEST) { if (live_call()) {  // GMLive
 }}
 
 // set the previous played song and get the current
+if (room == rBattle)
+    exit;
+    
 getCurrentSong();
-
 alarm_set(0, aTime);

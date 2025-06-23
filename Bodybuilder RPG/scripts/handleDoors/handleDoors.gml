@@ -7,97 +7,119 @@ function handleDoors(doorID){
 		// mom's house
 		case inst_5A092949:
 			// mom's basement -> mom's house
-			global.pX = 416 -32;
-			global.pY = 352;
-			global.pFace = "left";
-			global.roomGoto = rMom;
-			global.roomTransition = "fade";
+			global.roomChange = {
+				x: 416 - 32, 
+				y: 352, 
+				face: "left", 
+				room: rMom, 
+				transition: "fade"
+			};
 			break;
 		case inst_7F4DBE81:
 			// mom's house -> basement
-			global.pX = 416 -32;
-			global.pY = 64;
-			global.pFace = "left";
-			global.roomGoto = rMom;
-			global.roomTransition = "fade";
+			global.roomChange = {
+				x: 416 - 32, 
+				y: 64, 
+				face: "left", 
+				room: rMom, 
+				transition: "fade"
+			};
 			break;
 		case inst_3088334D:
 			// mom's house -> overworld
-			global.pX = 1856;
-			global.pY = 704 + 32;
-			global.pFace = "down";
-			global.roomGoto = rOverworld;
-			global.roomTransition = "fade";
+			global.roomChange = {
+				x: 1856, 
+				y: 704 + 32, 
+				face: "down", 
+				room: rOverworld, 
+				transition: "fade"
+			};
 			break;
 		// overworld
 		case inst_7C4D478B:
 			// overworld -> mom's house
-			global.pX = 224;
-			global.pY = 512 - 32;
-			global.pFace = "up";
-			global.roomGoto = rMom;
-			global.roomTransition = "fade";
+			global.roomChange = {
+				x: 224, 
+				y: 512 - 32, 
+				face: "up", 
+				room: rMom, 
+				transition: "fade"
+			};
 			break;
 		case inst_1F15BCE2:
 			// overworld -> pump palace right door
-			global.pX = 768;
-			global.pY = 256 - 32;
-			global.pFace = "up";
-			global.roomGoto = rPumpPalace;
-			global.roomTransition = "fade";
+			global.roomChange = {
+				x: 768, 
+				y: 256 - 32, 
+				face: "up", 
+				room: rPumpPalace, 
+				transition: "fade"
+			};
 			break;
 		case inst_6813D5EC:
 			// overworld -> pump palace left door
-			global.pX = 768 - 32;
-			global.pY = 256 - 32;
-			global.pFace = "up";
-			global.roomGoto = rPumpPalace;
-			global.roomTransition = "fade";
+			global.roomChange = {
+				x: 768 - 32, 
+				y: 256 - 32, 
+				face: "up", 
+				room: rPumpPalace, 
+				transition: "fade"
+			};
 			break;
 		case inst_56C4F286:
 			// overworld -> bbnc
-			global.pX = 256;
-			global.pY = 256 - 32;
-			global.pFace = "up";
-			global.roomGoto = rStores;
-			global.roomTransition = "fade";
+			global.roomChange = {
+				x: 256, 
+				y: 256 - 32, 
+				face: "up", 
+				room: rStores, 
+				transition: "fade"
+			};
 			break;
 
 		// pump palace
 		case inst_9B9658A:
 			// pump palace right door -> overworld
-			global.pX = 1280;
-			global.pY = 448 + 32;
-			global.pFace = "down";
-			global.roomGoto = rOverworld;
-			global.roomTransition = "fade";
+			global.roomChange = {
+				x: 1280, 
+				y: 448 + 32, 
+				face: "down", 
+				room: rOverworld, 
+				transition: "fade"
+			};
 			break;
 		case inst_1A758F22:
 			// pump palace left door -> overworld
-			global.pX = 1280 - 32;
-			global.pY = 448 + 32;
-			global.pFace = "down";
-			global.roomGoto = rOverworld;
-			global.roomTransition = "fade";
+			global.roomChange = {
+				x: 1280 - 32, 
+				y: 448 + 32, 
+				face: "down", 
+				room: rOverworld, 
+				transition: "fade"
+			};
 			break;
 
 		// stores
 		case inst_1F9D8954:
 			// bbnc -> overworld
-			global.pX = 1248;
-			global.pY = 1056 + 32;
-			global.pFace = "down";
-			global.roomGoto = rOverworld;
-			global.roomTransition = "fade";
+			global.roomChange = {
+				x: 1248, 
+				y: 1056 + 32, 
+				face: "down", 
+				room: rOverworld, 
+				transition: "fade"
+			};
 			break;
 
 		// default
 		default:
-			global.pX = self.x;
-			global.pY = self.y + 32;
-			global.pFace = "down";
-			global.roomGoto = room;
-			global.roomTransition = "fade";
+			global.roomChange = {
+				x: self.x, 
+				y: self.y + 32, 
+				face: "down", 
+				room: room, 
+				transition: "fade"
+			};
 			break;
 	}
 	

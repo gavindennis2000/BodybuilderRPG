@@ -18,6 +18,10 @@ if (!instance_exists(objMusic))
 // handle any events
 handleEvents();
 
+// don't go any further if in the battle room
+if (room == rBattle)
+    exit;
+    
 // find out which room the player is in
 global.prevRoomVar = global.roomVar;
 switch (room) {
@@ -29,6 +33,8 @@ switch (room) {
         break;
     case rPumpPalace:
         global.roomVar = "Pump Palace";
+        break;
+    case rStores:
         break;
 
     default:

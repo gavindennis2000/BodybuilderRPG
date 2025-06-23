@@ -1,4 +1,226 @@
-// obj
+// objBattle drawGUI
+
 if (TEST) { if (live_call()) {  // GMLive
     return live_result;
 }}
+
+// draw the marquee
+var marqueeChangeAmount = 4;
+if (marquee.counter != 0) {
+    if (marquee.height < marquee.heightMax)
+        marquee.height += marqueeChangeAmount;
+
+    
+    marquee.counter--;
+}
+else if (marquee.height > 0)
+    marquee.height -= marqueeChangeAmount;
+
+if (marquee.height != 0) {
+    var getAlpha = draw_get_alpha();
+    draw_set_alpha(0.8);
+    draw_rectangle_color(0, 0, CAM_WIDTH, marquee.height, c_black, c_black, c_black, c_black, false);
+    draw_set_alpha(getAlpha);
+    fontXY(fa_center, fa_bottom);
+    draw_set_font(fTextboxSmall);
+    drawTextOutline(CAM_WIDTH / 2, marquee.height + 2, marquee.text, c_white, c_black);
+}
+
+// draw the players names, health, etc
+fontXY(fa_right, fa_bottom);
+var nameX = CAM_WIDTH * 2/3
+var nameY = CAM_HEIGHT * 19/20;
+var pY = 0;
+for (var i = array_length(myParty) - 1; i >= 0; i--) {
+    // find where to draw everything
+    var finalNameY = nameY - 24 * pY;
+    // if it is the fighter's turn, draw a rectangle around their area
+    if (turn != -1 && turn.battleID == myParty[i].battleID) {
+        var getAlpha = draw_get_alpha();
+        draw_set_alpha(0.3);
+        var turnX = CAM_WIDTH / 2 + 10
+        var turnY = finalNameY - 2;
+        var turnH = 23;
+        draw_rectangle_color(turnX, turnY - turnH, CAM_WIDTH - 2, turnY, c_blue, c_blue, c_black, c_black, false);
+        draw_set_alpha(getAlpha);
+    }
+
+    // draw the fighter's name
+    var fighterName = myParty[i].battleID;
+    if (fighterName == "andro")
+        fighterName = global.characterName;
+    draw_set_font(fTextboxSmall)
+    drawTextOutline(nameX, finalNameY, string_upper(fighterName));
+
+    // draw the fighter's health and skill points
+    var healthX = nameX + 48;
+    var healthY = finalNameY - 9;
+    drawTextOutline(healthX, healthY, myParty[i].stats.hp, (myParty[i].stats.hp > 0) ? c_white : #7a2d2d);
+    drawTextOutline(healthX + 9, healthY + 1, "/", (myParty[i].stats.hp > 0) ? c_white : #7a2d2d);
+    drawTextOutline(healthX + 44, healthY, myParty[i].stats.maxhp, (myParty[i].stats.hp > 0) ? c_white : #7a2d2d);
+    var skillColor = myParty[i].stats.skill == 0 ? #7a2d2d : #d68449;
+    
+    drawTextOutline(CAM_WIDTH - 20, healthY, myParty[i].stats.skill, skillColor);
+    pY++;
+
+    // draw the fighter's ultimate
+    var ultimateX = nameX + 8;
+    var ultimateY = finalNameY - 4;
+    draw_rectangle_color(ultimateX, ultimateY, CAM_WIDTH - 8, ultimateY - 5, c_white, c_white, c_white, c_white, false);
+    draw_rectangle_color(ultimateX + 1, ultimateY - 1, CAM_WIDTH - 9, ultimateY - 4, c_black, c_black, c_black, c_black, false);
+}
+
+// draw the attack options
+if (state == "ready" && focus == "menu") {
+    var attackX = 10;
+    var attackY = nameY - 74;
+    var attackW = CAM_WIDTH / 2 - 10;
+    var getAlpha = draw_get_alpha();
+    draw_set_alpha(0.5);
+    draw_rectangle_color(attackX + optionsOffset, attackY, attackW + optionsOffset, CAM_HEIGHT - attackX - 1, c_blue, c_blue, c_black, c_black, false);
+    draw_set_alpha(getAlpha);
+    draw_rectangle_color(attackX + optionsOffset, attackY, attackW + optionsOffset, CAM_HEIGHT - attackX, c_white, c_white, c_white, c_white, true);
+
+    fontXY(fa_center, fa_middle);
+    var textYOff = 26;
+    var selectColor = c_yellow;
+    if (focus == "menu") {
+        drawTextOutline(attackX + attackW / 4 + optionsOffset, attackY + textYOff, selections[0], selection == 0 ? selectColor : c_white);
+        drawTextOutline(attackX + attackW * 3 / 4 - 2 + optionsOffset, attackY + textYOff, selections[1], selection == 1 ? selectColor : c_white);
+        drawTextOutline(attackX + attackW / 4 + optionsOffset, attackY + textYOff * 2, selections[2], selection == 2 ? selectColor : c_white);
+        drawTextOutline(attackX + attackW * 3 / 4 - 2 + optionsOffset, attackY + textYOff * 2, selections[3], selection == 3 ? selectColor : c_white);
+    }
+
+    // smooth animation for the options menu
+    if (optionsOffset > 0) {
+        optionsOffset = round(optionsOffset / 1.5);
+        if (optionsOffset == 1) {
+            playSound(sndBattleReady);
+            optionsOffset = 0;
+        }
+    }
+
+}
+
+// draw the battle order queue
+if (state != "start" && turn != -1) {
+    var margin = 10;
+    var queueW = 64;
+    var queueX = CAM_WIDTH - margin - queueW;
+    var queueY =  margin;
+    var queueH = 24;
+    var queueDis = 16;
+    // draw the top of the queue
+    var getAlpha = draw_get_alpha();
+    draw_set_alpha(0.8);
+    var turnColor = #6ec3c4;
+    var turnColor2 = #c1dbdb;
+    var turnColor3 = #2a4e4f;
+    draw_rectangle_color(queueX, queueY, queueX + queueW, queueY + queueH * 6 - 1, turnColor, turnColor2, turnColor3, c_black, false);
+    fontXY(fa_center, fa_top);
+    drawTextOutline(queueX + queueW / 2, queueY, "Turn");
+    draw_set_alpha(getAlpha);
+    // the following fighters' turns
+    for (var i = -1; i < array_length(battleQueue); i++) {
+        // get the fighter's picture
+        var battleID, c1;
+        if (i == -1) {
+            battleID = turn.battleID;
+            c1 = turn.side == "party" ? c_blue : c_red;
+            if (turn.side == "party") {
+                var getAlpha = draw_get_alpha();
+                draw_set_alpha(1);
+                var tX = queueX + 51, tY = queueY + queueH * 1.5;
+                var tW = 11, tH = queueH / 2 - 5;
+                var tColor = c_yellow, tColorTop = 	#ffff99, tColorBottom = #b3b34d;
+                draw_triangle_color(tX, tY, tX + tW, tY - tH, tX + tW, tY + tH, tColor, tColorTop, tColorBottom, false);
+                draw_set_alpha(getAlpha);
+            }
+        }
+        else {
+            battleID = battleQueue[i].battleID;
+            c1 = battleQueue[i].side == "party" ? c_blue : c_red;
+        }
+        switch (battleID) {
+            case "andro":
+                spr = sprAndro;
+                break;
+            case "ana":
+                spr = sprAna;
+                break;
+            case "doms":
+                spr = sprDoms;
+                break;
+            default:
+                spr = "enemy";
+                break;
+        }
+        queueY += queueH;
+        var c2 = c_black;
+        var getAlpha = draw_get_alpha();
+        draw_set_alpha(0.4);
+        draw_rectangle_color(i == -1 ? queueX: queueX + queueDis, queueY, i == -1 ? queueX + queueW - queueDis : queueX + queueW, queueY + queueH - 1, c1, c1, c2, c2, false);
+        draw_set_alpha(getAlpha);
+        if (spr != "enemy")
+            draw_sprite_part_ext(spr, 0, 0, 5, queueW, queueH / 2, i == -1 ? queueX - queueDis / 2 : queueX + queueDis / 2, queueY, 2, 2, c_white, 1);
+        else {
+            fontXY(fa_center, fa_middle);
+            drawTextOutline(queueX + queueW / 2 + queueDis / 2, queueY + queueH / 2 - 2, $"{battleQueue[i].pos}", c_yellow, c_black);
+        }
+    }
+}
+
+// focus the cursor on the enemies
+if (focus == "enemies") {
+    // draw the cursor on the selected enemy
+
+    if (selection == "all") {
+        for (var i = 0; i < array_length(selections); i++) {
+            // draw a cursor on every party member
+            var tX = selections[i].x + 20;
+            var tY = selections[i].y;
+            var tW = 11, tH = queueH / 2 - 5;
+            var tColor = c_yellow, tColorTop = 	#ffff99, tColorBottom = #b3b34d;
+            draw_triangle_color(tX, tY, tX + tW, tY - tH, tX + tW, tY + tH, tColor, tColorTop, tColorBottom, false);
+        }
+    }
+    else {
+        var tX = selections[selection].x + 20;
+        var tY = selections[selection].y;
+        var tW = 11, tH = queueH / 2 - 5;
+        var tColor = c_yellow, tColorTop = 	#ffff99, tColorBottom = #b3b34d;
+        draw_triangle_color(tX, tY, tX + tW, tY - tH, tX + tW, tY + tH, tColor, tColorTop, tColorBottom, false);
+    }
+}
+
+// focus the cursor on the players
+else if (focus == "players") {
+    if (selection == "all") {
+        for (var i = 0; i < array_length(selections); i++) {
+            // draw a cursor on every party member
+            var tX = selections[i].x - 20;
+            var tY = selections[i].y;
+            var tW = 11, tH = queueH / 2 - 5;
+            var tColor = c_yellow, tColorTop = 	#ffff99, tColorBottom = #b3b34d;
+            draw_triangle_color(tX, tY, tX - tW, tY - tH, tX - tW, tY + tH, tColor, tColorTop, tColorBottom, false);
+        }
+    }
+    else {
+
+    }
+}
+if (TEST) {
+    // dev tool: draw the enemies health
+    exit;
+    for (var i = array_length(myEnemies) - 1; i >= 0; i--) {
+        // draw the fighter's name
+        var finalNameY = nameY - CAM_HEIGHT / 2 - 24 * pY;
+        drawTextOutline(nameX, finalNameY, string_upper(myEnemies[i].battleID), c_white, c_black, 0.5);
+
+        // draw the fighter's health and skill points
+        var healthX = nameX + 48;
+        var healthY = finalNameY - 9;
+        drawTextOutline(healthX, healthY, myEnemies[i].stats.hp, c_white, c_black, 0.5);
+        pY++;
+    }
+}
