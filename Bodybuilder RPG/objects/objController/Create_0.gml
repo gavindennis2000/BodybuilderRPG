@@ -5,6 +5,7 @@
 layer = layer_create(layer_get_depth(layer_get_id("Instances")) - 2, "Controller");
 
 // global stuff
+// events/cutscenes/actions
 global.events = {
     startCh1: false,
     meetMom: false,
@@ -15,13 +16,31 @@ global.events = {
 global.chapter = 1;
 global.cutscene = false; 
 global.cutsceneSong = -1;
+
+// the party
 global.character = "andro";
 global.characterName = "andro";
 global.party = ["andro"];
-global.roomVar = -1;
-global.prevRoomVar = -1;
+global.inventory = [
+    {
+        name: "Choc. Milk",
+        quantity: 1, 
+    }
+];
+global.skills = {
+    andro: [],
+    ana: [],
+    doms: [
+        {
+            name: "brace",
+            cost: 1
+        }
+    ]
+}
 
 // room transitioning
+global.roomVar = -1;
+global.prevRoomVar = -1;
 global.roomChange = {
     x: -1,
     y: -1,
@@ -41,7 +60,8 @@ cutsceneY = 0;
 global.battle = false;
 global.battleData = {
     party: [],
-    enemies: []
+    enemies: [],
+    canRun: true
 };
 global.battleMusic = -1;
 global.noEncounters = true;

@@ -9,7 +9,6 @@ var marqueeChangeAmount = 4;
 if (marquee.counter != 0) {
     if (marquee.height < marquee.heightMax)
         marquee.height += marqueeChangeAmount;
-
     
     marquee.counter--;
 }
@@ -83,12 +82,39 @@ if (state == "ready" && focus == "menu") {
 
     fontXY(fa_center, fa_middle);
     var textYOff = 26;
-    var selectColor = c_yellow;
     if (focus == "menu") {
-        drawTextOutline(attackX + attackW / 4 + optionsOffset, attackY + textYOff, selections[0], selection == 0 ? selectColor : c_white);
-        drawTextOutline(attackX + attackW * 3 / 4 - 2 + optionsOffset, attackY + textYOff, selections[1], selection == 1 ? selectColor : c_white);
-        drawTextOutline(attackX + attackW / 4 + optionsOffset, attackY + textYOff * 2, selections[2], selection == 2 ? selectColor : c_white);
-        drawTextOutline(attackX + attackW * 3 / 4 - 2 + optionsOffset, attackY + textYOff * 2, selections[3], selection == 3 ? selectColor : c_white);
+        var getColor = function(selectionName) {
+            var selectColor = c_yellow, invalidColor = c_grey;
+            var color = c_white;
+            if (
+                selectionName == "Skill" && array_length(skills) == 0 ||
+                selectionName == "Gym Bag" && array_length(inventory) == 0 ||
+                selectionName == "Run Away" && !canRun
+            ) {
+                color = selections[selection] == selectionName ? #666600 : invalidColor;
+            }
+            else if (selections[selection] == selectionName)
+                color = selectColor;
+
+            return color;
+        }
+        var finalSelections = selections;
+        if (screen == "Gym Bag" && selections = inventory) {
+            finalSelections = [
+                selections[0] != -1 ? $"{selections[0].name} {selections[0].quantity}" : "",
+                selections[1] != -1 ? $"{selections[1].name} {selections[1].quantity}" : "",
+                selections[2] != -1 ? $"{selections[2].name} {selections[2].quantity}" : "",
+                selections[3] != -1 ? $"{selections[3].name} {selections[3].quantity}" : "",
+            ]
+        }
+        if (array_length(selections) >= 1)
+        drawTextOutline(attackX + attackW / 4 + optionsOffset, attackY + textYOff, finalSelections[0], getColor(selections[0]));
+        if (array_length(selections) >= 2)
+            drawTextOutline(attackX + attackW * 3 / 4 - 2 + optionsOffset, attackY + textYOff, finalSelections[1], getColor(selections[1]));
+        if (array_length(selections) >= 3)
+            drawTextOutline(attackX + attackW / 4 + optionsOffset, attackY + textYOff * 2, finalSelections[2], getColor(selections[2]));
+        if (array_length(selections) >= 4)
+            drawTextOutline(attackX + attackW * 3 / 4 - 2 + optionsOffset, attackY + textYOff * 2, finalSelections[3], getColor(selections[3]));
     }
 
     // smooth animation for the options menu
@@ -121,13 +147,13 @@ if (state != "start" && turn != -1) {
     drawTextOutline(queueX + queueW / 2, queueY, "Turn");
     draw_set_alpha(getAlpha);
     // the following fighters' turns
-    for (var i = -1; i < array_length(battleQueue); i++) {
+    for (var i = 0; i < 5; i++) {
         // get the fighter's picture
         var battleID, c1;
-        if (i == -1) {
-            battleID = turn.battleID;
-            c1 = turn.side == "party" ? c_blue : c_red;
-            if (turn.side == "party") {
+        if (i == 0) {
+            battleID = predictQueue[i].battleID;
+            c1 = predictQueue[i].side == "party" ? c_blue : c_red;
+            if (predictQueue[i].side == "party") {
                 var getAlpha = draw_get_alpha();
                 draw_set_alpha(1);
                 var tX = queueX + 51, tY = queueY + queueH * 1.5;
@@ -138,8 +164,8 @@ if (state != "start" && turn != -1) {
             }
         }
         else {
-            battleID = battleQueue[i].battleID;
-            c1 = battleQueue[i].side == "party" ? c_blue : c_red;
+            battleID = predictQueue[i].battleID;
+            c1 = predictQueue[i].side == "party" ? c_blue : c_red;
         }
         switch (battleID) {
             case "andro":
@@ -159,13 +185,13 @@ if (state != "start" && turn != -1) {
         var c2 = c_black;
         var getAlpha = draw_get_alpha();
         draw_set_alpha(0.4);
-        draw_rectangle_color(i == -1 ? queueX: queueX + queueDis, queueY, i == -1 ? queueX + queueW - queueDis : queueX + queueW, queueY + queueH - 1, c1, c1, c2, c2, false);
+        draw_rectangle_color(i == 0 ? queueX: queueX + queueDis, queueY, i == 0 ? queueX + queueW - queueDis : queueX + queueW, queueY + queueH - 1, c1, c1, c2, c2, false);
         draw_set_alpha(getAlpha);
         if (spr != "enemy")
-            draw_sprite_part_ext(spr, 0, 0, 5, queueW, queueH / 2, i == -1 ? queueX - queueDis / 2 : queueX + queueDis / 2, queueY, 2, 2, c_white, 1);
+            draw_sprite_part_ext(spr, 0, 0, 5, queueW, queueH / 2, i == 0 ? queueX - queueDis / 2 : queueX + queueDis / 2, queueY, 2, 2, c_white, 1);
         else {
             fontXY(fa_center, fa_middle);
-            drawTextOutline(queueX + queueW / 2 + queueDis / 2, queueY + queueH / 2 - 2, $"{battleQueue[i].pos}", c_yellow, c_black);
+            drawTextOutline(queueX + queueW / 2 + queueDis / 2, queueY + queueH / 2 - 2, $"{predictQueue[i].pos}", c_yellow, c_black);
         }
     }
 }

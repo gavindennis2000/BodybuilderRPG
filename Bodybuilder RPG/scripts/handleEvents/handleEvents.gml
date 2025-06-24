@@ -54,7 +54,7 @@ function handleEvents(){
     }
 
     // catch the robbers at bbnc
-    else if (global.events.meetAna && !global.events.bbnc && room == rStores && global.roomVar = "BBNC") {
+    else if (!global.events.bbnc && global.events.meetAna && room == rStores && global.roomVar = "BBNC") {
         // global.events.bbnc = true;
         debug("bbnc robbery");
         global.cutscene = true;
@@ -74,13 +74,17 @@ function handleEvents(){
             },
             {
                 name: "clerk",
-                text: "Please zir! I donut sell zhis CREATINE at muh store...",
+                text: "Please sir! I donut sell this so-called CREATINE at me store...",
                 tone: "quiet"
             },
             {
                 name: "enemy",
                 alias: "robber",
                 text: "I've heard enough of your crap... Prepare to get MANHANDLED!"
+            },
+            {
+                name: "clerk",
+                text: "Mama mercy! Hey you there... Call the police!"
             },
             {
                 name: "ana",

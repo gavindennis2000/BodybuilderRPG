@@ -4,6 +4,30 @@ if (TEST) { if (live_call()) {  // GMLive
     return live_result;
 }}
 
+// get the current fighter's skillset
+var turnID = (turn != -1) ? turn.battleID : -1;
+switch (turnID) {
+    case "andro":
+        skills = global.skills.andro;
+        break;    
+    case "ana":
+        skills = global.skills.ana;
+        break;    
+    case "doms":
+        skills = global.skills.doms;
+        break;    
+    default:
+        break;
+}
+
+// get the inventory
+inventory = [
+    array_length(global.inventory) >= inventoryCursor + 1 ? global.inventory[inventoryCursor + 0] : -1,
+    array_length(global.inventory) >= inventoryCursor + 2 ? global.inventory[inventoryCursor + 1] : -1,
+    array_length(global.inventory) >= inventoryCursor + 3 ? global.inventory[inventoryCursor + 2] : -1,
+    array_length(global.inventory) >= inventoryCursor + 4 ? global.inventory[inventoryCursor + 3] : -1,
+];
+
 // configure the selections
 switch (screen) {
     case "main":
@@ -16,6 +40,16 @@ switch (screen) {
         var enemySelected = selections[selection];
         marquee.counter = 1;
         marquee.text = $"{string_upper(enemySelected.battleID)}  {enemySelected.stats.hp} / {enemySelected.stats.maxhp}";
+        break;
+    case "Skill":
+        focus = "menu";
+        selections = skills;
+        break;
+    case "Gym Bag":
+        focus = "menu";
+        selections = inventory;
+        marquee.counter = 1;
+        marquee.text = getItemDescription(selections[selection].name);
         break;
     case "Run Away":
         focus = "players";
@@ -38,30 +72,38 @@ if (state != "ready")
 
 // confirm
 if (confirm) {
-    // debug(selections[selection]);
-    playSound(sndCursor);
-    array_insert(previousSelections, array_length(previousSelections), {
-        screen: screen,
-        focus: focus, 
-        selections: selections, 
-        selection: selection
-    });
-    if (focus == "menu") {
-        screen = selections[selection];
-        selection = 0;
+    if (
+        is_numeric(selection) && (
+        selections[selection] == "Skill" && array_length(skills) == 0 || 
+        selections[selection] == "Gym Bag" && array_length(inventory) == 0 
+    )) {
+        playSound(sndError);
     }
-    else if (focus == "players") {
-        if (screen == "Run Away") {
-            debug("running away!");
-            screen = -1;
-            selection = -1;
-            state = "run away";
-            with (objBattleInst) {
-                if (side == "party")
-                    runAway();
+    else {
+        playSound(sndCursor);
+        array_insert(previousSelections, array_length(previousSelections), {
+            screen: screen,
+            focus: focus, 
+            selections: selections, 
+            selection: selection
+        });
+        if (focus == "menu") {
+            screen = selections[selection];
+            selection = 0;
+        }
+        else if (focus == "players") {
+            if (screen == "Run Away") {
+                debug("running away!");
+                screen = -1;
+                selection = -1;
+                state = "run away";
+                with (objBattleInst) {
+                    if (side == "party")
+                        runAway();
+                }
+                // fade the music
+                alarm_set(1, 30);
             }
-            // fade the music
-            alarm_set(1, 30);
         }
     }
 }
@@ -82,33 +124,28 @@ else if (cancel)
 // directions
 else if (focus == "menu") {
     if (left) {
-        playSound(sndCursor);
-        if (selection == 1 || selection == 3)
-            selection --;
-        else 
-            selection ++;
+        if ((selection == 1 || selection == 3) && selections[selection - 1] != -1) {
+            playSound(sndCursor);
+            selection--;
+        }
     }
     else if (right) {
-        playSound(sndCursor);
-        if (selection == 0 || selection == 2)
+        if ((selection == 0 || selection == 2) && selections[selection + 1] != -1) {
+            playSound(sndCursor);
             selection++;
-        else
-            selection--;
+        }
     }
     else if (down) {
-        playSound(sndCursor);
-        if (selection == 0 || selection == 1)
+        if ((selection == 0 || selection == 1) && selections[selection + 2] != -1) {
+            playSound(sndCursor);
             selection += 2;
-        else 
-            selection -= 2;
+        }
     }
     else if (up) {
-        playSound(sndCursor);
-        if (selection == 2 || selection == 3) {
+        if ((selection == 2 || selection == 3) && selections[selection - 2] != -1) {
+            playSound(sndCursor);
             selection -= 2;
         }
-        else 
-            selection += 2;
     }
 
     // check to make sure cursor isn't out of bounds
@@ -117,6 +154,7 @@ else if (focus == "menu") {
     else if (selection < 0)
         selection += 4;
 }
+
 else if (focus == "enemies") {
     if (up && array_length(myEnemies) > 0) {
         playSound(sndCursor);
