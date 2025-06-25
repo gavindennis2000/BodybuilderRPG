@@ -38,8 +38,10 @@ switch (screen) {
         focus = "enemies";
         selections = myEnemies;
         var enemySelected = selections[selection];
-        marquee.counter = 1;
-        marquee.text = $"{string_upper(enemySelected.battleID)}  {enemySelected.stats.hp} / {enemySelected.stats.maxhp}";
+        if (state == "ready") {
+            marquee.counter = 1;
+            marquee.text = $"{string_upper(enemySelected.battleID)}  {enemySelected.stats.hp} / {enemySelected.stats.maxhp}";
+        }
         break;
     case "Skill":
         focus = "menu";
@@ -67,6 +69,10 @@ var down = input_check_pressed("down");
 var confirm = input_check_pressed("south");
 var cancel = input_check_pressed("east");
 
+if (state == "enemy turn") {
+    state = "wait";
+    handleEnemyTurn();
+}
 if (state != "ready")
     exit;
 
@@ -75,7 +81,8 @@ if (confirm) {
     if (
         is_numeric(selection) && (
         selections[selection] == "Skill" && array_length(skills) == 0 || 
-        selections[selection] == "Gym Bag" && array_length(inventory) == 0 
+        selections[selection] == "Gym Bag" && array_length(inventory) == 0 ||
+        selections[selection] == "Run Away" && !canRun
     )) {
         playSound(sndError);
     }
@@ -90,6 +97,10 @@ if (confirm) {
         if (focus == "menu") {
             screen = selections[selection];
             selection = 0;
+            if (screen == "Gym Bag") {
+                // update the prediction queue
+                predictQueue = setPredictQueue(battleQueue, "Item");
+            }
         }
         else if (focus == "players") {
             if (screen == "Run Away") {
@@ -105,6 +116,13 @@ if (confirm) {
                 alarm_set(1, 30);
             }
         }
+        else if (focus == "enemies") {
+            if (screen == "Attack") {
+                var attacker = turn;
+                var enemyToAttack = selections[selection];
+                handleAttack(attacker, enemyToAttack);
+            }
+        }
     }
 }
 
@@ -117,6 +135,10 @@ else if (cancel && array_length(previousSelections) > 0) {
     focus = array_last(previousSelections).focus;
     screen = array_last(previousSelections).screen;
     array_delete(previousSelections, array_length(previousSelections) - 1, 1);
+    // if player is back to the main screen, reset the prediction queue
+    if (screen == "main") {
+        predictQueue = setPredictQueue(battleQueue);
+    }
 }
 else if (cancel)
     playSound(sndError);
@@ -156,13 +178,13 @@ else if (focus == "menu") {
 }
 
 else if (focus == "enemies") {
-    if (up && array_length(myEnemies) > 0) {
+    if (up && array_length(myEnemies) > 1) {
         playSound(sndCursor);
         selection--;
         if (selection < 0)
             selection = array_length(myEnemies) - 1;
     }
-    else if (down && array_length(myEnemies) > 0) {
+    else if (down && array_length(myEnemies) > 1) {
         playSound(sndCursor);
         selection++;
         if (selection >= array_length(myEnemies))

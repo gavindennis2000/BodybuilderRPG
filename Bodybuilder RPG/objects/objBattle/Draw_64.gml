@@ -129,7 +129,7 @@ if (state == "ready" && focus == "menu") {
 }
 
 // draw the battle order queue
-if (state != "start" && turn != -1) {
+if (state != "start" && state != "run away" && turn != -1 && turn.side == "party" && screen != "Run Away") {
     var margin = 10;
     var queueW = 64;
     var queueX = CAM_WIDTH - margin - queueW;
@@ -197,7 +197,7 @@ if (state != "start" && turn != -1) {
 }
 
 // focus the cursor on the enemies
-if (focus == "enemies") {
+if (focus == "enemies" && state == "ready") {
     // draw the cursor on the selected enemy
 
     if (selection == "all") {

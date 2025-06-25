@@ -8,6 +8,20 @@ if (state == "start") {
     alarm[0] = marquee.counter;
 }
 else if (state == "first turn") {
-    state = "ready";
     turn = getNextTurn(battleQueue);
+    state = turn.side == "party" ? "ready" : "enemy turn";
+}
+else if (state == "attacking") {
+    if (!attackStatus.ready) {
+        marquee.text = "";
+        alarm_set(0, 30);
+        exit;
+    }
+    battleQueue = sortBattleQueue(battleQueue);
+    turn = getNextTurn(battleQueue);
+    predictQueue = setPredictQueue(battleQueue);
+    screen = "main";
+    optionsOffset = optionsOffsetStart;
+    previousSelections = [];
+    state = turn.side == "party" ? "ready" : "enemy turn";
 }

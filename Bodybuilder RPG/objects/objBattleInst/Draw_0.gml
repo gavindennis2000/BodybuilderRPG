@@ -25,6 +25,12 @@ switch (state) {
     case "run":
         image_speed = 0.5;
         break;
+    case "attack":
+        break;
+    case "jump":
+        image_index = 3;
+        image_speed = 0;
+        break;
 }
 
 var dir = 0;
@@ -36,4 +42,15 @@ switch (face) {
         dir = 64;
         break;
 }
+
+// draw the damage received
+if (showDamage) {
+    fontXY(fa_center, fa_middle);
+    draw_set_font(fTextbox);
+    if (dmgY < dmgYFinal)
+        dmgY += 4;
+    drawTextOutline(x, y - dmgY, dmgToShow);
+}
+
+// draw the battle instance
 draw_sprite_part_ext(sprite_index, image_index, 0, dir, 32, 32, x - 32, y - 32, 2, 2, image_blend, image_alpha);

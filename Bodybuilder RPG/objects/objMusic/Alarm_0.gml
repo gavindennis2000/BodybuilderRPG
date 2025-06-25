@@ -3,8 +3,6 @@ if (TEST) { if (live_call()) {  // GMLive
     return live_result;
 }}
 
-debug($"\ncurrent song: {global.currentSong} \nprevious song {global.previousSong} \nsong playing: {global.songPlaying}");
-
 if (global.currentSong == -1 && !global.cutscene)
     audio_stop_sound(global.songPlaying);
 else if (global.currentSong == global.previousSong) {
@@ -12,6 +10,8 @@ else if (global.currentSong == global.previousSong) {
         audio_resume_sound(global.songPlaying);
         audio_sound_gain(global.songPlaying, 0, 0.5);
     }
+    else if (!audio_is_playing(global.currentSong))
+        global.songPlaying = audio_play_sound(global.currentSong, 1, true);
     audio_sound_gain(global.songPlaying, 1, 200);
 }
 else {
