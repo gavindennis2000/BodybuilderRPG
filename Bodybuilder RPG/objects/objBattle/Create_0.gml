@@ -46,8 +46,6 @@ marquee = {
 alarm[0] = 30;
 
 // the party
-global.battleData.party = ["andro", "ana"];
-global.battleData.enemies = ["robber"];
 party = global.battleData.party;
 myParty = [];  // array that holds the fighter instance references
 myEnemies = [];  // array that holds the enemy fighter references
@@ -133,17 +131,12 @@ handleAttack = function(attacker, attacked) {
 
     /*gmlive*/ if (TEST) { if (live_call(attacker, attacked)) return live_result; }
 
-    // adjust the attacker's hit counter
-    var spdFactor = attacker.ref.stats.cardio;
-    attacker.counter += ATTACK_COUNTER - (spdFactor % 5 / 4);;
-    // debug($"New attack counter: {attacker.counter}");
-
-
     // calculate the damage
     var attackerStr = attacker.ref.stats.strength;
     var attackedDef = attacked.stats.endurance;
-    var dmg = round((attackerStr * 10 - attackedDef * 5) * random_range(0.8, 1.2));
-    attacked.stats.hp -= dmg;
+    var dmg = round((attackerStr * 10 - attackedDef * 5) * random_range(0.9, 1.1));
+    if (dmg < 1)
+        dmg = 1;
 
     // instruct the fighter to animate
     var attackerInst = attacker.ref;
@@ -160,16 +153,42 @@ handleAttack = function(attacker, attacked) {
     return;
 }
 
+handlePlayerTurn = function(attacker, attacked, move) {
+    // does what it says
+
+    /*gmlive*/ if (TEST) { if (live_call(attacker, attacked, move)) return live_result; }
+
+    var cardio = attacker.ref.stats.cardio;
+    var spdFactor = ((cardio div 5) / 2);
+    debug($"cardio: {cardio} spdfactor {spdFactor}");
+            // adjust the attacker's hit counter
+    switch (move) {
+        case "Attack":
+            attacker.counter += ATTACK_COUNTER - spdFactor;
+            handleAttack(attacker, attacked);
+            break;
+        case "Item":
+            attacker.counter += (ATTACK_COUNTER - spdFactor) / 2;
+            break;
+    }
+    return;
+}
+
 handleEnemyTurn = function() {
     // does what it says
 
-    /*gmlive*/ if (TEST) { if (live_call(battleQueue)) return live_result; }
+    /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
     // get the enemy's move and the attack target
     var enemy = turn.ref;
     var move = enemy.moves[enemy.moveIndex];
     var target = myParty[irandom(array_length(myParty) - 1)];
 
+    var cardio = enemy.stats.cardio;
+    var spdFactor = ((cardio div 5) / 2);
+    debug (spdFactor);
+    turn.counter += ATTACK_COUNTER - spdFactor;
+    
     with (enemy) {
         moveIndex++;
         if (moveIndex >= array_length(moves))
@@ -221,7 +240,9 @@ sortBattleQueue = function(battleQueue) {
 setPredictQueue = function(battleQueue, attackType = "Attack") {
     // finds out the predicted battle queue
 
+    // copy the battle queue
     var predict = [];
+    debug($"Battle queue rn {battleQueue}");
     for (var i = 0; i < array_length(battleQueue); i++) {
         array_insert(predict, array_length(predict), {
             ref: battleQueue[i].ref,
@@ -229,44 +250,67 @@ setPredictQueue = function(battleQueue, attackType = "Attack") {
             side: battleQueue[i].side,
             counter: battleQueue[i].counter, 
             pos: battleQueue[i].pos,
-            clone: false
         });
     }
 
-    for (var i = 0; i < array_length(predict) - 1; i++) {
-        var counterIncrease = 0;
-        var spdFactor = predict[i].ref.stats.cardio;
+    // create clones of each fighter
+    var originalLength = array_length(predict);
+    for (var i = 0; i < originalLength; i++) {
+        var cardio = predict[i].ref.stats.cardio;
+        var spdFactor = ((cardio div 5) / 2);
+        var counterIncrease
+        var originalIncrease = ATTACK_COUNTER - spdFactor;;
         switch (attackType) {
-            case "Attack":
-                counterIncrease = ATTACK_COUNTER - (spdFactor % 5 / 4);
-                break;    
             case "Item":
-                counterIncrease = ITEM_COUNTER - (spdFactor % 5 / 4);
+                counterIncrease = originalIncrease / 2;
+                break;    
+            case "Attack":
+            default:
+                counterIncrease = originalIncrease
                 break;    
         }
-        if (predict[i].counter + counterIncrease < predict[i + 1].counter)
-            array_insert(predict, i + 1, {
-                ref: predict[i].ref,
-                battleID: predict[i].battleID, 
-                side: predict[i].side, 
-                counter: predict[i].counter + counterIncrease, 
-                pos: predict[i].pos,
-                clone: true
-            });
+        for (var j = 0; (i == 0) ? j < 4 : j < 3; j++) {
+            var clone = (j == 0) ? variable_clone(predict[i]) : variable_clone(predict[array_length(predict) - 1]);
+            clone.counter += (i == 0 && j == 0) ? counterIncrease : originalIncrease;
+            array_insert(predict, array_length(predict), clone);
+        }
     }
 
-    while (array_length(predict) < 6) {
-        for (var i = 0; i < array_length(battleQueue); i++) {
-        array_insert(predict, array_length(predict), {
-            battleID: battleQueue[i].battleID,
-            side: battleQueue[i].side,
-            counter: battleQueue[i].counter, 
-            pos: battleQueue[i].pos,
-            clone: false
-        });
+    // sort the array with the clones
+    for (var i = 0; i < array_length(predict) - 1; i++) {
+        for (var j = i + 1; j < array_length(predict); j++) {
+            if (predict[j].counter < predict[i].counter) {
+                var temp = variable_clone(predict[i]);
+                predict[i] = predict[j];
+                predict[j] = temp;
+            }
+        }
+        debug($"predict {i}: {predict[i]}");
     }
-    }
-    // debug($"\npredict queue {i}: \n{predict[i]}");
+
+    return predict;
+
+    // for (var i = 0; i < array_length(predict) - 1; i++) {
+    //     var cardio = predict[i].ref.stats.cardio;
+    //     var spdFactor = ((cardio div 5) / 2);
+    //     var counterIncrease;
+    //     
+    //     var clone = variable_clone(predict[i]);
+    //     clone.counter += counterIncrease;
+    //     for (var j = i + 1; j < array_length(predict); j++) {
+    //         if (clone.counter < predict[j].counter) {
+    //             array_insert(predict, j, clone);
+    //             clone.counter += ATTACK_COUNTER - spdFactor;
+    //         }
+    //     }
+    //     if (array_length(predict) >= 10)
+    //         return predict;
+    // }
+
+    // var repeatIndex = 0;
+    // while (array_length(predict) < 5) {
+    //     array_insert(predict, array_length(predict), predict[repeatIndex++]);
+    // }
     return predict;
 }
 

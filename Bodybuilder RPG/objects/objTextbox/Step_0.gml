@@ -54,9 +54,11 @@ if (counter % 2 == 0) {
 counter++;
 
 if (input_check_pressed("left") && prompt != -1 && readyForNext && selection == 1) {
+    playSound(sndCursor);
     selection = 0;
 }
 else if (input_check_pressed("right") && prompt != -1 && readyForNext && selection == 0) {
+    playSound(sndCursor);
     selection = 1;
 }
 
@@ -69,6 +71,7 @@ if (confirm) {
         checkNewLineAt = checkNewLineAtAmount;
         setNewLine = false;
         if (prompt != -1) {
+                playSound(sndCursor);
                 if (is_array(prompt[1 + selection * 2])) {
                     for (var i = 0; i < array_length(prompt[1 + selection * 2]); i++)
                         array_insert(text, textIndex + i + 1, prompt[1 + selection * 2][i])

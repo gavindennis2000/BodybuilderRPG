@@ -1,7 +1,7 @@
-function startBattle(enemies = -1, special = false, music = sndBattle, canRun = true, party = global.party) {
+function startBattle(enemies = -1, special = false, canRun = true, music = sndBattle, party = global.party) {
     // initiates a battle
 
-    /*gmlive*/ if (TEST) { if (live_call(enemies, special, music, canRun, party)) return live_result; }
+    /*gmlive*/ if (TEST) { if (live_call(enemies, special, canRun, music, party)) return live_result; }
 
     // don't start a battle if there are no encounters allowed
     if (global.noEncounters && !special)

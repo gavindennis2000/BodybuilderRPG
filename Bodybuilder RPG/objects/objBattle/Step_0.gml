@@ -73,7 +73,7 @@ if (state == "enemy turn") {
     state = "wait";
     handleEnemyTurn();
 }
-if (state != "ready")
+if (state != "ready" || optionsOffset > 1)
     exit;
 
 // confirm
@@ -120,7 +120,7 @@ if (confirm) {
             if (screen == "Attack") {
                 var attacker = turn;
                 var enemyToAttack = selections[selection];
-                handleAttack(attacker, enemyToAttack);
+                handlePlayerTurn(attacker, enemyToAttack, "Attack");
             }
         }
     }

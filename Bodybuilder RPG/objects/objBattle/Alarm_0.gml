@@ -14,7 +14,7 @@ else if (state == "first turn") {
 else if (state == "attacking") {
     if (!attackStatus.ready) {
         marquee.text = "";
-        alarm_set(0, 30);
+        alarm_set(0, 1);
         exit;
     }
     battleQueue = sortBattleQueue(battleQueue);

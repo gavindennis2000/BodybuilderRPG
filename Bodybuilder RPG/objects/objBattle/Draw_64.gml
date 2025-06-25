@@ -119,7 +119,7 @@ if (state == "ready" && focus == "menu") {
 
     // smooth animation for the options menu
     if (optionsOffset > 0) {
-        optionsOffset = round(optionsOffset / 1.5);
+        optionsOffset = round(optionsOffset / 2);
         if (optionsOffset == 1) {
             playSound(sndBattleReady);
             optionsOffset = 0;
@@ -224,6 +224,7 @@ else if (focus == "players") {
     if (selection == "all") {
         for (var i = 0; i < array_length(selections); i++) {
             // draw a cursor on every party member
+            var queueH = 24;
             var tX = selections[i].x - 20;
             var tY = selections[i].y;
             var tW = 11, tH = queueH / 2 - 5;

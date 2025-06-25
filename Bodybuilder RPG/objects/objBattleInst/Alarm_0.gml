@@ -34,6 +34,7 @@ else if (state == "attack") {
     with (myVictim) {
         showDamage = true;
         dmgToShow = other.dmgToGive;
+        stats.hp -= other.dmgToGive;
         alarm[1] = 50;
     }
     alarm_set(0, 1);
