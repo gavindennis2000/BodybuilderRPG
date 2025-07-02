@@ -1,4 +1,5 @@
-// obj
+// objItem step
+
 if (TEST) { if (live_call()) {  // GMLive
     return live_result;
 }}
@@ -16,7 +17,14 @@ if (touching && !instance_exists(objTextbox)) {
         instance_create_layer(x, y, layer, objAction);
     if (input_check_pressed("south") && objPlayer.canMove) {
         // get and show dialog
-        var finalText = (text == -1) ? handleDialog(-1, itemID) : text;
-        textbox(finalText);
+        if (finalText == -1) {
+            handleDialog(-1, itemID);
+            if (alreadyTalked && is_array(finalText))
+                array_delete(finalText, 0, textIndex);
+            textbox(text);
+            alreadyTalked = true;
+        }
+        else
+            textbox(finalText);
     }
 }

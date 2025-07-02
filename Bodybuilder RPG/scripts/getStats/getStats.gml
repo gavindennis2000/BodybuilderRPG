@@ -15,6 +15,15 @@ function getStats(battleID) {
 		case "doms":
 			stats = global.stats.doms;
 			break;
+		case "robber":
+			stats = {
+				xp: 50,
+			    hp: 180,
+			    strength: 8,
+			    endurance: 10,
+			    cardio: 10,
+			}
+			break;
 		default:
 			stats = {
 			    xp: 50,
@@ -27,5 +36,9 @@ function getStats(battleID) {
 			break;
 	}
 	
+	if (!variable_struct_exists(stats, "maxhp"))
+		stats.maxhp = stats.hp;
+	if (variable_struct_exists(stats, "maxskill"))
+		stats.skill = stats.maxskill;
 	return stats;
 }

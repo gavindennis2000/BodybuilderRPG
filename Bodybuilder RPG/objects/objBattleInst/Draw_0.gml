@@ -2,36 +2,65 @@
 
 /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
+var sprX = 0;
+var sprY = 0;
+image_alpha = 1;
+sprite_index = sprFighters;
+
 switch (battleID) {
     case "andro":
-        sprite_index = sprAndro;
+        sprY = 0;
         break;
     case "ana":
-        sprite_index = sprAna;
+        sprY = 1;
         break;
     case "doms":
-        sprite_index = sprDoms;
+        sprY = 2;
+        break;
+    case "robber":
+        sprY = 3;
         break;
     default:
-        sprite_index = sprNPC;   
+        sprY = 0;
         break;
 }
 
 switch (state) {
     case "wait":
+        sprX = 0;
         image_index = 0;
         image_speed = 0;
         break;
     case "run":
+        sprX = 0;
         image_speed = 0.5;
         break;
     case "attack":
+        sprX = 1;
+        image_speed = 0.35;
         break;
     case "jump":
-        image_index = 3;
+        sprX = 0;
+        image_index = 1;
         image_speed = 0;
         break;
+    case "ko":
+        sprX = 3;
+        image_index = 0;
+        image_speed = 0;
+        break;
+    case "attacked":
+        sprX = 2;
+        image_index = 0;
+        image_speed = 0;
+        image_alpha = 0.75;
+        break;
+    case "victory":
+        sprX = 4;
+        image_speed = 0.12;
+        break;
 }
+
 
 var dir = 0;
 switch (face) {
@@ -53,4 +82,7 @@ if (showDamage) {
 }
 
 // draw the battle instance
-draw_sprite_part_ext(sprite_index, image_index, 0, dir, 32, 32, x - 32, y - 32, 2, 2, image_blend, image_alpha);
+draw_sprite_part_ext(sprite_index, image_index, 0 + sprX * 32, sprY * 32, 32, 32 - deathY, side == "party" ? x - 32 : x + 32, y - 32, side == "party" ? 2 : -2, 2, image_blend, image_alpha);
+
+if (dying)
+    deathY += 0.75;

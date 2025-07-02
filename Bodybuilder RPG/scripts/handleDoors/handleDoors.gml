@@ -70,7 +70,7 @@ function handleDoors(doorID){
 			// overworld -> bbnc
 			global.roomChange = {
 				x: 256, 
-				y: 256 - 32, 
+				y: 224 - 32, 
 				face: "up", 
 				room: rStores, 
 				transition: "fade"

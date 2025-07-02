@@ -22,7 +22,9 @@ if (state == "run") {
         state = "attack";
         var sfx = getSFX(battleID);
         playSound(sfx);
-        alarm_set(0, 20);
+        alarm_set(0, 30);
+        with (myVictim)
+            state = "attacked";
     }
 }
 else if (state == "attack") {
@@ -32,9 +34,15 @@ else if (state == "attack") {
     halfwayX = targetX - (targetX - x) / 2;
     targetY = ystart;
     with (myVictim) {
+        state = "wait";
         showDamage = true;
         dmgToShow = other.dmgToGive;
         stats.hp -= other.dmgToGive;
+        if (stats.hp <= 0) {
+            stats.hp = 0;
+            if (side == "party")
+                alarm[2] = 20;
+        }
         alarm[1] = 50;
     }
     alarm_set(0, 1);

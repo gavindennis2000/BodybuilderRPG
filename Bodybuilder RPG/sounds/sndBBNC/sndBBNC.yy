@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"sndBBNC",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":3,
+  "conversionMode":0,
+  "duration":88.615395,
+  "name":"sndBBNC",
+  "parent":{
+    "name":"Rooms",
+    "path":"folders/4 Music/OST/Rooms.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndBBNC.wav",
+  "type":1,
+  "volume":1.0,
+}

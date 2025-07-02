@@ -33,8 +33,11 @@ if (touching && !instance_exists(objTextbox)) {
                 break;
         }
         // get and show dialog
-        var text = handleDialog(npcID);
+        handleDialog(npcID);
+        if (alreadyTalked and textIndex > 0)
+            array_delete(text, 0, textIndex);
         textbox(text);
+        alreadyTalked = true;
     }
 }
 

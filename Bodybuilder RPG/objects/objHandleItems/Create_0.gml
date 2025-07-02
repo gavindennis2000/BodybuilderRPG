@@ -3,8 +3,11 @@ if (TEST) { if (live_call()) {  // GMLive
     return live_result;
 }}
 
+if (!instance_exists(objItem))
+    exit;
+
 with (objItem) {
-    switch (id) {
+    switch (itemIdentifier) {
         // mom's house
         case inst_2D4D067D:
             itemID = "mirror";
@@ -22,65 +25,49 @@ with (objItem) {
         // overworld
         case inst_31A09F3:
             itemID = "sign";
-            text = {
+            finalText = {
                 text: $"Mom's House"
             };
             break;
         case inst_624F3169:
             itemID = "sign";
-            text = {
+            finalText = {
                 text: $"Harvey's House"
             };
             break;
         case inst_74DD81CD:
             itemID = "sign";
-            text = {
+            finalText = {
                 text: $"Mason's House"
             };
             break;
         case inst_410CADC5:
             itemID = "sign";
-            text = {
+            finalText = {
                 text: $"Ana's House"
             };
             break;
         case inst_1046573B:
             itemID = "sign";
-            text = {
+            finalText = {
                 text: $"Central Prairie Community College"
             };
             break;
         case inst_3AD879B1:
             itemID = "sign";
-            text = {
+            finalText = {
                 text: $"Pump Palace Bodybuilding Gym"
             };
             break;
         case inst_178CDEA8:
             itemID = "sign";
-            text = $"Bodybuilding Nutrition Company"
+            finalText = $"Bodybuilding Nutrition Company"
             break;
         
         // stores
         // bbnc
         case inst_2F5A5C4E:
-            itemID = "wall";
-            text = [
-                {
-                    name: "Clerk",
-                    text: $"Welcome to BBNC! Home to all your hypertrophy needs!"
-                },
-                {
-                    name: "Clerk",
-                    text: $"Are you trying to buy some supplements?",
-                    prompt: [
-                        "Yes",
-                        [],
-                        "No",
-                        []
-                    ]
-                }
-            ]
+            itemID = "bbnc owner";
             break;
             
         // not found

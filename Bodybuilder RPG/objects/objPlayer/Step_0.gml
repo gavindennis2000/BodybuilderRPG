@@ -3,20 +3,16 @@
 if (TEST) {
     // change character with the click of a button
 
-    if (input_check_pressed("select")) {
-        switch(global.character) {
-            case "andro":
-                global.character = "ana";
-                break;
-            case "ana":
-                global.character = "doms";
-                break;
-            case "doms":
-                global.character = "samson";
-                break;
-            case "samson":
-                global.character = "andro";
-                break;
+    if (input_check_pressed("north")) {
+        for (var i = 0; i < array_length(global.party); i++) {
+            if (global.character == global.party[i] && i + 1 < array_length(global.party)) {
+                global.character = global.party[i + 1];
+                exit;
+            }
+            else if (global.character == global.party[i] && i + 1 >= array_length(global.party)) {
+                global.character = global.party[0];
+                exit;
+            }
         }
     }
     // if (input_check_pressed("start")) {
@@ -87,10 +83,14 @@ else if (keyDown && canMove) {
 
 if (targetX != 0 || targetY != 0) {
     // move the player to the next grid square 
+    if (TEST) 
+        runSpeed *= 2;
     x += sign(targetX) * runSpeed;
     targetX -= sign(targetX) * runSpeed; 
     y += sign(targetY) * runSpeed;
     targetY -= sign(targetY) * runSpeed; 
+    if (TEST)
+        runSpeed /= 2;
 }
 
 if (targetX == 0 && targetY == 0) {

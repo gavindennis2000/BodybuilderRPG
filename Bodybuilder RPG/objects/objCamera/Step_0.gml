@@ -65,7 +65,7 @@ if (room == rOverworld) {
         }
         else if (divX == 0 || divX == 1) {
             global.prevRoomVar = global.roomVar;
-            global.roomVar = "Creatine Island";
+            global.roomVar = "Creatine Cove";
         }
         else {
             global.prevRoomVar = global.roomVar;

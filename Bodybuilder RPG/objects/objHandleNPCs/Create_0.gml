@@ -17,8 +17,10 @@ with (objNPC) {
         
         // not found
         default:
-            npcID = "npc not found";
-            debug($"NPC not found: {id}");
+            // npcID = "npc not found";
             break;
     }
+    if (npcID == -1)
+        debug($"NPC not found: {id}");
+
 }

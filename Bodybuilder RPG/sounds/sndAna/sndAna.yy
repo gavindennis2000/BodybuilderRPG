@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":3,
   "conversionMode":0,
-  "duration":78.0,
+  "duration":84.37501,
   "name":"sndAna",
   "parent":{
     "name":"Character Themes",

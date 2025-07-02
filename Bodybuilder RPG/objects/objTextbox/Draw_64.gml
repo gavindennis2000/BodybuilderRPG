@@ -129,6 +129,8 @@ switch (emotion) {
     default:
         break;
 }
+// #TODO todo - decide whether or not to keep portraits
+pictureIndex = -1;
 if (pictureIndex != -1) {
     var getAlpha = draw_get_alpha();
     var rectColor = c_white;
@@ -171,8 +173,9 @@ if (drawText != "") {
             draw_set_font(fTextbox);
             var selectedColor = c_yellow;
             var strLength = string_length(prompt[0]);
-            var prompt1X = CAM_WIDTH / 2 + picLength - CAM_WIDTH / 4;
-            var prompt2X = CAM_WIDTH / 2 + picLength / 2 + CAM_WIDTH / 4;
+            var margin = 10;
+            var prompt1X = pictureIndex == -1 ? CAM_WIDTH / 3 - margin: CAM_WIDTH / 2 + picLength - CAM_WIDTH / 4;
+            var prompt2X = pictureIndex == -1 ? CAM_WIDTH * 2/3 + margin : CAM_WIDTH / 2 + picLength / 2 + CAM_WIDTH / 4;
             drawTextOutline(prompt1X, textY + picLength + 8, $"\n{prompt[0]}", selection == 0 ? selectedColor : c_white);
             drawTextOutline(prompt2X, textY + picLength + 8, $"\n{prompt[2]}", selection == 1 ? selectedColor : c_white);
         }

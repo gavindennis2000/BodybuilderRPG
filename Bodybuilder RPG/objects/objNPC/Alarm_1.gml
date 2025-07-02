@@ -50,7 +50,9 @@ else if (xTo == x && yTo == y && array_length(directions) == 0) {
         }
     }
     if (action != -1) {
-        if ( (is_array(action) && is_struct(action[0])) || is_struct(action) )
+        if (is_method(action))
+            action();
+        else if ( (is_array(action) && is_struct(action[0])) || is_struct(action) )
             textbox(action);
         else
             handleAction(action);

@@ -14,9 +14,14 @@ if (currentTextObj == -1) {
         }
     else
         currentTextObj = (is_array(text)) ? variable_clone(text[0]) : variable_clone(text);
+
     prompt = (variable_struct_exists(currentTextObj, "prompt")) ? currentTextObj.prompt : -1;
     canMove = (variable_struct_exists(currentTextObj, "canMove")) ? currentTextObj.canMove : canMove;
     action = (variable_struct_exists(currentTextObj, "action")) ? currentTextObj.action: -1;
+    if (is_method(action) && textIndex + 1 < array_length(text)) {
+        action();
+        action = -1;
+    }
 }
 var confirm = input_check_pressed("south");
 var getNextChar = function() {
@@ -80,9 +85,17 @@ if (confirm) {
                         prompt = (variable_struct_exists(currentTextObj, "prompt")) ? currentTextObj.prompt : -1;
                         canMove = (variable_struct_exists(currentTextObj, "canMove")) ? currentTextObj.canMove : canMove;
                         action = (variable_struct_exists(currentTextObj, "action")) ? currentTextObj.action: -1;
+                        if (is_method(action) && textIndex + 1 < array_length(text)) {
+                            action();
+                            action = -1;
+                        }
                     } 
                     else
                         destroy = true;
+                }
+                else if (is_method(prompt[1 + selection * 2])) {
+                    prompt[1 + selection * 2]();
+                    destroy = true;
                 }
             }
         else if (++textIndex < array_length(text)) {
@@ -90,6 +103,10 @@ if (confirm) {
             prompt = (variable_struct_exists(currentTextObj, "prompt")) ? currentTextObj.prompt : -1;
             canMove = (variable_struct_exists(currentTextObj, "canMove")) ? currentTextObj.canMove : canMove;
             action = (variable_struct_exists(currentTextObj, "action")) ? currentTextObj.action: -1;
+            if (is_method(action) && textIndex + 1 < array_length(text)) {
+                action();
+                action = -1;
+            }
         }
         else
             destroy = true;

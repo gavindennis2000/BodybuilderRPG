@@ -3,6 +3,8 @@
 /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
 stats = getStats(battleID);
+if (stats.cardio > 99)
+    stats.cardio = 99;
 
 moves = getMoves(battleID);
 moveIndex = 0;
@@ -21,7 +23,11 @@ dmgYStart = dmgY
 dmgYFinal = 40;
 showDamage = false;
 
-// functions
+// stuff for enemy death animation
+dying = false;
+deathY = 0;
+
+// functions in alphabetical order
 
 attack = function(victim, dmg) {
     // attacks another fighter
@@ -41,6 +47,18 @@ attack = function(victim, dmg) {
     return;
 }
 
+death = function() {
+    // enemy fades to black like metallica
+
+    /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
+
+    image_blend = c_black;
+    image_alpha = 0.8;
+    dying = true;
+    playSound(sndDeath);
+
+    return;
+}
 getSFX = function(battleID) {
     // get's the appropriate sound effects
 

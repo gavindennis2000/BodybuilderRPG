@@ -8,12 +8,13 @@ if (!instance_exists(objDevTools))
     instance_create_layer(0, 0, "Instances", objDevTools);
 if (!instance_exists(objCamera))
     instance_create_layer(0, 0, "Instances", objCamera);
-if (!instance_exists(objHandleItems))
-    instance_create_layer(0, 0, "Instances", objHandleItems);
 if (!instance_exists(objHandleNPCs))
     instance_create_layer(0, 0, "Instances", objHandleNPCs);
 if (!instance_exists(objMusic))
     instance_create_layer(0, 0, "Instances", objMusic);
+
+// set item ID's
+handleItems();
 
 // handle any events
 handleEvents();
@@ -47,4 +48,8 @@ showRoomVarFunc();
 fadeAmount = 1;
 if (fadeAmount > 0) {
     alarm[1] = alarmTime;
+}
+
+if (TEST_BATTLE) {
+    startBattle(true, global.battleData.enemies, true, global.battleData.party);
 }

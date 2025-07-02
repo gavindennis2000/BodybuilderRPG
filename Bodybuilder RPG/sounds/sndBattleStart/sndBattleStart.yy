@@ -12,8 +12,8 @@
   "duration":2.1928117,
   "name":"sndBattleStart",
   "parent":{
-    "name":"SFX",
-    "path":"folders/4 Music/SFX.yy",
+    "name":"Battle",
+    "path":"folders/4 Music/SFX/Battle.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

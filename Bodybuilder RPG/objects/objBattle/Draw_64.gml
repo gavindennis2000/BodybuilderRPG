@@ -4,6 +4,14 @@ if (TEST) { if (live_call()) {  // GMLive
     return live_result;
 }}
 
+if (fadeBlack != -1) {
+    var getAlpha = draw_get_alpha();
+    draw_set_alpha(fadeBlack)
+    draw_rectangle_color(0, 0, CAM_WIDTH, CAM_HEIGHT, c_black, c_black, c_black, c_black, false);
+    draw_set_alpha(getAlpha);
+    exit;
+}
+
 // draw the marquee
 var marqueeChangeAmount = 4;
 if (marquee.counter != 0) {
@@ -26,47 +34,49 @@ if (marquee.height != 0) {
 }
 
 // draw the players names, health, etc
-fontXY(fa_right, fa_bottom);
-var nameX = CAM_WIDTH * 2/3
-var nameY = CAM_HEIGHT * 19/20;
-var pY = 0;
-for (var i = array_length(myParty) - 1; i >= 0; i--) {
-    // find where to draw everything
-    var finalNameY = nameY - 24 * pY;
-    // if it is the fighter's turn, draw a rectangle around their area
-    if (turn != -1 && turn.battleID == myParty[i].battleID) {
-        var getAlpha = draw_get_alpha();
-        draw_set_alpha(0.3);
-        var turnX = CAM_WIDTH / 2 + 10
-        var turnY = finalNameY - 2;
-        var turnH = 23;
-        draw_rectangle_color(turnX, turnY - turnH, CAM_WIDTH - 2, turnY, c_blue, c_blue, c_black, c_black, false);
-        draw_set_alpha(getAlpha);
+if (state != "victory") {
+    fontXY(fa_right, fa_bottom);
+    var nameX = CAM_WIDTH * 2/3
+    var nameY = CAM_HEIGHT * 19/20;
+    var pY = 0;
+    for (var i = array_length(myParty) - 1; i >= 0; i--) {
+        // find where to draw everything
+        var finalNameY = nameY - 24 * pY;
+        // if it is the fighter's turn, draw a rectangle around their area
+        if (turn != -1 && turn.battleID == myParty[i].battleID) {
+            var getAlpha = draw_get_alpha();
+            draw_set_alpha(0.3);
+            var turnX = CAM_WIDTH / 2 + 10
+            var turnY = finalNameY - 2;
+            var turnH = 23;
+            draw_rectangle_color(turnX, turnY - turnH, CAM_WIDTH - 2, turnY, c_blue, c_blue, c_black, c_black, false);
+            draw_set_alpha(getAlpha);
+        }
+
+        // draw the fighter's name
+        var fighterName = myParty[i].battleID;
+        if (fighterName == "andro")
+            fighterName = global.characterName;
+        draw_set_font(fTextboxSmall)
+        drawTextOutline(nameX, finalNameY, string_upper(fighterName));
+
+        // draw the fighter's health and skill points
+        var healthX = nameX + 48;
+        var healthY = finalNameY - 9;
+        drawTextOutline(healthX, healthY, myParty[i].stats.hp, (myParty[i].stats.hp > 0) ? c_white : #7a2d2d);
+        drawTextOutline(healthX + 9, healthY + 1, "/", (myParty[i].stats.hp > 0) ? c_white : #7a2d2d);
+        drawTextOutline(healthX + 44, healthY, myParty[i].stats.maxhp, (myParty[i].stats.hp > 0) ? c_white : #7a2d2d);
+        var skillColor = myParty[i].stats.skill == 0 ? #7a2d2d : #d68449;
+        
+        drawTextOutline(CAM_WIDTH - 20, healthY, myParty[i].stats.skill, skillColor);
+        pY++;
+
+        // draw the fighter's ultimate
+        var ultimateX = nameX + 8;
+        var ultimateY = finalNameY - 4;
+        draw_rectangle_color(ultimateX, ultimateY, CAM_WIDTH - 8, ultimateY - 5, c_white, c_white, c_white, c_white, false);
+        draw_rectangle_color(ultimateX + 1, ultimateY - 1, CAM_WIDTH - 9, ultimateY - 4, c_black, c_black, c_black, c_black, false);
     }
-
-    // draw the fighter's name
-    var fighterName = myParty[i].battleID;
-    if (fighterName == "andro")
-        fighterName = global.characterName;
-    draw_set_font(fTextboxSmall)
-    drawTextOutline(nameX, finalNameY, string_upper(fighterName));
-
-    // draw the fighter's health and skill points
-    var healthX = nameX + 48;
-    var healthY = finalNameY - 9;
-    drawTextOutline(healthX, healthY, myParty[i].stats.hp, (myParty[i].stats.hp > 0) ? c_white : #7a2d2d);
-    drawTextOutline(healthX + 9, healthY + 1, "/", (myParty[i].stats.hp > 0) ? c_white : #7a2d2d);
-    drawTextOutline(healthX + 44, healthY, myParty[i].stats.maxhp, (myParty[i].stats.hp > 0) ? c_white : #7a2d2d);
-    var skillColor = myParty[i].stats.skill == 0 ? #7a2d2d : #d68449;
-    
-    drawTextOutline(CAM_WIDTH - 20, healthY, myParty[i].stats.skill, skillColor);
-    pY++;
-
-    // draw the fighter's ultimate
-    var ultimateX = nameX + 8;
-    var ultimateY = finalNameY - 4;
-    draw_rectangle_color(ultimateX, ultimateY, CAM_WIDTH - 8, ultimateY - 5, c_white, c_white, c_white, c_white, false);
-    draw_rectangle_color(ultimateX + 1, ultimateY - 1, CAM_WIDTH - 9, ultimateY - 4, c_black, c_black, c_black, c_black, false);
 }
 
 // draw the attack options
@@ -129,7 +139,7 @@ if (state == "ready" && focus == "menu") {
 }
 
 // draw the battle order queue
-if (state != "start" && state != "run away" && turn != -1 && turn.side == "party" && screen != "Run Away") {
+if (state != "start" && state != "run away" && state != "victory" && state != "loss" && screen != "Run Away") {
     var margin = 10;
     var queueW = 64;
     var queueX = CAM_WIDTH - margin - queueW;
@@ -236,6 +246,40 @@ else if (focus == "players") {
 
     }
 }
+
+if (victoryBarX != -1) {
+    if (victoryBarX > victoryBarXFinal) {
+        victoryBarX -= round((victoryBarX - victoryBarXFinal) / 8);
+    }
+
+    if (victoryBarX - 10 <= victoryBarXFinal && victoryBarXP < xpAccumulated) {
+        victoryBarXP++;
+        global.stats.xp++;
+        if (global.stats.xp >= global.stats.xpNext) {
+            levelUp();
+        }
+    }
+    else if (victoryBarXP == xpAccumulated) { 
+        if (alarm_get(1) <= 0)
+            alarm_set(1, 120);
+    }
+
+    var victoryX = victoryBarX;
+    var victoryY = CAM_HEIGHT * 3/4 - 16;
+    var victoryW = 200;
+    var victoryH = 4;
+    var margin = 1;
+
+    var coefficient = (victoryW - margin * 2) / global.stats.xpNext;
+
+    var xp = global.stats.xp;
+
+    fontXY(fa_middle, fa_center);
+    drawTextOutline(victoryX, victoryY - 10, $"Level {global.stats.level}");
+    draw_rectangle_color(victoryX - victoryW / 2 , victoryY, victoryX + victoryW / 2, victoryY + victoryH, c_black, c_black, c_black, c_black, false);
+    draw_rectangle_color(victoryX - victoryW / 2 + margin, victoryY + margin, victoryX - victoryW / 2 + 1 + xp * coefficient, victoryY + victoryH - margin, c_white, c_white, c_white, c_white, false);
+}
+
 if (TEST) {
     // dev tool: draw the enemies health
     exit;

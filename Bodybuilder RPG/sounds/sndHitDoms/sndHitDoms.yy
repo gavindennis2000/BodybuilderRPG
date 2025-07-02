@@ -12,8 +12,8 @@
   "duration":1.1095692,
   "name":"sndHitDoms",
   "parent":{
-    "name":"SFX",
-    "path":"folders/4 Music/SFX.yy",
+    "name":"Battle",
+    "path":"folders/4 Music/SFX/Battle.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

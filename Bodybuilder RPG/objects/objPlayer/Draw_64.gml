@@ -10,4 +10,4 @@ var testString = $"x {x} y {y}";
 
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
-draw_text(0, 0, $"{testString}")
+// draw_text(0, 0, $"{testString}")

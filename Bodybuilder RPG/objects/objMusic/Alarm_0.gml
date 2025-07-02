@@ -3,21 +3,19 @@ if (TEST) { if (live_call()) {  // GMLive
     return live_result;
 }}
 
-if (global.currentSong == -1 && !global.cutscene)
-    audio_stop_sound(global.songPlaying);
-else if (global.currentSong == global.previousSong) {
-    if (audio_is_paused(global.songPlaying)) {
-        audio_resume_sound(global.songPlaying);
-        audio_sound_gain(global.songPlaying, 0, 0.5);
-    }
-    else if (!audio_is_playing(global.currentSong))
-        global.songPlaying = audio_play_sound(global.currentSong, 1, true);
-    audio_sound_gain(global.songPlaying, 1, 200);
-}
-else {
-    if (global.cutscene && global.cutsceneSong != -1) {
+if (global.battle)
+    exit;
+
+if (!global.cutscene) {
+    if (global.currentSong == -1)
         audio_stop_sound(global.songPlaying);
-        global.songPlaying = audio_play_sound(global.cutsceneSong, 1, true, 0.25);
+    else if (global.currentSong != -1 && global.currentSong == global.previousSong) {
+        if (audio_is_paused(global.songPlaying)) {
+            audio_resume_sound(global.songPlaying);
+            audio_sound_gain(global.songPlaying, 0, 0.5);
+        }
+        else if (!audio_is_playing(global.currentSong))
+            global.songPlaying = audio_play_sound(global.currentSong, 1, true);
         audio_sound_gain(global.songPlaying, 1, 200);
     }
     else if (audio_get_name(global.songPlaying) == audio_get_name(global.currentSong)) {
@@ -39,5 +37,17 @@ else {
                 position: -1
             };
         }
+    }
+}
+else {
+    if (global.cutsceneSong != -1) {
+        audio_stop_sound(global.songPlaying);
+        global.songPlaying = audio_play_sound(global.cutsceneSong, 1, true, 0.25);
+        audio_sound_gain(global.songPlaying, 1, 200);
+    }
+    else if (global.cutsceneSong == -1) {
+        debug("here?")
+        if (audio_is_playing(global.songPlaying))
+            audio_stop_sound(global.songPlaying);
     }
 }

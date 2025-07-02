@@ -11,5 +11,5 @@ if (keyboard_check_pressed(ord("G"))) {
 }
 
 if (keyboard_check_pressed(ord("B")) && !global.battle) {
-    startBattle(["robber"], true);
+    startBattle(true, ["robber"]);
 }

@@ -12,8 +12,8 @@
   "duration":50.823536,
   "name":"sndBattle",
   "parent":{
-    "name":"OST",
-    "path":"folders/4 Music/OST.yy",
+    "name":"Battle",
+    "path":"folders/4 Music/OST/Battle.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

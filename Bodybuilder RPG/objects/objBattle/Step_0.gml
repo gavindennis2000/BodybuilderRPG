@@ -4,6 +4,9 @@ if (TEST) { if (live_call()) {  // GMLive
     return live_result;
 }}
 
+if (state == "victory" || state == "loss")
+    exit;
+
 // get the current fighter's skillset
 var turnID = (turn != -1) ? turn.battleID : -1;
 switch (turnID) {
@@ -104,7 +107,6 @@ if (confirm) {
         }
         else if (focus == "players") {
             if (screen == "Run Away") {
-                debug("running away!");
                 screen = -1;
                 selection = -1;
                 state = "run away";

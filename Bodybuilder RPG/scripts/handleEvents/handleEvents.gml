@@ -3,13 +3,20 @@ function handleEvents(){
 
     /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
+    var func;
+    
+    // test
+    if (TEST) {
+        //
+    }
+
     // the beginning of ch 1
     if (!global.events.startCh1 && room == rMom) {
         global.events.startCh1 = true;
         audio_pause_sound(global.songPlaying);
         textbox([
             {
-                text: $"Whoa... was that all just a dream?",
+                text: $"Was that all just a dream?",
             },
             {
                 name: "mom",
@@ -28,19 +35,19 @@ function handleEvents(){
     // lock the doors at pump palace
     else if (!global.events.meetJim && room == rPumpPalace) {
         with (objDoor) {
-            instance_create_layer(x, y, layer, objItem, {
+            with (instance_create_layer(x, y, layer, objItem, {
                 itemID: "locked door",
-                text: $"I have to meet with Mr. Ohner before I leave.",
-            });
+            })) {
+                finalText = $"I have to meet with Mr. Ohner before I leave."
+            };
         }
     }
 
     // meet ana for the first time
-    else if (!global.events.meetAna && global.events.meetJim && room == rOverworld) {
+    else if (!global.events.meetAna && room == rOverworld) {
         // only introduce ana after the player has met jim
         if (!global.events.meetJim)
             exit;
-        global.events.meetAna = true;
         global.cutscene = true;
         global.cutsceneSong = sndAna;
         textbox([
@@ -55,16 +62,48 @@ function handleEvents(){
 
     // catch the robbers at bbnc
     else if (!global.events.bbnc && global.events.meetAna && room == rStores && global.roomVar = "BBNC") {
-        // global.events.bbnc = true;
-        debug("bbnc robbery");
+        
+        // set the music and cutscene curtains
         global.cutscene = true;
-        global.cutsceneSong = sndTrouble;
+        global.cutsceneSong = sndDanger;
+
         // create the robber
-        instance_create_layer(256, 96, "Instances", objNPC, {
+        instance_create_layer(256, 128, "Instances", objNPC, {
             npcID: "robber",
             faceStart: "up",
             face: "up"
         });
+
+        // create ana
+        instance_create_layer(objPlayer.x, objPlayer.y, "Instances", objNPC, {
+            npcID: "ana",
+            directions: ["right"],
+            action: function() {
+                with (objNPC) {
+                    if (npcID == "ana") {
+                        faceStart = "up";
+                        face = "up";
+                    }
+                }
+            }
+        });
+        
+        // functions for dialog and npc stuff
+        var anaFacePlayer = function() {
+            with (objNPC) {
+                if (npcID != "ana")
+                    exit;
+                faceStart = "left";
+                face = "left";
+            }
+        }
+        var bbncFight = function() {
+            global.events.bbnc = true;
+            global.cutscene = false;
+            startBattle(true, ["robber"], false);
+        }
+
+        // the dialog
         textbox([
             {
                 name: "enemy",
@@ -74,13 +113,13 @@ function handleEvents(){
             },
             {
                 name: "clerk",
-                text: "Please sir! I donut sell this so-called CREATINE at me store...",
-                tone: "quiet"
+                text: "Please sir! I do not sell this so-called CREATINE at me store...",
             },
             {
                 name: "enemy",
                 alias: "robber",
-                text: "I've heard enough of your crap... Prepare to get MANHANDLED!"
+                text: "I've heard enough of your crap! Prepare to get MANHANDLED!",
+                tone: "loud"
             },
             {
                 name: "clerk",
@@ -89,25 +128,24 @@ function handleEvents(){
             {
                 name: "ana",
                 text: $"He's getting robbed {string_upper(global.characterName)}!",
-                tone: "quiet"
+                action: anaFacePlayer
             },
             {
                 name: "ana",
                 text: "What should we do!?",
-                tone: "quiet",
                 prompt: [
                     "Stay and fight",
                     [
                         {
                             name: "andro",
-                            text: $"We need to fight! It's our moral obligation to use our impressive muscles for justice!",
+                            text: $"We need to fight! It's our moral duty to use our muscles for justice!",
                             emotion: "angry"
                         },
                         {
                             name: "ana",
                             text: "I couldn't agree more. Brace yourself!",
                             emotion: "angry",
-                            action: "bbnc robbery fight"
+                            action: bbncFight
                         }
                     ],
                     "Run away",
@@ -122,5 +160,75 @@ function handleEvents(){
                 ]
             }
         ], false);
+    }
+    else if (!global.events.bbnc2 && room == rStores) {
+        global.events.bbnc2 = true;
+        debug("bbnc robbery2");
+        global.cutscene = true;
+        global.cutsceneSong = -1;
+        // create the robber
+        instance_create_layer(256, 128, "Instances", objNPC, {
+            npcID: "robber",
+            faceStart: "down",
+            face: "down",
+            flashing: true,
+        });
+        textbox([
+            {
+                name: "enemy",
+                alias: "robber",
+                text: "Impossible! How could I be defeated by two kids!",
+            },
+            {
+                name: "enemy",
+                alias: "robber",
+                text: "If only I had some CREATINE...",
+            },
+            {
+                name: "enemy",
+                alias: "robber",
+                text: "I would have... been...",
+            },
+            {
+                name: "enemy",
+                alias: "robber",
+                text: "Unstoppable...",
+                action: "destroy robber"
+            },
+        ]);
+    }
+    else if (!global.events.bbncTalkToOwner && room == rOverworld) {
+        if (!global.events.bbnc2)
+            exit;
+        debug("skipped talking to bbnc owner");
+        instance_create_layer(objPlayer.x, objPlayer.y, "Instances", objNPC, {
+            directions: ["right"],
+            action: function() {
+                with (objNPC)
+                    if (npcID == "ana")
+                        face = "left";
+            }
+        });
+        var anaTalk = function() {
+            // ana comes out, talks to the player, then exits
+            debug("ana talk");
+            global.events.bbncTalkToOwner = true;
+            with (objNPC) {
+                if (npcID == "ana") {
+                    directions = ["left"];
+                    action = function() {
+                        with (objPlayer)
+                            canMove = true;
+                        instance_destroy();
+                    }
+                    alarm_set(1, 1);
+                }
+            }
+        }
+        textbox({
+            name: "ana",
+            text: $"{string_upper(global.characterName)}! Let's get back to Pump Palace so we can tell Jim what happened!",
+            action: anaTalk
+        }, false)
     }
 }

@@ -9,6 +9,8 @@ image_speed = 0;
 image_index = 0;
 faceStart = (variable_instance_exists(self, "faceStart")) ? faceStart : face;
 depthStart = depth;
+flashing = variable_instance_exists(self, "flashing") ? flashing : false;
+flashCounter = 0;
 
 // handle moving npcs
 xTo = x;
@@ -18,3 +20,4 @@ if (array_length(directions) > 0)
 
 // handle player interactions
 touching = false;
+alreadyTalked = false;

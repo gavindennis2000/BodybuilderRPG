@@ -3,15 +3,16 @@ function ch1Dialog(npcID = -1, itemID = -1){
 
 	/*gmlive*/ if (TEST) { if (live_call(npcID, itemID)) return live_result; }
 	
-	var textObj = [{
-		name: npcID,
-		text: ""
-	}];
+	text = {
+		name: npcID, 
+		text: "No text available"
+	};
+
 	if (npcID != -1) {
 		switch (npcID) {
 			case "mom":
 				if (!global.events.meetMom && !global.events.meetJim) {
-					textObj = [
+					text = [
 						{
 							name: "mom",
 							text: $"{string_upper(global.characterName)}, what is going on with you?",
@@ -67,7 +68,7 @@ function ch1Dialog(npcID = -1, itemID = -1){
 					]
 				}
 				else if (!global.events.meetJim) {
-					textObj = [
+					text = [
 						{
 							name: "mom",
 							text: $"You still haven't gone to work?"
@@ -80,10 +81,26 @@ function ch1Dialog(npcID = -1, itemID = -1){
 						}
 					]
 				}
+				else {
+					textIndex = 1;
+					text = [
+						{
+							name: "mom",
+							text: "Are ya winnin, son?"
+						},
+						{
+							name: "mom",
+							text: "Are you listening to me?"
+						}
+					]
+				}
 				break;
 			case "jim":
+				var giveDelivery = function() {
+					playSound(sndLevelUp);
+				}
 				if (!global.events.meetJim) {
-					textObj = [
+					text = [
 						{
 							name: "jim",
 							alias: "???",
@@ -104,29 +121,46 @@ function ch1Dialog(npcID = -1, itemID = -1){
 						{
 							name: "jim",
 							alias: "???",
-							text: global.characterName != "jim" ? $"{string_upper(global.characterName)}!? What kind of name is that!?" : "Jim!? You've gotta be kidding me!",
+							text: global.characterName != "jim" ? $"{string_upper(global.characterName)}!?" : "JIM!?",
 							emotion: "cocky",
 							tone: "loud"
 						},
 						{
 							name: "jim",
-							text: global.characterName != "jim" ? $"The name's Jim Ohner, by the way. You can just call me Jim." : "That's my name! From now on I'm going to address you as \"Twiglet\".",
+							alias: "???",
+							text: global.characterName != "jim" ? "WHAT KIND OF NAME IS THAT!?" : "YOU'VE GOTTA BE KIDDING ME!!",
+							emotion: "cocky",
+							tone: "loud"
+
+						},
+						{
+							name: "jim",
+							text: global.characterName != "jim" ? $"The name's Jim Ohner, by the way. You can just call me Jim." : "That's my name! From now on I'm going to address you as STRING BEAN so there's no confusion.",
 							emotion: "happy"
 						},
 						{
 							name: "jim",
-							text: $"You're all skin and bones! If you want to work at a bodybuilding gym, you're gonna need to put on some serious mass!",
+							text: "I'm the proud owner of Pump Palace Bodybuilding Gyms. I only let the strongest, most dedicated lifters hang around here.",
+						},
+						{
+							name: "jim",
+							text: "Don't get the wrong idea though, I only hired you because your friend put in a good word.",
 							emotion: "cocky"
 						},
 						{
 							name: "jim",
-							text: $"Say, what makes you want a job here anyway?",
+							text: $"You're all skin and bones! If you want to stick around here, you're gonna need to put on some serious mass!",
+							emotion: "cocky"
+						},
+						{
+							name: "jim",
+							text: $"Say, what made you want a job here anyway?",
 							prompt: [
 								"I want to be a bodybuilder", 
 								[
 									{
 										name: "jim",
-										text: $"Bwahaha! What naive confidence!",
+										text: $"Bwahaha! You think you have what it takes!?",
 										emotion: "cocky"
 									},
 									{
@@ -135,8 +169,12 @@ function ch1Dialog(npcID = -1, itemID = -1){
 									},
 									{
 										name: "jim",
-										text: "But still, you might have some potential... "
+										text: "But still, you might have some potential... I can sense a powerful aura coming from you..."
 									},
+									{
+										name: "jim",
+										text: "Actually, no. It's just your  B.O."
+									}
 								],
 								"I'm in it for the bag",
 								[
@@ -147,17 +185,18 @@ function ch1Dialog(npcID = -1, itemID = -1){
 									},
 									{
 										name: "jim",
-										text: "But don't think I'll forget about what I said earlier. You still need to hit the weights!",
+										text: "But don't think I'll forget about what I said earlier. You still need to start slamming the mass gainer!",
 									},
 								]
 							]
 						},
 						{
 							name: "jim",
-							text: "Take this delivery to my business associate at Bodybuilding Nutrition Company (BBNC)."
+							text: "Take this delivery to my business associate at Bodybuilding Nutrition Company (BBNC).",
 						},
 						{
-							text: $"JIM handed {string_upper(global.characterName)} the goods."
+							text: $"JIM handed {global.characterName == "jim" ? "STRING BEAN" : string_upper(global.characterName)} the goods.",
+							action: giveDelivery
 						},
 						{
 							name: "jim",
@@ -171,7 +210,7 @@ function ch1Dialog(npcID = -1, itemID = -1){
 					]
 				}
 				else {
-					textObj = [
+					text = [
 						{
 							name: "jim",
 							text: "You'll find BBNC in Wheyford, two blocks south of here."
@@ -184,7 +223,7 @@ function ch1Dialog(npcID = -1, itemID = -1){
 				}
 				break;
 			default:
-				textObj = {
+				text = {
 					text: $"{npcID}"
 				};
 				break;
@@ -192,8 +231,118 @@ function ch1Dialog(npcID = -1, itemID = -1){
 	}
 	else if (itemID != -1) {
 		switch (itemID) {
+			case "bbnc owner":
+				var func = function() {
+					global.events.bbncTalkToOwner = true;
+				}
+				var kickedOut = function() {
+					// kicks player out of his store
+					global.roomChange = {
+						x: 1248, 
+						y: 1056 + 32, 
+						face: "down", 
+						room: rOverworld, 
+						transition: "fade"
+					}
+					with (objPlayer)
+						canMove = false;
+					with (objController)
+						goToNextRoom();
+					playSound(sndError);
+				}
+				if (global.events.bbnc2 && !global.events.bbncTalkToOwner) {
+
+					// npc creation and functions
+					var createAna = function() {
+						instance_create_layer(objPlayer.x, objPlayer.y, "Instances", objNPC, {
+							npcID: "ana", 
+							directions: ["right"], 
+							action: function() {
+								with (objNPC) {
+									if (npcID == "ana") {
+										faceStart = "left";
+										face = "left";
+									}
+								}
+							}
+						});
+					}
+
+					var exitAna = function() {
+						with (objNPC) {
+							if (npcID == "ana") {
+								directions = ["left"]; 
+								action = function() {
+									global.events.bbncTalkToOwner = true;
+									with (objPlayer)
+										canMove = true;
+									instance_destroy();
+								}
+								alarm_set(1, 1);
+							}
+						}
+					}
+					text = [
+						{
+							name: "clerk",
+							text: "You saved me! Thank you so much!"
+						},
+						{
+							name: "clerk",
+							text: "You have a package delivery for me? This day has really turned around! Weehee!"
+						},
+						{
+							name: "clerk",
+							text: "I see you have quite the muscles on you, boy. Please come back any time to get my top-shelf supplements!"
+						},
+						{
+							name: "clerk",
+							text: "As for the package, I'll use Western Onion to remotely pay Jim. I promise. You definitely don't need to tell him.",
+						},
+						{
+							name: "ana",
+							text: $"{string_upper(global.characterName)}!",
+							action: createAna
+						},
+						{
+							name: "ana",
+							text:  "Let's get back to Pump Palace so we can tell Jim what happened!",
+							action: exitAna
+						}
+					]
+				}
+				else {
+					text = [
+						{
+							name: "Clerk",
+							text: $"Welcome to BBNC! Home to all your hypertrophy needs!"
+						},
+						{
+							name: "Clerk",
+							text: $"Are you looking to buy some supplements?",
+							prompt: [
+								"Yes",
+								[],
+								"No",
+								[
+									{
+										name: "clerk",
+										text: "Did you read the sign, meat wipe?"
+									},
+									{
+										name: "clerk",
+										text: "NO SOLICITING! GET OUT!",
+										tone: "loud",
+										action: kickedOut
+									}
+							]
+							]
+						}
+					];
+				}
+				break;
 			case "gymtendo 64":
-				textObj = [
+				text = [
 					{
 						text: "My Gymtendo 64!"
 					},
@@ -203,7 +352,7 @@ function ch1Dialog(npcID = -1, itemID = -1){
 				];
 				break;
 			default:
-				textObj = {
+				text = {
 					text: $"{itemID}"
 				};
 				break;
@@ -214,5 +363,5 @@ function ch1Dialog(npcID = -1, itemID = -1){
 		return (-1);
 	}
 
-	return textObj;
+	return;
 }

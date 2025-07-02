@@ -8,9 +8,9 @@ function handleDialog(npcID = -1, itemID = -1){
 			break;
 		case 1:
 		default:
-			text = ch1Dialog(npcID, itemID);
+			ch1Dialog(npcID, itemID);
 			break;
 	}
 	
-	return text;
+	return;
 }

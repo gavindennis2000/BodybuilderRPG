@@ -12,8 +12,8 @@
   "duration":170.0,
   "name":"sndPumpPalace",
   "parent":{
-    "name":"OST",
-    "path":"folders/4 Music/OST.yy",
+    "name":"Rooms",
+    "path":"folders/4 Music/OST/Rooms.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

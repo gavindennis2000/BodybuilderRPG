@@ -17,6 +17,13 @@ else if (state == "attacking") {
         alarm_set(0, 1);
         exit;
     }
+    // check if any fighters are dead
+    checkFighterHP();
+
+    // if the battle's over, don't do anything else
+    if (state == "victory" || state == "loss")
+        exit;
+        
     battleQueue = sortBattleQueue(battleQueue);
     turn = getNextTurn(battleQueue);
     predictQueue = setPredictQueue(battleQueue);
@@ -24,4 +31,5 @@ else if (state == "attacking") {
     optionsOffset = optionsOffsetStart;
     previousSelections = [];
     state = turn.side == "party" ? "ready" : "enemy turn";
+    selection = 0;
 }

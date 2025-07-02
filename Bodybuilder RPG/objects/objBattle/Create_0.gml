@@ -4,6 +4,8 @@ if (TEST) { if (live_call()) {  // GMLive
     return live_result;
 }}
 
+// handle test battles
+
 // create the instances for party members and enemies
 var battleDist = 128;  // distance between player and enemies
 var playerDistX = 8;  // horizontal distance between each party member
@@ -22,6 +24,7 @@ predictQueue = [];
 optionsOffset = 400;
 optionsOffsetStart = optionsOffset;
 turn = -1;
+fadeBlack = -1;
 
 // keep track of states and screen information
 state = "start";
@@ -80,14 +83,14 @@ for (var i = 0; i < array_length(party); i++) {
         side: "party",
         face: "left",
         pos: i + 1,
-        counter: 100 - fighter.stats.cardio + 0.1 * i
+        counter: 100 - fighter.stats.cardio + 0.001 * i
     });
 }
 
 // the enemies
 enemies = global.battleData.enemies;
 
-// check whether or not the player can run away
+// check whether or not the player can nun away
 canRun = global.battleData.canRun;
 
 // create battle instances for the enemies and add them to the total fighter pool
@@ -118,11 +121,81 @@ for (var i = 0; i < array_length(enemies); i++) {
         battleID: fighter.battleID, 
         side: "enemies",
         pos: i + 1,
-        counter: 100 - fighter.stats.cardio + 0.1 * (i + (array_length(party)))
+        counter: 100 - fighter.stats.cardio + 0.001 * (i + (array_length(party)))
     });
 }
 
+// show the xp bar after victory
+xpAccumulated = 0;
+victoryBarX = -1;
+victoryBarXFinal = CAM_WIDTH / 2;
+victoryBarXP = 0;
+
 // battle functions in alphabetical order
+
+battleOver = function(status) {
+    // the battle is finished
+
+    /*gmlive*/ if (TEST) { if (live_call(status)) return live_result; }
+
+    state = status;
+    turn = -1;
+    debug(state);
+    var aTime = 105;
+    if (state == "victory") {
+        audio_sound_gain(global.battleMusic, 0, aTime / 6 * 100)
+        alarm_set(3, aTime);
+    }
+    else if (state == "loss") {
+        with (objMusic)
+            death();
+        alarm_set(2, 10);
+    }
+}
+
+checkFighterHP = function() {
+    // checks to see if any fighters are dead after an attack
+
+    /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
+
+    var playerStillAlive = false;  // make sure at least one player is alive        
+    for (var i = 0; i < array_length(battleQueue); i++) {
+        if (battleQueue[i].ref.stats.hp <= 0) {
+            if (battleQueue[i].side == "enemies") {
+                for (var j = 0; j < array_length(myEnemies); j++) {
+                    if (myEnemies[j] == battleQueue[i].ref) {
+                        xpAccumulated += battleQueue[i].ref.stats.xp;
+                        array_delete(myEnemies, j, 1);
+                    }
+                    if (array_length(myEnemies) == 0) {
+                        // the battle is won
+                        battleOver("victory");
+                        break;
+                    }
+                }
+            }
+            debug($"removed {battleQueue[i].battleID} from queue")
+            array_delete(battleQueue, i, 1);
+            i--;
+        }
+        else if (battleQueue[i].side == "party")
+            playerStillAlive = true;
+    }
+
+    if (!playerStillAlive)
+        battleOver("loss");
+    return;
+}
+
+getSpeedFactor = function(cardio) {
+    // uses cardio to calculate speed factor
+
+    /*gmlive*/ if (TEST) { if (live_call(cardio)) return live_result; }
+
+    var spdFactor = ((cardio div 5) / 2);
+
+    return spdFactor;
+}
 
 handleAttack = function(attacker, attacked) {
     // handles attack; either party or enemy
@@ -159,7 +232,7 @@ handlePlayerTurn = function(attacker, attacked, move) {
     /*gmlive*/ if (TEST) { if (live_call(attacker, attacked, move)) return live_result; }
 
     var cardio = attacker.ref.stats.cardio;
-    var spdFactor = ((cardio div 5) / 2);
+    var spdFactor = getSpeedFactor(cardio);
     debug($"cardio: {cardio} spdfactor {spdFactor}");
             // adjust the attacker's hit counter
     switch (move) {
@@ -183,9 +256,12 @@ handleEnemyTurn = function() {
     var enemy = turn.ref;
     var move = enemy.moves[enemy.moveIndex];
     var target = myParty[irandom(array_length(myParty) - 1)];
-
+    while (target.state == "ko")
+        target = myParty[irandom(array_length(myParty) - 1)];
+    
+    // adjust the enemy's tick counter
     var cardio = enemy.stats.cardio;
-    var spdFactor = ((cardio div 5) / 2);
+    var spdFactor = getSpeedFactor(cardio);
     debug (spdFactor);
     turn.counter += ATTACK_COUNTER - spdFactor;
     
@@ -210,10 +286,7 @@ getNextTurn = function(battleQueue) {
 
     /*gmlive*/ if (TEST) { if (live_call(battleQueue)) return live_result; }
 
-    var nextFighter = array_first(battleQueue);
-    // debug($"Next fighter is {nextFighter.battleID} new array: {battleQueue}");
-
-    return nextFighter;
+    return array_first(battleQueue);
 }
 
 sortBattleQueue = function(battleQueue) {
@@ -242,7 +315,6 @@ setPredictQueue = function(battleQueue, attackType = "Attack") {
 
     // copy the battle queue
     var predict = [];
-    debug($"Battle queue rn {battleQueue}");
     for (var i = 0; i < array_length(battleQueue); i++) {
         array_insert(predict, array_length(predict), {
             ref: battleQueue[i].ref,
@@ -257,7 +329,7 @@ setPredictQueue = function(battleQueue, attackType = "Attack") {
     var originalLength = array_length(predict);
     for (var i = 0; i < originalLength; i++) {
         var cardio = predict[i].ref.stats.cardio;
-        var spdFactor = ((cardio div 5) / 2);
+        var spdFactor = getSpeedFactor(cardio);
         var counterIncrease
         var originalIncrease = ATTACK_COUNTER - spdFactor;;
         switch (attackType) {
@@ -285,9 +357,11 @@ setPredictQueue = function(battleQueue, attackType = "Attack") {
                 predict[j] = temp;
             }
         }
-        debug($"predict {i}: {predict[i]}");
+        // debug($"predict {i}: {predict[i]}");
     }
 
+    for (var i = 0; i < array_length(predict); i++)
+    debug ($"fighter: {predict[i].battleID} {predict[i].pos} counter: {predict[i].counter}");
     return predict;
 
     // for (var i = 0; i < array_length(predict) - 1; i++) {

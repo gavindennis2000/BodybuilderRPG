@@ -22,7 +22,7 @@ if (global.cutscene || cutsceneY != 0) {
 }
 
 // show the name of the room at the beginning of room start
-if (showRoomVar) {
+if (showRoomVar && room != rBattle) {
     // set the opacity of the text
     var getAlpha = draw_get_alpha();
     var alphaChange = 0.075;

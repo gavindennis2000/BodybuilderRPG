@@ -18,14 +18,17 @@ switch (npcID) {
 	case "doms":
 		sprite_index = sprDoms;
 		break;
-	case "samson":
-		sprite_index = sprSamson;
+	case "jim":
+		image_index = 2;
 		break;
 	case "mom":
 		image_index = 3;
 		break;
-	case "jim":
-		image_index = 2;
+	case "samson":
+		sprite_index = sprSamson;
+		break;
+	case "robber":
+		image_index = 4;
 		break;
 	default:
 		image_index = 0;
@@ -48,10 +51,21 @@ switch (face) {
 		break;
 }
 
+
 if (instance_exists(objPlayer) && y >= objPlayer.y)
 	depth = objPlayer.depth - 1;
 else if (instance_exists(objPlayer))
 	depth = objPlayer.depth + 1;
 else depth = depthStart;
+
+// flash the sprite when having food poisoning or whatever
+if (flashing) {
+	flashCounter++;
+	var modCheck = 15;
+	if (flashCounter % modCheck > (modCheck / 2))
+		image_alpha = 0.5;
+	else 
+		image_alpha = 0.9;
+}
 
 draw_sprite_part_ext(sprite_index, image_index, 0, 0 + 32 * imageY, 32, 32, x - 16, y - 21, 2, 2, image_blend, image_alpha);

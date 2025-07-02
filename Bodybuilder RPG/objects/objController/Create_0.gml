@@ -7,11 +7,14 @@ layer = layer_create(layer_get_depth(layer_get_id("Instances")) - 2, "Controller
 // global stuff
 // events/cutscenes/actions
 global.events = {
+    // chapter 1
     startCh1: false,
     meetMom: false,
     meetJim: false,
     meetAna: false,
     bbnc: false,
+    bbnc2: false,
+    bbncTalkToOwner: false,
 }
 global.chapter = 1;
 global.cutscene = false; 
@@ -58,7 +61,7 @@ cutsceneY = 0;
 
 // battle engine
 global.battle = false;
-global.battleData = {
+global.battleData = (variable_global_exists("battleData")) ? global.battleData : {
     party: [],
     enemies: [],
     canRun: true
@@ -66,10 +69,12 @@ global.battleData = {
 global.battleMusic = -1;
 global.noEncounters = true;
 global.stats = {
+    // level is a group asset
+    level: 1,
+    xp: 0,
+    xpNext: 100,
+    // the fighters
     andro: {
-        level: 1,
-        xp: 0,
-        next: 100,
         hp: 200,
         maxhp: 200,
         skill: 1,
@@ -79,9 +84,6 @@ global.stats = {
         cardio: 20,
     },
     ana: {
-        level: 1,
-        xp: 0,
-        next: 100,
         hp: 120,
         maxhp: 120,
         skill: 3,
@@ -91,9 +93,6 @@ global.stats = {
         cardio: 10,
     },
     doms: {
-        level: 10,
-        xp: 0,
-        next: 100 * power(1.5, 9),
         hp: 100,
         maxhp: 100,
         skill: 1,
@@ -113,7 +112,8 @@ goToNextRoom = function() {
     alarm[0] = alarmTime;
 
     if (room == rBattle) {
-        audio_sound_gain(global.battleMusic, 0, 600);
+        if (audio_is_playing(global.battleMusic))
+            audio_sound_gain(global.battleMusic, 0, 600);
     }
     else
         audio_sound_gain(global.songPlaying, 0.3, 600);

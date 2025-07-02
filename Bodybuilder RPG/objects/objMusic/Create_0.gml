@@ -20,6 +20,18 @@ if (!variable_global_exists("trackPosition"))
         position: -1
     };
 
+// music functions
+death = function() {
+    // fades battle music
+
+    /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
+
+    debug("music death")
+    alarm_set(1, 1);
+    
+    return;
+}
+
 getCurrentSong = function() {
     // get's current song at start of room
 
@@ -28,15 +40,17 @@ getCurrentSong = function() {
     global.previousSong = global.currentSong;
     switch(global.roomVar) {
         // sorted alphabetically
+        case "BBNC":
+            global.currentSong = sndBBNC;
+            break;
         case "Anabolic Heights":
             global.currentSong = sndAnabolicHeights;
             break;
         case "Central Prairie":
-        // case "Overworld":
             global.currentSong = sndCentralPrairie;
             break;
-        case "Creatine Island":
-            global.currentSong = sndCreatineIsland;
+        case "Creatine Cove":
+            global.currentSong = sndCreatineCove;
             break;
         case "Leangroundburg":
             global.currentSong = sndLeangroundburg;
@@ -51,7 +65,7 @@ getCurrentSong = function() {
             global.currentSong = sndWheyford;
             break;
         default:
-            global.currentSong = -1;
+            global.currentSong = sndCreatineCove;
             break;
     }
 
@@ -64,5 +78,6 @@ playBattleMusic = function(music) {
     if (audio_is_playing(global.songPlaying))
         audio_pause_sound(global.songPlaying);
         
+    audio_sound_gain(global.battleMusic, 1, 0);
     global.battleMusic = audio_play_sound(music, 1, true);
 }

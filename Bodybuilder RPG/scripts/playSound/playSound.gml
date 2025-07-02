@@ -6,5 +6,6 @@ function playSound(snd){
 	if (audio_is_playing(snd))
 		audio_stop_sound(snd);
 		
-	audio_play_sound(snd, 2, false);
+	audio_play_sound(snd, 1, false);
+	debug($"should be playing {audio_get_name(snd)}");
 }
