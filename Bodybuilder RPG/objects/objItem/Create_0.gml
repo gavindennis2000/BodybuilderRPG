@@ -5,3 +5,5 @@
 itemIdentifier = id;
 alreadyTalked = false;
 finalText = -1;
+
+image_speed = 0;

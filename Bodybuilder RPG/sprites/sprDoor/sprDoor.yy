@@ -29,8 +29,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"1 Sprites",
-    "path":"folders/1 Sprites.yy",
+    "name":"Rooms",
+    "path":"folders/1 Sprites/Rooms.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

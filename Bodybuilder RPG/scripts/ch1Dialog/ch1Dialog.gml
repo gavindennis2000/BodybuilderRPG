@@ -351,6 +351,43 @@ function ch1Dialog(npcID = -1, itemID = -1){
 					}
 				];
 				break;
+			case "home bed":
+				if (!global.events.meetJim)
+					text = $"I have to get ready for work!";
+				break;
+			case "home bench press":
+				text = [
+					{
+						text: "Bench press. My favorite lift!"
+					}, 
+					{
+						text: "If I'm quick, I can knock out a few sets before work..."
+					},
+					{
+						name: "mom",
+						text: $"{string_upper(global.characterName)}!!"
+					}, 
+					{
+						text: "Never mind. Maybe tonight."
+					}
+				]
+				break;
+			case "mirror":
+				switch (global.character) {
+					case "andro":
+						text = "Hey, big guy! Lookin large!";
+						break;
+					case "ana":
+						text = "I can't believe the game developer made my arms so small!";
+						break;
+					case "doms":
+						text = "My calves need some work. Very happy with the progress my lats have made, though.";
+						break;
+					case "samson":
+						text = "I'm ashamed of myself. Can't believe I skipped cardio today!";
+						break;
+				}
+				break;
 			default:
 				text = {
 					text: $"{itemID}"

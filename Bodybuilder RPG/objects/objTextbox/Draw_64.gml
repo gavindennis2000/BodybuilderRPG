@@ -8,42 +8,12 @@ if (text == -1)
     exit;
 
 screen = (instance_exists(objPlayer) && objPlayer.y < camera_get_view_y(view_camera[0]) + CAM_WIDTH / 2 - 96) ? "bottom" : "top";
-if (screen == "top" && textY != textYTop) {
-    var increment = 8;
-    if (textY < CAM_HEIGHT) {
-        textY += increment;
-        textboxY += increment;
-        picY += increment;
-    }
-    else if (textY >= CAM_HEIGHT) {
-        textY = textYTop - 96;
-        textboxY = textboxYTop - 96;
-        picY = picYTop - 96;
-    }
-    else {
-        textY += increment;
-        textboxY += increment;
-        picY += increment;
-    }
-}
-else if (screen == "bottom" && textY != textYBottom) {
-    var increment = 8;
-    if (textY > - 96) {
-        textY -= increment;
-        textboxY -= increment;
-        picY -= increment;
-    }
-    else if (textY <= -96) {
-        textY = textYBottom + 96;
-        textboxY = textboxYBottom + 96;
-        picY = picYBottom + 96;
-    }
-    else {
-        textY += increment;
-        textboxY += increment;
-        picY += increment;
-    }
-}
+if (forceScreen != -1)
+    screen = forceScreen;
+    
+textY = screen == "top" ? textYTop : textYBottom;
+textboxY = screen == "top" ? textboxYTop : textboxYBottom;
+picY = screen == "top" ? picYTop : picYBottom;
 
 // fade in/out the textbox
 var fadeAmount = 0.075;

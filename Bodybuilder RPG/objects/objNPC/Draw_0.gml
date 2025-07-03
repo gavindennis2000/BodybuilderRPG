@@ -9,23 +9,28 @@ var imageY = 0;
 // get the npc's sprite_index
 sprite_index = sprNPC;  // default
 switch (npcID) {
-	case "ana":
-		sprite_index = sprAna;
-		break;
+	// main characters
 	case "andro":
 		sprite_index = sprAndro;
 		break;
+	case "ana":
+		sprite_index = sprAna;
+		break;
 	case "doms":
 		sprite_index = sprDoms;
+		break;
+	case "samson":
+		sprite_index = sprSamson;
+		break;
+	// alphabetical order for the rest
+	case "clerk":
+		image_index = 5;
 		break;
 	case "jim":
 		image_index = 2;
 		break;
 	case "mom":
 		image_index = 3;
-		break;
-	case "samson":
-		sprite_index = sprSamson;
 		break;
 	case "robber":
 		image_index = 4;

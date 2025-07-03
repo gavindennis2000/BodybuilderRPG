@@ -1,7 +1,7 @@
 {
   "$GMSprite":"",
   "%Name":"sprWall",
-  "bboxMode":1,
+  "bboxMode":2,
   "bbox_bottom":31,
   "bbox_left":0,
   "bbox_right":31,
@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"1 Sprites",
-    "path":"folders/1 Sprites.yy",
+    "name":"Rooms",
+    "path":"folders/1 Sprites/Rooms.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

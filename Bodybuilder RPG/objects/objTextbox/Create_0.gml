@@ -29,6 +29,7 @@ next = 1;  // index of character to be transferred from text object to drawText
 readyForNext = false;  // lets player move on to next paragraph of text
 destroy = false;  // used to fade out textbox
 screen = -1;  // will the dialog box be on top or bottom?
+forceScreen = (variable_instance_exists(self, "forceScreen")) ? forceScreen : -1;
 selection = 0;
 
 // where the textbox is drawn at
@@ -55,3 +56,6 @@ else {
     textY = textYTop;
     picY = picYTop;
 }
+
+if (forceScreen != -1)
+    screen = forceScreen;

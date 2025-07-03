@@ -7,6 +7,10 @@ if (TEST) { if (live_call()) {  // GMLive
 }}
 
 if (!instance_exists(objPlayer))
-	instance_create_layer(x, y, layer, objPlayer);
+	with (instance_create_layer(x, y, layer, objPlayer)) {
+        if (room == rMom)
+            face = "left";
+    }
+
 	
 instance_destroy();

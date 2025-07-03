@@ -98,7 +98,13 @@ function handleDoors(doorID){
 				transition: "fade"
 			};
 			break;
+		case inst_2EC7C37A:
+			// pump palace stairs ->
+			global.roomChange = {
 
+			};
+			break;
+		
 		// stores
 		case inst_1F9D8954:
 			// bbnc -> overworld

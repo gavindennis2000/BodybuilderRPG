@@ -1,0 +1,38 @@
+{
+  "$GMTileSet":"v1",
+  "%Name":"tsRoom",
+  "autoTileSets":[],
+  "macroPageTiles":{
+    "SerialiseHeight":0,
+    "SerialiseWidth":0,
+    "TileSerialiseData":[],
+  },
+  "name":"tsRoom",
+  "out_columns":30,
+  "out_tilehborder":2,
+  "out_tilevborder":2,
+  "parent":{
+    "name":"6 Tiles",
+    "path":"folders/6 Tiles.yy",
+  },
+  "resourceType":"GMTileSet",
+  "resourceVersion":"2.0",
+  "spriteId":{
+    "name":"sprRoom",
+    "path":"sprites/sprRoom/sprRoom.yy",
+  },
+  "spriteNoExport":false,
+  "textureGroupId":{
+    "name":"Default",
+    "path":"texturegroups/Default",
+  },
+  "tileAnimationFrames":[],
+  "tileAnimationSpeed":15.0,
+  "tileHeight":32,
+  "tilehsep":0,
+  "tilevsep":0,
+  "tileWidth":32,
+  "tilexoff":0,
+  "tileyoff":0,
+  "tile_count":900,
+}

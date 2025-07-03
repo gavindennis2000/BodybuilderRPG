@@ -15,6 +15,12 @@ with (objNPC) {
             npcID = "jim";
             break;
         
+        // stores
+        // bbnc
+        case inst_3367C1FA:
+            npcID = "clerk";
+            break;
+        
         // not found
         default:
             // npcID = "npc not found";

@@ -3,6 +3,7 @@
 if (TEST) {
     // change character with the click of a button
 
+    if (TEST) global.party = ["andro", "ana", "doms"];
     if (input_check_pressed("north")) {
         for (var i = 0; i < array_length(global.party); i++) {
             if (global.character == global.party[i] && i + 1 < array_length(global.party)) {
@@ -15,9 +16,6 @@ if (TEST) {
             }
         }
     }
-    // if (input_check_pressed("start")) {
-    //     instance_create_layer(x, y, layer, objTextbox);
-    // }
 }
 
 var canCertainlyMove = (canMove && targetX == 0 && targetY == 0);
@@ -83,14 +81,14 @@ else if (keyDown && canMove) {
 
 if (targetX != 0 || targetY != 0) {
     // move the player to the next grid square 
-    if (TEST) 
-        runSpeed *= 2;
+    // if (TEST) 
+        // runSpeed *= 2;
     x += sign(targetX) * runSpeed;
     targetX -= sign(targetX) * runSpeed; 
     y += sign(targetY) * runSpeed;
     targetY -= sign(targetY) * runSpeed; 
-    if (TEST)
-        runSpeed /= 2;
+    // if (TEST)
+        // runSpeed /= 2;
 }
 
 if (targetX == 0 && targetY == 0) {

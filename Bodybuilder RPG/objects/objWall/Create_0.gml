@@ -6,5 +6,3 @@ if (TEST) { if (live_call()) {  // GMLive
 
 if (room != rOverworld)
     visible = false;
-
-visible = true;

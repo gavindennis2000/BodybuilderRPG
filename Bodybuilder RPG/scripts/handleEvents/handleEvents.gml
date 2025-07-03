@@ -16,9 +16,6 @@ function handleEvents(){
         audio_pause_sound(global.songPlaying);
         textbox([
             {
-                text: $"Was that all just a dream?",
-            },
-            {
                 name: "mom",
                 text: $"{string_upper(global.characterName)}!!",
                 emotion: "angry"
@@ -68,7 +65,7 @@ function handleEvents(){
         global.cutsceneSong = sndDanger;
 
         // create the robber
-        instance_create_layer(256, 128, "Instances", objNPC, {
+        instance_create_layer(256, 140, "Instances", objNPC, {
             npcID: "robber",
             faceStart: "up",
             face: "up"
@@ -159,15 +156,15 @@ function handleEvents(){
                     ]
                 ]
             }
-        ], false);
+        ], false, true, "top");
     }
-    else if (!global.events.bbnc2 && room == rStores) {
+    else if (global.events.bbnc && !global.events.bbnc2 && room == rStores) {
         global.events.bbnc2 = true;
         debug("bbnc robbery2");
         global.cutscene = true;
         global.cutsceneSong = -1;
         // create the robber
-        instance_create_layer(256, 128, "Instances", objNPC, {
+        instance_create_layer(256, 140, "Instances", objNPC, {
             npcID: "robber",
             faceStart: "down",
             face: "down",
