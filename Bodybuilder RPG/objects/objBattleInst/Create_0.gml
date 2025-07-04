@@ -16,6 +16,9 @@ targetY = -1;
 
 // show damage when hit by oppressor
 myVictim = -1;
+myItem = -1;
+fogAlpha = 0;
+fogDir = "up";
 dmgToGive = -1;
 dmgToShow = -1;
 dmgY = 20;
@@ -42,7 +45,7 @@ attack = function(victim, dmg) {
 
     dmgToGive = dmg;
 
-    alarm_set(0, 1);
+    alarm_set(0, 5);
 
     return;
 }
@@ -57,6 +60,26 @@ death = function() {
     dying = true;
     playSound(sndDeath);
 
+    return;
+}
+
+useItem = function(victim, item) {
+    // uses item for self or other fighter
+
+    /*gmlive*/ if (TEST) { if (live_call(victim, item)) return live_result; }
+
+    myVictim = victim;
+    myItem = item;
+
+    var victimHP = myVictim.stats.hp;
+    useItemGlobal(myItem, myVictim.battleID);
+    victimHP -= myVictim.stats.hp;
+
+    with (myVictim) {
+        dmgToShow = victimHP == 0 ? -1 : victimHP;
+        state = "use item";
+        alarm_set(0, 5);
+    }
     return;
 }
 getSFX = function(battleID) {

@@ -27,7 +27,7 @@ global.party = ["andro"];
 global.inventory = [
     {
         name: "Choc. Milk",
-        quantity: 1, 
+        quantity: 2, 
     }
 ];
 global.skills = {

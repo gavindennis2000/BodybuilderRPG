@@ -63,6 +63,15 @@ switch (screen) {
         marquee.counter = 1;
         marquee.text = "Run away from the fight."
         break;
+    case "Use Item":
+        focus = "players";
+        selections = myParty;
+        var partySelected = selections[selection];
+        if (state == "ready") {
+            marquee.counter = 1;
+            marquee.text = $"{string_upper(partySelected.battleID)}  {partySelected.stats.hp} / {partySelected.stats.maxhp}";
+        }
+        break;
 }
 
 var left = input_check_pressed("left");
@@ -84,7 +93,7 @@ if (confirm) {
     if (
         is_numeric(selection) && (
         selections[selection] == "Skill" && array_length(skills) == 0 || 
-        selections[selection] == "Gym Bag" && array_length(inventory) == 0 ||
+        selections[selection] == "Gym Bag" && array_length(global.inventory) == 0 ||
         selections[selection] == "Run Away" && !canRun
     )) {
         playSound(sndError);
@@ -98,14 +107,34 @@ if (confirm) {
             selection: selection
         });
         if (focus == "menu") {
-            screen = selections[selection];
-            selection = 0;
             if (screen == "Gym Bag") {
-                // update the prediction queue
-                predictQueue = setPredictQueue(battleQueue, "Item");
+                queuedItem = selections[selection];
+                debug($"queued item: {queuedItem}");
+                focus = "party";
+                screen = "Use Item";
+                selections = myParty;
+                for (var i = 0; i < array_length(myParty); i++) {
+                    if (myParty[i] == turn.ref) {
+                        selection = i;
+                        break;
+                    }
+                }
+            }
+            else {
+                screen = selections[selection];
+                selection = 0;
+                if (screen == "Gym Bag") {
+                    // update the prediction queue
+                    predictQueue = setPredictQueue(battleQueue, "Item");
+                }
             }
         }
         else if (focus == "players") {
+            if (screen == "Use Item") {
+                var attacker = turn;
+                var playerToItem = selections[selection];
+                handlePlayerTurn(attacker, playerToItem, "Item");
+            }
             if (screen == "Run Away") {
                 screen = -1;
                 selection = -1;
@@ -190,6 +219,21 @@ else if (focus == "enemies") {
         playSound(sndCursor);
         selection++;
         if (selection >= array_length(myEnemies))
+            selection = 0;
+    }
+}
+
+else if (focus == "players") {
+    if (up && array_length(myParty) > 1) {
+        playSound(sndCursor);
+        selection--;
+        if (selection < 0)
+            selection = array_length(myParty) - 1;
+    }
+    else if (down && array_length(myParty) > 1) {
+        playSound(sndCursor);
+        selection++;
+        if (selection >= array_length(myParty))
             selection = 0;
     }
 }

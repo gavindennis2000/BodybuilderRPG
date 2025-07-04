@@ -47,6 +47,30 @@ else if (state == "attack") {
     }
     alarm_set(0, 1);
 }
+else if (state == "use item") {
+    var fogAmountChange = 0.04;
+    if (fogDir == "up") {
+        fogAlpha += fogAmountChange;
+        alarm_set(0, 1);
+        if (fogAlpha >= 0.7) {
+            showDamage = true;
+            alarm_set(1, 50);
+            fogDir = "down";
+            alarm_set(0, 20);
+        }
+    }
+    else if (fogDir == "down" && fogAlpha > 0) {
+        fogAlpha -= fogAmountChange;
+        alarm_set(0, 1);
+    }
+    else {
+        fogAlpha = 0;
+        fogDir = "up";
+        state = "wait";
+        with (objBattle)
+            attackStatus.ready = true;
+    }
+}
 else if (state == "jump") {
     // when fighter get's back to starting position, send a message to battle controller
     if (x != targetX || y != targetY) {

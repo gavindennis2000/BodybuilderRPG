@@ -8,9 +8,9 @@ if (TEST) { if (live_call()) {  // GMLive
 setSongLoopPoints();
 
 // test battle
-if (TEST_BATTLE) {
+if (TEST && TEST_BATTLE) {
     global.battleData = {
-        party: ["andro", "ana"],
+        party: ["andro", "ana", "doms"],
         enemies: ["robber", "robber"],
         canRun: true
     }

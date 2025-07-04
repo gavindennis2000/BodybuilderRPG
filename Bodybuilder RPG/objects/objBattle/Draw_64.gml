@@ -98,7 +98,7 @@ if (state == "ready" && focus == "menu") {
             var color = c_white;
             if (
                 selectionName == "Skill" && array_length(skills) == 0 ||
-                selectionName == "Gym Bag" && array_length(inventory) == 0 ||
+                selectionName == "Gym Bag" && array_length(global.inventory) == 0 ||
                 selectionName == "Run Away" && !canRun
             ) {
                 color = selections[selection] == selectionName ? #666600 : invalidColor;
@@ -109,7 +109,8 @@ if (state == "ready" && focus == "menu") {
             return color;
         }
         var finalSelections = selections;
-        if (screen == "Gym Bag" && selections = inventory) {
+        if (screen == "Gym Bag") {
+            selections = inventory;
             finalSelections = [
                 selections[0] != -1 ? $"{selections[0].name} {selections[0].quantity}" : "",
                 selections[1] != -1 ? $"{selections[1].name} {selections[1].quantity}" : "",
@@ -230,7 +231,7 @@ if (focus == "enemies" && state == "ready") {
 }
 
 // focus the cursor on the players
-else if (focus == "players") {
+else if (focus == "players" && state == "ready") {
     if (selection == "all") {
         for (var i = 0; i < array_length(selections); i++) {
             // draw a cursor on every party member
@@ -243,7 +244,11 @@ else if (focus == "players") {
         }
     }
     else {
-
+        var tX = selections[selection].x + 20;
+        var tY = selections[selection].y;
+        var tW = 11, tH = queueH / 2 - 5;
+        var tColor = c_yellow, tColorTop = 	#ffff99, tColorBottom = #b3b34d;
+        draw_triangle_color(tX, tY, tX + tW, tY - tH, tX + tW, tY + tH, tColor, tColorTop, tColorBottom, false);
     }
 }
 
@@ -278,20 +283,4 @@ if (victoryBarX != -1) {
     drawTextOutline(victoryX, victoryY - 10, $"Level {global.stats.level}");
     draw_rectangle_color(victoryX - victoryW / 2 , victoryY, victoryX + victoryW / 2, victoryY + victoryH, c_black, c_black, c_black, c_black, false);
     draw_rectangle_color(victoryX - victoryW / 2 + margin, victoryY + margin, victoryX - victoryW / 2 + 1 + xp * coefficient, victoryY + victoryH - margin, c_white, c_white, c_white, c_white, false);
-}
-
-if (TEST) {
-    // dev tool: draw the enemies health
-    exit;
-    for (var i = array_length(myEnemies) - 1; i >= 0; i--) {
-        // draw the fighter's name
-        var finalNameY = nameY - CAM_HEIGHT / 2 - 24 * pY;
-        drawTextOutline(nameX, finalNameY, string_upper(myEnemies[i].battleID), c_white, c_black, 0.5);
-
-        // draw the fighter's health and skill points
-        var healthX = nameX + 48;
-        var healthY = finalNameY - 9;
-        drawTextOutline(healthX, healthY, myEnemies[i].stats.hp, c_white, c_black, 0.5);
-        pY++;
-    }
 }

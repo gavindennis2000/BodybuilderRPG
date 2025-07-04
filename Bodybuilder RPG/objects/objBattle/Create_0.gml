@@ -15,6 +15,7 @@ var playerDistY = 48;  // vertical distance between each party member
 skills = [];
 inventory = [-1, -1, -1, -1];
 inventoryCursor = 0;
+queuedItem = -1;  // next used item
 
 // keep track of fighter order
 battleQueue = [];
@@ -174,7 +175,7 @@ checkFighterHP = function() {
                     }
                 }
             }
-            debug($"removed {battleQueue[i].battleID} from queue")
+            // debug($"removed {battleQueue[i].battleID} from queue")
             array_delete(battleQueue, i, 1);
             i--;
         }
@@ -226,6 +227,30 @@ handleAttack = function(attacker, attacked) {
     return;
 }
 
+handleItem = function(attacker, attacked) {
+    // handles item use; either party or enemy
+    // attacker -> pointer to battleQueue array index
+    // attacked -> pointer to battle instance
+
+    /*gmlive*/ if (TEST) { if (live_call(attacker, attacked)) return live_result; }
+
+    // instruct the fighter to animate
+    var attackerInst = attacker.ref;
+    with (attackerInst) {
+        useItem(attacked, other.queuedItem);
+    }
+
+    // let the alarm handle the rest
+    state = "attacking";
+    turn = -1;
+    queuedItem = -1;
+    attackStatus.ready = false;
+    alarm_set(0, 1);
+
+    return;
+
+}
+
 handlePlayerTurn = function(attacker, attacked, move) {
     // does what it says
 
@@ -233,7 +258,7 @@ handlePlayerTurn = function(attacker, attacked, move) {
 
     var cardio = attacker.ref.stats.cardio;
     var spdFactor = getSpeedFactor(cardio);
-    debug($"cardio: {cardio} spdfactor {spdFactor}");
+    // debug($"cardio: {cardio} spdfactor {spdFactor}");
             // adjust the attacker's hit counter
     switch (move) {
         case "Attack":
@@ -242,6 +267,7 @@ handlePlayerTurn = function(attacker, attacked, move) {
             break;
         case "Item":
             attacker.counter += (ATTACK_COUNTER - spdFactor) / 2;
+            handleItem(attacker, attacked);
             break;
     }
     return;
@@ -262,7 +288,7 @@ handleEnemyTurn = function() {
     // adjust the enemy's tick counter
     var cardio = enemy.stats.cardio;
     var spdFactor = getSpeedFactor(cardio);
-    debug (spdFactor);
+    // debug (spdFactor);
     turn.counter += ATTACK_COUNTER - spdFactor;
     
     with (enemy) {
@@ -361,7 +387,7 @@ setPredictQueue = function(battleQueue, attackType = "Attack") {
     }
 
     for (var i = 0; i < array_length(predict); i++)
-    debug ($"fighter: {predict[i].battleID} {predict[i].pos} counter: {predict[i].counter}");
+    // debug ($"fighter: {predict[i].battleID} {predict[i].pos} counter: {predict[i].counter}");
     return predict;
 
     // for (var i = 0; i < array_length(predict) - 1; i++) {
