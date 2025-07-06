@@ -11,7 +11,7 @@ setSongLoopPoints();
 if (TEST && TEST_BATTLE) {
     global.battleData = {
         party: ["andro", "ana", "doms"],
-        enemies: ["robber", "robber"],
+        enemies: ["robber", "robber", "robber"],
         canRun: true
     }
 }

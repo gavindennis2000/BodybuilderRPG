@@ -36,9 +36,13 @@ function getStats(battleID) {
 			break;
 	}
 	
+	// for enemies, set the max hp
 	if (!variable_struct_exists(stats, "maxhp"))
 		stats.maxhp = stats.hp;
+
+	// set the skill for players to max skill each fight
 	if (variable_struct_exists(stats, "maxskill"))
 		stats.skill = stats.maxskill;
+		
 	return stats;
 }

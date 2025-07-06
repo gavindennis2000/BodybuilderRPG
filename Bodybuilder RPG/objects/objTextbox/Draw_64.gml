@@ -70,6 +70,13 @@ draw_rectangle_color(  // main
     textboxY + 96 - (96 / 2 * fade) - margin, 
 	 color1, color1, color2, color2, false
 );
+draw_rectangle_color(  // main
+    0 + (CAM_WIDTH / 2 * fade) + margin, 
+    textboxY + (96 / 2 * fade) + margin, 
+    CAM_WIDTH - (CAM_WIDTH / 2 * fade) - margin, 
+    textboxY + 96 - (96 / 2 * fade) - margin, 
+    c_white, c_white, c_white, c_white, true
+);
 draw_set_alpha(alpha);
 
 // draw the talker's name, picture, and speech

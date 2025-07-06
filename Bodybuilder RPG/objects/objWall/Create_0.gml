@@ -6,3 +6,6 @@ if (TEST) { if (live_call()) {  // GMLive
 
 if (room != rOverworld)
     visible = false;
+
+if (visible)
+    layer = layer_create(layer_get_depth(layer_get_id("Instances")) + 1, "Wall");

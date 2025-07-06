@@ -3,7 +3,7 @@ if (TEST) { if (live_call()) {  // GMLive
     return live_result;
 }}
 
-layer = layer_create(layer_get_depth(layer_get_id("Instances")) - 10, "TextBox");
+layer = layer_create(layer_get_depth(layer_get_id("Instances")) - 100, "TextBox");
 fade = 1;
 sampleText = [
     {

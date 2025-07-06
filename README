@@ -1,13 +1,22 @@
 Bodybuilder RPG
+Created by Gavin Dennis
 
 A JPRG-inspired role playing game featuring bodybuilding simulator
-elements.
+elements and a conditional turn-based battle system in the style of Final Fantasy X.
+
+Important Updates
+    2025-07-06
+        First playable demo is now available!
+        "Bodybuilder RPG/Build/Demo 2025-07-06.zip"
+        All you need to do is download it, unzip it, and run the executable.
+        The overworld is pretty empty, but you can experience the dialog and battle
+        systems as well as the first part of the main story.
 
 Resources/Documentation
-    Home Video Font 
-        Designed by GGBotNet
-        https://www.fontspace.com/home-video-font-f116641
-        Free for commercial use
+    Playfair Display Font 
+        by Claus Eggers Sorensen
+        Open Font License (free for commercial use)
 
 Input Extension by Juju Adams, Alynne Keith, and Friends 
     https://offalynne.github.io/Input/#/10.0/
+    Used for cross-compatible input (keyboard, X-Box, PlayStation, and Nintendo controllers all work)

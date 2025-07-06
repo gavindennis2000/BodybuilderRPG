@@ -19,6 +19,7 @@ function handleItems(){
 	            break;
 	        case inst_7C5E1A9B:
 	            itemID = "home bench press";
+				finalText = "no text";
 	            break;
 	        case inst_3FE4D9AC:
 	            itemID = "home bed";
@@ -58,13 +59,21 @@ function handleItems(){
 	        case inst_3AD879B1:
 	            itemID = "sign";
 	            finalText = {
-	                text: $"Pump Palace Bodybuilding Gym ``(no weenies allowed)"
+	                text: $"Pump Palace Bodybuilding Gym"
 	            };
 	            break;
 	        case inst_178CDEA8:
 	            itemID = "sign";
 	            finalText = $"Bodybuilding Nutrition Company ``(no soliciting)"
 	            break;
+			case inst_699C5C98:
+				itemID = "sign";
+				finalText = "Dangle's Bodybuilding Bargains"
+				break;
+			case inst_25232AF4:
+				itemID = "sign";
+				finalText = "Wheyford Barbell Powerlifting Gym";
+				break;
         
 	        // stores
 	        // bbnc

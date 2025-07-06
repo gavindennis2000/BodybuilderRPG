@@ -10,6 +10,7 @@ function setSongLoopPoints() {
 	// character themes
 	audio_sound_loop_start(sndAna, 15 - 2.625);
 	audio_sound_loop_start(sndMom, 6);
+	// fix duration
 	audio_sound_loop_start(sndSamson, 16);
 
 	// overworld
@@ -20,6 +21,7 @@ function setSongLoopPoints() {
 	audio_sound_loop_start(sndWheyford, 10.971);
 
 	// gyms
+	// fix duration
 	audio_sound_loop_start(sndPumpPalace, 42);
 
 	// rooms

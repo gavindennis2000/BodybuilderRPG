@@ -10,6 +10,12 @@ function handleEvents(){
         //
     }
 
+    // natural disasters and stuff that happen every time
+    if (!global.events.atlasStone)
+        instance_create_layer(2016, 352, "Instances", objItem, {
+            itemID: "atlas stone", 
+        });
+
     // the beginning of ch 1
     if (!global.events.startCh1 && room == rMom) {
         global.events.startCh1 = true;

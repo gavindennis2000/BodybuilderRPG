@@ -12,6 +12,10 @@ var yscale = image_yscale;
 var func = -1;
 
 switch (itemID) {
+    case "atlas stone":
+        index = 5;
+        sprY -= 2;
+        break;
     case "bbnc owner":
         index = -1;
         break;
@@ -75,7 +79,7 @@ switch (itemID) {
         break;
     case "sign":
         index = 4;
-        sprY -= 6;
+        sprY -= 3;
         break;
     default:
         spr = sprItemPlaceholder;
@@ -93,4 +97,7 @@ if (func != -1 && is_method(func)) {
 }
 
 // draw the item id for easier debugging
-// drawTextOutline(x, y - 32, itemID, c_white, c_black, 0.4);
+if (TEST && spr == sprItemPlaceholder) {
+    fontXY(fa_center, fa_middle);
+    drawTextOutline(x, y, id, c_white, c_black, 0.4);
+}

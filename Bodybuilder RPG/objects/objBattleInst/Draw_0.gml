@@ -15,7 +15,7 @@ switch (battleID) {
         sprY = 1;
         break;
     case "doms":
-        sprY = 3;
+        sprY = 2;
         break;
     case "robber":
         sprY = 3;

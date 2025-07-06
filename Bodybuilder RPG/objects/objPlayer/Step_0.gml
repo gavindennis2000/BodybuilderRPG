@@ -1,19 +1,17 @@
 /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
-if (TEST) {
-    // change character with the click of a button
-
-    if (TEST) global.party = ["andro", "ana", "doms"];
-    if (input_check_pressed("north")) {
-        for (var i = 0; i < array_length(global.party); i++) {
-            if (global.character == global.party[i] && i + 1 < array_length(global.party)) {
-                global.character = global.party[i + 1];
-                exit;
-            }
-            else if (global.character == global.party[i] && i + 1 >= array_length(global.party)) {
-                global.character = global.party[0];
-                exit;
-            }
+// change character with the click of a button
+var playable = [];
+array_copy(playable, 0, global.party, 0, array_length(global.party));
+if (array_length(playable) > 1 && input_check_pressed("north")) {
+    for (var i = 0; i < array_length(global.party); i++) {
+        if (global.character == global.party[i] && i + 1 < array_length(global.party)) {
+            global.character = global.party[i + 1];
+            exit;
+        }
+        else if (global.character == global.party[i] && i + 1 >= array_length(global.party)) {
+            global.character = global.party[0];
+            exit;
         }
     }
 }

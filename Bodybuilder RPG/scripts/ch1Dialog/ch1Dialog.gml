@@ -96,6 +96,7 @@ function ch1Dialog(npcID = -1, itemID = -1){
 				}
 				break;
 			case "jim":
+				// jim ohner
 				var giveDelivery = function() {
 					playSound(sndLevelUp);
 				}
@@ -209,7 +210,7 @@ function ch1Dialog(npcID = -1, itemID = -1){
 						}
 					]
 				}
-				else {
+				else if (!global.events.bbncTalkToOwner) {
 					text = [
 						{
 							name: "jim",
@@ -218,6 +219,73 @@ function ch1Dialog(npcID = -1, itemID = -1){
 						{
 							name: "jim",
 							text: "I'm busy running a business. If you need help, try talking to some of the lifters around the gym.",
+						}
+					]
+				}
+				else if (!global.events.firstPay) {
+					text = [
+						{
+							name: "jim",
+							text: "Hey! Great work on the delivery. Do you have my money?"
+						},
+						{
+							name: "jim",
+							text: "Western Onion? What the #$%# is that!?",
+							tone: "loud",
+						},
+						{
+							name: "jim",
+							text: "I'm going to pound that cheapsteak into a pulp! Anyways, here's your cut."
+						},
+						{
+							text: $"JIM paid {string_upper(global.characterName)} $1000.",
+							action: function() {
+								playSound(sndLevelUp);
+							}
+						},
+						{
+							name: "jim",
+							text: "I threw in some extra cash so you can buy supplements and training equipment. Your next task is to get SWOLE."
+						},
+						{
+							name: "jim",
+							text: "Go train at Wheyford Barbell down south. Those guys are old school and will definitely toughen you up!"
+						},
+						{
+							name: "jim",
+							text: "They look pretty mean, but I promise, they aren't the least bit hostile."
+						},
+						{
+							name: "jim",
+							text: "But if you're worried about getting picked on for being a wussy, stop at the martial arts dojo on your way there."
+						},
+						{
+							name: "jim",
+							text: "It's called something stupid like \"Krav Magains\" or \"Massed Martial Arts\". I can't remember.",
+							action: function() {
+								global.events.firstPay = true;
+								debug("first paycheck", -1);
+							}
+						}
+					];
+				}
+				else {
+					text = [
+						{
+							name: "jim",
+							text: "Go train at Wheyford Barbell down south. Those guys are old school and will definitely toughen you up!"
+						},
+						{
+							name: "jim",
+							text: "They look pretty mean, but I promise, they aren't the least bit hostile."
+						},
+						{
+							name: "jim",
+							text: "But if you're worried about getting picked on for being a wussy, stop at the martial arts dojo on your way there."
+						},
+						{
+							name: "jim",
+							text: "It's called something stupid like \"Krav Magains\" or \"Massed Martial Arts\". I can't remember.",
 						}
 					]
 				}
@@ -231,6 +299,9 @@ function ch1Dialog(npcID = -1, itemID = -1){
 	}
 	else if (itemID != -1) {
 		switch (itemID) {
+			case "atlas stone":
+				text = $"A massive atlas stone blocks your path."
+				break;
 			case "bbnc owner":
 				var func = function() {
 					global.events.bbncTalkToOwner = true;
@@ -354,6 +425,9 @@ function ch1Dialog(npcID = -1, itemID = -1){
 			case "home bed":
 				if (!global.events.meetJim)
 					text = $"I have to get ready for work!";
+				else {
+					text = $"No time for a nap right now.";
+				}
 				break;
 			case "home bench press":
 				text = [

@@ -15,6 +15,11 @@ global.events = {
     bbnc: false,
     bbnc2: false,
     bbncTalkToOwner: false,
+    firstPay: false,
+    meetSamson: false,
+
+    // chapter 2
+    atlasStone: false,
 }
 global.chapter = 1;
 global.cutscene = false; 
@@ -86,7 +91,7 @@ global.stats = {
     ana: {
         hp: 120,
         maxhp: 120,
-        skill: 3,
+        skill: 5,
         maxskill: 3,
         strength: 10,
         endurance: 10,
@@ -97,12 +102,15 @@ global.stats = {
         maxhp: 100,
         skill: 1,
         maxskill: 1,
-        strength: 10,
+        strength: 20,
         endurance: 10,
         cardio: 10,
     },
 
 }
+setStats();
+if (TEST)
+    setStats(99);
 
 goToNextRoom = function() {
     // goes to next room

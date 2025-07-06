@@ -1,7 +1,12 @@
 function debug(str, obj = object_index){
 	// enhanced show debug message
 
-	/*gmlive*/ if (TEST) { if (live_call(str, obj = object_index)) return live_result; }
+	/*gmlive*/ if (TEST) { if (live_call(str, obj)) return live_result; }
+
+	if (obj == -1) {
+		show_debug_message($"{str}");
+		return;
+	}
 
 	var objName = object_get_name(obj);
 	var eventNum = event_type;

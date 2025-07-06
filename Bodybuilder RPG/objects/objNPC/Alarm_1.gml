@@ -10,7 +10,7 @@ if (xTo == x && yTo == y && array_length(directions) > 0) {
     var nextDirection = array_get(directions, 0);
     array_delete(directions, 0, 1);
     face = nextDirection;
-    npcID = "ana";
+    // npcID = "ana";
     image_speed = 0.2;
     switch (nextDirection) {
         case "up":
@@ -32,23 +32,23 @@ else if (xTo == x && yTo == y && array_length(directions) == 0) {
     // the action if any
     image_speed = 0;
     image_index = 0;
-    if (instance_exists(objPlayer)) {
-        var pFace = objPlayer.face;
-        switch (pFace) {
-            case "up":
-                face = "down";
-                break;
-            case "down":
-                face = "up";
-                break;
-            case "left":
-                face = "right";
-                break;
-            case "right":
-                face = "left";
-                break;
-        }
-    }
+    // if (instance_exists(objPlayer)) {
+    //     var pFace = objPlayer.face;
+    //     switch (pFace) {
+    //         case "up":
+    //             face = "down";
+    //             break;
+    //         case "down":
+    //             face = "up";
+    //             break;
+    //         case "left":
+    //             face = "right";
+    //             break;
+    //         case "right":
+    //             face = "left";
+    //             break;
+    //     }
+    // }
     if (action != -1) {
         if (is_method(action))
             action();

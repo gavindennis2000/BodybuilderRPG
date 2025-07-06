@@ -208,9 +208,11 @@ handleAttack = function(attacker, attacked) {
     // calculate the damage
     var attackerStr = attacker.ref.stats.strength;
     var attackedDef = attacked.stats.endurance;
-    var dmg = round((attackerStr * 10 - attackedDef * 5) * random_range(0.9, 1.1));
+    var dmg = round((attackerStr * 10 - attackedDef * 5) * random_range(0.95, 1.05));
     if (dmg < 1)
         dmg = 1;
+    else if (dmg > 999)
+        dmg = 999;
 
     // instruct the fighter to animate
     var attackerInst = attacker.ref;

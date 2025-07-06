@@ -258,8 +258,15 @@ if (victoryBarX != -1) {
     }
 
     if (victoryBarX - 10 <= victoryBarXFinal && victoryBarXP < xpAccumulated) {
-        victoryBarXP++;
-        global.stats.xp++;
+        var amount = xpAccumulated div 50;
+        if (victoryBarXP + amount <= xpAccumulated) {
+            victoryBarXP += amount;
+            global.stats.xp += amount;
+        }
+        else {
+            global.stats.xp += xpAccumulated - victoryBarXP;
+            victoryBarXP += xpAccumulated - victoryBarXP;
+        }
         if (global.stats.xp >= global.stats.xpNext) {
             levelUp();
         }
@@ -279,8 +286,10 @@ if (victoryBarX != -1) {
 
     var xp = global.stats.xp;
 
-    fontXY(fa_middle, fa_center);
-    drawTextOutline(victoryX, victoryY - 10, $"Level {global.stats.level}");
-    draw_rectangle_color(victoryX - victoryW / 2 , victoryY, victoryX + victoryW / 2, victoryY + victoryH, c_black, c_black, c_black, c_black, false);
-    draw_rectangle_color(victoryX - victoryW / 2 + margin, victoryY + margin, victoryX - victoryW / 2 + 1 + xp * coefficient, victoryY + victoryH - margin, c_white, c_white, c_white, c_white, false);
+    if (global.stats.level < 99) {
+        fontXY(fa_middle, fa_center);
+        drawTextOutline(victoryX, victoryY - 10, $"Level {global.stats.level}");
+        draw_rectangle_color(victoryX - victoryW / 2 , victoryY, victoryX + victoryW / 2, victoryY + victoryH, c_black, c_black, c_black, c_black, false);
+        draw_rectangle_color(victoryX - victoryW / 2 + margin, victoryY + margin, victoryX - victoryW / 2 + 1 + xp * coefficient, victoryY + victoryH - margin, c_white, c_white, c_white, c_white, false);
+    }
 }

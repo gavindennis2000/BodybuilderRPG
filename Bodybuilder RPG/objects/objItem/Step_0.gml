@@ -4,6 +4,7 @@ if (TEST) { if (live_call()) {  // GMLive
     return live_result;
 }}
 
+touching = false;
 if (instance_exists(objPlayer))
     touching = (
         place_meeting(x + 32, y, objPlayer) && objPlayer.face == "left" || 
@@ -15,7 +16,7 @@ if (instance_exists(objPlayer))
 if (touching && !instance_exists(objTextbox)) {
     if (!instance_exists(objAction))
         instance_create_layer(x, y, layer, objAction);
-    if (input_check_pressed("south") && objPlayer.canMove) {
+    if (input_check_pressed("south") && objPlayer.canMove && objPlayer.targetX == 0 && objPlayer.targetY == 0) {
         // get and show dialog
         if (finalText == -1) {
             handleDialog(-1, itemID);
@@ -24,6 +25,8 @@ if (touching && !instance_exists(objTextbox)) {
             textbox(text);
             alreadyTalked = true;
         }
+        else if (finalText == "no text")
+            exit;
         else
             textbox(finalText);
     }

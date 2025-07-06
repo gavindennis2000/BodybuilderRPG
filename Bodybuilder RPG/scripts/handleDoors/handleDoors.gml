@@ -76,6 +76,13 @@ function handleDoors(doorID){
 				transition: "fade"
 			};
 			break;
+		case inst_70649281:
+			// overworld -> wheyford barbell
+			global.roomChange = {
+
+				room: rWheyfordBarbell, 
+				transition: "fade"
+			}
 
 		// pump palace
 		case inst_9B9658A:
