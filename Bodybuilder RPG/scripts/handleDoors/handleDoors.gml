@@ -124,6 +124,24 @@ function handleDoors(doorID){
 			};
 			break;
 
+		// wheyford barbell
+		case inst_1807F49A:
+			global.roomChange = {
+				x: 1728, 
+				y: 1280 + 32, 
+				room: rOverworld, 
+				transition: "fade"
+			};
+			break;
+		case inst_5EB09401:
+			global.roomChange = {
+				x: 1728 + 32, 
+				y: 1280 + 32, 
+				room: rOverworld, 
+				transition: "fade"
+			};
+			break;
+
 		// default
 		default:
 			global.roomChange = {

@@ -56,6 +56,8 @@ global.roomChange = {
     transition: "fade",
     face: "up"
 }
+global.defeated = [];  // enemies that have been defeated will be destroyed before you can talk to them
+global.openChests = [];  // chests that are opened get added here
 fadeAmount = 0;
 fadeAmountChange = 0.15;
 alarmTime = 2;
@@ -73,6 +75,8 @@ global.battleData = (variable_global_exists("battleData")) ? global.battleData :
 };
 global.battleMusic = -1;
 global.noEncounters = true;
+global.enemiesToDestroy = [];
+global.enemiesDestroyed = [];
 global.stats = {
     // level is a group asset
     level: 1,
@@ -109,8 +113,9 @@ global.stats = {
 
 }
 setStats();
-if (TEST)
+if (TEST) {
     setStats(99);
+}
 
 goToNextRoom = function() {
     // goes to next room

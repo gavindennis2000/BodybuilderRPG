@@ -121,9 +121,9 @@ else {
 }
 if (name != "monologue") {
     // the name
-    fontXY(fa_center, fa_bottom);
+    fontXY(fa_left, fa_bottom);
     draw_set_font(fTextbox)
-    drawTextOutline(picX + picLength / 2, picY + 1, string_upper(alias != -1 ? alias : name));
+    drawTextOutline(16, picY + 1, string_upper(alias != -1 ? alias : name));
 }
 if (drawText != "") {
     // get the font size

@@ -1,4 +1,5 @@
-// obj
+// objTextbox destroy - handle any actions and let the player move again
+
 if (TEST) { if (live_call()) {  // GMLive
     return live_result;
 }}

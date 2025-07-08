@@ -24,6 +24,16 @@ function getStats(battleID) {
 			    cardio: 10,
 			}
 			break;
+		case "smol powerlifter":
+			stats = {
+			    xp: 50,
+			    hp: 200,
+			    maxhp: 100,
+			    strength: 5.5,
+			    endurance: 10,
+			    cardio: 30,
+			}
+break;
 		default:
 			stats = {
 			    xp: 50,

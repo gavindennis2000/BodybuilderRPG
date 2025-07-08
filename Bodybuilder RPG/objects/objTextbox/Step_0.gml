@@ -8,12 +8,15 @@ if (currentTextObj == -1) {
         debug("no text to show");
         instance_destroy();
     }
-    if (is_string(text))
-        currentTextObj = {
-            text: text,
-        }
-    else
+    else if (is_string(text)) {
+        text = [{text: text}];
+        currentTextObj = text[0];
+    }
+    else {
+        if (!is_array(text))
+            text = [text];
         currentTextObj = (is_array(text)) ? variable_clone(text[0]) : variable_clone(text);
+    }
 
     prompt = (variable_struct_exists(currentTextObj, "prompt")) ? currentTextObj.prompt : -1;
     canMove = (variable_struct_exists(currentTextObj, "canMove")) ? currentTextObj.canMove : canMove;

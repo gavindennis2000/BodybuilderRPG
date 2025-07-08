@@ -99,5 +99,5 @@ if (func != -1 && is_method(func)) {
 // draw the item id for easier debugging
 if (TEST && spr == sprItemPlaceholder) {
     fontXY(fa_center, fa_middle);
-    drawTextOutline(x, y, id, c_white, c_black, 0.4);
+    // drawTextOutline(x, y, id, c_white, c_black, 0.4);
 }

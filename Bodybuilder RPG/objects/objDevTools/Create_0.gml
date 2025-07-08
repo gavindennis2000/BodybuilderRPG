@@ -10,9 +10,11 @@ if (!TEST) {
 if (TEST) {
     global.events.startCh1 = true;
     global.events.meetJim = true;
-    // global.events.meetAna = true;
+    global.events.meetAna = true;
     global.events.bbnc = true;
     global.events.bbnc2 = true;
     global.events.bbncTalkToOwner = true;
     global.events.firstPay = true;
 }
+
+global.party = ["andro", "ana"];

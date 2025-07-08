@@ -1,3 +1,5 @@
+// objBattle alarm2 - game over
+
 /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
 var continueFromLast = function() {

@@ -1,15 +1,11 @@
-function handleItems(){
+function handleItems() {
 	// give id's and sometimes text to items
 	
-	if (TEST) { if (live_call()) {  // GMLive
-	    return live_result;
-	}}
-
 	if (!instance_exists(objItem))
 	    exit;
 
 	with (objItem) {
-	    switch (itemIdentifier) {
+	    switch (id) {
 	        // mom's house
 	        case inst_2D4D067D:
 	            itemID = "mirror";
@@ -80,6 +76,24 @@ function handleItems(){
 	        case inst_2F5A5C4E:
 	            itemID = "bbnc owner";
 	            break;
+
+			// wheyford barbell
+			case inst_215F6685:
+				itemID = "wfbb switch 1";
+				break;
+			case inst_2AFDD0A0:
+				itemID = "wfbb switch 2";
+				break;
+			case inst_52197F6E:
+				itemID = "wfbb roadblock 1";
+				image_blend = c_red;
+				finalText = "no text";
+				break;
+			case inst_243F743A:
+				itemID = "wfbb roadblock 2";
+				image_blend = c_red;
+				finalText = "no text";
+				break;
             
 	        // not found
 	        default:

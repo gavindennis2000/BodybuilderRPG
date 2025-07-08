@@ -1,4 +1,4 @@
-// objBattle alarm 0
+// objBattle alarm 0 - fight is over
 
 /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 

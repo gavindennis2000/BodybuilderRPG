@@ -10,10 +10,10 @@ setSongLoopPoints();
 // test battle
 if (TEST && TEST_BATTLE) {
     global.battleData = {
-        party: ["andro", "ana", "doms"],
+        party: ["andro", "ana"],
         enemies: ["robber", "robber", "robber"],
         canRun: true
     }
 }
 
-room_goto(rMom);
+room_goto(rWheyfordBarbell);

@@ -139,6 +139,7 @@ if (confirm) {
                 screen = -1;
                 selection = -1;
                 state = "run away";
+                global.enemiesToDestroy = [];
                 with (objBattleInst) {
                     if (side == "party")
                         runAway();

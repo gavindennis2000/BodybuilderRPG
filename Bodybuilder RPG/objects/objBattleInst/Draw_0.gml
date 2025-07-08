@@ -30,6 +30,11 @@ switch (state) {
         sprX = 0;
         image_speed = 0.5;
         break;
+    case "run away":
+        sprX = 0;
+        image_speed = 0.5;
+        face = "left";
+        break;
     case "attack":
         sprX = 1;
         image_speed = 0.35;
@@ -83,10 +88,10 @@ if (showDamage && dmgToShow != -1) {
 }
 
 // draw the battle instance
-draw_sprite_part_ext(sprite_index, image_index, 0 + sprX * 32, sprY * 32, 32, 32 - deathY, side == "party" ? x - 32 : x + 32, y - 32, side == "party" ? 2 : -2, 2, image_blend, image_alpha);
+draw_sprite_part_ext(sprite_index, image_index, 0 + sprX * 32, sprY * 32, 32, 32 - deathY, face == "right" ? x - 32 : x + 32, y - 32, face == "right" ? 2 : -2, 2, image_blend, image_alpha);
 if (state == "use item") {
     gpu_set_fog(true, #59dbff, 0, 1000);
-    draw_sprite_part_ext(sprite_index, image_index, 0 + sprX * 32, sprY * 32, 32, 32 - deathY, side == "party" ? x - 32 : x + 32, y - 32, side == "party" ? 2 : -2, 2, image_blend, fogAlpha);
+    draw_sprite_part_ext(sprite_index, image_index, 0 + sprX * 32, sprY * 32, 32, 32 - deathY, face == "right" ? x - 32 : x + 32, y - 32, face == "right" ? 2 : -2, 2, image_blend, fogAlpha);
     gpu_set_fog(false, c_blue, 0, 1000);
 
 }

@@ -11,7 +11,7 @@ function handleEvents(){
     }
 
     // natural disasters and stuff that happen every time
-    if (!global.events.atlasStone)
+    if (room == rOverworld && !global.events.atlasStone)
         instance_create_layer(2016, 352, "Instances", objItem, {
             itemID: "atlas stone", 
         });

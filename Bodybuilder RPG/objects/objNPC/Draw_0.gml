@@ -35,6 +35,17 @@ switch (npcID) {
 	case "robber":
 		image_index = 4;
 		break;
+	case "smol powerlifter 1":
+	case "smol powerlifter 2":
+		image_index = 6;
+		break;
+	case "super heavyweight 1":
+		image_index = 8;
+		break;
+	case "thicc powerlifter 1":
+	case "thicc powerlifter 2":
+		image_index = 7;
+		break;
 	default:
 		image_index = 0;
 		break;

@@ -8,10 +8,11 @@ if (!instance_exists(objDevTools))
     instance_create_layer(0, 0, "Instances", objDevTools);
 if (!instance_exists(objCamera))
     instance_create_layer(0, 0, "Instances", objCamera);
-if (!instance_exists(objHandleNPCs))
-    instance_create_layer(0, 0, "Instances", objHandleNPCs);
 if (!instance_exists(objMusic))
     instance_create_layer(0, 0, "Instances", objMusic);
+
+// set npc id's
+handleNPCs();
 
 // set item ID's
 handleItems();
@@ -37,7 +38,9 @@ switch (room) {
         break;
     case rStores:
         break;
-
+    case rWheyfordBarbell:
+        global.roomVar = "Wheyford Barbell";
+        break;
     default:
         global.roomVar = "Unknown";
         break;
