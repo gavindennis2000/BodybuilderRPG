@@ -15,6 +15,7 @@ if (TEST) {
     global.events.bbnc2 = true;
     global.events.bbncTalkToOwner = true;
     global.events.firstPay = true;
+    global.events.defeatDonnie = true;
 }
 
 global.party = ["andro", "ana"];

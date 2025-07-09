@@ -89,6 +89,9 @@ switch (itemID) {
 if (index == -1)
     exit;
 
+if (chestID != -1 && opened)
+    image_blend = c_green;
+    
 draw_sprite_ext(spr, index, sprX, sprY, xscale, yscale, image_angle, image_blend, image_alpha);
 
 // if the associated item has a function, do it

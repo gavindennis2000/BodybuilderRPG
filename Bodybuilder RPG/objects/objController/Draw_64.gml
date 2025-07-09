@@ -12,17 +12,11 @@ if (fadeAmount != 0) {
 
 // cutscenes: show some cool black bars
 // layer = layer_create(layer_get_depth(layer_get_id("Instances")) , "cutscene");
-if (global.cutscene || cutsceneY != 0) {
-    var amount = 0.75;
-    if (global.cutscene && cutsceneY < 32)
-        cutsceneY += amount;
-    else if (!global.cutscene)
-        cutsceneY -= amount;
-    // var getAlpha = draw_get_alpha();
-    // draw_set_alpha(1);
-    draw_rectangle_color(0, 0, CAM_WIDTH, cutsceneY, c_black, c_black, c_black, c_black, false);
-    draw_rectangle_color(0, CAM_HEIGHT, CAM_WIDTH, CAM_HEIGHT - cutsceneY, c_black, c_black, c_black, c_black, false);
-    // draw_set_alpha(getAlpha);
+if (TEST && global.cutscene) {
+    draw_set_font(fTextboxSmall);
+    fontXY(fa_right, fa_bottom);
+    var margin = 3;
+    drawTextOutline(CAM_WIDTH - margin, CAM_HEIGHT - margin, "cutscene in progress");
 }
 
 // show the name of the room at the beginning of room start
@@ -38,12 +32,41 @@ if (showRoomVar && room != rBattle) {
 
     // draw the actual text finally
     draw_set_font(fTextbox);
-    fontXY(fa_right, fa_top);
+    fontXY(fa_left, fa_top);
     var margin = 2;
-    drawTextOutline(CAM_WIDTH - margin * 3, 0 + margin, global.roomVar, c_white, c_black, showRoomVarAlpha);
+    drawTextOutline(margin, 0 + margin, global.roomVar, c_white, c_black, showRoomVarAlpha);
 
     if (showRoomVarAlpha < 0) {
         showRoomVarAlpha = 0;
         showRoomVar = false;
+    }
+}
+
+// show the name of the room at the beginning of room start
+if (showSubRoomVar && room != rBattle) {
+    // set the opacity of the text
+    var getAlpha = draw_get_alpha();
+    var alphaChange = 0.075;
+
+    if (showSubRoomVarAlpha < 1 && showSubRoomAlarm > 0) {
+        showSubRoomVarAlpha += alphaChange;
+        showSubRoomAlarm--;
+    }
+    else if (showSubRoomAlarm <= 0)
+        showSubRoomVarAlpha -= alphaChange;
+    else {
+        showSubRoomAlarm--;
+    }
+    // debug(showSubRoomAlarm);
+
+    // draw the actual text finally
+    draw_set_font(fTextbox);
+    fontXY(fa_right, fa_bottom);
+    var margin = 2;
+    drawTextOutline(CAM_WIDTH - margin * 3, CAM_HEIGHT - margin, global.subRoomVar, c_white, c_black, showSubRoomVarAlpha);
+
+    if (showSubRoomVarAlpha < 0) {
+        showSubRoomVarAlpha = 0;
+        showSubRoomVar = false;
     }
 }

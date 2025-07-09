@@ -84,6 +84,9 @@ function handleItems() {
 			case inst_2AFDD0A0:
 				itemID = "wfbb switch 2";
 				break;
+			case inst_27DA2E:
+				itemID = "wfbb switch 3";
+				break;
 			case inst_52197F6E:
 				itemID = "wfbb roadblock 1";
 				image_blend = c_red;
@@ -93,6 +96,26 @@ function handleItems() {
 				itemID = "wfbb roadblock 2";
 				image_blend = c_red;
 				finalText = "no text";
+				break;
+			case inst_5C6E248D:
+				itemID = "chest";
+				chestID = "wheyford barbell 1";
+				opened = array_contains(global.openedChests, chestID);
+				if (opened)
+					finalText = "no text";
+				break;
+			case inst_457830A1:
+				itemID = "wheyford barbell boss";
+				break;
+			case inst_192731DD:
+				itemID = "chest";
+				chestID = "wheyford barbell 2";
+				opened = array_contains(global.openedChests, chestID);
+				break;
+			case inst_768EB297:
+				itemID = "chest";
+				chestID = "wheyford barbell 3";
+				opened = array_contains(global.openedChests, chestID);
 				break;
             
 	        // not found

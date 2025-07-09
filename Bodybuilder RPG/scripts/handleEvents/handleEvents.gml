@@ -15,6 +15,16 @@ function handleEvents(){
         instance_create_layer(2016, 352, "Instances", objItem, {
             itemID: "atlas stone", 
         });
+    if (room == rOverworld && global.events.defeatDonnie) {
+        instance_create_layer(1728, 1280, "Instances", objItem, {
+            itemID: "locked door", 
+            finalText: "Temporarily closed due to an accident."
+        });
+        instance_create_layer(1728 + 32, 1280, "Instances", objItem, {
+            itemID: "locked door", 
+            finalText: "Temporarily closed due to accident."
+        })
+    }
 
     // the beginning of ch 1
     if (!global.events.startCh1 && room == rMom) {
@@ -233,5 +243,96 @@ function handleEvents(){
             text: $"{string_upper(global.characterName)}! Let's get back to Pump Palace so we can tell Jim what happened!",
             action: anaTalk
         }, false)
+    }
+    else if (!global.events.meetSamson && global.events.defeatDonnie && room == rOverworld) {
+        global.events.meetSamson = true;
+        global.cutscene = true;
+        global.cutsceneSong = sndSamson;
+        with (objPlayer)
+            face = "down";
+        instance_create_layer(objPlayer.x - 32 * 7, objPlayer.y, "Instances", objNPC, {
+            npcID: "samson",
+            face: "right", 
+            faceStart: "right",
+            // spd: 4,
+            directions: ["right", "right", "right", "right", "right", "right"], 
+            action: function() {
+                with (objPlayer)
+                    face = "left";
+                textbox([
+                    {
+                        name: "samson", 
+                        alias: "???",
+                        text: "Well, well, well... I heard there's a new fish in the pond!",
+                        prompt: [
+                            "Who... are you!?", 
+                            [
+                                {
+                                    name: "samson",
+                                    alias: "???", 
+                                    text: "You haven't heard of me? This isn't ideal."
+                                }
+                            ], 
+                            "Get lost. I'm busy", 
+                            [
+                                {
+                                    name: "samson", 
+                                    alias: "???",
+                                    text: "That's some serious confidence coming from a 160 pounder in a stringer!"
+                                }
+                            ],
+                        ]
+                    }, 
+                    {
+                        name: "samson", 
+                        alias: "???",
+                        text: "My name is SAMSON, and I'm the number one ranked bodybuilder in the country!"
+                    },
+                    {
+                        name: "samson",
+                        text: "*protein shake burp*"
+                    }, 
+                    {
+                        name: "samson", 
+                        text: "I heard the old fart that runs this place got taken down by some rookie and his girlfriend. Thought I should come check it out."
+                    },
+                    {
+                        name: "samson", 
+                        text: "I'm dedicated to keeping Wheyford CREATINE free, so I thank you for sweeping up that dust pile."
+                    },
+                    {
+                        name: "samson", 
+                        text: "But don't think that makes us friends or anything."
+                    },
+                    {
+                        name: "samson", 
+                        text: "There's a bodybuilding show in Central Prairie in a few weeks. Feel free to stop by if you want to get humiliated by yours truly."
+                    },
+                    {
+                        name: "samson", 
+                        text: "Until then, I'm off to get a freaky pump. Sayonara!",
+                        action: function() {
+                            with (objNPC)
+                                if (npcID == "samson") {
+                                    directions = ["left", "left", "left", "left", "left", "left", "left"];
+                                    action = function() {
+                                        global.cutscene = false;
+                                        global.cutsceneSong = -1;
+                                        with (objPlayer)
+                                            canMove = true;
+                                        instance_destroy(self, false);
+                                        with (objMusic) {
+                                            getCurrentSong();
+                                            audio_sound_gain(global.songPlaying, 0, aTime * 4);
+                                            alarm_set(0, aTime);
+                                        }
+                                    }
+                                    alarm_set(1, 1);
+                                }
+                        }
+                    }
+                ], false);
+            }
+        })
     }
 }

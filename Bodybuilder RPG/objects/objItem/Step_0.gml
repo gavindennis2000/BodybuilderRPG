@@ -16,10 +16,12 @@ if (instance_exists(objPlayer))
 if (touching && !instance_exists(objTextbox)) {
     if (!instance_exists(objAction))
         instance_create_layer(x, y, layer, objAction);
-    if (input_check_pressed("south") && objPlayer.canMove && objPlayer.targetX == 0 && objPlayer.targetY == 0) {
+    if (input_check_pressed("south") && objPlayer.canCertainlyMove) {
         // get and show dialog
         if (finalText == -1) {
             handleDialog(-1, itemID);
+            if (text == "no text")
+                exit;
             if (alreadyTalked && is_array(finalText))
                 array_delete(finalText, 0, textIndex);
             textbox(text);

@@ -65,7 +65,7 @@ getCurrentSong = function() {
             global.currentSong = sndWheyford;
             break;
         case "Wheyford Barbell":
-            global.currentSong = sndDanger;
+            global.currentSong = sndPumpPalace;
             break;
         default:
             global.currentSong = sndCreatineCove;

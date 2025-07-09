@@ -76,13 +76,26 @@ function handleDoors(doorID){
 				transition: "fade"
 			};
 			break;
-		case inst_70649281:
-			// overworld -> wheyford barbell
+		case inst_46A388A5:
+			// overworld -> wheyford barbell left door
 			global.roomChange = {
-
+				x: 736,
+				y: 1120 - 32,
 				room: rWheyfordBarbell, 
+				face: "up",
 				transition: "fade"
 			}
+			break;
+		case inst_70649281:
+			// overworld -> wheyford barbell left door
+			global.roomChange = {
+				x: 736 + 32,
+				y: 1120 - 32,
+				room: rWheyfordBarbell, 
+				face: "up",
+				transition: "fade"
+			}
+			break;
 
 		// pump palace
 		case inst_9B9658A:
@@ -125,19 +138,23 @@ function handleDoors(doorID){
 			break;
 
 		// wheyford barbell
+		// left exit
 		case inst_1807F49A:
 			global.roomChange = {
 				x: 1728, 
 				y: 1280 + 32, 
 				room: rOverworld, 
+				face: "down",
 				transition: "fade"
 			};
 			break;
+		// right exit
 		case inst_5EB09401:
 			global.roomChange = {
 				x: 1728 + 32, 
 				y: 1280 + 32, 
 				room: rOverworld, 
+				face: "down",
 				transition: "fade"
 			};
 			break;
@@ -151,6 +168,7 @@ function handleDoors(doorID){
 				room: room, 
 				transition: "fade"
 			};
+			debug(global.roomChange, -1);
 			break;
 	}
 	

@@ -46,6 +46,7 @@ switch (name) {
         color1 = #264d00;
         break;
     case "enemy":
+    case "donnie swoleman":
         color1 = #4d0000;
         break;
     case "samson":

@@ -12,7 +12,7 @@ if (fadeAmount > 0) {
 else {
     fadeAmount = 0;
     with (objPlayer)
-        canMove = (!instance_exists(objTextbox));
+        canMove = (!instance_exists(objTextbox) && !global.cutscene);
     exit;
 }
 

@@ -12,6 +12,150 @@ function ch1Dialog(npcID = -1){
 		return;
 
 	switch (npcID) {
+		case "donnie swoleman":
+			text = [
+				{
+					name: "donnie swoleman", 
+					text: "YEAHHHHHHHHH BABY!!!!!",
+					tone: "loud",
+					preAction: function() {
+						// set up a cutscene
+						global.cutscene = true;
+						global.cutsceneSong = sndDanger;
+						audio_sound_gain(global.songPlaying, 0, 1000);
+						with (objMusic)
+							alarm_set(0, 60);
+						
+						var dir;
+						switch (objPlayer.face) {
+							case "up":
+								dir = "right";
+								break;
+							case "down":
+								dir = "left";
+								break;
+							case "left":
+								dir = "up";
+								break;
+							case "right":
+								dir = "down";
+								break;
+						}
+						instance_create_layer(objPlayer.x, objPlayer.y, "Instances", objNPC, {
+							npcID: "ana", 
+							directions: [dir],
+							action: function() {
+								with (objNPC)
+									if (npcID == "ana") {
+										faceStart = objPlayer.face;
+										face = faceStart;
+									}
+							}
+						});
+					}
+				},
+				{
+					name: "donnie swoleman", 
+					text: "I SEE PUMP PALACE IS TRYING TO FUNCTION `ON MY TURF!!!",  
+					tone: "loud"
+				},
+				{
+					name: "donnie swoleman", 
+					text: "YOU BETTER WALK ON HOME BOY!!!!",
+					tone: "loud",
+				},
+				{
+					name: "donnie swoleman", 
+					text: "OR I'LL MAKE YOUR MUSCLES SORER THAN `THEY'VE EVER BEEN!!!",  
+					tone: "loud",
+					prompt: [
+						"Who are you?", 
+						[
+							{
+								name: "donnie swoleman", 
+								text: "I'M DONNIE MOTHERFREAKIN' SWOLEMAN!! `8-TIME MR. POWERLIFTER CHAMPION!!",  
+								tone: "loud",
+							}, 
+						],
+						"What are you talking about?",
+						[
+							{
+								name: "donnie swoleman", 
+								text: "PLAY DUMB ALL YOU LIKE!! YOU CAN'T HIDE THE TRUTH FROM ME!!",  
+								tone: "loud",
+							}, 
+						],
+					]
+				},
+				{
+					name: "donnie swoleman",
+					text: "I KNOW JIM WAS DELIVERING CREATINE `TO BBNC. HE KNOWS IT'S MY TERRITORY!!",
+					tone: "loud",
+				},
+				{
+					name: "donnie swoleman", 
+					text: "NOW HIS DELIVERY BOY IS GONNA PAY THE `PRICE!!",
+					tone: "loud",
+				},
+				{
+					name: "ana", 
+					text: "Hold on a sec! We were just delivering Prairie Protein (TM)! This is all a big misunderstanding!"
+				},
+				{
+					name: "donnie swoleman", 
+					text: "I KNOW SOMETHING'S UP!! MY PAY DAY THIS `WEEK WAS NOTHIN BUT A PEANUT!!!",
+					tone: "loud"
+				},
+				{
+					name: "donnie swoleman", 
+					text: "I'LL TELL YOU WHAT... I'LL SPARE YOUR LIVES. ON ONE CONDITION...",
+					tone: "loud"
+				},
+				{
+					name: "donnie swoleman", 
+					text: "YOU WORK FOR ME NOW!!!",
+					tone: "loud",
+					prompt: [
+						"Donnie? More like Moron-nie",
+						[{
+							name: "donnie swoleman", 
+							text: "OOOOOH BUDDY!! YOU'VE REALLY MADE ME `MAD NOW!!!", 
+							tone: "loud"
+						}],
+						"I'll do it",
+						[{
+							name: "donnie swoleman",
+							text: "HAHAHAHAHAHA!!!",
+							tone: "loud"
+						},
+						{
+							name: "donnie swoleman", 
+							text: "YOU REALLY ARE A NAIVE CHILD!!",
+							tone: "loud"
+						},
+						{
+							name: "donnie swoleman", 
+							tone: "loud",
+							text: "YOU THINK I WOULD LET A WUSS LIKE YOU `WORK UNDER ME??"
+						},
+						{
+							name: "donnie swoleman", 
+							text: "JIM WAS A FOOL TO HIRE YOU!!!",
+							tone: "loud"
+						}],
+					]
+				},
+				{
+					name: "donnie swoleman", 
+					text: "NOW IT'S TIME TO DIE!!!",
+					tone: "loud",
+					action: function() {
+						array_push(global.enemiesToDestroy, "donnie swoleman");
+						startBattle(true, ["donnie swoleman"], false, global.party, sndBossBattle);
+					}
+				}
+			]
+			break;
 		case "mom":
 			if (!global.events.meetMom && !global.events.meetJim) {
 				text = [
@@ -314,7 +458,7 @@ function ch1Dialog(npcID = -1){
 						},
 						{
 							name: "noob lifter", 
-							text: "You know, that special supplement that gives you superhuman muscles?"
+							text: "You know, that special sports supplement that gives you superhuman muscles?"
 						},
 						{
 							name: "noob lifter", 
@@ -361,12 +505,15 @@ function ch1Dialog(npcID = -1){
 				}, 
 				{
 					name: "thicc powerlifter", 
-					text: "Real MEN like me train their muscles for functional purposes.",
+					text: "Real MEN like me train their muscles for functional strength purposes!",
 					prompt: [
-						"Like what?", 
+						"Such as?", 
 						[], 
 						"I didn't ask",
-						[],
+						[{
+							name: "thicc powerlifter",
+							text: "Functional, MANLY... Wait, what did you just say!?"
+						}],
 					]
 				},
 				{
@@ -387,7 +534,7 @@ function ch1Dialog(npcID = -1){
 				},
 				{
 					name: "thicc powerlifter",
-					text: "*thinking and sweating profusely*"
+					text: "*sweating profusely*"
 				},
 				{
 					name: "thicc powerlifter",
@@ -403,6 +550,25 @@ function ch1Dialog(npcID = -1){
 		case "thicc powerlifter 2":
 		case "smol powerlifter 2":
 			// these guys talk together
+			with (objNPC) {
+				if (npcID == "thicc powerlifter 2" || npcID == "smol powerlifter 2") {
+					switch (objPlayer.face) {
+						case "left":
+							faceStart = "right";
+							break;
+						case "right":
+							faceStart = "left";
+							break;
+						case "up":
+							faceStart = "down";
+							break;
+						case "down":
+							faceStart = "up";
+							break;
+					}
+					debug($"{npcID} {faceStart}");
+				}
+			}
 			text = [
 				{
 					name: "thicc powerlifter (pal)",
@@ -428,7 +594,7 @@ function ch1Dialog(npcID = -1){
 					action: function() {
 						with (objNPC)
 							if (npcID == "thicc powerlifter 2")
-								face = "up";
+								face = faceStart;
 					}
 				},
 				{
@@ -437,7 +603,7 @@ function ch1Dialog(npcID = -1){
 					action: function() {
 						with (objNPC)
 							if (npcID == "smol powerlifter 2")
-								face = "up";
+								face = faceStart;
 					}
 				},
 				{
@@ -468,6 +634,62 @@ function ch1Dialog(npcID = -1){
 				},
 			]
 			break;
+		case "smol powerlifter 3":
+			text = [
+				{
+					name: "smol powerlifter",
+					text: "I've been training at Wheyford Barbell for a couple years now. This is the biggest powerlifting gym in the country."
+				},
+				{
+					name: "smol powerlifter", 
+					text: "Something about the old school atmosphere seems to turn skinny guys like me into juggernauts over time."
+				}, 
+				{
+					name: "smol powerlifter", 
+					text: "You're a bodybuilder, right? Say, have you ever thought about giving powerlifting a try?", 
+					prompt: [
+						"It's not for me", 
+						[
+							{
+								name: "smol powerlifter", 
+								text: "That's fair. If you're just lifting to look good, the numbers aren't that important."
+							}
+						], 
+						"Powerlifting is a joke", 
+						[
+							{
+								name: "smol powerlifter", 
+								text: "Ouch! I understand where you're coming from though."
+							},
+							{
+								name: "smol powerlifter", 
+								text: "There's definitely more to powerlifting than just flexibility tricks and rule bending."
+							}, 
+							{
+								name: "smol powerlifter", 
+								text: "I love the thrill of maxing out and chasing after new PRs!"
+							}
+						],
+					]
+				},
+				{
+					name: "smol powerlifter", 
+					text: "I'm sorry! I'm talking too much. I'm pretty passionate about this stuff."
+				},
+				{
+					name: "smol powerlifter", 
+					text: "One last thing..."
+				},
+				{
+					name: "smol powerlifter",
+					text: "Some of these long-timers are a bit intolerant towards bodybuilders. It's like some sort of territorial dispute."
+				},
+				{
+					name: "smol powerlifter", 
+					text: "I'm going to stay away from that drama though. I'm just hear to lift weights!"
+				}
+			]
+			break;
 		case "super heavyweight 1":
 			text = [
 				{
@@ -494,21 +716,65 @@ function ch1Dialog(npcID = -1){
 				{
 					name: "super heavyweight",
 					text: "LITTLE BRO BEAN!!",
-					tone: "loud"
+					tone: "loud",
+					action: function() {
+						with (objNPC)
+							if (npcID == "super heavyweight 1")
+								face = "left";
+					}
 				},
 				{
 					name: "",
 					text: "*crickets chirping in the background* (little bro bean didn't answer his brother's call).",
-					tone: "quiet"
+					tone: "quiet",
 				},
 				{
 					name: "super heavyweight",
-					text: "How dare you beat up on my little bro bean! I'll teach you to pick on someone your own size!",
+					text: string_upper("How dare you beat up on my little bro `bean!"),
 					tone: "loud",
+					action: function() {
+						with (objNPC)
+							if (npcID == "super heavyweight 1") {
+								switch (objPlayer.face) {
+									case "left":
+										face = "right";
+										break;
+									case "right":
+										face = "left";
+										break;
+									case "up":
+										face = "down";
+										break;
+									case "down":
+										face = "up";
+										break;
+								}
+							}
+					}
+				},
+				{
+					name: "super heavyweight",
+					text: "I'll teach you to pick on someone your own size!",
 					action: function() {
 						array_push(global.enemiesToDestroy, "super heavyweight 1");
 						startBattle(true, ["super heavyweight"]);
 					}
+				}
+			]
+			break;
+		case "trapped guy":
+			text = [
+				{
+					name: "some guy",
+					text: "Oh thank god."
+				},
+				{
+					name: "some guy",
+					text: "Donnie trapped me in here after I told him his squat depth sucks."
+				},
+				{
+					name: "some guy",
+					text: "These people are crazy! I'm never coming back.",
 				}
 			]
 			break;

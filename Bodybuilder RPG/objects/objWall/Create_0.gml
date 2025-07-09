@@ -4,7 +4,7 @@ if (TEST) { if (live_call()) {  // GMLive
     return live_result;
 }}
 
-if (room != rOverworld && room != rWheyfordBarbell)
+if (room != rOverworld)
     visible = false;
 
 if (visible)

@@ -57,10 +57,49 @@ if (room == rOverworld) {
             if (divY == 1 || divY == 2) {
                 global.prevRoomVar = global.roomVar;
                 global.roomVar = "Central Prairie";
+
+                if (divX == 2 && divY == 1 && global.subRoomVar != "Northeast") {
+                    global.prevSubRoomVar = global.subRoomVar;
+                    global.subRoomVar = "Northeast";
+                    debug("hello");
+                    with (objController)
+                        showSubRoomVarFunc();
+                }
+                else if (divX == 3 && divY == 1 && global.subRoomVar != "Northwest") {
+                    global.prevSubRoomVar = global.subRoomVar;
+                    global.subRoomVar = "Northwest";
+                    with (objController)
+                        showSubRoomVarFunc();
+                }
+                else if (divX == 2 && divY == 2 && global.subRoomVar != "Southeast") {
+                    global.prevSubRoomVar = global.subRoomVar;
+                    global.subRoomVar = "Southeast";
+                    with (objController)
+                        showSubRoomVarFunc();
+                }
+                else if (divX == 3 && divY == 2 && global.subRoomVar != "Southwest") {
+                    global.prevSubRoomVar = global.subRoomVar;
+                    global.subRoomVar = "Southwest";
+                    with (objController)
+                        showSubRoomVarFunc();
+                }
             }
             else {
                 global.prevRoomVar = global.roomVar;
                 global.roomVar = "Wheyford";
+                if (((divX == 2 && divY == 3) || divX == 3) && global.subRoomVar != "Shopping District") {
+                    global.prevSubRoomVar = global.subRoomVar;
+                    global.subRoomVar = "Shopping District";
+                    with (objController)
+                        showSubRoomVarFunc();
+                }
+                else if (divX == 2 && divY == 4 && global.subRoomVar != "Affordable Living") {
+                    global.prevSubRoomVar = global.subRoomVar;
+                    global.subRoomVar = "Affordable Living";
+                    with (objController)
+                        showSubRoomVarFunc();
+                }
+
             }
         }
         else if (divX == 0 || divX == 1) {

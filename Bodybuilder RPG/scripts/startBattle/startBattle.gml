@@ -6,6 +6,12 @@ function startBattle(special = false, enemies = -1, canRun = true, party = globa
     if (instance_exists(objPlayer))
         objPlayer.canMove = false;
 
+    // end any ongoing cutscene
+    if (global.cutscene) {
+        global.cutscene = false;
+        global.cutsceneSong = -1;
+    }
+
     // don't start a battle if there are no encounters allowed
     if (global.noEncounters && !special) {
         debug("Can't start battle. Check special flag.", -1);

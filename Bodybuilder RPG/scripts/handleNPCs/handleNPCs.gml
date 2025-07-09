@@ -26,6 +26,9 @@ function handleNPCs() {
             case inst_5DEFDD70:
                 npcID = "noob 1";
                 break;
+            case inst_70E0E3CA:
+                npcID = "smol powerlifter 3"
+                break;
             case inst_738322E3:
                 npcID = "smol powerlifter 1";
                 break;
@@ -48,6 +51,12 @@ function handleNPCs() {
                 npcID = "super heavyweight 1";
                 face = "left";
                 faceStart = face;
+                break;
+            case inst_5C1DBD30:
+                npcID = "trapped guy";
+                break;
+            case inst_1BF1D92A:
+                npcID = "donnie swoleman";
                 break;
 
             // not found

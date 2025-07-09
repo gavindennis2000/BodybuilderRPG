@@ -32,23 +32,6 @@ else if (xTo == x && yTo == y && array_length(directions) == 0) {
     // the action if any
     image_speed = 0;
     image_index = 0;
-    // if (instance_exists(objPlayer)) {
-    //     var pFace = objPlayer.face;
-    //     switch (pFace) {
-    //         case "up":
-    //             face = "down";
-    //             break;
-    //         case "down":
-    //             face = "up";
-    //             break;
-    //         case "left":
-    //             face = "right";
-    //             break;
-    //         case "right":
-    //             face = "left";
-    //             break;
-    //     }
-    // }
     if (action != -1) {
         if (is_method(action))
             action();
@@ -64,10 +47,10 @@ else if (xTo == x && yTo == y && array_length(directions) == 0) {
 var directionAmount = 1;
 
 if (x != xTo) {
-    x += directionAmount * sign(xTo - x);
+    x += directionAmount * sign(xTo - x) * spd;
 }
 else if (y != yTo) {
-    y += directionAmount * sign(yTo - y);
+    y += directionAmount * sign(yTo - y) * spd;
 }
 
 alarm_set(1, 1);

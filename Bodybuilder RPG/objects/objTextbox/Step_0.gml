@@ -21,9 +21,14 @@ if (currentTextObj == -1) {
     prompt = (variable_struct_exists(currentTextObj, "prompt")) ? currentTextObj.prompt : -1;
     canMove = (variable_struct_exists(currentTextObj, "canMove")) ? currentTextObj.canMove : canMove;
     action = (variable_struct_exists(currentTextObj, "action")) ? currentTextObj.action: -1;
+    preAction = (variable_struct_exists(currentTextObj, "preAction")) ? currentTextObj.preAction: -1;
     if (is_method(action) && textIndex + 1 < array_length(text)) {
         action();
         action = -1;
+    }
+    if (is_method(preAction)) {
+        preAction();
+        preAction = -1;
     }
 }
 var confirm = input_check_pressed("south");
@@ -79,28 +84,29 @@ if (confirm) {
         checkNewLineAt = checkNewLineAtAmount;
         setNewLine = false;
         if (prompt != -1) {
-                playSound(sndCursor);
-                if (is_array(prompt[1 + selection * 2])) {
-                    for (var i = 0; i < array_length(prompt[1 + selection * 2]); i++)
-                        array_insert(text, textIndex + i + 1, prompt[1 + selection * 2][i])
-                    if (++textIndex < array_length(text)) {
-                        currentTextObj = variable_clone(text[textIndex]);
-                        prompt = (variable_struct_exists(currentTextObj, "prompt")) ? currentTextObj.prompt : -1;
-                        canMove = (variable_struct_exists(currentTextObj, "canMove")) ? currentTextObj.canMove : canMove;
-                        action = (variable_struct_exists(currentTextObj, "action")) ? currentTextObj.action: -1;
-                        if (is_method(action) && textIndex + 1 < array_length(text)) {
-                            action();
-                            action = -1;
-                        }
-                    } 
-                    else
-                        destroy = true;
-                }
-                else if (is_method(prompt[1 + selection * 2])) {
-                    prompt[1 + selection * 2]();
+            playSound(sndCursor);
+            if (is_array(prompt[1 + selection * 2])) {
+                for (var i = 0; i < array_length(prompt[1 + selection * 2]); i++)
+                    array_insert(text, textIndex + i + 1, prompt[1 + selection * 2][i])
+                if (++textIndex < array_length(text)) {
+                    currentTextObj = variable_clone(text[textIndex]);
+                    prompt = (variable_struct_exists(currentTextObj, "prompt")) ? currentTextObj.prompt : -1;
+                    canMove = (variable_struct_exists(currentTextObj, "canMove")) ? currentTextObj.canMove : canMove;
+                    action = (variable_struct_exists(currentTextObj, "action")) ? currentTextObj.action: -1;
+                    if (is_method(action) && textIndex + 1 < array_length(text)) {
+                        action();
+                        action = -1;
+                    }
+                } 
+                else
                     destroy = true;
-                }
             }
+            else if (is_method(prompt[1 + selection * 2])) {
+                prompt[1 + selection * 2]();
+                destroy = true;
+            }
+            selection = 0;
+        }
         else if (++textIndex < array_length(text)) {
             currentTextObj = variable_clone(text[textIndex]);
             prompt = (variable_struct_exists(currentTextObj, "prompt")) ? currentTextObj.prompt : -1;

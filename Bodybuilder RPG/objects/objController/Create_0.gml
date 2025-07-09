@@ -17,6 +17,8 @@ global.events = {
     bbncTalkToOwner: false,
     firstPay: false,
     meetSamson: false,
+    defeatDonnie: false,
+    meetSamson: false,
 
     // chapter 2
     atlasStone: false,
@@ -35,6 +37,9 @@ global.inventory = [
         quantity: 2, 
     }
 ];
+global.keyItems = {
+    wheyfordBarbellKey: false,
+}
 global.skills = {
     andro: [],
     ana: [],
@@ -49,6 +54,8 @@ global.skills = {
 // room transitioning
 global.roomVar = -1;
 global.prevRoomVar = -1;
+global.subRoomVar = -1;
+global.prevSubRoomVar = -1;
 global.roomChange = {
     x: -1,
     y: -1,
@@ -57,7 +64,7 @@ global.roomChange = {
     face: "up"
 }
 global.defeated = [];  // enemies that have been defeated will be destroyed before you can talk to them
-global.openChests = [];  // chests that are opened get added here
+global.openedChests = [];  // chests that are opened get added here
 fadeAmount = 0;
 fadeAmountChange = 0.15;
 alarmTime = 2;
@@ -135,7 +142,11 @@ goToNextRoom = function() {
 }
 
 showRoomVar = false;
+showSubRoomVar = false;
 showRoomVarAlpha = 0;
+showSubRoomVarAlpha = 0;
+showSubRoomAlarm = 0;
+
 showRoomVarFunc = function() {
     // shows the room var is the top right corner
 
@@ -147,6 +158,20 @@ showRoomVarFunc = function() {
     alarm[2] = 120;
     showRoomVarAlpha = 0;
     showRoomVar = true;
+
+    return;
+}
+showSubRoomVarFunc = function() {
+    // shows the room var is the top right corner
+
+    /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
+
+    if (global.subRoomVar == global.prevSubRoomVar)
+        exit;
+
+    showSubRoomAlarm = 120;
+    showSubRoomVarAlpha = 0;
+    showSubRoomVar = true;
 
     return;
 }

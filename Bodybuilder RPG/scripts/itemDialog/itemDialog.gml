@@ -121,6 +121,48 @@ function itemDialog(itemID = -1) {
                 ];
             }
             break;
+        case "chest":
+            if (opened) {
+                text = "no text";
+                break;
+            }
+            else {
+                array_push(global.openedChests, chestID);
+                opened = true;
+            }
+            switch (chestID) {
+                case "wheyford barbell 1":
+                    text = {
+                        text: "You found a key.",
+                        preAction: function() {
+                            playSound(sndDoor);
+                            global.keyItems.wheyfordBarbellKey = true;
+                            // with (objItem)
+                            //     if (chestID == "wheyford barbell 1")
+                            //         opened = true;
+                        }
+                    }
+                    break;
+                case "wheyford barbell 2":
+                    text = {
+                        text: "TODO todo put item here",
+                        preAction: function() {
+                            playSound(sndDoor);
+                        }
+                    }
+                    break;
+                case "wheyford barbell 3":
+                    text = {
+                        text: "You found a Choc. Milk.",
+                        preAction: function() {
+                            playSound(sndDoor);
+                            addToInventory("Choc. Milk", 1);
+                            debug(global.inventory, -1)
+                        }
+                    }
+                    break;
+            }
+            break;
         case "gymtendo 64":
             text = [
                 {
@@ -172,6 +214,7 @@ function itemDialog(itemID = -1) {
             }
             break;
         case "wfbb switch 1":
+        case "wfbb switch 3":
             var flipSwitch = function() {
                 with (objItem) {
                     if (itemID == "wfbb roadblock 1") {
@@ -228,7 +271,19 @@ function itemDialog(itemID = -1) {
                 }
             ]
             break;
-default:
+        case "wheyford barbell boss":
+            text = (global.keyItems.wheyfordBarbellKey) ? {
+                text: "", 
+                preAction: function() {
+                    debug("did it work?", -1);
+                    with (objItem)
+                        if (itemID == "wheyford barbell boss")
+                            instance_destroy();
+                    instance_destroy(objTextbox);
+                }
+            } : "The door is locked.";
+            break;
+        default:
             text = {
                 text: $"{itemID}"
             };

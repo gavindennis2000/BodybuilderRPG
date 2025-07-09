@@ -26,20 +26,28 @@ switch (npcID) {
 	case "clerk":
 		image_index = 5;
 		break;
+	case "donnie swoleman":
+		image_index = 9;
+		break;
 	case "jim":
 		image_index = 2;
 		break;
 	case "mom":
 		image_index = 3;
 		break;
+	case "noob 1":
+	image_index = 10;
+		break;
 	case "robber":
 		image_index = 4;
 		break;
 	case "smol powerlifter 1":
 	case "smol powerlifter 2":
+	case "smol powerlifter 3":
 		image_index = 6;
 		break;
 	case "super heavyweight 1":
+	case "trapped guy":
 		image_index = 8;
 		break;
 	case "thicc powerlifter 1":
@@ -66,7 +74,6 @@ switch (face) {
 		imageY = 3
 		break;
 }
-
 
 if (instance_exists(objPlayer) && y >= objPlayer.y)
 	depth = objPlayer.depth - 1;

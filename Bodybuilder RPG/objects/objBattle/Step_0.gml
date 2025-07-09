@@ -78,7 +78,7 @@ var left = input_check_pressed("left");
 var right = input_check_pressed("right");
 var up = input_check_pressed("up");
 var down = input_check_pressed("down");
-var confirm = input_check_pressed("south");
+var confirm = KILL_EVERYTHING ? true : input_check_pressed("south");
 var cancel = input_check_pressed("east");
 
 if (state == "enemy turn") {

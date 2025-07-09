@@ -16,7 +16,7 @@ if (array_length(playable) > 1 && input_check_pressed("north")) {
     }
 }
 
-var canCertainlyMove = (canMove && targetX == 0 && targetY == 0);
+canCertainlyMove = (canMove && targetX == 0 && targetY == 0);
 
 var keyLeft = input_check("left");
 var keyRight = input_check("right");
