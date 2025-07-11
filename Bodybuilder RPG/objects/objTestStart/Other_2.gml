@@ -16,4 +16,4 @@ if (TEST && TEST_BATTLE) {
     }
 }
 
-room_goto(rWheyfordBarbell);
+room_goto(rOverworld);

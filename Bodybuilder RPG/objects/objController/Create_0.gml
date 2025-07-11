@@ -17,8 +17,11 @@ global.events = {
     bbncTalkToOwner: false,
     firstPay: false,
     meetSamson: false,
+    firstTimeAtWheyfordBarbell: false,
     defeatDonnie: false,
     meetSamson: false,
+    endCh1: false,
+    meetArnold: false,
 
     // chapter 2
     atlasStone: false,

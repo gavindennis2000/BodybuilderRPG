@@ -3,6 +3,13 @@
 /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
 // handle fade
+if (global.chapter == 1 && global.events.endCh1 && room == rOverworld) {
+    var getAlpha = draw_get_alpha();
+    draw_set_alpha(0.7);
+    draw_rectangle_color(0, 0, CAM_WIDTH, CAM_HEIGHT, c_black, c_black, c_black, c_black, false);
+    draw_set_alpha(getAlpha);
+}
+    
 if (fadeAmount != 0) {
     var alpha = draw_get_alpha();
     draw_set_alpha(fadeAmount);
@@ -14,9 +21,9 @@ if (fadeAmount != 0) {
 // layer = layer_create(layer_get_depth(layer_get_id("Instances")) , "cutscene");
 if (TEST && global.cutscene) {
     draw_set_font(fTextboxSmall);
-    fontXY(fa_right, fa_bottom);
+    fontXY(fa_left, fa_top);
     var margin = 3;
-    drawTextOutline(CAM_WIDTH - margin, CAM_HEIGHT - margin, "cutscene in progress");
+    drawTextOutline(margin, margin, "cutscene in progress");
 }
 
 // show the name of the room at the beginning of room start
@@ -32,9 +39,9 @@ if (showRoomVar && room != rBattle) {
 
     // draw the actual text finally
     draw_set_font(fTextbox);
-    fontXY(fa_left, fa_top);
+    fontXY(fa_right, fa_top);
     var margin = 2;
-    drawTextOutline(margin, 0 + margin, global.roomVar, c_white, c_black, showRoomVarAlpha);
+    drawTextOutline(CAM_WIDTH - margin, 0 + margin, global.roomVar, c_white, c_black, showRoomVarAlpha);
 
     if (showRoomVarAlpha < 0) {
         showRoomVarAlpha = 0;

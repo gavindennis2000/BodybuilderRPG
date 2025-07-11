@@ -16,3 +16,4 @@ runSpeedAnimation = 0.2;
 originalRunSpeedAnimation = runSpeedAnimation;
 runSpeed = 2;
 originalRunSpeed = runSpeed;
+ko = false;

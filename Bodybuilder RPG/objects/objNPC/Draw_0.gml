@@ -43,8 +43,10 @@ switch (npcID) {
 		break;
 	case "smol powerlifter 1":
 	case "smol powerlifter 2":
-	case "smol powerlifter 3":
 		image_index = 6;
+		break;
+	case "smol powerlifter 3":
+		image_index = 11;
 		break;
 	case "super heavyweight 1":
 	case "trapped guy":

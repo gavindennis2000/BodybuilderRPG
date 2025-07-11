@@ -17,6 +17,20 @@ switch (battleID) {
     case "doms":
         sprY = 2;
         break;
+
+    // everybody else in alphabetical order
+    case "donnie swoleman":
+        sprY = 7;
+        break;
+    case "smol powerlifter":
+        sprY = 4;
+        break;
+    case "super heavyweight":
+        sprY = 6;
+        break;
+    case "thicc powerlifter":
+        sprY = 5;
+        break;
     case "robber":
         sprY = 3;
         break;

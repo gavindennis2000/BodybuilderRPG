@@ -11,11 +11,13 @@ function handleEvents(){
     }
 
     // natural disasters and stuff that happen every time
+    // the atlas stone in front of leangroudnburg
     if (room == rOverworld && !global.events.atlasStone)
         instance_create_layer(2016, 352, "Instances", objItem, {
             itemID: "atlas stone", 
         });
-    if (room == rOverworld && global.events.defeatDonnie) {
+    // lock up wheyford barbell after defeating donnie
+    if (room == rOverworld && global.events.defeatDonnie && !global.events.endCh1) {
         instance_create_layer(1728, 1280, "Instances", objItem, {
             itemID: "locked door", 
             finalText: "Temporarily closed due to an accident."
@@ -24,6 +26,17 @@ function handleEvents(){
             itemID: "locked door", 
             finalText: "Temporarily closed due to accident."
         })
+    }
+    // first time going to wheyford barbell
+    if (room == rWheyfordBarbell && !global.events.firstTimeAtWheyfordBarbell)
+        global.events.firstTimeAtWheyfordBarbell = true;
+    // lock all doors after ch1 ends
+    if (global.chapter == 1 && global.events.endCh1 && room == rOverworld) {
+        with (objDoor)
+            if (doorID != "mom")
+                instance_create_layer(x, y, "Instances", objItem, {
+                    finalText: "It's late. I should go home."
+                });
     }
 
     // the beginning of ch 1

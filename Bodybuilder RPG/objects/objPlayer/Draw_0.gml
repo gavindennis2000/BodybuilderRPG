@@ -35,4 +35,9 @@ switch (face) {
 }
 
 // draw_sprite(sprWall, 0, x, y);
-draw_sprite_part_ext(global.cutscene ? sprAndro : sprite_index, image_index, 0, 0 + (yPart * 32), 32, 32, x - 16, y - 21, image_xscale * 2, image_yscale * 2, image_blend, image_alpha);
+if (ko) {
+    sprite_index = sprFighters;
+    draw_sprite_part_ext(sprite_index, image_index, 96, 0 + (yPart * 32), 32, 32, x - 16, y - 21, image_xscale * 2, image_yscale * 2, image_blend, image_alpha);
+}
+else 
+    draw_sprite_part_ext(global.cutscene ? sprAndro : sprite_index, image_index, 0, 0 + (yPart * 32), 32, 32, x - 16, y - 21, image_xscale * 2, image_yscale * 2, image_blend, image_alpha);

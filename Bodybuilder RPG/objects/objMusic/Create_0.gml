@@ -48,6 +48,8 @@ getCurrentSong = function() {
             break;
         case "Central Prairie":
             global.currentSong = sndCentralPrairie;
+            if (global.chapter == 1 && global.events.endCh1)
+                global.currentSong = -1;
             break;
         case "Creatine Cove":
             global.currentSong = sndCreatineCove;
@@ -63,6 +65,8 @@ getCurrentSong = function() {
             break;
         case "Wheyford":
             global.currentSong = sndWheyford;
+            if (global.chapter == 1 && global.events.endCh1)
+                global.currentSong = -1;
             break;
         case "Wheyford Barbell":
             global.currentSong = sndPumpPalace;

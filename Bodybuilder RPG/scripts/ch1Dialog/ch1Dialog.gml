@@ -116,7 +116,7 @@ function ch1Dialog(npcID = -1){
 					text: "YOU WORK FOR ME NOW!!!",
 					tone: "loud",
 					prompt: [
-						"Donnie? More like Moron-nie",
+						"Donnie? More like Moronnie",
 						[{
 							name: "donnie swoleman", 
 							text: "OOOOOH BUDDY!! YOU'VE REALLY MADE ME `MAD NOW!!!", 
@@ -243,9 +243,6 @@ function ch1Dialog(npcID = -1){
 			break;
 		case "jim":
 			// jim ohner
-			var giveDelivery = function() {
-				playSound(sndLevelUp);
-			}
 			if (!global.events.meetJim) {
 				text = [
 					{
@@ -343,7 +340,9 @@ function ch1Dialog(npcID = -1){
 					},
 					{
 						text: $"JIM handed {global.characterName == "jim" ? "STRING BEAN" : string_upper(global.characterName)} the goods.",
-						action: giveDelivery
+						action: function() {
+							playSound(sndLevelUp);
+						}
 					},
 					{
 						name: "jim",
@@ -415,7 +414,7 @@ function ch1Dialog(npcID = -1){
 					}
 				];
 			}
-			else {
+			else if (!global.events.firstTimeAtWheyfordBarbell) {
 				text = [
 					{
 						name: "jim",
@@ -432,6 +431,57 @@ function ch1Dialog(npcID = -1){
 					{
 						name: "jim",
 						text: "It's called something stupid like \"Krav Magains\" or \"Massed Martial Arts\". I can't remember.",
+					}
+				]
+			}
+			else if (!global.events.defeatDonnie) {
+				text = [
+					{
+						name: "jim", 
+						text: "You're back already!?"
+					}, 
+					{
+						name: "jim", 
+						text: "Get back there and don't come back until you're the strongest motherfather there!"
+					},
+					{
+						name: "jim", 
+						text: "Those powerlifters are a bunch of sissies so it shouldn't take too long."
+					}
+				]
+			}
+			else {
+				textIndex = 1;
+				text = [
+					{
+						name: "jim", 
+						text: "Hey, how'd it go?", 
+						prompt: [
+							"Tell him about Donnie", 
+							[
+								{
+									name: "jim", 
+									text: "Donnie Swoleman? Guy's a nut job! I wouldn't listen to a word that comes out of that goon's mouth."
+								}
+							], 
+							"Not too bad",
+							[{
+								name: "jim", 
+								text: "Good deal! That'll teach those Wheyford Barbell folks not to mess with my crea... I mean good job kiddo!"
+							}]
+						]
+					},
+					{
+						name: "jim", 
+						text: "It's getting late. I think it's time to go home and get some rest, twiglet."
+					},
+					{
+						name: "jim", 
+						text: "Be here first thing tomorrow. We have some serious business to take care of!",
+						action: function() {
+							global.events.endCh1 = true;
+							debug("end chapter 1", -1);
+						}
 					}
 				]
 			}
@@ -490,6 +540,63 @@ function ch1Dialog(npcID = -1){
 						array_push(global.enemiesToDestroy, "smol powerlifter 1");
 						startBattle(true, ["smol powerlifter"]);
 					}
+				}
+			]
+			break;
+		case "smol powerlifter 3":
+			textIndex = 5;
+			text = [
+				{
+					name: "smol powerlifter",
+					text: "I've been training at Wheyford Barbell for a couple years now. This is the biggest powerlifting gym in the country."
+				},
+				{
+					name: "smol powerlifter", 
+					text: "Something about the old school atmosphere seems to turn skinny guys like me into giants over time."
+				}, 
+				{
+					name: "smol powerlifter", 
+					text: "You're a bodybuilder, right? Say, have you ever thought about giving powerlifting a try?", 
+					prompt: [
+						"It's not for me", 
+						[
+							{
+								name: "smol powerlifter", 
+								text: "That's fair. If you're just lifting to look good, the numbers aren't that important."
+							}
+						], 
+						"Powerlifting is a joke", 
+						[
+							{
+								name: "smol powerlifter", 
+								text: "Ouch! I understand where you're coming from though."
+							},
+							{
+								name: "smol powerlifter", 
+								text: "There's definitely more to powerlifting than just flexibility tricks and rule bending."
+							}, 
+							{
+								name: "smol powerlifter", 
+								text: "I love the thrill of maxing out and chasing after new PRs!"
+							}
+						],
+					]
+				},
+				{
+					name: "smol powerlifter", 
+					text: "I'm sorry! I'm talking too much. I'm pretty passionate about this stuff."
+				},
+				{
+					name: "smol powerlifter", 
+					text: "One last thing..."
+				},
+				{
+					name: "smol powerlifter",
+					text: "Some of these long-timers are a bit intolerant towards bodybuilders. It's like some sort of territorial dispute."
+				},
+				{
+					name: "smol powerlifter", 
+					text: "I'm going to stay away from that drama though. I'm just hear to lift weights!"
 				}
 			]
 			break;
@@ -632,62 +739,6 @@ function ch1Dialog(npcID = -1){
 						startBattle(true, ["thicc powerlifter", "smol powerlifter"]);
 					}
 				},
-			]
-			break;
-		case "smol powerlifter 3":
-			text = [
-				{
-					name: "smol powerlifter",
-					text: "I've been training at Wheyford Barbell for a couple years now. This is the biggest powerlifting gym in the country."
-				},
-				{
-					name: "smol powerlifter", 
-					text: "Something about the old school atmosphere seems to turn skinny guys like me into juggernauts over time."
-				}, 
-				{
-					name: "smol powerlifter", 
-					text: "You're a bodybuilder, right? Say, have you ever thought about giving powerlifting a try?", 
-					prompt: [
-						"It's not for me", 
-						[
-							{
-								name: "smol powerlifter", 
-								text: "That's fair. If you're just lifting to look good, the numbers aren't that important."
-							}
-						], 
-						"Powerlifting is a joke", 
-						[
-							{
-								name: "smol powerlifter", 
-								text: "Ouch! I understand where you're coming from though."
-							},
-							{
-								name: "smol powerlifter", 
-								text: "There's definitely more to powerlifting than just flexibility tricks and rule bending."
-							}, 
-							{
-								name: "smol powerlifter", 
-								text: "I love the thrill of maxing out and chasing after new PRs!"
-							}
-						],
-					]
-				},
-				{
-					name: "smol powerlifter", 
-					text: "I'm sorry! I'm talking too much. I'm pretty passionate about this stuff."
-				},
-				{
-					name: "smol powerlifter", 
-					text: "One last thing..."
-				},
-				{
-					name: "smol powerlifter",
-					text: "Some of these long-timers are a bit intolerant towards bodybuilders. It's like some sort of territorial dispute."
-				},
-				{
-					name: "smol powerlifter", 
-					text: "I'm going to stay away from that drama though. I'm just hear to lift weights!"
-				}
 			]
 			break;
 		case "super heavyweight 1":
