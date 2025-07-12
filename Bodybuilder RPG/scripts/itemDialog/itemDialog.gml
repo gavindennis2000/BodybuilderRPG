@@ -32,36 +32,6 @@ function itemDialog(itemID = -1) {
             }
             if (global.events.bbnc2 && !global.events.bbncTalkToOwner) {
 
-                // npc creation and functions
-                var createAna = function() {
-                    instance_create_layer(objPlayer.x, objPlayer.y, "Instances", objNPC, {
-                        npcID: "ana", 
-                        directions: ["right"], 
-                        action: function() {
-                            with (objNPC) {
-                                if (npcID == "ana") {
-                                    faceStart = "left";
-                                    face = "left";
-                                }
-                            }
-                        }
-                    });
-                }
-
-                var exitAna = function() {
-                    with (objNPC) {
-                        if (npcID == "ana") {
-                            directions = ["left"]; 
-                            action = function() {
-                                global.events.bbncTalkToOwner = true;
-                                with (objPlayer)
-                                    canMove = true;
-                                instance_destroy();
-                            }
-                            alarm_set(1, 1);
-                        }
-                    }
-                }
                 text = [
                     {
                         name: "clerk",
@@ -82,12 +52,39 @@ function itemDialog(itemID = -1) {
                     {
                         name: "ana",
                         text: $"{string_upper(global.characterName)}!",
-                        action: createAna
+                        action: function() {
+                            instance_create_layer(objPlayer.x, objPlayer.y, "Instances", objNPC, {
+                                npcID: "ana", 
+                                directions: ["right"], 
+                                action: function() {
+                                    with (objNPC) if (npcID == "ana") {
+                                        faceStart = "left";
+                                        face = "left";
+                                    }
+                                    with (objPlayer)
+                                        face = "right";
+                                }
+                            });
+                        }
                     },
                     {
                         name: "ana",
                         text:  "Let's get back to Pump Palace so we can tell Jim what happened!",
-                        action: exitAna
+                        canMove: false,
+                        action: function() {
+                            with (objNPC) if (npcID == "ana") {
+                                directions = ["left"]; 
+                                action = function() {
+                                    global.events.bbncTalkToOwner = true;
+                                    with (objPlayer) {
+                                        canMove = true;
+                                        face = "down";
+                                    }
+                                    instance_destroy(self, false);
+                                }
+                                alarm_set(1, 1);
+                            }
+                        }
                     }
                 ]
             }

@@ -2,14 +2,28 @@
 
 /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
+// pause
+if (input_check_pressed("start")) {
+    if (!instance_exists(objPlayer))
+        { /* do nothing */}
+    else if (!objPlayer.canCertainlyMove)
+        { /* do nothing */}
+    else if (global.cutscene || room == rBattle)
+        { /* do nothing */}
+    else {
+        global.paused = !global.paused;
+        debug(global.paused);
+    }
+}
+
 // meet arnold terminager
 if (global.chapter == 1 && room == rOverworld && global.events.endCh1 && !global.events.meetArnold && objPlayer.x == 1856 && objPlayer.y == 736 && !global.cutscene) {
     global.cutscene = true;
     
     // cutscene music
     global.cutsceneSong = sndDanger;
-    // with (objMusic) 
-        // alarm_set(0, 1);
+    with (objMusic) 
+        alarm_set(0, 1);
 
     with (objPlayer)
         canMove = false;
@@ -36,22 +50,23 @@ if (global.chapter == 1 && room == rOverworld && global.events.endCh1 && !global
                         {
                             name: "enemy",
                             alias: "large australian man", 
-                            text: "You thought I was Austrian? No, I am man from Australia."
+                            text: "You thought I was Austrian? Nein, I am man from Australia."
                         },
                         {
                             name: "enemy",
                             alias: "large australian man", 
-                            text: "The boss gave me orders to take care of you."
+                            text: "The boss has given me orders to terminate you."
                         }, 
                         {
                             name: "enemy",
                             alias: "large australian man", 
-                            text: "I'm in a good mood from my workout earlier. So this will just be a warning. Guess It's your lucky day.",
+                            text: "I'm in a good mood from my excellent workout earlier. So instead, I will just kick your ass as a warning. Guess It's your \"Gluckstag\" today.",
                         },
                         {
                             name: "", 
-                            text: $"LARGE AUSTRALIAN MAN beat the bejohnson out of {string_upper(global.characterName)}.",
+                            text: $"LARGE AUSTRALIAN MAN beats the bejesus out of {string_upper(global.characterName)}.",
                             action: function() {
+                                playSound(sndHitAndro);
                                 with (objPlayer)
                                     ko = true;
                             }
@@ -59,7 +74,7 @@ if (global.chapter == 1 && room == rOverworld && global.events.endCh1 && !global
                         {
                             name: "enemy",
                             alias: "large australian man", 
-                            text: "That is all. You better not speak a word of this. Otherwise...",
+                            text: "Das is all. You better not speak a word of this. Otherwise...",
                         },
                         {
                             name: "enemy",
@@ -70,7 +85,6 @@ if (global.chapter == 1 && room == rOverworld && global.events.endCh1 && !global
                                     if (npcID == "arnold terminager") {
                                         directions = ["down", "down", "down", "down"]; 
                                         action = function() {
-                                            global.cutscene = false;
                                             global.cutsceneSong = -1;
                                             global.roomChange = {
                                                 room: rMom, 
@@ -99,6 +113,7 @@ else if (global.chapter == 1 && room == rOverworld && global.events.endCh1 && gl
         fadeAmount += 0.005;
     else {
         fadeAmount = 0;
+        global.cutscene = false;
         with (objPlayer)
             instance_destroy();
         global.chapter++;

@@ -151,69 +151,13 @@ function ch1Dialog(npcID = -1){
 					tone: "loud",
 					action: function() {
 						array_push(global.enemiesToDestroy, "donnie swoleman");
-						startBattle(true, ["donnie swoleman"], false, global.party, sndBossBattle);
+						startBattle(["donnie swoleman"], false, global.party, sndBossBattle);
 					}
 				}
 			]
 			break;
 		case "mom":
-			if (!global.events.meetMom && !global.events.meetJim) {
-				text = [
-					{
-						name: "mom",
-						text: $"{string_upper(global.characterName)}, what is going on with you?",
-						prompt: [
-							"Tell her about the dream",
-							[
-								{
-									name: "andro",
-									text: "I had this dream... I think it's trying to tell me something about this new bodybuilding job."
-								},
-								{
-									name: "mom",
-									text: "Bodybuilding job!? I thought Mr. Ohner hired you to be an assistant manager!",
-									emotion: "frustrated"
-								},
-								{
-									name: "mom",
-									text: "You have to take this seriously! You can't afford to get fired again because you'd rather go lift weights than show up to work!",
-									emotion: "angry",
-								},
-							],
-							"It's nothing",
-							[],
-						]
-					},
-					{
-						name: "mom",
-						text: "*sigh* I can't deal with this today...",
-						tone: "quiet",
-						emotion: "frustrated",
-					},
-					{
-						name: "mom",
-						text: "Do you know how to get to work?",
-						prompt: [
-							"Yes",
-							[],
-							"No",
-							[
-								{
-									name: "mom",
-									text: "It's is in the northwest corner of town. Don't forget to introduce yourself to your boss, Mr. Ohner.",
-								}
-							]
-						]
-					},
-					{
-						name: "mom",
-						text: "Have a great first day, sweetie.",
-						emotion: "happy",
-						action: "meet mom"
-					},
-				]
-			}
-			else if (!global.events.meetJim) {
+			if (!global.events.meetJim) {
 				text = [
 					{
 						name: "mom",
@@ -351,7 +295,13 @@ function ch1Dialog(npcID = -1){
 					{
 						name: "jim",
 						text: "I'm busy running a business. If you need help, try talking to some of the lifters around the gym.",
-						action: "meet jim"
+						action: function() {
+							global.events.meetJim = true;
+							with (objItem) {
+								if (itemID == "locked door")
+									instance_destroy();
+							}
+						}
 					}
 				]
 			}
@@ -390,7 +340,7 @@ function ch1Dialog(npcID = -1){
 					},
 					{
 						name: "jim",
-						text: "I threw in some extra cash so you can buy supplements and training equipment. Your next task is to get SWOLE."
+						text: "I threw in some extra cash so you can buy supplements and training equipment. Your next task is to get SWOLE as SHIT."
 					},
 					{
 						name: "jim",
@@ -467,7 +417,7 @@ function ch1Dialog(npcID = -1){
 							"Not too bad",
 							[{
 								name: "jim", 
-								text: "Good deal! That'll teach those Wheyford Barbell folks not to mess with my crea... I mean good job kiddo!"
+								text: "Good deal! That'll teach those Wheyford Barbell folks not to... *clears throat*... good job kiddo!"
 							}]
 						]
 					},
@@ -538,7 +488,7 @@ function ch1Dialog(npcID = -1){
 					text: "Not listening to me? Guess I'll have to teach you a lesson!",
 					action: function() {
 						array_push(global.enemiesToDestroy, "smol powerlifter 1");
-						startBattle(true, ["smol powerlifter"]);
+						startBattle(["smol powerlifter"]);
 					}
 				}
 			]
@@ -649,7 +599,7 @@ function ch1Dialog(npcID = -1){
 					tone: "loud",
 					action: function() {
 						array_push(global.enemiesToDestroy, "thicc powerlifter 1");
-						startBattle(true, ["thicc powerlifter"]);
+						startBattle(["thicc powerlifter"]);
 					}
 				},
 			]
@@ -736,7 +686,7 @@ function ch1Dialog(npcID = -1){
 					text: "Indeed! *agrees in smug laugh*",
 					action: function() {
 						array_push(global.enemiesToDestroy, "thicc powerlifter 2", "smol powerlifter 2");
-						startBattle(true, ["thicc powerlifter", "smol powerlifter"]);
+						startBattle(["thicc powerlifter", "smol powerlifter"]);
 					}
 				},
 			]
@@ -808,7 +758,7 @@ function ch1Dialog(npcID = -1){
 					text: "I'll teach you to pick on someone your own size!",
 					action: function() {
 						array_push(global.enemiesToDestroy, "super heavyweight 1");
-						startBattle(true, ["super heavyweight"]);
+						startBattle(["super heavyweight"]);
 					}
 				}
 			]

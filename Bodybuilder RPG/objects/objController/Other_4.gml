@@ -26,6 +26,8 @@ if (room == rBattle)
     
 // find out which room the player is in
 global.prevRoomVar = global.roomVar;
+global.prevSubRoomVar = global.subRoomVar;
+global.subRoomVar = -1;
 switch (room) {
     case rMom:
         global.roomVar = "Mom's House";

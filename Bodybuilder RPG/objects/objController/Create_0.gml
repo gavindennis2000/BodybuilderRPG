@@ -5,6 +5,8 @@
 layer = layer_create(layer_get_depth(layer_get_id("Instances")) - 2, "Controller");
 
 // global stuff
+global.paused = false;
+
 // events/cutscenes/actions
 global.events = {
     // chapter 1
@@ -21,6 +23,7 @@ global.events = {
     defeatDonnie: false,
     meetSamson: false,
     endCh1: false,
+    goodbyeAna: false,
     meetArnold: false,
 
     // chapter 2

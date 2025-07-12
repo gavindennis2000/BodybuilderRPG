@@ -23,6 +23,9 @@ switch (npcID) {
 		sprite_index = sprSamson;
 		break;
 	// alphabetical order for the rest
+	case "arnold terminager":
+		sprite_index = sprArnold;
+		break;
 	case "clerk":
 		image_index = 5;
 		break;

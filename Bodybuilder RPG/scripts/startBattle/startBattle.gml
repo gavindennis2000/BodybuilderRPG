@@ -1,7 +1,7 @@
-function startBattle(special = false, enemies = -1, canRun = true, party = global.party, music = sndBattle) {
+function startBattle(enemies = -1, canRun = true, party = global.party, music = sndBattle) {
     // initiates a battle
 
-    /*gmlive*/ if (TEST) { if (live_call(special, enemies, canRun, party, music)) return live_result; }
+    /*gmlive*/ if (TEST) { if (live_call(enemies, canRun, party, music)) return live_result; }
 
     if (instance_exists(objPlayer))
         objPlayer.canMove = false;
@@ -10,12 +10,6 @@ function startBattle(special = false, enemies = -1, canRun = true, party = globa
     if (global.cutscene) {
         global.cutscene = false;
         global.cutsceneSong = -1;
-    }
-
-    // don't start a battle if there are no encounters allowed
-    if (global.noEncounters && !special) {
-        debug("Can't start battle. Check special flag.", -1);
-        exit;
     }
 
     if (enemies == -1)
@@ -27,7 +21,7 @@ function startBattle(special = false, enemies = -1, canRun = true, party = globa
         enemies: enemies,
         canRun: canRun
     }
-    debug(global.battleData, -1, "startBattle");
+    // debug(global.battleData, -1);
 
     playSound(sndBattleStart);
 

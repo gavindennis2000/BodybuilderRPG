@@ -36,12 +36,18 @@ var alias = variable_struct_exists(currentTextObj, "alias") ? currentTextObj.ali
 var emotion = variable_struct_exists(currentTextObj, "emotion") ? currentTextObj.emotion : "neutral";
 var tone = variable_struct_exists(currentTextObj, "tone") ? currentTextObj.tone : -1;
 switch (name) {
+    // mains
     case "andro":
-    case "ana":
-    case "doms":
     case "monologue":
         color1 = #00364d; 
         break;
+    case "ana":
+        color1 = #00b3ff;
+        break;
+    case "doms":
+        color1 = #808000;
+        break;
+    // everybody else
     case "jim":
         color1 = #264d00;
         break;

@@ -5,7 +5,7 @@ if (TEST) { if (live_call()) {  // GMLive
 }}
 
 if (instance_exists(objPlayer))
-    objPlayer.canMove = canMove;
+    objPlayer.canMove = (canMove && !(global.cutscene));
     
 if (action != -1) {
     if (is_method(action))
@@ -13,7 +13,3 @@ if (action != -1) {
     else
         handleAction(action);
 }
-// else if (prompt != -1) {
-//     if (is_method(prompt[selection]))
-//         prompt[selection]();
-// }

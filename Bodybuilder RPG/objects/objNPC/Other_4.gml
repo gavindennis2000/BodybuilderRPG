@@ -29,6 +29,7 @@ for (var i = 0; i < array_length(global.enemiesToDestroy); i++) {
         }
         with (objNPC)
             if (npcID == enemy) {
+                flashing = true;
                 faceStart = newFace;
                 face = faceStart;
             }
