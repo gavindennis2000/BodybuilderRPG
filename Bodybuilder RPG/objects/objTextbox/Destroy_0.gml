@@ -7,9 +7,7 @@ if (TEST) { if (live_call()) {  // GMLive
 if (instance_exists(objPlayer))
     objPlayer.canMove = (canMove && !(global.cutscene));
     
-if (action != -1) {
-    if (is_method(action))
-        action();
-    else
-        handleAction(action);
-}
+if (action != -1 && is_method(action))
+    action();
+else if (action != -1)
+    debug("Action provided but unhandled.");

@@ -17,3 +17,4 @@ originalRunSpeedAnimation = runSpeedAnimation;
 runSpeed = 2;
 originalRunSpeed = runSpeed;
 ko = false;
+spaceFog = 0;

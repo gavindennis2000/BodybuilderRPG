@@ -25,7 +25,8 @@ function setSongLoopPoints() {
 	audio_sound_loop_start(sndPumpPalace, 42);
 
 	// rooms
-	audio_sound_loop_start(sndBBNC, 0);
+	audio_sound_loop_end(sndBBNC, 73.846);
+	audio_sound_loop_start(sndSpace, 5.333);
 	 
 
 	// misc

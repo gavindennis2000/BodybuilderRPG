@@ -1,8 +1,6 @@
 function handleDoors(doorID){
 	// returns information about where a door goes
 	
-	/*gmlive*/ if (TEST) { if (live_call(doorID)) return live_result; }
-	
 	switch (doorID) {
 		// mom's house
 		case inst_5A092949:
@@ -118,12 +116,6 @@ function handleDoors(doorID){
 				transition: "fade"
 			};
 			break;
-		case inst_2EC7C37A:
-			// pump palace stairs ->
-			global.roomChange = {
-
-			};
-			break;
 		
 		// stores
 		case inst_1F9D8954:
@@ -168,7 +160,7 @@ function handleDoors(doorID){
 				room: room, 
 				transition: "fade"
 			};
-			debug(global.roomChange, -1);
+			global.apology = true;
 			break;
 	}
 	

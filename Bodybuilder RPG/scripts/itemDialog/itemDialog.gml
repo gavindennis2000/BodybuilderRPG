@@ -160,6 +160,45 @@ function itemDialog(itemID = -1) {
                     break;
             }
             break;
+        case "golden drumstick":
+            text = [
+                {
+                    name: "gods of gains", 
+                    text: "The GOLDEN DRUMSTICK will give you a small hp boost."
+                },
+                {
+                    name: "gods of gains", 
+                    text: "This gift is for intermediate lifters and will still provide a solid challenge."    
+                },
+                {
+                    name: "gods of gains", 
+                    text: "Proceed with the GOLDEN DRUMSTICK?",
+                    prompt: [
+                        "Yes",
+                        [{
+                            // name: "", 
+                            text: $"{string_upper(global.characterName)} received the GOLDEN DRUMSTICK.",
+                            action: function() {
+                                playSound(sndLevelUp);
+                            },
+                        },
+                        {
+                            name: "gods of gains",
+                            text: $"Good luck on your journey, {string_upper(global.characterName)}.",
+                            canMove: false,
+                            action: function() {
+                                playSound(sndDeath);
+                                with (objCamera)
+                                    startBattleTransition();
+                                audio_sound_gain(global.songPlaying, 0, 2000);
+                            }
+                        }],
+                        "No",
+                        []
+                    ]
+                }
+            ]
+            break;
         case "gymtendo 64":
             text = [
                 {
@@ -180,18 +219,8 @@ function itemDialog(itemID = -1) {
         case "home bench press":
             text = [
                 {
-                    text: "Bench press. My favorite lift!"
-                }, 
-                {
-                    text: "If I'm quick, I can knock out a few sets before work..."
+                    text: "Whoops! Looks like I forgot to rerack my weights..."
                 },
-                {
-                    name: "mom",
-                    text: $"{string_upper(global.characterName)}!!"
-                }, 
-                {
-                    text: "Never mind. Maybe tonight."
-                }
             ]
             break;
         case "mirror":
@@ -209,6 +238,95 @@ function itemDialog(itemID = -1) {
                     text = "I'm ashamed of myself. Can't believe I skipped cardio today!";
                     break;
             }
+            break;
+        case "nectar of the gods":
+            text = [
+                {
+                    name: "gods of gains", 
+                    text: "The NECTAR OF THE GODS will bless you with nearly unlimited recovery."
+                },
+                {
+                    name: "gods of gains", 
+                    text: "This gift is for inexperienced lifters and will make your journey easier."    
+                },
+                {
+                    name: "gods of gains", 
+                    text: "Proceed with the NECTAR OF THE GODS?",
+                    prompt: [
+                        "Yes",
+                        [{
+                            // name: "", 
+                            text: $"{string_upper(global.characterName)} received the NECTAR OF THE GODS.",
+                            action: function() {
+                                playSound(sndLevelUp);
+                            },
+                        },
+                        {
+                            name: "gods of gains",
+                            text: $"Good luck on your journey, {string_upper(global.characterName)}.",
+                            canMove: false,
+                            action: function() {
+                                playSound(sndDeath);
+                                with (objCamera)
+                                    startBattleTransition();
+                                audio_sound_gain(global.songPlaying, 0, 2000);
+                            }
+                        }],
+                        "No",
+                        []
+                    ]
+                }
+            ]
+            break;
+        case "trapezius of power":
+            text = [
+                {
+                    name: "gods of gains", 
+                    text: "The TRAPEZIUS OF POWER will..."
+                },
+                {
+                    name: "gods of gains", 
+                    text: "Yeah... Like we said, we don't really know what it does."    
+                },
+                {
+                    name: "gods of gains", 
+                    text: "It looks cool? It seems to make the enemies you will encounter even stronger..."    
+                },
+                {
+                    name: "gods of gains", 
+                    text: "Look, I'm gonna let you in on a secret."
+                },
+                {
+                    name: "gods of gains", 
+                    text: "If you haven't played the game before, just go with the NECTAR or DRUMSTICK, okay?"    
+                },
+                {
+                    name: "gods of gains", 
+                    text: "Proceed with TRAPEZIUS OF POWER?",
+                    prompt: [
+                        "Yes",
+                        [{
+                            text: $"{string_upper(global.characterName)} received the NECTAR OF THE GODS.",
+                            action: function() {
+                                playSound(sndLevelUp);
+                            },
+                        },
+                        {
+                            name: "gods of gains",
+                            text: $"Good luck on your journey, {string_upper(global.characterName)}.",
+                            canMove: false,
+                            action: function() {
+                                playSound(sndDeath);
+                                with (objCamera)
+                                    startBattleTransition();
+                                audio_sound_gain(global.songPlaying, 0, 2000);
+                            }
+                        }],
+                        "No",
+                        []
+                    ]
+                }
+            ]
             break;
         case "wfbb switch 1":
         case "wfbb switch 3":

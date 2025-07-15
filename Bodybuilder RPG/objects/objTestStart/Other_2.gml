@@ -16,4 +16,4 @@ if (TEST && TEST_BATTLE) {
     }
 }
 
-room_goto(rOverworld);
+room_goto(rSpace);

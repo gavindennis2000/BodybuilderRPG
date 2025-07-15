@@ -15,7 +15,6 @@ function handleItems() {
 	            break;
 	        case inst_7C5E1A9B:
 	            itemID = "home bench press";
-				finalText = "no text";
 	            break;
 	        case inst_3FE4D9AC:
 	            itemID = "home bed";
@@ -71,11 +70,24 @@ function handleItems() {
 				finalText = "Wheyford Barbell Powerlifting Gym";
 				break;
         
-	        // stores
 	        // bbnc
 	        case inst_2F5A5C4E:
 	            itemID = "bbnc owner";
 	            break;
+
+			// space
+			case inst_1088CAE7:
+				itemID = "nectar of the gods";
+				x += 16;
+				break;
+			case inst_44EE5942:
+				itemID = "golden drumstick";
+				x += 16;
+				break;
+			case inst_5238A955:
+				itemID = "trapezius of power";
+				x += 16;
+				break;
 
 			// wheyford barbell
 			case inst_215F6685:

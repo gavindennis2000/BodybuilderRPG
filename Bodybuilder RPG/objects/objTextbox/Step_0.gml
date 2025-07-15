@@ -31,7 +31,7 @@ if (currentTextObj == -1) {
         preAction = -1;
     }
 }
-var confirm = input_check_pressed("south");
+var confirm = input_check_pressed("south") || TEST && input_check("west");
 var getNextChar = function() {
     // grabs next char from currentTextObj and feeds it to drawText
     if (text == -1) {

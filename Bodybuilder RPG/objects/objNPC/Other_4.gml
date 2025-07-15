@@ -101,7 +101,7 @@ for (var i = 0; i < array_length(global.enemiesToDestroy); i++) {
                                                 },
                                                 {
                                                     name: "ana", 
-                                                    text: "Let's get going! He'll know what to do.", 
+                                                    text: "Let's get out of here! We need to tell JIM what's going on!", 
                                                     action: function() {
                                                         global.events.defeatDonnie = true;
                                                         debug("defeated donnie", -1);

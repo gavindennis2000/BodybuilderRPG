@@ -9,7 +9,6 @@ function setStats(override = -1){
     var lvl = global.stats.level - 1;
     
     global.stats.xpNext = round(100 * power(1.1, global.stats.level));
-    debug("nextnext", -1);
 
 	 // hp
     var oldHP = global.stats.andro.maxhp + 0;
@@ -44,8 +43,6 @@ function setStats(override = -1){
     global.stats.ana.cardio = (floor(10 + lvl * change) <= 99) ? floor(10 + lvl * change) : 99;
     change = 0.68;
     global.stats.doms.cardio = (floor(10 + lvl * change) <= 99) ? floor(10 + lvl * change) : 99;
-
-    debug($"\nStats: {global.stats}\n", -1);
 
     return;
 }

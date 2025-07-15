@@ -7,12 +7,20 @@ if (TEST) { if (live_call()) {  // GMLive
 }}
 
 if (fadeAmount > 0) {
-    fadeAmount -= fadeAmountChange;
+    if (room == rMom && !global.events.startCh1) {
+        fadeAmount -= 0;
+    }
+    else
+        fadeAmount -= fadeAmountChange;
 }
 else {
     fadeAmount = 0;
     with (objPlayer)
         canMove = (!instance_exists(objTextbox) && !global.cutscene);
+    if (global.apology) {
+        global.apology = false;
+        textbox("This room hasn't been created yet. Sorry! - Gavin");
+    }
     exit;
 }
 

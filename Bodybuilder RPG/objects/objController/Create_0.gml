@@ -10,6 +10,9 @@ global.paused = false;
 // events/cutscenes/actions
 global.events = {
     // chapter 1
+    prologueStart: false,
+    prologueDecision: false,
+    prolgueConfirmation: false,
     startCh1: false,
     meetMom: false,
     meetJim: false,
@@ -69,6 +72,7 @@ global.roomChange = {
     transition: "fade",
     face: "up"
 }
+global.apology = false;
 global.defeated = [];  // enemies that have been defeated will be destroyed before you can talk to them
 global.openedChests = [];  // chests that are opened get added here
 fadeAmount = 0;

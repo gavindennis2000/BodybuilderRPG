@@ -63,6 +63,9 @@ getCurrentSong = function() {
         case "Pump Palace":
             global.currentSong = sndPumpPalace;
             break;
+        case "???":
+            global.currentSong = sndSpace;
+            break;
         case "Wheyford":
             global.currentSong = sndWheyford;
             if (global.chapter == 1 && global.events.endCh1)

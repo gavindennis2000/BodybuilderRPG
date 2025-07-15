@@ -93,9 +93,9 @@ if (room == rOverworld) {
                     with (objController)
                         showSubRoomVarFunc();
                 }
-                else if (divX == 2 && divY == 4 && global.subRoomVar != "Affordable Living") {
+                else if (divX == 2 && divY == 4 && global.subRoomVar != "\"Affordable\" Living District") {
                     global.prevSubRoomVar = global.subRoomVar;
-                    global.subRoomVar = "Affordable Living";
+                    global.subRoomVar = "\"Affordable\" Living District";
                     with (objController)
                         showSubRoomVarFunc();
                 }

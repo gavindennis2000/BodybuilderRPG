@@ -2,6 +2,12 @@
 
 /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
+// set the background on the space room 
+if (room == rSpace) {
+    var layID = layer_get_id("Background");
+    if (layer_get_y(layID) != camera_get_view_y(view_camera[0]))
+        layer_y(layID, camera_get_view_y(view_camera[0]));
+}
 // handle fade
 if (global.chapter == 1 && global.events.endCh1 && room == rOverworld) {
     var getAlpha = draw_get_alpha();
@@ -10,10 +16,11 @@ if (global.chapter == 1 && global.events.endCh1 && room == rOverworld) {
     draw_set_alpha(getAlpha);
 }
     
-if (fadeAmount != 0) {
+if (fadeAmount > 0) {
     var alpha = draw_get_alpha();
     draw_set_alpha(fadeAmount);
-    draw_rectangle_color(0, 0, CAM_WIDTH, CAM_HEIGHT, c_black, c_black, c_black, c_black, false);
+    var color = (room == rSpace) ? c_white : c_black;
+    draw_rectangle_color(0, 0, CAM_WIDTH, CAM_HEIGHT, color, color, color, color, false);
     draw_set_alpha(alpha);
 }
 

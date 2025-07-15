@@ -10,6 +10,8 @@ if (!instance_exists(objCamera))
     instance_create_layer(0, 0, "Instances", objCamera);
 if (!instance_exists(objMusic))
     instance_create_layer(0, 0, "Instances", objMusic);
+if (room == rSpace)
+    instance_create_layer(0, 0, "Instances", objSpace);
 
 // set npc id's
 handleNPCs();
@@ -37,6 +39,9 @@ switch (room) {
         break;
     case rPumpPalace:
         global.roomVar = "Pump Palace";
+        break;
+    case rSpace:
+        global.roomVar = "???";
         break;
     case rStores:
         break;

@@ -1,7 +1,6 @@
 // objCamera DrawGUI
-if (TEST) { if (live_call()) {  // GMLive
-    return live_result;
-}}
+
+/*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
 if (battle) {
     // transition into the battle room
@@ -14,12 +13,16 @@ if (battle) {
     // change the camera angle
     var viewAngle = camera_get_view_angle(cam);
     camera_set_view_angle(cam, viewAngle + camAngleChange);
-    camAngleChange *= 1.09;
+    if (room == rSpace && !global.events.startCh1)
+        camAngleChange *= 1.07;
+    else
+        camAngleChange *= 1.09;
 
     // draw a white rectangle
-    if (whiteOut < 1) {
-        whiteOut += 0.02;
-        if (whiteOut == 1) {
+    if (whiteOut < 2) {
+        whiteOut = (room == rSpace && !global.events.startCh1) ? whiteOut + 0.015 : whiteOut + 0.02;
+
+        if (global.events.startCh1 && whiteOut >= 1) {
             // save the player's state and destroy its object
             global.roomChange.x = objPlayer.x;
             global.roomChange.y = objPlayer.y;
@@ -27,6 +30,10 @@ if (battle) {
             global.roomChange.room = room;
             instance_destroy(objPlayer);
             room_goto(rBattle);
+        }
+        else if (whiteOut >= 2) {
+            instance_destroy(objPlayer);
+            room_goto(rMom);
         }
     }
 }

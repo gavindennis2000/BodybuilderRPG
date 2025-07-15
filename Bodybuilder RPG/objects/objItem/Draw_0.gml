@@ -11,6 +11,19 @@ var xscale = image_xscale;
 var yscale = image_yscale;
 var func = -1;
 
+var floatFunc = function() {
+    // makes the item look like it's levitating
+    if (!variable_instance_exists(self, "float") || !variable_instance_exists(self, "floatChange"))
+        exit;
+    float += floatChange / 1.5;
+    floatChange /= 1.01;
+    var amount = 3;
+    if ((float >= amount && sign(floatChange) == 1) || (float <= -amount && sign(floatChange) == -1)) {
+        floatChange = 0.25 * sign(floatChange);
+        floatChange = -floatChange;
+    }
+}
+
 switch (itemID) {
     case "atlas stone":
         index = 5;
@@ -18,6 +31,11 @@ switch (itemID) {
         break;
     case "bbnc owner":
         index = -1;
+        break;
+    case "golden drumstick":
+        index = 7;
+        func = floatFunc;
+        draw_sprite_ext(spr, index, x, y + 32, 1, 0.3, 0, c_black, 1);
         break;
     case "gymtendo 64":
         index = 1;
@@ -77,9 +95,20 @@ switch (itemID) {
             }
         }
         break;
+    case "nectar of the gods":
+        index = 6;
+        func = floatFunc;
+        sprY -= 10;
+        draw_sprite_ext(spr, index, x, y + 32, 1, 0.2, 0, c_black, 1);
+        break;
     case "sign":
         index = 4;
         sprY -= 3;
+        break;
+    case "trapezius of power":
+        index = 8;
+        func = floatFunc;
+        draw_sprite_ext(spr, index, x, y + 32, 1, 0.35, 0, c_black, 1);
         break;
     default:
         spr = sprItemPlaceholder;
@@ -91,8 +120,8 @@ if (index == -1)
 
 if (chestID != -1 && opened)
     image_blend = c_green;
-    
-draw_sprite_ext(spr, index, sprX, sprY, xscale, yscale, image_angle, image_blend, image_alpha);
+
+draw_sprite_ext(spr, index, sprX, sprY + float, xscale, yscale, image_angle, image_blend, image_alpha);
 
 // if the associated item has a function, do it
 if (func != -1 && is_method(func)) {

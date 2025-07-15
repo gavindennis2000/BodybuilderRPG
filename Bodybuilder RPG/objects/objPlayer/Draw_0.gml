@@ -34,10 +34,21 @@ switch (face) {
         break;
 }
 
-// draw_sprite(sprWall, 0, x, y);
+
 if (ko) {
+    // draw a ko'd andro when he gets beat up
     sprite_index = sprFighters;
     draw_sprite_part_ext(sprite_index, image_index, 96, 0 + (yPart * 32), 32, 32, x - 16, y - 21, image_xscale * 2, image_yscale * 2, image_blend, image_alpha);
+}
+else if (room == rSpace && spaceFog > 0) {
+    // draw a white illumintation when spawning in the space world
+    var newY = y - 21 - power(spaceFog * 2, 8);
+    draw_sprite_part_ext(global.cutscene ? sprAndro : sprite_index, image_index, 0, 0 + (yPart * 32), 32, 32, x - 16, newY, image_xscale * 2, image_yscale * 2, image_blend, image_alpha);
+    gpu_set_fog(true, c_white, 0, 1000);
+    draw_sprite_part_ext(global.cutscene ? sprAndro : sprite_index, image_index, 0, 0 + (yPart * 32), 32, 32, x - 16, newY, image_xscale * 2, image_yscale * 2, image_blend, spaceFog);
+    gpu_set_fog(false, c_blue, 0, 1000);
+    spaceFog -= 0.01;
+    // canMove = false;
 }
 else 
     draw_sprite_part_ext(global.cutscene ? sprAndro : sprite_index, image_index, 0, 0 + (yPart * 32), 32, 32, x - 16, y - 21, image_xscale * 2, image_yscale * 2, image_blend, image_alpha);

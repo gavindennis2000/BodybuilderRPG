@@ -58,14 +58,12 @@ function handleEvents() {
                 {
                     name: "mom",
                     text: $"{string_upper(global.characterName)}!! ",
-                    action: function() {
-                        global.events.startCh1 = true;
-                    }
                 },
                 {
                     name: "mom",
                     text: $"Get out of bed! You're going to be late for your new job!",
                     action: function() {
+                        global.events.startCh1 = true;
                         global.cutscene = false;
                         with (objMusic) 
                             alarm_set(0, 30);
@@ -87,7 +85,7 @@ function handleEvents() {
                         [
                             {
                                 name: "mom",
-                                text: "You had a dream about your \"bodybuilding destiny\"?",
+                                text: "Oh great. You had another dream about the \"bodybuilding gods\" or something?",
                                 emotion: "frustrated"
                             },
                         ],
@@ -215,6 +213,7 @@ function handleEvents() {
                                                 global.events.meetAna = true;
                                                 playSound(sndLevelUp);
                                                 textbox("ANA has joined the party.");
+                                                global.party = ["andro", "ana"];
                                                 global.cutscene = false;
                                                 global.cutsceneSong = -1;
                                                 audio_sound_gain(global.songPlaying, 0, 500);

@@ -13,3 +13,6 @@ if (keyboard_check_pressed(ord("G"))) {
 if (keyboard_check_pressed(ord("B")) && !global.battle) {
     // startBattle(["robber"]);
 }
+
+if (keyboard_check_pressed(ord("C")) && global.cutscene)
+    global.cutscene = false;

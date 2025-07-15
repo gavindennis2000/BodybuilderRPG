@@ -30,7 +30,7 @@ if (destroy) {
 }
 
 // get the textbox color
-var color1, color2 = c_black;
+var color1, color2 = c_black, color3 = c_black;
 var name = variable_struct_exists(currentTextObj, "name") ? currentTextObj.name : "monologue";
 var alias = variable_struct_exists(currentTextObj, "alias") ? currentTextObj.alias: -1;
 var emotion = variable_struct_exists(currentTextObj, "emotion") ? currentTextObj.emotion : "neutral";
@@ -55,6 +55,11 @@ switch (name) {
     case "donnie swoleman":
         color1 = #4d0000;
         break;
+    case "gods of gains":
+        color1 = c_black;
+        color3 = #80afd1;
+        color2 = #dade95;
+        break;
     case "samson":
         color1 = #32004d;
         break;
@@ -75,7 +80,7 @@ draw_rectangle_color(  // main
     textboxY + (96 / 2 * fade) + margin, 
     CAM_WIDTH - (CAM_WIDTH / 2 * fade) - margin, 
     textboxY + 96 - (96 / 2 * fade) - margin, 
-	 color1, color1, color2, color2, false
+	 color1, color1, color2, color3, false
 );
 draw_rectangle_color(  // main
     0 + (CAM_WIDTH / 2 * fade) + margin, 
