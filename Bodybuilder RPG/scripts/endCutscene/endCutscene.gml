@@ -8,7 +8,8 @@ function endCutscene() {
     
     // reset the music
     with (objMusic) {
-        audio_sound_gain(global.songPlaying, 0, 0.5);
+        if (global.songPlaying != -1)
+            audio_sound_gain(global.songPlaying, 0, 500);
         getCurrentSong();
         alarm_set(0, 30);
     }

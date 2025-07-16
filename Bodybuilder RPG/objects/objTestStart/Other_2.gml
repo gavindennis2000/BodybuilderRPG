@@ -16,4 +16,4 @@ if (TEST && TEST_BATTLE) {
     }
 }
 
-room_goto(rSpace);
+room_goto(rPumpPalace);

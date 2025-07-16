@@ -725,7 +725,7 @@ function ch1Dialog(npcID = -1){
 					}
 				},
 				{
-					name: "",
+					name: "super heavyweight",
 					text: "*crickets chirping in the background* (little bro bean didn't answer his brother's call).",
 					tone: "quiet",
 				},

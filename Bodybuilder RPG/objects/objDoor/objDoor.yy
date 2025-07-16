@@ -40,8 +40,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sprDoor",
-    "path":"sprites/sprDoor/sprDoor.yy",
+    "name":"sprDoorPlaceholder",
+    "path":"sprites/sprDoorPlaceholder/sprDoorPlaceholder.yy",
   },
   "spriteMaskId":null,
   "visible":true,

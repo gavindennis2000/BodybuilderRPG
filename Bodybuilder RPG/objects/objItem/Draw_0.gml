@@ -49,6 +49,9 @@ switch (itemID) {
         index = 3;
         sprY -= 0;
         break;
+    case "locked door":
+        index = -1;
+        break;
     case "mirror":
         sprY += 1;
         index = 2;

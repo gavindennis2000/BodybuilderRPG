@@ -101,7 +101,7 @@ if (fade != 0)
 // the picture
 var pictureIndex = getPictureIndex(name);
 switch (emotion) {
-    // get the emotion of the talker for the portrait
+    // get the emotion of the talker for the portrait                                        
     case "happy":
         pictureIndex += 1;
         break;
@@ -135,7 +135,7 @@ if (name != "monologue") {
     // the name
     fontXY(fa_left, fa_bottom);
     draw_set_font(fTextbox)
-    drawTextOutline(16, picY + 1, string_upper(alias != -1 ? alias : name));
+    drawTextOutline(16, textY + 8, string_upper(alias != -1 ? alias : name));
 }
 if (drawText != "") {
     // get the font size
@@ -167,6 +167,24 @@ if (drawText != "") {
             var prompt2X = pictureIndex == -1 ? CAM_WIDTH * 2/3 + margin : CAM_WIDTH / 2 + picLength / 2 + CAM_WIDTH / 4;
             drawTextOutline(prompt1X, textY + picLength + 8, $"\n{prompt[0]}", selection == 0 ? selectedColor : c_white);
             drawTextOutline(prompt2X, textY + picLength + 8, $"\n{prompt[2]}", selection == 1 ? selectedColor : c_white);
+        }
+        else {
+            // draw a continue button when ready for the next box
+
+            // the original sprite, no glow
+            var scale = 1.1;
+            var nextY = textboxY + 92;
+            draw_sprite_ext(sprNext, 0, CAM_WIDTH / 2, nextY, scale, scale, 0, image_blend, image_alpha);
+
+            // set up the glow for the sprite
+            nextGlow += nextGlowChange;
+            if ( (nextGlow >= 0.2 && sign(nextGlowChange) == 1) || (nextGlow <= 0 && sign(nextGlowChange) == -1) )
+                nextGlowChange *= -1;
+            
+            // draw the sprtie glow
+            gpu_set_fog(true, c_white, 0, 1000);
+            draw_sprite_ext(sprNext, 0, CAM_WIDTH / 2, nextY, scale, scale, 0, image_blend, nextGlow >= 0.175 ? 0.175 : nextGlow);
+            gpu_set_fog(false, c_blue, 0, 1000);
         }
     }
 }

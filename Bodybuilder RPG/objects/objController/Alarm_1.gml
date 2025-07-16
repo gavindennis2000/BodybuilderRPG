@@ -19,7 +19,7 @@ else {
         canMove = (!instance_exists(objTextbox) && !global.cutscene);
     if (global.apology) {
         global.apology = false;
-        textbox("This room hasn't been created yet. Sorry! - Gavin");
+        textbox("This room hasn't been created yet. Sorry! `-Gavin (The programmer)");
     }
     exit;
 }

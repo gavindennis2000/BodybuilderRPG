@@ -130,7 +130,7 @@ global.stats = {
 
 }
 setStats();
-if (TEST) {
+if (TEST && KILL_EVERYTHING) {
     setStats(99);
 }
 
@@ -176,7 +176,7 @@ showSubRoomVarFunc = function() {
 
     /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
-    if (global.subRoomVar == global.prevSubRoomVar)
+    if (global.subRoomVar == global.prevSubRoomVar || global.subRoomVar == -1)
         exit;
 
     showSubRoomAlarm = 120;

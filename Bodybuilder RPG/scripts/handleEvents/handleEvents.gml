@@ -214,11 +214,7 @@ function handleEvents() {
                                                 playSound(sndLevelUp);
                                                 textbox("ANA has joined the party.");
                                                 global.party = ["andro", "ana"];
-                                                global.cutscene = false;
-                                                global.cutsceneSong = -1;
-                                                audio_sound_gain(global.songPlaying, 0, 500);
-                                                with (objMusic)
-                                                    alarm_set(0, 30);
+                                                endCutscene();
                                                 instance_destroy(self, false);
                                             }; 
                                             alarm_set(1, 1);
@@ -277,7 +273,11 @@ function handleEvents() {
                     name: "enemy",
                     alias: "robber",
                     text: "Now! Put the CREATINE in the bag!",
-                    tone: "loud"
+                    tone: "loud",
+                    action: function() {
+                        with (objPlayer)
+                            face = "up";
+                    }
                 },
                 {
                     name: "clerk",
@@ -312,7 +312,11 @@ function handleEvents() {
                             {
                                 name: "andro",
                                 text: $"We need to fight! It's our moral duty to use our muscles for justice!",
-                                emotion: "angry"
+                                emotion: "angry",
+                                action: function() {
+                                    with (objPlayer)
+                                        face = "right";
+                                }
                             },
                             {
                                 name: "ana",
@@ -325,6 +329,8 @@ function handleEvents() {
                                 text: "Sheeitt! When did you meddling kids get here!?", 
                                 tone: "loud", 
                                 action: function() {
+                                    with (objPlayer)
+                                        face = "up";
                                     with (objNPC) {
                                         if (npcID == "ana")
                                             face = "up";
@@ -357,6 +363,10 @@ function handleEvents() {
                                 name: "andro",
                                 text: $"It's not safe here... We need to run and get help!",
                                 emotion: "angry",
+                                action: function() {
+                                    with (objPlayer)
+                                        face = "right";
+                                }                                        
                             },
                             {
                                 name: "enemy",
@@ -370,6 +380,8 @@ function handleEvents() {
                                         else if (npcID == "ana")
                                             face = "up";
                                     }
+                                    with (objPlayer)
+                                        face = "up";
                                 }
                             },
                             {
@@ -483,7 +495,6 @@ function handleEvents() {
 
         // meet samson after defeating donnie
         else if (!global.events.meetSamson && global.events.defeatDonnie && room == rOverworld) {
-            global.events.meetSamson = true;
             global.cutscene = true;
             global.cutsceneSong = sndSamson;
             with (objPlayer)
@@ -554,16 +565,11 @@ function handleEvents() {
                                     if (npcID == "samson") {
                                         directions = ["left", "left", "left", "left", "left", "left", "left"];
                                         action = function() {
-                                            global.cutscene = false;
-                                            global.cutsceneSong = -1;
+                                            endCutscene();
+                                            global.events.meetSamson = true;
                                             with (objPlayer)
                                                 canMove = true;
                                             instance_destroy(self, false);
-                                            with (objMusic) {
-                                                getCurrentSong();
-                                                audio_sound_gain(global.songPlaying, 0, aTime * 4);
-                                                alarm_set(0, aTime);
-                                            }
                                         }
                                         alarm_set(1, 1);
                                     }

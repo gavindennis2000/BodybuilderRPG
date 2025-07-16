@@ -51,6 +51,7 @@ var getNextChar = function() {
             setNewLine = true;
     }
     else if (!readyForNext) {
+        nextGlow = 0;
         readyForNext = true;
     }
 }

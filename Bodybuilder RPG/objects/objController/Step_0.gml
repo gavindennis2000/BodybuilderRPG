@@ -37,7 +37,7 @@ if (room == rSpace && global.chapter == 1) {
             },
             {
                 name: "gods of gains", 
-                text: "Are you up for this divine challenge?",
+                text: "This will be no easy task... Are you up for the challenge?",
                 prompt: [
                     "Yes",
                     [{

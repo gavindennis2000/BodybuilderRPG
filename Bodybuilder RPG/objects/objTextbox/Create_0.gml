@@ -33,15 +33,19 @@ forceScreen = (variable_instance_exists(self, "forceScreen")) ? forceScreen : -1
 selection = 0;
 
 // where the textbox is drawn at
-textboxY = CAM_HEIGHT - 96;
-textboxYTop = textboxY - CAM_HEIGHT + 96;
+textboxY = CAM_HEIGHT - 104;
+textboxYTop = textboxY - CAM_HEIGHT + 107;
 textboxYBottom = textboxY;
-textY = CAM_HEIGHT - 96 + 11;
+textY = textboxY + 7;
 textYBottom = textY;
-textYTop = textY - CAM_HEIGHT + 96;
-picY = CAM_HEIGHT - 96 + 16;
+textYTop = textY - CAM_HEIGHT + 107;
+picY = textboxY + 8;
 picYBottom = picY;
-picYTop = picY - CAM_HEIGHT + 96;
+picYTop = picY - CAM_HEIGHT + 107;
+
+// draw the next icon when ready for the next text object
+nextGlow = 0;
+nextGlowChange = 0.004;
 
 // find out if textbox should be at top or bottom of screen
 if (instance_exists(objPlayer) && objPlayer.y < camera_get_view_y(view_camera[0]) + CAM_WIDTH / 2 - 96) {

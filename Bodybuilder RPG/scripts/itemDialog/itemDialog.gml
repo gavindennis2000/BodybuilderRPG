@@ -164,7 +164,7 @@ function itemDialog(itemID = -1) {
             text = [
                 {
                     name: "gods of gains", 
-                    text: "The GOLDEN DRUMSTICK will give you a small hp boost."
+                    text: "The GOLDEN DRUMSTICK will give you a small strength boost."
                 },
                 {
                     name: "gods of gains", 
@@ -176,10 +176,10 @@ function itemDialog(itemID = -1) {
                     prompt: [
                         "Yes",
                         [{
-                            // name: "", 
                             text: $"{string_upper(global.characterName)} received the GOLDEN DRUMSTICK.",
                             action: function() {
                                 playSound(sndLevelUp);
+                                global.divineItem = "golden drumstick";
                             },
                         },
                         {
@@ -255,10 +255,10 @@ function itemDialog(itemID = -1) {
                     prompt: [
                         "Yes",
                         [{
-                            // name: "", 
                             text: $"{string_upper(global.characterName)} received the NECTAR OF THE GODS.",
                             action: function() {
                                 playSound(sndLevelUp);
+                                global.divineItem = "nectar of the gods";
                             },
                         },
                         {
@@ -290,25 +290,26 @@ function itemDialog(itemID = -1) {
                 },
                 {
                     name: "gods of gains", 
-                    text: "It looks cool? It seems to make the enemies you will encounter even stronger..."    
+                    text: "It looks cool? It seems to make the enemies you encounter even stronger..."    
                 },
                 {
                     name: "gods of gains", 
-                    text: "Look, I'm gonna let you in on a secret."
+                    text: "Look, I'm gonna let you in on a little secret. I shouldn't be telling you this, but..."
                 },
                 {
                     name: "gods of gains", 
-                    text: "If you haven't played the game before, just go with the NECTAR or DRUMSTICK, okay?"    
+                    text: "If you haven't played the game before, just go with the NECTAR or DRUMSTICK, okay?",
                 },
                 {
                     name: "gods of gains", 
-                    text: "Proceed with TRAPEZIUS OF POWER?",
+                    text: "Proceed with the TRAPEZIUS OF POWER?",
                     prompt: [
                         "Yes",
                         [{
-                            text: $"{string_upper(global.characterName)} received the NECTAR OF THE GODS.",
+                            text: $"{string_upper(global.characterName)} received the TRAPEZIUS OF POWER.",
                             action: function() {
                                 playSound(sndLevelUp);
+                                global.divineItem = "trapezius of power";
                             },
                         },
                         {
