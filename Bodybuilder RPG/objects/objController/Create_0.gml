@@ -106,7 +106,6 @@ global.stats = {
         skill: 1,
         maxskill: 1,
         strength: 10,
-        endurance: 10,
         cardio: 20,
     },
     ana: {
@@ -115,7 +114,6 @@ global.stats = {
         skill: 5,
         maxskill: 3,
         strength: 10,
-        endurance: 10,
         cardio: 10,
     },
     doms: {
@@ -124,14 +122,13 @@ global.stats = {
         skill: 1,
         maxskill: 1,
         strength: 20,
-        endurance: 10,
         cardio: 10,
     },
 
 }
 setStats();
 if (TEST && KILL_EVERYTHING) {
-    setStats(99);
+    setStats(4);
 }
 
 goToNextRoom = function() {

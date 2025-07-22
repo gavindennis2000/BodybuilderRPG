@@ -95,7 +95,7 @@ getSFX = function(battleID) {
         case "doms":
             return sndHitDoms;
         default:
-            return sndHitAndro;
+            return sndHitEnemy;
     }
 }
 

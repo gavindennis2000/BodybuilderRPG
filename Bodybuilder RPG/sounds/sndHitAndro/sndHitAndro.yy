@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":1,
   "conversionMode":0,
-  "duration":1.0858049,
+  "duration":5.44,
   "name":"sndHitAndro",
   "parent":{
     "name":"Battle",

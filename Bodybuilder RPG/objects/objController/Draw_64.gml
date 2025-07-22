@@ -28,8 +28,8 @@ if (fadeAmount > 0) {
 // layer = layer_create(layer_get_depth(layer_get_id("Instances")) , "cutscene");
 if (TEST && global.cutscene) {
     draw_set_font(fTextboxSmall);
-    fontXY(fa_left, fa_middle);
-    drawTextOutline(3, CAM_HEIGHT / 3 + 5, "cutscene in progress", c_white, c_black, 0.5);
+    fontXY(fa_left, fa_bottom);
+    drawTextOutline(3, CAM_HEIGHT, "cutscene in progress", c_white, c_black, 0.5);
 }
 
 // show the name of the room at the beginning of room start
@@ -70,16 +70,16 @@ if (showSubRoomVar && room != rBattle) {
     else {
         showSubRoomAlarm--;
     }
-    // debug(showSubRoomAlarm);
 
+    // check when to turn off the show sub room text
+    if (showSubRoomVarAlpha < 0 || global.subRoomVar == -1) {
+        showSubRoomVarAlpha = 0;
+        showSubRoomVar = false;
+    }    
+    
     // draw the actual text finally
     draw_set_font(fTextbox);
     fontXY(fa_right, fa_bottom);
     var margin = 2;
     drawTextOutline(CAM_WIDTH - margin * 3, CAM_HEIGHT - margin, global.subRoomVar, c_white, c_black, showSubRoomVarAlpha);
-
-    if (showSubRoomVarAlpha < 0) {
-        showSubRoomVarAlpha = 0;
-        showSubRoomVar = false;
-    }
 }

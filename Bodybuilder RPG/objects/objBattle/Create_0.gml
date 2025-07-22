@@ -207,8 +207,7 @@ handleAttack = function(attacker, attacked) {
 
     // calculate the damage
     var attackerStr = attacker.ref.stats.strength;
-    var attackedDef = attacked.stats.endurance;
-    var dmg = round((attackerStr * 10 - attackedDef * 5) * random_range(0.95, 1.05));
+    var dmg = round((attackerStr * 10) * random_range(0.9, 1.1));
     if (dmg < 1)
         dmg = 1;
     else if (dmg > 999)
@@ -240,6 +239,23 @@ handleItem = function(attacker, attacked) {
     var attackerInst = attacker.ref;
     with (attackerInst) {
         useItem(attacked, other.queuedItem);
+    }
+
+    // check if healed fighter needs to be added back to battle queue
+    var reviveFlag = true;
+    for (var i = 0; i < array_length(battleQueue); i++) {
+        if (battleQueue[i].ref == attacked)
+            reviveFlag = false;
+    }
+    if (reviveFlag) {
+        var newCounter = battleQueue[array_length(battleQueue) - 1].counter + 1;
+        array_insert(battleQueue, array_length(battleQueue), {
+            ref: attacked,
+            battleID: attacked.battleID, 
+            side: "party",
+            counter: newCounter,
+            pos: 3,
+        });
     }
 
     // let the alarm handle the rest
@@ -385,35 +401,13 @@ setPredictQueue = function(battleQueue, attackType = "Attack") {
                 predict[j] = temp;
             }
         }
-        // debug($"predict {i}: {predict[i]}");
     }
 
-    for (var i = 0; i < array_length(predict); i++)
-    // debug ($"fighter: {predict[i].battleID} {predict[i].pos} counter: {predict[i].counter}");
+    // for (var i = 0; i < array_length(predict); i++)
+        // debug ($"fighter: {predict[i].battleID} {predict[i].pos} counter: {predict[i].counter}");
+
     return predict;
 
-    // for (var i = 0; i < array_length(predict) - 1; i++) {
-    //     var cardio = predict[i].ref.stats.cardio;
-    //     var spdFactor = ((cardio div 5) / 2);
-    //     var counterIncrease;
-    //     
-    //     var clone = variable_clone(predict[i]);
-    //     clone.counter += counterIncrease;
-    //     for (var j = i + 1; j < array_length(predict); j++) {
-    //         if (clone.counter < predict[j].counter) {
-    //             array_insert(predict, j, clone);
-    //             clone.counter += ATTACK_COUNTER - spdFactor;
-    //         }
-    //     }
-    //     if (array_length(predict) >= 10)
-    //         return predict;
-    // }
-
-    // var repeatIndex = 0;
-    // while (array_length(predict) < 5) {
-    //     array_insert(predict, array_length(predict), predict[repeatIndex++]);
-    // }
-    return predict;
 }
 
 battleQueue = sortBattleQueue(battleQueue);

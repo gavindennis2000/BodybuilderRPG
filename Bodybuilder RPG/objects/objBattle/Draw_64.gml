@@ -161,7 +161,7 @@ if (state != "start" && state != "run away" && state != "victory" && state != "l
     for (var i = 0; i < 5; i++) {
         // get the fighter's picture
         var battleID, c1;
-        if (i == 0) {
+        if (i == 0 && is_array(predictQueue)) {
             battleID = predictQueue[i].battleID;
             c1 = predictQueue[i].side == "party" ? c_blue : c_red;
             if (predictQueue[i].side == "party") {

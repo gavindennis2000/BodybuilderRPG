@@ -11,9 +11,15 @@ setSongLoopPoints();
 if (TEST && TEST_BATTLE) {
     global.battleData = {
         party: ["andro", "ana"],
-        enemies: ["robber", "robber", "robber"],
+        enemies: ["super heavyweight"],
         canRun: true
     }
 }
 
-room_goto(rPumpPalace);
+var rm =
+rPumpPalace;
+
+if (!TEST)
+    rm = rSpace;
+
+room_goto(rm);

@@ -8,6 +8,9 @@ function handleEvents() {
         //
     }
 
+    if (TEST && TEST_BATTLE)
+        exit;
+
     // natural disasters and stuff that happen every time
     if (true) {
         // the atlas stone in front of leangroudnburg
@@ -44,6 +47,7 @@ function handleEvents() {
             with (objDoor)
                 if (doorID != "mom")
                     instance_create_layer(x, y, "Instances", objItem, {
+                        itemID: "locked door",
                         finalText: "It's late. I should go home."
                     });
         }
@@ -587,6 +591,8 @@ function handleEvents() {
             if (!global.events.endCh1)
                 exit;
 
+            global.cutscene = true;
+            global.cutsceneSong = -1;
             textbox([
                 {
                     name: "ana", 
@@ -614,14 +620,20 @@ function handleEvents() {
                     text: "Ummm. Do you want me to walk home with you?", 
                     prompt: [
                         "No, thanks",
-                        [],
+                        [
+                            {
+                                name: "ana", 
+                                text: "Gotcha. Sorry if I sound overly cautious, but..."
+                            },
+                        ],
                         "I'm a grown-ass man, Anabel",
-                        []
+                        [
+                            {
+                                name: "ana", 
+                                text: "You're right... What am I saying. It's just..."
+                            },
+                        ]
                     ]
-                },
-                {
-                    name: "ana", 
-                    text: "You're right... What am I saying. It's just..."
                 },
                 {
                     name: "ana", 
@@ -643,6 +655,7 @@ function handleEvents() {
                                 global.party = ["andro"];
                                 debug($"party after: {global.party}", -1);
                                 global.events.goodbyeAna = true;
+                                endCutscene();
                                 instance_destroy(self, false);
                             }
                             alarm_set(1, 1);

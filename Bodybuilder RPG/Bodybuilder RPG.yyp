@@ -518,6 +518,7 @@
     {"id":{"name":"sndHitAna","path":"sounds/sndHitAna/sndHitAna.yy",},},
     {"id":{"name":"sndHitAndro","path":"sounds/sndHitAndro/sndHitAndro.yy",},},
     {"id":{"name":"sndHitDoms","path":"sounds/sndHitDoms/sndHitDoms.yy",},},
+    {"id":{"name":"sndHitEnemy","path":"sounds/sndHitEnemy/sndHitEnemy.yy",},},
     {"id":{"name":"sndLeangroundburg","path":"sounds/sndLeangroundburg/sndLeangroundburg.yy",},},
     {"id":{"name":"sndLevelUp","path":"sounds/sndLevelUp/sndLevelUp.yy",},},
     {"id":{"name":"sndMom","path":"sounds/sndMom/sndMom.yy",},},

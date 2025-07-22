@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":1,
   "conversionMode":0,
-  "duration":0.29306123,
+  "duration":4.4,
   "name":"sndCursor",
   "parent":{
     "name":"SFX",

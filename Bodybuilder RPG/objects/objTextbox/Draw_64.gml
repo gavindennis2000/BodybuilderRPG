@@ -39,7 +39,7 @@ switch (name) {
     // mains
     case "andro":
     case "monologue":
-        color1 = #00364d; 
+        color1 = #006b99;
         break;
     case "ana":
         color1 = #00b3ff;

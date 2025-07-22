@@ -60,6 +60,6 @@ if (fadeAmount > 0) {
     alarm[1] = alarmTime;
 }
 
-if (TEST_BATTLE) {
-    startBattle(true, global.battleData.enemies, true, global.battleData.party);
+if (TEST_BATTLE && room != rBattle) {
+    startBattle(global.battleData.enemies, true, global.battleData.party);
 }

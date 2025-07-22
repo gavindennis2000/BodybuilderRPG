@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"sndHitEnemy",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":1,
+  "conversionMode":0,
+  "duration":7.54,
+  "name":"sndHitEnemy",
+  "parent":{
+    "name":"Battle",
+    "path":"folders/4 Music/SFX/Battle.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndHitEnemy.wav",
+  "type":0,
+  "volume":1.0,
+}

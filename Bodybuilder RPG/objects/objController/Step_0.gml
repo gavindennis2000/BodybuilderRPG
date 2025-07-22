@@ -167,7 +167,6 @@ if (global.chapter == 1 && room == rOverworld && global.events.endCh1 && !global
                             text: "I'm in a good mood from my excellent workout earlier. So instead, I will just kick your ass as a warning. Guess It's your \"Gluckstag\" today.",
                         },
                         {
-                            name: "", 
                             text: $"LARGE AUSTRALIAN MAN beats the bejesus out of {string_upper(global.characterName)}.",
                             action: function() {
                                 playSound(sndHitAndro);

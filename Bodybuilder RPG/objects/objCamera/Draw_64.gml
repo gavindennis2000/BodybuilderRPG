@@ -22,7 +22,7 @@ if (battle) {
     if (whiteOut < 2) {
         whiteOut = (room == rSpace && !global.events.startCh1) ? whiteOut + 0.015 : whiteOut + 0.02;
 
-        if (global.events.startCh1 && whiteOut >= 1) {
+        if (TEST_BATTLE || (global.events.startCh1 && whiteOut >= 1)) {
             // save the player's state and destroy its object
             global.roomChange.x = objPlayer.x;
             global.roomChange.y = objPlayer.y;

@@ -17,9 +17,9 @@ else {
     fadeAmount = 0;
     with (objPlayer)
         canMove = (!instance_exists(objTextbox) && !global.cutscene);
-    if (global.apology) {
+    if (!TEST && global.apology) {
         global.apology = false;
-        textbox("This room hasn't been created yet. Sorry! `-Gavin (The programmer)");
+        textbox("This room hasn't been created yet. Sorry! `-Gavin");
     }
     exit;
 }

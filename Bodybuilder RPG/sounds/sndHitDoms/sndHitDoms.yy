@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":1,
   "conversionMode":0,
-  "duration":1.1095692,
+  "duration":5.44,
   "name":"sndHitDoms",
   "parent":{
     "name":"Battle",

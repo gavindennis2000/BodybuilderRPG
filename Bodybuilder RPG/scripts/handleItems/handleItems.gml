@@ -59,11 +59,11 @@ function handleItems() {
 	            break;
 	        case inst_178CDEA8:
 	            itemID = "sign";
-	            finalText = $"Bodybuilding Nutrition Company ``(no soliciting)"
+	            finalText = $"Bodybuilding Nutrition Company ``(no soliciting)";
 	            break;
 			case inst_699C5C98:
 				itemID = "sign";
-				finalText = "Dangle's Bodybuilding Bargains"
+				finalText = "Dong's Sporting Goods";
 				break;
 			case inst_25232AF4:
 				itemID = "sign";

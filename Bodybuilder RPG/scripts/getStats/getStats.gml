@@ -18,29 +18,41 @@ function getStats(battleID) {
 		case "robber":
 			stats = {
 				xp: 50,
-			    hp: 180,
-			    strength: 8,
-			    endurance: 10,
+			    hp: 320,
+			    strength: 4,
 			    cardio: 10,
 			}
 			break;
 		case "smol powerlifter":
 			stats = {
 			    xp: 50,
-			    hp: 200,
-			    maxhp: 100,
-			    strength: 5.5,
-			    endurance: 10,
+			    hp: 100,
+			    strength: 1,
 			    cardio: 30,
 			}
-break;
+			break;
+		case "super heavyweight":
+			stats = {
+			    xp: 50,
+			    hp: 1000,
+			    strength: 16,
+			    cardio: 1,
+			}
+			break;
+		case "thicc powerlifter":
+			stats = {
+				xp: 50,
+				hp: 320,
+				strength: 5,
+				cardio: 6,
+			}	
+			break;
 		default:
 			stats = {
 			    xp: 50,
 			    hp: 100,
 			    maxhp: 100,
 			    strength: 10,
-			    endurance: 10,
 			    cardio: 10,
 			}
 			break;

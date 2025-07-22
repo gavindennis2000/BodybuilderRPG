@@ -37,8 +37,6 @@ else if (xTo == x && yTo == y && array_length(directions) == 0) {
             action();
         else if ( (is_array(action) && is_struct(action[0])) || is_struct(action) )
             textbox(action);
-        else
-            handleAction(action);
     }
         
     exit;

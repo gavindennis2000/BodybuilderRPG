@@ -4,13 +4,15 @@
 
 var doorIndex = 0;
 var xscale = 1;
+var sprY = 0;
+
 switch (doorID) {
     case "upstairs":
-        doorIndex = 1;
+        doorIndex = 2;
         image_index = 0;
         break;
     case "downstairs":
-        doorIndex = 2;
+        doorIndex = 1;
         image_index = 0;
         break;
     case "gym left":
@@ -27,4 +29,4 @@ switch (doorID) {
         break;
 }
 
-draw_sprite_part_ext(sprDoor, image_index, 0, 0 + doorIndex * 32, 32, 32, xscale == 1 ? x - drawX : x + 32 + drawX, y, xscale, image_yscale, image_blend, image_alpha);
+draw_sprite_part_ext(sprDoor, image_index, 0, 0 + doorIndex * 32, 32, 32, xscale == 1 ? x - drawX : x + 32 + drawX, y + sprY, xscale, image_yscale, image_blend, image_alpha);

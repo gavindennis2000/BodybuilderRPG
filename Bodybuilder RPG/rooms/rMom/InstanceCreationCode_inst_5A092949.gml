@@ -1,1 +1,1 @@
-doorID = "downstairs";
+doorID = "upstairs";

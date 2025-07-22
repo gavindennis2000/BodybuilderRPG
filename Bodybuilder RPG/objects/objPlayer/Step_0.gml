@@ -15,6 +15,8 @@ if (array_length(playable) > 1 && input_check_pressed("north")) {
         }
     }
 }
+else 
+    global.character = "andro";
 
 canCertainlyMove = (canMove && targetX == 0 && targetY == 0);
 
@@ -79,14 +81,14 @@ else if (keyDown && canMove) {
 
 if (targetX != 0 || targetY != 0) {
     // move the player to the next grid square 
-    if (TEST) 
-        runSpeed *= 2;
+    // if (TEST) 
+    //     runSpeed *= 2;
     x += sign(targetX) * runSpeed;
     targetX -= sign(targetX) * runSpeed; 
     y += sign(targetY) * runSpeed;
     targetY -= sign(targetY) * runSpeed; 
-    if (TEST)
-        runSpeed /= 2;
+    // if (TEST)
+    //     runSpeed /= 2;
 }
 
 if (targetX == 0 && targetY == 0) {
