@@ -98,7 +98,7 @@ if (showDamage && dmgToShow != -1) {
     draw_set_font(fTextbox);
     if (dmgY < dmgYFinal)
         dmgY += 4;
-    drawTextOutline(x, y - dmgY, dmgToShow < 0 ? -dmgToShow : dmgToShow, c_white, dmgToShow < 0 ? #59dbff : c_black);
+    drawTextOutline(x, y - dmgY, dmgToShow < 0 ? -dmgToShow : dmgToShow, c_white, dmgToShow < 0 ? #00b3ff : c_black);
 }
 
 // draw the battle instance

@@ -99,7 +99,8 @@ if (state == "ready" && focus == "menu") {
             if (
                 selectionName == "Skill" && array_length(skills) == 0 ||
                 selectionName == "Gym Bag" && array_length(global.inventory) == 0 ||
-                selectionName == "Run Away" && !canRun
+                selectionName == "Run Away" && (!canRun) ||
+                screen == "Skill" && is_struct(selectionName) && selectionName.cost > turn.ref.stats.skill
             ) {
                 color = selections[selection] == selectionName ? #666600 : invalidColor;
             }
@@ -116,6 +117,15 @@ if (state == "ready" && focus == "menu") {
                 selections[1] != -1 ? $"{selections[1].name} {selections[1].quantity}" : "",
                 selections[2] != -1 ? $"{selections[2].name} {selections[2].quantity}" : "",
                 selections[3] != -1 ? $"{selections[3].name} {selections[3].quantity}" : "",
+            ]
+        }
+        else if (screen == "Skill") {
+            selections = skills;
+            finalSelections = [
+                selections[0] != -1 ? $"{selections[0].name} {selections[0].cost}" : "",
+                selections[1] != -1 ? $"{selections[1].name} {selections[1].cost}" : "",
+                selections[2] != -1 ? $"{selections[2].name} {selections[2].cost}" : "",
+                selections[3] != -1 ? $"{selections[3].name} {selections[3].cost}" : "",
             ]
         }
         if (array_length(selections) >= 1)

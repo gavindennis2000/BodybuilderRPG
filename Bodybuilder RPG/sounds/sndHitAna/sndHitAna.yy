@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":1,
   "conversionMode":0,
-  "duration":5.44,
+  "duration":0.5952608,
   "name":"sndHitAna",
   "parent":{
     "name":"Battle",

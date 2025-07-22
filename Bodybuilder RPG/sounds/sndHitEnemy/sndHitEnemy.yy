@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":1,
   "conversionMode":0,
-  "duration":7.54,
+  "duration":1.0858049,
   "name":"sndHitEnemy",
   "parent":{
     "name":"Battle",

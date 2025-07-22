@@ -50,11 +50,21 @@ global.keyItems = {
     wheyfordBarbellKey: false,
 }
 global.skills = {
-    andro: [],
-    ana: [],
+    andro: [
+        {
+            name: "Talk", 
+            cost: 1
+        }
+    ],
+    ana: [
+        {
+            name: "Train", 
+            cost: 1
+        }
+    ],
     doms: [
         {
-            name: "brace",
+            name: "Brace",
             cost: 1
         }
     ]
@@ -84,6 +94,34 @@ global.cutscene = -1;
 cutsceneY = 0;
 
 // battle engine
+// base stats for playable characters
+global.ANDRO_BASE_STATS = {
+    hp: 200,
+    maxhp: 200,
+    skill: 1,
+    maxskill: 1,
+    strength: 10,
+    cardio: 20,
+}
+
+global.ANA_BASE_STATS = {
+    hp: 120,
+    maxhp: 120,
+    skill: 5,
+    maxskill: 3,
+    strength: 9,
+    cardio: 10,
+}
+
+global.DOMS_BASE_STATS = {
+    hp: 100,
+    maxhp: 100,
+    skill: 1,
+    maxskill: 1,
+    strength: 20,
+    cardio: 10,
+}
+
 global.battle = false;
 global.battleData = (variable_global_exists("battleData")) ? global.battleData : {
     party: [],
@@ -100,32 +138,11 @@ global.stats = {
     xp: 0,
     xpNext: 100,
     // the fighters
-    andro: {
-        hp: 200,
-        maxhp: 200,
-        skill: 1,
-        maxskill: 1,
-        strength: 10,
-        cardio: 20,
-    },
-    ana: {
-        hp: 120,
-        maxhp: 120,
-        skill: 5,
-        maxskill: 3,
-        strength: 10,
-        cardio: 10,
-    },
-    doms: {
-        hp: 100,
-        maxhp: 100,
-        skill: 1,
-        maxskill: 1,
-        strength: 20,
-        cardio: 10,
-    },
-
+    andro: global.ANDRO_BASE_STATS,
+    ana: global.ANA_BASE_STATS,
+    doms: global.DOMS_BASE_STATS,
 }
+
 setStats();
 if (TEST && KILL_EVERYTHING) {
     setStats(4);

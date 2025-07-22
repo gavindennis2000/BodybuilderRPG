@@ -22,6 +22,9 @@ switch (turnID) {
     default:
         break;
 }
+while (array_length(skills) < 4) {
+    array_insert(skills, array_length(skills), -1);
+}
 
 // get the inventory
 inventory = [
@@ -49,6 +52,8 @@ switch (screen) {
     case "Skill":
         focus = "menu";
         selections = skills;
+        marquee.counter = 1;
+        marquee.text = getSkillDescription(selections[selection].name);
         break;
     case "Gym Bag":
         focus = "menu";
@@ -72,6 +77,13 @@ switch (screen) {
             marquee.text = $"{string_upper(partySelected.battleID)}  {partySelected.stats.hp} / {partySelected.stats.maxhp}";
         }
         break;
+    case "Use Skill":
+        if (state == "ready" && selection != "all") {
+            var selected = selections[selection];
+            marquee.counter = 1;
+            marquee.text = $"{string_upper(selected.battleID)}  {selected.stats.hp} / {selected.stats.maxhp}";
+        }
+        break;
 }
 
 var left = input_check_pressed("left");
@@ -92,10 +104,12 @@ if (state != "ready" || optionsOffset > 1)
 if (confirm) {
     if (
         is_numeric(selection) && (
-        selections[selection] == "Skill" && array_length(skills) == 0 || 
-        selections[selection] == "Gym Bag" && array_length(global.inventory) == 0 ||
-        selections[selection] == "Run Away" && !canRun
-    )) {
+            selections[selection] == "Skill" && array_length(skills) == 0 || 
+            screen == "Skill" && selections[selection].cost > turn.ref.stats.skill ||
+            selections[selection] == "Gym Bag" && array_length(global.inventory) == 0 ||
+            selections[selection] == "Run Away" && !canRun
+        )
+    ) {
         playSound(sndError);
     }
     else {
@@ -120,6 +134,32 @@ if (confirm) {
                     }
                 }
             }
+            else if (screen == "Skill") {
+                queuedSkill = selections[selection];
+                debug($"queued skill: {queuedSkill}");
+                var focuses = getSkillFocuses(queuedSkill.name);
+                focus = focuses.focus;
+                screen = "Use Skill";
+                selections = focuses.selections;
+                selection = focuses.selection;
+                if (selections == "myParty") {
+                    selections = myParty;  // workaround of the century
+                    if (selection != "all") {
+                        for (var i = 0; i < array_length(myParty); i++) {
+                            if (myParty[i] == turn.ref) {
+                                selection = i;
+                                debug($"new selection {selection}");
+                                break;
+                            }
+                        }
+                    }
+                }
+                else if (selections == "myEnemies") {
+                    selections = myEnemies;
+                    if (selection != "all")
+                        selection = 0;
+                }
+            }
             else {
                 screen = selections[selection];
                 selection = 0;
@@ -135,7 +175,12 @@ if (confirm) {
                 var playerToItem = selections[selection];
                 handlePlayerTurn(attacker, playerToItem, "Item");
             }
-            if (screen == "Run Away") {
+            else if (screen == "Use Skill") {
+                var attacker = turn;
+                var playerToSkill = selection == "all" ? selection : selections[selection];
+                handlePlayerTurn(attacker, playerToSkill, "Skill");
+            }
+            else if (screen == "Run Away") {
                 screen = -1;
                 selection = -1;
                 state = "run away";
@@ -153,6 +198,11 @@ if (confirm) {
                 var attacker = turn;
                 var enemyToAttack = selections[selection];
                 handlePlayerTurn(attacker, enemyToAttack, "Attack");
+            }
+            else if (screen == "Use Skill") {
+                var attacker = turn;
+                var enemyToSkill = selection == "all" ? selection : selections[selection];
+                handlePlayerTurn(attacker, enemyToSkill, "Skill");
             }
         }
     }

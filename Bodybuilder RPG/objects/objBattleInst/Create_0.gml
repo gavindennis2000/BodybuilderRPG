@@ -3,8 +3,14 @@
 /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
 stats = getStats(battleID);
+debug($"{battleID}: {stats}");
 if (stats.cardio > 99)
     stats.cardio = 99;
+
+// extra stats from buffs
+talkedTo = false;
+buffStr = 0;
+buffDef = 0;
 
 moves = getMoves(battleID);
 moveIndex = 0;
@@ -82,6 +88,32 @@ useItem = function(victim, item) {
     }
     return;
 }
+
+useSkill = function(victim, skill) {
+    // uses skill on self, whole party, enemy, or all enemies
+
+    /*gmlive*/ if (TEST) { if (live_call(victim, skill)) return live_result; }
+
+    myVictim = victim;
+    mySkill = skill.name;
+
+    switch (mySkill) {
+        case "Talk":
+            state = "talking";
+            var text = getBattleText(myVictim);
+            textbox(text, false, false, "bottom");
+            myVictim.talkedTo = true;
+            alarm_set(0, 5);
+            break;
+        default:
+            state = "talking";
+            textbox("This skill doesn't work yet. Sorry.", false, false, "bottom");
+            alarm_set(0, 60);
+            break;
+    }    
+
+}
+
 getSFX = function(battleID) {
     // get's the appropriate sound effects
 

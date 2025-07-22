@@ -92,3 +92,12 @@ else if (state == "jump") {
             attackStatus.ready = true;
     }
 }
+else if (state == "talking") {
+    if (instance_exists(objTextbox)) {
+        alarm_set(0, 5);
+        exit;
+    }
+    state = "wait";
+    with (objBattle)
+        attackStatus.ready = true;
+}

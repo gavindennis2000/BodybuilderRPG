@@ -17,7 +17,7 @@ if (fadeBlack == -1)
 else if (fadeBlack >= 0.85) {
     textbox([
         {
-            text: array_length(global.battleData.party) == 1 ? $"{string_upper(global.characterName)} got mogged by the enemies and blacked out..." : $"The party got mogged by the enemies and blacked out..."
+            text: $"{array_length(myParty) > 1 ? "The party " : string_upper(global.characterName)} got mogged by {array_length(myEnemies) > 1 ? "the enemies" : string_upper(myEnemies[0].battleID)} and blacked out..."
         },
         {
             text: "Continue from last save?",

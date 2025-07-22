@@ -15,6 +15,14 @@ function getStats(battleID) {
 		case "doms":
 			stats = global.stats.doms;
 			break;
+		case "donnie swoleman":
+			stats = {
+				xp: 50,
+			    hp: 3000,
+			    strength: 9,
+			    cardio: 5,
+			}
+			break;
 		case "robber":
 			stats = {
 				xp: 50,
