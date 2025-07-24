@@ -28,8 +28,8 @@ if (fadeAmount > 0) {
 // layer = layer_create(layer_get_depth(layer_get_id("Instances")) , "cutscene");
 if (TEST && global.cutscene) {
     draw_set_font(fTextboxSmall);
-    fontXY(fa_left, fa_bottom);
-    drawTextOutline(3, CAM_HEIGHT, "cutscene in progress", c_white, c_black, 0.5);
+    fontXY(fa_middle, fa_bottom);
+    drawTextOutline(CAM_WIDTH / 2, CAM_HEIGHT + 5, "cutscene", c_white, c_black, 0.5);
 }
 
 // show the name of the room at the beginning of room start

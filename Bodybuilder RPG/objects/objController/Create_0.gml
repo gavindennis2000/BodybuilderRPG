@@ -54,7 +54,7 @@ global.skills = {
         {
             name: "Talk", 
             cost: 1
-        }
+        },
     ],
     ana: [
         {
@@ -138,9 +138,9 @@ global.stats = {
     xp: 0,
     xpNext: 100,
     // the fighters
-    andro: global.ANDRO_BASE_STATS,
-    ana: global.ANA_BASE_STATS,
-    doms: global.DOMS_BASE_STATS,
+    andro: variable_clone(global.ANDRO_BASE_STATS),
+    ana: variable_clone(global.ANA_BASE_STATS),
+    doms: variable_clone(global.DOMS_BASE_STATS),
 }
 
 setStats();

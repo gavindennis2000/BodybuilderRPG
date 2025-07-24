@@ -46,7 +46,7 @@ if (room == rSpace && global.chapter == 1) {
                     },
                     {
                         name: "gods of gains",
-                        text: "Proceed forward to claim your gift, King of Lifters."
+                        text: $"We bless you with a gift to assist you on your journey. Proceed forward to claim it."
                     }],
                     "No",
                     [{
@@ -55,7 +55,7 @@ if (room == rSpace && global.chapter == 1) {
                     },
                     {
                         name: "gods of gains",
-                        text: "You have the rare combination of work ethic and varsity athlete genes necessary to be worthy of the title \"King of Lifters\"."
+                        text: "You have the rare combination of work ethic and talent necessary to be a bodybuilding champion."
                     },
                     {
                         name: "gods of gains",

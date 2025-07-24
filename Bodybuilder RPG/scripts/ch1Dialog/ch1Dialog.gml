@@ -103,7 +103,7 @@ function ch1Dialog(npcID = -1){
 				},
 				{
 					name: "donnie swoleman", 
-					text: "I KNOW SOMETHING'S UP!! MY PAY DAY THIS `WEEK WAS NOTHIN BUT A PEANUT!!!",
+					text: "I KNOW SOMETHING'S UP!! MY PAY DAY THIS `WEEK WAS NOTHIN BUT A WALNUT!!!",
 					tone: "loud"
 				},
 				{

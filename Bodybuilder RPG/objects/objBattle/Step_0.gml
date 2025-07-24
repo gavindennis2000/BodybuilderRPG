@@ -105,6 +105,7 @@ if (confirm) {
     if (
         is_numeric(selection) && (
             selections[selection] == "Skill" && array_length(skills) == 0 || 
+            selections[selection] == "Skill" && turn.ref.stats.skill == 0 || 
             screen == "Skill" && selections[selection].cost > turn.ref.stats.skill ||
             selections[selection] == "Gym Bag" && array_length(global.inventory) == 0 ||
             selections[selection] == "Run Away" && !canRun
@@ -166,6 +167,11 @@ if (confirm) {
                 if (screen == "Gym Bag") {
                     // update the prediction queue
                     predictQueue = setPredictQueue(battleQueue, "Item");
+                }
+                else if (screen == "Skill") {
+                    // update the prediction queue
+                    var firstSkillSpd = getSkillSpeed(skills[0], getSpeedFactor(turn.ref.stats.cardio));
+                    predictQueue = setPredictQueue(battleQueue, "Skill", firstSkillSpd);
                 }
             }
         }
@@ -231,24 +237,48 @@ else if (focus == "menu") {
         if ((selection == 1 || selection == 3) && selections[selection - 1] != -1) {
             playSound(sndCursor);
             selection--;
+            if (screen == "Skill") {
+                // update the prediction queue
+                debug(selections[selection]);
+                var skillSpd = getSkillSpeed(selections[selection], getSpeedFactor(turn.ref.stats.cardio));
+                debug(skillSpd);
+                predictQueue = setPredictQueue(battleQueue, "Skill", skillSpd);
+            }
         }
     }
     else if (right) {
         if ((selection == 0 || selection == 2) && selections[selection + 1] != -1) {
             playSound(sndCursor);
             selection++;
+            if (screen == "Skill") {
+                // update the prediction queue
+                debug(selections[selection]);
+                var skillSpd = getSkillSpeed(selections[selection], getSpeedFactor(turn.ref.stats.cardio));
+                debug(skillSpd);
+                predictQueue = setPredictQueue(battleQueue, "Skill", skillSpd);
+            }
         }
     }
     else if (down) {
         if ((selection == 0 || selection == 1) && selections[selection + 2] != -1) {
             playSound(sndCursor);
             selection += 2;
+            if (screen == "Skill") {
+                // update the prediction queue
+                var skillSpd = getSkillSpeed(selections[selection], getSpeedFactor(turn.ref.stats.cardio));
+                predictQueue = setPredictQueue(battleQueue, "Skill", skillSpd);
+            }
         }
     }
     else if (up) {
         if ((selection == 2 || selection == 3) && selections[selection - 2] != -1) {
             playSound(sndCursor);
             selection -= 2;
+            if (screen == "Skill") {
+                // update the prediction queue
+                var skillSpd = getSkillSpeed(selections[selection], getSpeedFactor(turn.ref.stats.cardio));
+                predictQueue = setPredictQueue(battleQueue, "Skill", skillSpd);
+            }
         }
     }
 

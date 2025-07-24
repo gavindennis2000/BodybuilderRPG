@@ -187,7 +187,7 @@ function itemDialog(itemID = -1) {
                             text: $"Good luck on your journey, {string_upper(global.characterName)}.",
                             canMove: false,
                             action: function() {
-                                playSound(sndDeath);
+                                playSound(sndWakeUp);
                                 with (objCamera)
                                     startBattleTransition();
                                 audio_sound_gain(global.songPlaying, 0, 2000);
@@ -259,6 +259,7 @@ function itemDialog(itemID = -1) {
                             action: function() {
                                 playSound(sndLevelUp);
                                 global.divineItem = "nectar of the gods";
+                                addToInventory("Choc. Milk", 100);
                             },
                         },
                         {
@@ -266,7 +267,7 @@ function itemDialog(itemID = -1) {
                             text: $"Good luck on your journey, {string_upper(global.characterName)}.",
                             canMove: false,
                             action: function() {
-                                playSound(sndDeath);
+                                playSound(sndWakeUp);
                                 with (objCamera)
                                     startBattleTransition();
                                 audio_sound_gain(global.songPlaying, 0, 2000);
@@ -317,7 +318,7 @@ function itemDialog(itemID = -1) {
                             text: $"Good luck on your journey, {string_upper(global.characterName)}.",
                             canMove: false,
                             action: function() {
-                                playSound(sndDeath);
+                                playSound(sndWakeUp);
                                 with (objCamera)
                                     startBattleTransition();
                                 audio_sound_gain(global.songPlaying, 0, 2000);
@@ -330,7 +331,6 @@ function itemDialog(itemID = -1) {
             ]
             break;
         case "wfbb switch 1":
-        case "wfbb switch 3":
             var flipSwitch = function() {
                 with (objItem) {
                     if (itemID == "wfbb roadblock 1") {
@@ -338,11 +338,8 @@ function itemDialog(itemID = -1) {
                         mask_index = -1;
                         sprite_index = -1;
                     }
-                    if (TEST && itemID == "wfbb roadblock 2") {
-                        image_blend = c_blue;
-                        mask_index = -1;
-                        sprite_index = -1;
-                    }
+                    else if (itemID == "wfbb switch 1")
+                        finalText = "no text";
                 }
             }
             text = {
@@ -356,13 +353,16 @@ function itemDialog(itemID = -1) {
             }
             break;
         case "wfbb switch 2":
+        case "wfbb switch 3":
             var flipSwitch = function() {
                 with (objItem) {
-                    if (itemID == "wfbb roadblock 2") {
+                    if (itemID == "wfbb roadblock 1" || itemID == "wfbb roadblock 2") {
                         image_blend = c_blue;
                         mask_index = -1;
                         sprite_index = -1;
                     }
+                    if (itemID == "wfbb switch 1" || itemID == "wfbb switch 2" || itemID == "wfbb switch 3")
+                        finalText = "no text";
                 }
             }
             text = [

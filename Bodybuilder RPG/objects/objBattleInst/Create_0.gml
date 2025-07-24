@@ -3,7 +3,6 @@
 /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
 stats = getStats(battleID);
-debug($"{battleID}: {stats}");
 if (stats.cardio > 99)
     stats.cardio = 99;
 
@@ -20,9 +19,17 @@ targetX = -1;
 halfwayX = -1;
 targetY = -1;
 
+// skill animation effects
+skillSpr = -1;
+skillY = 0;
+skillAlpha = 0;
+skillDir = "up";
+skillSound = sndDoor;
+
 // show damage when hit by oppressor
 myVictim = -1;
 myItem = -1;
+mySkill = -1;
 fogAlpha = 0;
 fogDir = "up";
 dmgToGive = -1;
@@ -37,6 +44,36 @@ dying = false;
 deathY = 0;
 
 // functions in alphabetical order
+activateSkillEffect = function() {
+    // activate skill and handle animations for all involved fighters
+
+    // show animation
+    var partySkillFunc = function() {
+        with (objBattle)
+            for (var i = 0; i < array_length(myParty); i++) {
+                with (myParty[i]) {
+                    alarm_set(3, 1 + 30 * i);
+                }
+            }
+    }
+
+    switch (mySkill) {
+        case "Train":
+            with (objBattleInst)
+                if (side == "party") {
+                    skillSpr = 0;
+                    skillSound = sndBuffer;
+                    if (buffStr < 5)
+                        buffStr++;
+                    if (buffDef < 5)
+                        buffDef++;
+                }
+            partySkillFunc();
+            break;
+        default:
+            debug("no skill effect");
+    }
+}
 
 attack = function(victim, dmg) {
     // attacks another fighter
@@ -96,6 +133,7 @@ useSkill = function(victim, skill) {
 
     myVictim = victim;
     mySkill = skill.name;
+    stats.skill -= skill.cost;
 
     switch (mySkill) {
         case "Talk":
@@ -103,6 +141,10 @@ useSkill = function(victim, skill) {
             var text = getBattleText(myVictim);
             textbox(text, false, false, "bottom");
             myVictim.talkedTo = true;
+            alarm_set(0, 5);
+            break;
+        case "Train":
+            state = "use skill";
             alarm_set(0, 5);
             break;
         default:

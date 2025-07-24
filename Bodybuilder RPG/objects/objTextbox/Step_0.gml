@@ -31,7 +31,8 @@ if (currentTextObj == -1) {
         preAction = -1;
     }
 }
-var confirm = input_check_pressed("south") || TEST && input_check("west");
+var confirm = input_check_pressed("south") || TEST && input_check("east");
+var finishText = input_check_pressed("west") || TEST && input_check("east");
 var getNextChar = function() {
     // grabs next char from currentTextObj and feeds it to drawText
     if (text == -1) {
@@ -76,53 +77,51 @@ else if (input_check_pressed("right") && prompt != -1 && readyForNext && selecti
     selection = 1;
 }
 
-if (confirm) {
-    if (readyForNext) {
-        readyForNext = false;
-        next = 1;
-        counter = 0;
-        drawText = "";
-        checkNewLineAt = checkNewLineAtAmount;
-        setNewLine = false;
-        if (prompt != -1) {
-            playSound(sndCursor);
-            if (is_array(prompt[1 + selection * 2])) {
-                for (var i = 0; i < array_length(prompt[1 + selection * 2]); i++)
-                    array_insert(text, textIndex + i + 1, prompt[1 + selection * 2][i])
-                if (++textIndex < array_length(text)) {
-                    currentTextObj = variable_clone(text[textIndex]);
-                    prompt = (variable_struct_exists(currentTextObj, "prompt")) ? currentTextObj.prompt : -1;
-                    canMove = (variable_struct_exists(currentTextObj, "canMove")) ? currentTextObj.canMove : canMove;
-                    action = (variable_struct_exists(currentTextObj, "action")) ? currentTextObj.action: -1;
-                    if (is_method(action) && textIndex + 1 < array_length(text)) {
-                        action();
-                        action = -1;
-                    }
-                } 
-                else
-                    destroy = true;
-            }
-            else if (is_method(prompt[1 + selection * 2])) {
-                prompt[1 + selection * 2]();
+if (confirm && readyForNext) {
+    readyForNext = false;
+    next = 1;
+    counter = 0;
+    drawText = "";
+    checkNewLineAt = checkNewLineAtAmount;
+    setNewLine = false;
+    if (prompt != -1) {
+        playSound(sndCursor);
+        if (is_array(prompt[1 + selection * 2])) {
+            for (var i = 0; i < array_length(prompt[1 + selection * 2]); i++)
+                array_insert(text, textIndex + i + 1, prompt[1 + selection * 2][i])
+            if (++textIndex < array_length(text)) {
+                currentTextObj = variable_clone(text[textIndex]);
+                prompt = (variable_struct_exists(currentTextObj, "prompt")) ? currentTextObj.prompt : -1;
+                canMove = (variable_struct_exists(currentTextObj, "canMove")) ? currentTextObj.canMove : canMove;
+                action = (variable_struct_exists(currentTextObj, "action")) ? currentTextObj.action: -1;
+                if (is_method(action) && textIndex + 1 < array_length(text)) {
+                    action();
+                    action = -1;
+                }
+            } 
+            else
                 destroy = true;
-            }
-            selection = 0;
         }
-        else if (++textIndex < array_length(text)) {
-            currentTextObj = variable_clone(text[textIndex]);
-            prompt = (variable_struct_exists(currentTextObj, "prompt")) ? currentTextObj.prompt : -1;
-            canMove = (variable_struct_exists(currentTextObj, "canMove")) ? currentTextObj.canMove : canMove;
-            action = (variable_struct_exists(currentTextObj, "action")) ? currentTextObj.action: -1;
-            if (is_method(action) && textIndex + 1 < array_length(text)) {
-                action();
-                action = -1;
-            }
-        }
-        else
+        else if (is_method(prompt[1 + selection * 2])) {
+            prompt[1 + selection * 2]();
             destroy = true;
+        }
+        selection = 0;
     }
-    else if (prompt == -1) {
-        while (string_length(currentTextObj.text) >= next)
-            getNextChar();
+    else if (++textIndex < array_length(text)) {
+        currentTextObj = variable_clone(text[textIndex]);
+        prompt = (variable_struct_exists(currentTextObj, "prompt")) ? currentTextObj.prompt : -1;
+        canMove = (variable_struct_exists(currentTextObj, "canMove")) ? currentTextObj.canMove : canMove;
+        action = (variable_struct_exists(currentTextObj, "action")) ? currentTextObj.action: -1;
+        if (is_method(action) && textIndex + 1 < array_length(text)) {
+            action();
+            action = -1;
+        }
     }
+    else
+        destroy = true;
+}
+else if (finishText && prompt == -1) {
+    while (string_length(currentTextObj.text) >= next)
+        getNextChar();
 }

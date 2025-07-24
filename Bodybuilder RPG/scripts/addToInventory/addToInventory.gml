@@ -10,11 +10,15 @@ function addToInventory(item, quantity = 1) {
         if (inv[i].name == item) {
             found = true;
             inv[i].quantity += quantity;
+            if (inv[i].quantity > 99)
+                inv[i].quantity = 99;
             return;
         }
     }
     
     if (!found)
+        if (quantity > 99)
+            quantity = 99;
         array_push(global.inventory, {
             name: item, 
             quantity: quantity

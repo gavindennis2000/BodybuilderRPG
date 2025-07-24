@@ -48,13 +48,41 @@ else if (state == "attack") {
     alarm_set(0, 1);
 }
 else if (state == "use item") {
-    var fogAmountChange = 0.04;
+    var fogAmountChange = 0.02;
     if (fogDir == "up") {
         fogAlpha += fogAmountChange;
         alarm_set(0, 1);
         if (fogAlpha >= 0.7) {
             showDamage = true;
             alarm_set(1, 50);
+            fogDir = "down";
+            alarm_set(0, 20);
+        }
+    }
+    else if (fogDir == "down" && fogAlpha > 0) {
+        fogAlpha -= fogAmountChange;
+        alarm_set(0, 1);
+    }
+    else {
+        fogAlpha = 0;
+        fogDir = "up";
+        state = "wait";
+        with (objBattle)
+            attackStatus.ready = true;
+    }
+}
+else if (state == "use skill") {
+   var fogAmountChange = 0.01;
+    if (fogDir == "up") {
+        if (fogAlpha == 0)
+            playSound(sndUseSkill);
+        // increment the color change for fighter and reset the alarm
+        fogAlpha += fogAmountChange;
+        alarm_set(0, 1);
+        if (fogAlpha >= 0.7) {
+            showDamage = true;
+            alarm_set(1, 50);
+            activateSkillEffect();
             fogDir = "down";
             alarm_set(0, 20);
         }
@@ -98,6 +126,10 @@ else if (state == "talking") {
         exit;
     }
     state = "wait";
+    with (objBattleInst)
+        if (side == "enemies" && stats.hp <= 0)
+            death();
+
     with (objBattle)
         attackStatus.ready = true;
 }

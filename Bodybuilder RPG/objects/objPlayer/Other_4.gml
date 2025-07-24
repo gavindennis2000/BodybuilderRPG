@@ -2,6 +2,7 @@
 
 if (room == rSpace) {
     spaceFog = 1;
+    playSound(sndTeleport);
     face = "up";
 }
 

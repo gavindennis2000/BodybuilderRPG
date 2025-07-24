@@ -34,7 +34,7 @@ if (marquee.height != 0) {
 }
 
 // draw the players names, health, etc
-if (state != "victory") {
+if (state != "victory" && !instance_exists(objTextbox)) {
     fontXY(fa_right, fa_bottom);
     var nameX = CAM_WIDTH * 2/3
     var nameY = CAM_HEIGHT * 19/20;
@@ -98,6 +98,7 @@ if (state == "ready" && focus == "menu") {
             var color = c_white;
             if (
                 selectionName == "Skill" && array_length(skills) == 0 ||
+                selectionName == "Skill" && turn.ref.stats.skill == 0 ||
                 selectionName == "Gym Bag" && array_length(global.inventory) == 0 ||
                 selectionName == "Run Away" && (!canRun) ||
                 screen == "Skill" && is_struct(selectionName) && selectionName.cost > turn.ref.stats.skill
@@ -164,6 +165,7 @@ if (state != "start" && state != "run away" && state != "victory" && state != "l
     var turnColor2 = #c1dbdb;
     var turnColor3 = #2a4e4f;
     draw_rectangle_color(queueX, queueY, queueX + queueW, queueY + queueH * 6 - 1, turnColor, turnColor2, turnColor3, c_black, false);
+    draw_set_font(fTextboxSmall);
     fontXY(fa_center, fa_top);
     drawTextOutline(queueX + queueW / 2, queueY, "Turn");
     draw_set_alpha(getAlpha);

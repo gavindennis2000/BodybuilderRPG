@@ -2,6 +2,7 @@
 
 /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
+global.enemiesToDestroy = [];
 var continueFromLast = function() {
     audio_stop_sound(global.battleMusic);
     continueFromLastSave();

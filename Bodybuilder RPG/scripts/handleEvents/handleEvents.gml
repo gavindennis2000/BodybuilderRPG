@@ -543,7 +543,10 @@ function handleEvents() {
                         },
                         {
                             name: "samson",
-                            text: "*protein shake burp*"
+                            text: "*protein shake burp*",
+                            action: function() {
+                                playSound(sndProteinShakeBurp);
+                            }
                         }, 
                         {
                             name: "samson", 
@@ -619,14 +622,14 @@ function handleEvents() {
                     name: "ana", 
                     text: "Ummm. Do you want me to walk home with you?", 
                     prompt: [
-                        "No, thanks",
+                        "No, thanks.",
                         [
                             {
                                 name: "ana", 
                                 text: "Gotcha. Sorry if I sound overly cautious, but..."
                             },
                         ],
-                        "I'm a grown-ass man, Anabel",
+                        "I'm a grown ass man, Anabel.",
                         [
                             {
                                 name: "ana", 

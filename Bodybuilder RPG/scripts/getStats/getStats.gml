@@ -27,7 +27,7 @@ function getStats(battleID) {
 			stats = {
 				xp: 50,
 			    hp: 320,
-			    strength: 4,
+			    strength: 3,
 			    cardio: 10,
 			}
 			break;

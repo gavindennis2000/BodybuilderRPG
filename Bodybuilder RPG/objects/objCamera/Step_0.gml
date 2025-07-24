@@ -61,7 +61,6 @@ if (room == rOverworld) {
                 if (divX == 2 && divY == 1 && global.subRoomVar != "Northeast") {
                     global.prevSubRoomVar = global.subRoomVar;
                     global.subRoomVar = "Northeast";
-                    debug("hello");
                     with (objController)
                         showSubRoomVarFunc();
                 }

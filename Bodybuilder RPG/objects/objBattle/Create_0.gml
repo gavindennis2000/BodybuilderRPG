@@ -208,7 +208,12 @@ handleAttack = function(attacker, attacked) {
     /*gmlive*/ if (TEST) { if (live_call(attacker, attacked)) return live_result; }
 
     // calculate the damage
-    var attackerStr = attacker.ref.stats.strength;
+    var attackerStr = attacker.ref.stats.strength; 
+    var attackBuffer = 1 + (attacker.ref.buffStr / 10);
+    debug(attackBuffer);
+    attackerStr *= attackBuffer;
+    var attackedDef = (10 - attacked.buffDef) / 10;
+    attackerStr *= attackedDef;
     var dmg = round((attackerStr * 10) * random_range(0.9, 1.1));
     if (dmg < 1)
         dmg = 1;
@@ -289,7 +294,8 @@ handlePlayerTurn = function(attacker, attacked, move) {
             handleItem(attacker, attacked);
             break;
         case "Skill":
-            var counterIncrease = getSkillSpeed(move, spdFactor);
+            var counterIncrease = getSkillSpeed(queuedSkill, spdFactor);
+            debug($"Counter increase: {counterIncrease}");
             attacker.counter += counterIncrease;
             handleSkill(attacker, attacked);
             break;
@@ -383,7 +389,7 @@ sortBattleQueue = function(battleQueue) {
     return sortedQueue;
 }
 
-setPredictQueue = function(battleQueue, attackType = "Attack") {
+setPredictQueue = function(battleQueue, attackType = "Attack", customAmount = -1) {
     // finds out the predicted battle queue
 
     // copy the battle queue
@@ -406,12 +412,18 @@ setPredictQueue = function(battleQueue, attackType = "Attack") {
         var counterIncrease
         var originalIncrease = ATTACK_COUNTER - spdFactor;;
         switch (attackType) {
+            case "Attack":
+                counterIncrease = originalIncrease;
+                break;
             case "Item":
                 counterIncrease = originalIncrease / 2;
                 break;    
-            case "Attack":
+            case "Skill":
+                counterIncrease = customAmount != -1 ? customAmount : originalIncrease;
+                debug($"right here: {counterIncrease}");
+                break;
             default:
-                counterIncrease = originalIncrease
+                counterIncrease = originalIncrease;
                 break;    
         }
         for (var j = 0; (i == 0) ? j < 4 : j < 3; j++) {

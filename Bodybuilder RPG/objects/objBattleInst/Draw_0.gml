@@ -60,6 +60,8 @@ switch (state) {
         break;
     case "ko":
         sprX = 3;
+        buffStr = 0;
+        buffDef = 0;
         image_index = 0;
         image_speed = 0;
         break;
@@ -107,8 +109,18 @@ if (state == "use item") {
     gpu_set_fog(true, #59dbff, 0, 1000);
     draw_sprite_part_ext(sprite_index, image_index, 0 + sprX * 32, sprY * 32, 32, 32 - deathY, face == "right" ? x - 32 : x + 32, y - 32, face == "right" ? 2 : -2, 2, image_blend, fogAlpha);
     gpu_set_fog(false, c_blue, 0, 1000);
-
+}
+else if (state == "use skill") {
+    gpu_set_fog(true, #d99898, 0, 1000);
+    draw_sprite_part_ext(sprite_index, image_index, 0 + sprX * 32, sprY * 32, 32, 32 - deathY, face == "right" ? x - 32 : x + 32, y - 32, face == "right" ? 2 : -2, 2, image_blend, fogAlpha);
+    gpu_set_fog(false, c_blue, 0, 1000);
 }
 
 if (dying)
     deathY += 0.75;
+
+// draw the skill sprite if there is one
+if (skillAlpha > 0) {
+    draw_sprite_ext(sprSkills, skillSpr == -1 ? 0 :skillSpr, x - 16, y - 24 - skillY, 1, 1, image_angle, image_blend, skillAlpha);
+    skillY += 0.3;
+}

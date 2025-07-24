@@ -17,7 +17,7 @@ if (TEST && TEST_BATTLE) {
 }
 
 var rm =
-rPumpPalace;
+rMom;
 
 if (!TEST)
     rm = rSpace;
