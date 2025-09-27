@@ -7,5 +7,5 @@ function continueFromLastSave(){
     global.stats.ana.hp = global.stats.ana.maxhp;
     global.stats.doms.hp = global.stats.doms.maxhp;
 
-    objController.goToNextRoom();
+    oController.goToNextRoom();
 }

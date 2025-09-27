@@ -24,9 +24,9 @@ function itemDialog(itemID = -1) {
                     room: rOverworld, 
                     transition: "fade"
                 }
-                with (objPlayer)
+                with (oPlayer)
                     canMove = false;
-                with (objController)
+                with (oController)
                     goToNextRoom();
                 playSound(sndError);
             }
@@ -53,7 +53,7 @@ function itemDialog(itemID = -1) {
                         name: "ana",
                         text: $"{string_upper(global.characterName)}!",
                         action: function() {
-                            instance_create_layer(objPlayer.x, objPlayer.y, "Instances", objNPC, {
+                            instance_create_layer(oPlayer.x, oPlayer.y, "Instances", objNPC, {
                                 npcID: "ana", 
                                 directions: ["right"], 
                                 action: function() {

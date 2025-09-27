@@ -27,7 +27,7 @@ function ch1Dialog(npcID = -1){
 							alarm_set(0, 60);
 						
 						var dir;
-						switch (objPlayer.face) {
+						switch (oPlayer.face) {
 							case "up":
 								dir = "right";
 								break;
@@ -41,7 +41,7 @@ function ch1Dialog(npcID = -1){
 								dir = "down";
 								break;
 						}
-						instance_create_layer(objPlayer.x, objPlayer.y, "Instances", objNPC, {
+						instance_create_layer(oPlayer.x, oPlayer.y, "Instances", objNPC, {
 							npcID: "ana", 
 							directions: [dir],
 							action: function() {
@@ -609,7 +609,7 @@ function ch1Dialog(npcID = -1){
 			// these guys talk together
 			with (objNPC) {
 				if (npcID == "thicc powerlifter 2" || npcID == "smol powerlifter 2") {
-					switch (objPlayer.face) {
+					switch (oPlayer.face) {
 						case "left":
 							faceStart = "right";
 							break;
@@ -736,7 +736,7 @@ function ch1Dialog(npcID = -1){
 					action: function() {
 						with (objNPC)
 							if (npcID == "super heavyweight 1") {
-								switch (objPlayer.face) {
+								switch (oPlayer.face) {
 									case "left":
 										face = "right";
 										break;

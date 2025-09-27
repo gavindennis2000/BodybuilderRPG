@@ -71,7 +71,7 @@ function handleEvents() {
                         global.cutscene = false;
                         with (objMusic) 
                             alarm_set(0, 30);
-                        with (objPlayer)
+                        with (oPlayer)
                             canMove = true;
                     }
                 },
@@ -165,10 +165,10 @@ function handleEvents() {
                     text: "Hey! Wait!",
                     action: function() {
                         // player faces ana
-                        with (objPlayer)
+                        with (oPlayer)
                             face = "right";
                         // create ana npc
-                        instance_create_layer(objPlayer.x + 96, objPlayer.y + 128, "Instances", objNPC, {
+                        instance_create_layer(oPlayer.x + 96, oPlayer.y + 128, "Instances", objNPC, {
                             directions: ["up", "up", "up", "up", "left", "left"],
                             npcID: "ana",
                             faceStart: "left",
@@ -251,7 +251,7 @@ function handleEvents() {
             });
 
             // create ana
-            instance_create_layer(objPlayer.x, objPlayer.y, "Instances", objNPC, {
+            instance_create_layer(oPlayer.x, oPlayer.y, "Instances", objNPC, {
                 npcID: "ana",
                 directions: ["right"],
                 action: function() {
@@ -279,7 +279,7 @@ function handleEvents() {
                     text: "Now! Put the CREATINE in the bag!",
                     tone: "loud",
                     action: function() {
-                        with (objPlayer)
+                        with (oPlayer)
                             face = "up";
                     }
                 },
@@ -318,7 +318,7 @@ function handleEvents() {
                                 text: $"We need to fight! It's our moral duty to use our muscles for justice!",
                                 emotion: "angry",
                                 action: function() {
-                                    with (objPlayer)
+                                    with (oPlayer)
                                         face = "right";
                                 }
                             },
@@ -333,7 +333,7 @@ function handleEvents() {
                                 text: "Sheeitt! When did you meddling kids get here!?", 
                                 tone: "loud", 
                                 action: function() {
-                                    with (objPlayer)
+                                    with (oPlayer)
                                         face = "up";
                                     with (objNPC) {
                                         if (npcID == "ana")
@@ -368,7 +368,7 @@ function handleEvents() {
                                 text: $"It's not safe here... We need to run and get help!",
                                 emotion: "angry",
                                 action: function() {
-                                    with (objPlayer)
+                                    with (oPlayer)
                                         face = "right";
                                 }                                        
                             },
@@ -384,7 +384,7 @@ function handleEvents() {
                                         else if (npcID == "ana")
                                             face = "up";
                                     }
-                                    with (objPlayer)
+                                    with (oPlayer)
                                         face = "up";
                                 }
                             },
@@ -465,13 +465,13 @@ function handleEvents() {
             if (!global.events.bbnc2)
                 exit;
 
-            instance_create_layer(objPlayer.x, objPlayer.y, "Instances", objNPC, {
+            instance_create_layer(oPlayer.x, oPlayer.y, "Instances", objNPC, {
                 npcID: "ana",
                 directions: ["right"],
                 action: function() {
                     with (objNPC) if (npcID == "ana")
                         face = "left";
-                    with (objPlayer)
+                    with (oPlayer)
                         face = "right";
                 }
             });
@@ -501,16 +501,16 @@ function handleEvents() {
         else if (!global.events.meetSamson && global.events.defeatDonnie && room == rOverworld) {
             global.cutscene = true;
             global.cutsceneSong = sndSamson;
-            with (objPlayer)
+            with (oPlayer)
                 face = "down";
-            instance_create_layer(objPlayer.x - 32 * 7, objPlayer.y, "Instances", objNPC, {
+            instance_create_layer(oPlayer.x - 32 * 7, oPlayer.y, "Instances", objNPC, {
                 npcID: "samson",
                 face: "right", 
                 faceStart: "right",
                 // spd: 4,
                 directions: ["right", "right", "right", "right", "right", "right"], 
                 action: function() {
-                    with (objPlayer)
+                    with (oPlayer)
                         face = "left";
                     textbox([
                         {
@@ -601,7 +601,7 @@ function handleEvents() {
                     name: "ana", 
                     text: $"Well, {string_upper(global.characterName)}. It's been a crazy day...",
                     action: function() {
-                        instance_create_layer(objPlayer.x, objPlayer.y, "Instances", objNPC, {
+                        instance_create_layer(oPlayer.x, oPlayer.y, "Instances", objNPC, {
                             npcID: "ana", 
                             directions: ["right"], 
                             face: "right", 
@@ -646,7 +646,7 @@ function handleEvents() {
                     name: "ana", 
                     text: "Well anyways, I'll see you tomorrow. Good night!", 
                     action: function() {
-                        with (objPlayer)
+                        with (oPlayer)
                             face = "down";
                         with (objNPC) if (npcID == "ana") {
                             face = "down";

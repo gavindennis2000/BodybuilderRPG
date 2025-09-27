@@ -3,8 +3,8 @@ function startBattle(enemies = -1, canRun = true, party = global.party, music = 
 
     /*gmlive*/ if (TEST) { if (live_call(enemies, canRun, party, music)) return live_result; }
 
-    if (instance_exists(objPlayer))
-        objPlayer.canMove = false;
+    if (instance_exists(oPlayer))
+        oPlayer.canMove = false;
 
     // end any ongoing cutscene
     if (global.cutscene) {

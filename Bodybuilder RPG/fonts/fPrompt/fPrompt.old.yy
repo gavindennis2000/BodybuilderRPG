@@ -1,6 +1,6 @@
 {
   "$GMFont":"",
-  "%Name":"fTextbox",
+  "%Name":"fPrompt",
   "AntiAlias":0,
   "applyKerning":0,
   "ascender":20,
@@ -2325,7 +2325,7 @@
   "last":0,
   "lineHeight":26,
   "maintainGms1Font":false,
-  "name":"fTextbox",
+  "name":"fPrompt",
   "parent":{
     "name":"8 Fonts",
     "path":"folders/8 Fonts.yy",
