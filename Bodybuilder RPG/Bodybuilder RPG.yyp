@@ -101,6 +101,7 @@
     {"id":{"name":"oAltController","path":"objects/oAltController/oAltController.yy",},},
     {"id":{"name":"obj_gmlive","path":"objects/obj_gmlive/obj_gmlive.yy",},},
     {"id":{"name":"oBlank","path":"objects/oBlank/oBlank.yy",},},
+    {"id":{"name":"oCamera","path":"objects/oCamera/oCamera.yy",},},
     {"id":{"name":"oController","path":"objects/oController/oController.yy",},},
     {"id":{"name":"oDevTools","path":"objects/oDevTools/oDevTools.yy",},},
     {"id":{"name":"oPlayer","path":"objects/oPlayer/oPlayer.yy",},},
@@ -110,6 +111,7 @@
     {"id":{"name":"rBlank","path":"rooms/rBlank/rBlank.yy",},},
     {"id":{"name":"rStart","path":"rooms/rStart/rStart.yy",},},
     {"id":{"name":"rTest","path":"rooms/rTest/rTest.yy",},},
+    {"id":{"name":"rTest2","path":"rooms/rTest2/rTest2.yy",},},
     {"id":{"name":"__input_axis_is_directional","path":"scripts/__input_axis_is_directional/__input_axis_is_directional.yy",},},
     {"id":{"name":"__input_binding_get_label","path":"scripts/__input_binding_get_label/__input_binding_get_label.yy",},},
     {"id":{"name":"__input_class_binding","path":"scripts/__input_class_binding/__input_class_binding.yy",},},
@@ -545,6 +547,7 @@
     {"roomId":{"name":"rStart","path":"rooms/rStart/rStart.yy",},},
     {"roomId":{"name":"rBlank","path":"rooms/rBlank/rBlank.yy",},},
     {"roomId":{"name":"rTest","path":"rooms/rTest/rTest.yy",},},
+    {"roomId":{"name":"rTest2","path":"rooms/rTest2/rTest2.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[

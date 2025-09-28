@@ -13,3 +13,5 @@ if (global.playerSpawn.spawn) {
 // make any other controllers
 if (!instance_exists(oDevTools))
     instance_create_layer(0, 0, "Instances", oDevTools);
+if (!instance_exists(oCamera))
+    instance_create_layer(0, 0, "Instances", oCamera);
