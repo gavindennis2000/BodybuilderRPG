@@ -5,7 +5,7 @@
   "applyKerning":0,
   "ascender":16,
   "ascenderOffset":0,
-  "bold":false,
+  "bold":true,
   "canGenerateBitmap":true,
   "charset":0,
   "first":0,
@@ -1000,10 +1000,7 @@
   "sdfSpread":2,
   "size":13.0,
   "styleName":"Medium",
-  "textureGroupId":{
-    "name":"Default",
-    "path":"texturegroups/Default",
-  },
+  "textureGroupId":null,
   "TTFName":"",
   "usesSDF":true,
 }

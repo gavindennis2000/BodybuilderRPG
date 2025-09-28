@@ -1,6 +1,7 @@
 // oTextbox create
 /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
+layer = layer_exists(layer_get_id(layer_get_name("textbox"))) ? layer_get_id(layer_get_name("textbox")) : layer_create(-999, "textbox");
 textArr = variable_instance_exists(self, "textArr") ? textArr : [{
     name: "name",
     text: "this is my text",

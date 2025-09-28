@@ -1,6 +1,6 @@
 /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
-var keyNext = input_check_pressed("south");
+var keyNext = input_check_pressed("south") || (TEST && input_check("west"));
 var getNextText = function () {
     // get the next object of text and reset the draw string
     // first, make sure there is text to get, otherwise destroy the textbox

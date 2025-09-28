@@ -1,6 +1,6 @@
 {
   "$GMFont":"",
-  "%Name":"fTextbox",
+  "%Name":"fDeveloper",
   "AntiAlias":0,
   "applyKerning":0,
   "ascender":20,
@@ -2325,7 +2325,7 @@
   "last":0,
   "lineHeight":26,
   "maintainGms1Font":false,
-  "name":"fTextbox",
+  "name":"fDeveloper",
   "parent":{
     "name":"8 Fonts",
     "path":"folders/8 Fonts.yy",
@@ -2342,7 +2342,10 @@
   "sdfSpread":2,
   "size":15.0,
   "styleName":"Medium",
-  "textureGroupId":null,
+  "textureGroupId":{
+    "name":"Default",
+    "path":"texturegroups/Default",
+  },
   "TTFName":"",
   "usesSDF":true,
 }

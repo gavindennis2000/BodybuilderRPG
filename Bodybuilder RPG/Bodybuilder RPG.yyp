@@ -95,6 +95,7 @@
   "name":"Bodybuilder RPG",
   "resources":[
     {"id":{"name":"GMLive_fallback","path":"extensions/GMLive_fallback/GMLive_fallback.yy",},},
+    {"id":{"name":"fDeveloper","path":"fonts/fDeveloper/fDeveloper.yy",},},
     {"id":{"name":"fPrompt","path":"fonts/fPrompt/fPrompt.yy",},},
     {"id":{"name":"fTextbox","path":"fonts/fTextbox/fTextbox.yy",},},
     {"id":{"name":"input_controller_object","path":"objects/input_controller_object/input_controller_object.yy",},},
