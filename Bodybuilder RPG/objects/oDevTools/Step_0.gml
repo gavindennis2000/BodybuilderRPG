@@ -27,7 +27,10 @@ if (keyboard_check_pressed(ord("T"))) {
         var sample = [
             {
                 name: "Andro",
-                text: "this is my first text"
+                text: "this is my first text",
+                action: function() {
+                    debug("did this work?", -1);
+                }
             },
             {
                 text: "this is my second text"
@@ -51,7 +54,10 @@ if (keyboard_check_pressed(ord("T"))) {
             "no name again",
             {
                 name: "name",
-                text: "and a name"
+                text: "and a name",
+                action: function() {
+                    debug("this is the last one", -1)
+                }
             }
         ];
         textbox(sample);

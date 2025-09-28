@@ -47,7 +47,7 @@ if (showPrompt) {
     var promptX = CAM_WIDTH / 2;
     var promptY = CAM_HEIGHT / 2 + 24;
     var promptWidth = 200;
-    var promptHeight = 38;
+    var promptHeight = 42;
     var c1 = c_blue, c2 = c_white, c3 = c_blue, c4 = c_black;
     var getAlpha = draw_get_alpha();
     draw_set_alpha(0.6);
@@ -57,7 +57,8 @@ if (showPrompt) {
     if (promptScale == 1) {
         var drawPromptText = function(promptX, promptY, txt, index, selection) {
             var cY = c_yellow;
-            drawTextOutline(promptX, index == 0 ? promptY - 8 : promptY + 8, txt, selection == index ? cY: c_white, c_black, 1);
+            var yDist = 10;
+            drawTextOutline(promptX, index == 0 ? promptY - yDist : promptY + yDist, txt, selection == index ? cY: c_white, c_black, 1);
             return;
         }
         drawPromptText(promptX, promptY, prompt[0], 0, promptSelection);
