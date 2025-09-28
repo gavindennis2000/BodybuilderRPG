@@ -9,7 +9,7 @@ if (target != -1) {
     yTo = target.y;
 }
 
-var coefficient = 18;
+var coefficient = 15;
 x += (xTo - x) / coefficient;
 y += (yTo - y) / coefficient;
 camera_set_view_pos(cam, x - (CAM_WIDTH * 0.5) + 16, y - (CAM_HEIGHT * 0.5) + 16);

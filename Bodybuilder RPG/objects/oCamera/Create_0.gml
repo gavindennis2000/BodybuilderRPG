@@ -4,7 +4,6 @@
 
 // set up the room camera
 var cam = view_camera[0];
-debug($"viewport enabled: {view_enabled}");  // check if room has viewport enabled
 if (!view_enabled) {
     view_visible[0] = true;
     view_enabled = true;

@@ -9,6 +9,8 @@
 // players, room info, etc
 global.playerSpawn = {
     spawn: true,
+    doorOverride: -1,
+    doorGoto: -1,
     pX: 192 + 32, 
     pY: 128,
     pFace: "up"

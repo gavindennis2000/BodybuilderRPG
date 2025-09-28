@@ -29,7 +29,7 @@ else if (runCounter <= 48)
     image_index = 3;
 else
     image_index = 0;
-if (instance_exists(oTextbox))
+if (!canMove)
     image_index = 0;
 
 // draw the player

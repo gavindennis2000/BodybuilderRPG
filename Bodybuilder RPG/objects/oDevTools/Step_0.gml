@@ -20,6 +20,10 @@ if (keyboard_check_pressed(ord("R"))) {
 if (keyboard_check_pressed(ord("G")))
     game_restart();
 
+// show details
+if (keyboard_check_pressed(ord("Q")))
+    global.showDetails = !global.showDetails;
+
 // sample textbox
 if (keyboard_check_pressed(ord("T"))) {
     if (oPlayer.canCertainlyMove) {
