@@ -5,7 +5,7 @@
 // spawn the player
 if (global.playerSpawn.spawn) {
     var p = global.playerSpawn;
-    if (p.doorOverride != -1) {
+    if (variable_struct_exists(p, "doorOverride") && p.doorOverride != -1) {
         var obj = -1;
         with (oDoor) {
             debug(doorID);

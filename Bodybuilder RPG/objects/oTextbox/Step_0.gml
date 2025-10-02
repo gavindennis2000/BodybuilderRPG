@@ -1,11 +1,14 @@
 /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
+if (textboxScale < 1)
+    exit;
+
 var keyNext = input_check_pressed("south") || (TEST && input_check("west"));
 var getNextText = function () {
     // get the next object of text and reset the draw string
     // first, make sure there is text to get, otherwise destroy the textbox
     if (array_length(textArr) == 0) {
-        instance_destroy();
+        textboxScaleChange = -1 * abs(textboxScaleChange);
         exit;
     }
 
@@ -16,6 +19,7 @@ var getNextText = function () {
         textObj = { text: textObj };
     drawStr = "";
     drawStrIndex = 0;
+    newLineCounter = 0;
     
     // update the name of the person speaking
     if (variable_struct_exists(textObj, "name"))
@@ -34,16 +38,36 @@ var getNextText = function () {
 }
 
 if (textObj == -1) {
-        getNextText();
+    getNextText();
 }
 
 // set up the final string to draw
-var current = variable_clone(textObj.text);
-if (drawStr != current) {
-    if (keyNext)
-        drawStr = current; 
-    else 
-        drawStr += string_char_at(current, ++drawStrIndex);
+var current = textObj.text;
+if (string_length(drawStr) != string_length(current)) {
+    if (keyNext) {
+        while (string_length(drawStr) != string_length(current)) {
+            if (newLineCounter >= 50 && string_char_at(current, drawStrIndex + 1) == " ") {
+                drawStrIndex++;
+                newLineCounter = 0;
+                drawStr += "\n";
+            }
+            else {
+                drawStr += string_char_at(current, ++drawStrIndex);
+                newLineCounter++;
+            }
+        }
+    }
+    else {
+        if (newLineCounter >= 50 && string_char_at(current, drawStrIndex + 1) == " ") {
+            drawStrIndex++;
+            newLineCounter = 0;
+            drawStr += "\n";
+        }
+        else {
+            drawStr += string_char_at(current, ++drawStrIndex);
+            newLineCounter++;
+        }
+    }
 }
 else if (keyNext && prompt == -1) {
     // just get the next line of text

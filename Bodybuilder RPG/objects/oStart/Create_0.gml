@@ -4,6 +4,10 @@
 #macro TEST true 
 #macro CAM_WIDTH 512
 #macro CAM_HEIGHT 288
+#macro TEXTBOX1 #2b7eb5
+#macro TEXTBOX2 #81b7db
+#macro TEXTBOX3 #2b7eb5
+#macro TEXTBOX4 #1f3747
 // global.noEncounters = true;
 
 // players, room info, etc

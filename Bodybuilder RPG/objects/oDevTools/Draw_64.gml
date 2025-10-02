@@ -1,6 +1,6 @@
 /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 draw_set_font(fDeveloper);
-var textAlpha = (instance_exists(oTextbox)) ? 0.1 : 0.7;
+var textAlpha = (instance_exists(oTextbox)) ? 0 : 0.7;
 if (!global.showDetails) {
     fontXY(fa_left, fa_bottom);
     drawTextOutline(0, CAM_HEIGHT, "developer mode", c_white, c_black, textAlpha);
