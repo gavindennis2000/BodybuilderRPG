@@ -30,7 +30,6 @@ if (sign(textboxScaleChange) == 1 && textboxScale < 1) {
 }
 else if (sign(textboxScaleChange) == -1 && textboxScale > 0) {
     textboxScale += textboxScaleChange;
-    debug(textboxScale);
     if (textboxScale <= 0)
         instance_destroy();
 }
@@ -54,7 +53,7 @@ if (name != -1 && textboxScale == 1) {
 }
 
 // draw the next icon if the draw string length matches the text object
-if (variable_struct_exists(textObj, "text") && string_length(drawStr) == string_length(textObj.text))
+if (variable_struct_exists(textObj, "text") && string_length(drawStr) == string_length(textObj.text) && textboxScale == 1)
     draw_sprite(sprNext, 0, CAM_WIDTH / 2, CAM_HEIGHT - 11);
 
 // draw a box when theres a prompt

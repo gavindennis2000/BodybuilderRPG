@@ -3,7 +3,7 @@
 /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
 // spawn the player
-if (global.playerSpawn.spawn) {
+if (global.playerSpawn.spawn && !global.battle.started) {
     var p = global.playerSpawn;
     if (variable_struct_exists(p, "doorOverride") && p.doorOverride != -1) {
         var obj = -1;
@@ -51,6 +51,8 @@ if (!instance_exists(oDevTools))
     instance_create_layer(0, 0, "Instances", oDevTools);
 if (!instance_exists(oCamera))
     instance_create_layer(0, 0, "Instances", oCamera);
+if (!instance_exists(oBattle))
+    instance_create_layer(0, 0, "Instances", oBattle);
 
 // fade in the room
 if (fadeAmount > 0) {

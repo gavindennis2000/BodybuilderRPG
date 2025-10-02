@@ -1,0 +1,5 @@
+instances 0
+player -2
+npc ( -1 or - 3 if behind or in front of player)
+camera -100
+textbox -999

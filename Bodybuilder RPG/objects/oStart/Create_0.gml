@@ -10,12 +10,34 @@
 #macro TEXTBOX4 #1f3747
 // global.noEncounters = true;
 
+// the story
+enum STORY {
+    WAKE_UP,
+    TALK_TO_MOM,
+}
+global.storyProgress = STORY.WAKE_UP;
+global.events = {
+    
+}
+
 // players, room info, etc
 global.playerSpawn = {
     spawn: true,
     doorOverride: -1,
-    doorGoto: -1,
+    roomGoto: room,
     pX: 192 + 32, 
     pY: 128,
     pFace: "up"
+}
+
+// battle
+global.battle = {
+    camX: 0,
+    camY: 0,
+    battleRoom: rTest,
+    init: false,
+    started: false,
+    party: ["andro"],
+    enemies: ["npc"],
+    canRun: true,
 }

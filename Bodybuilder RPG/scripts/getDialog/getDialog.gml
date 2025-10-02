@@ -1,9 +1,14 @@
-function getDialog(npcID = "npc"){
+function getDialog(npcID = "npc", hasTalked) {
+    // gets dialog for npc's 
+    //
+    // for certain characters, they will say something different if you've already
+    // talked to them
+    //
     /*gmlive*/ if (TEST) { if (live_call(npcID)) return live_result; }
 
     switch(npcID) {
         case "test1":
-            return [
+            return (!hasTalked) ? [
                 {
                     name: "Test Guy", 
                     text: "Hey. I'm the first test.",
@@ -26,7 +31,11 @@ function getDialog(npcID = "npc"){
                         }
                     ]
                 }
-            ]
+            ] : [
+                {
+                    text: "We've already talked..."
+                }
+            ];
         default:
             // npc not found
             return $"dialog not found for \"{npcID}\"";

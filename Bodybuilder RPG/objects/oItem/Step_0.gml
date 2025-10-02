@@ -2,7 +2,7 @@
 // let's player talk to items and npcs
 /*gmlive*/ if (TEST) { if (live_call()) return live_result; }
 
-if !(instance_exists(oPlayer))
+if (!instance_exists(oPlayer))
     exit;
 
 var keyTalk = input_check_pressed("south");
@@ -42,6 +42,7 @@ if (contact && keyTalk && !instance_exists(oTextbox)) {
     oPlayer.canMove = false;
 
     // get the right text and read it
-    var text = (npcID == "item") ? getItemText(itemID) : getDialog(npcID);
+    var text = (npcID == "item") ? getItemText(itemID, hasTalked) : getDialog(npcID, hasTalked);
+    hasTalked = true;
     textbox(text);
 }

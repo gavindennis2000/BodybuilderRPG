@@ -67,3 +67,10 @@ if (keyboard_check_pressed(ord("T"))) {
         textbox(sample);
     }
 }
+
+// test battle
+if (keyboard_check_pressed(ord("B"))) {
+    global.battle.party = ["andro"];
+    global.battle.enemies = ["npc"];
+    oBattle.startBattle();
+}
